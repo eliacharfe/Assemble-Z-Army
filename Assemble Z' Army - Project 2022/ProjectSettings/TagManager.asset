@@ -16,7 +16,7 @@ TagManager:
   - Walls
   - Unit
   - Water
-  - 
+  - Buidings
   - 
   - 
   - 
@@ -52,6 +52,9 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 745030041
+    locked: 0
+  - name: Buildings
+    uniqueID: 1174373771
     locked: 0
   - name: Unit
     uniqueID: 74712451
