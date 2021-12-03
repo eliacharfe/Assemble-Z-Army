@@ -14,7 +14,7 @@ TagManager:
   - Background
   - Ground
   - Walls
-  - Player
+  - Unit
   - Water
   - 
   - 
@@ -53,6 +53,6 @@ TagManager:
   - name: Walls
     uniqueID: 745030041
     locked: 0
-  - name: Player
+  - name: Unit
     uniqueID: 74712451
     locked: 0
