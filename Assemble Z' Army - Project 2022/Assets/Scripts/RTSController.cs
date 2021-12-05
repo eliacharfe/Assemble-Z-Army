@@ -27,28 +27,33 @@ public class RTSController : MonoBehaviour
                 if (unit != null && unit.isSelectable())
                 {
                     selectedUnits.Add(unit);
-                    Debug.Log(unit.transform.position);
+                    unit.SetColorSelcted();
+                  // Debug.Log(unit.transform.position);
                 }
+                // else {
+                //     foreach (Unit un in selectedUnits)
+                //        un.ResetColor();
+                // }
             }
-            Debug.Log("RTS says hi");
+           // Debug.Log("RTS says hi");
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            foreach (Unit unit in selectedUnits)
-            {
-               // unit.setDest(Utils.GetMouseWorldPosition());
+            foreach (Unit unit in selectedUnits){
                 unit.MoveTo(Utils.GetMouseWorldPosition());
+                unit.ResetColor();
             }
+        
         }
 
         foreach (Unit unit in selectedUnits)
         {
-            Debug.Log("unit pos: " + unit.transform.position);
-            Debug.Log("dest========== " + unit.getDest());
+           // Debug.Log("unit pos: " + unit.transform.position);
+          //  Debug.Log("dest========== " + unit.getDest());
             if (unit.transform.position.x == unit.getDest().x 
             && unit.transform.position.y == unit.getDest().y){
-                Debug.Log("true");
+              //  Debug.Log("true");
                 unit.Stop();
             }
                 
