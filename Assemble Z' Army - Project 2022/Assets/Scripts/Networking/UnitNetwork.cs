@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Mirror;
+using System;
 
 public class UnitNetwork : NetworkBehaviour
 {
@@ -13,10 +14,15 @@ public class UnitNetwork : NetworkBehaviour
     private Animator myAnimator;
     private SpriteRenderer spriteRenderer;
 
-    // private bool unitSelected;
-    // public static bool dragSelectedUnitAllowed, mouseOverUnit;
-    // private Vector2 mousePos;
-    // private float dragOffsetX, dragOffsetY;
+    // Server Unit spawned event.
+    public static event Action<UnitNetwork> ServerOnUnitSpawned;
+    // Server Unit despawned event.
+    public static event Action<UnitNetwork> ServerOnUnitDeSpawned;
+
+    // Authorty Unit spawned event. 
+    public static event Action<UnitNetwork> AuthortyOnUnitSpawned;
+    // Authorty Unit despawned event. 
+    public static event Action<UnitNetwork> AuthortyOnUnitDeSpawned;
 
     private void Start()
     {
@@ -27,32 +33,42 @@ public class UnitNetwork : NetworkBehaviour
 
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        // unitSelected = false;
-        // dragSelectedUnitAllowed = false;
-        // mouseOverUnit = false;
     }
 
-    private void Update()
+    #region Server
+    public override void OnStartServer()
     {
-        // if (Input.GetMouseButtonDown(0)){
-        //     dragOffsetX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x - transform.position.x;
-        //     dragOffsetY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y - transform.position.y;
-        // }
+        base.OnStartServer();
 
-        // if(Input.GetMouseButton(0))
-        //     mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        // if (unitSelected && dragSelectedUnitAllowed)
-        //     transform.position = new Vector2(mousePos.x - dragOffsetX, mousePos.y - dragOffsetY);
-
-        // if (Input.GetMouseButtonDown(1)){
-        //     unitSelected = false;
-        //     dragSelectedUnitAllowed = false;
-        //     spriteRenderer.color = new Color(1f,1f,1f,1f);
-        // }
-      // FlipSideSprite();
+        ServerOnUnitSpawned?.Invoke(this);
     }
+
+    public override void OnStopServer()
+    {
+        base.OnStopAuthority();
+
+        ServerOnUnitDeSpawned?.Invoke(this);
+    }
+
+    #endregion
+
+
+    #region Client
+    public override void OnStartAuthority()
+    {
+        base.OnStartAuthority();
+
+        AuthortyOnUnitSpawned?.Invoke(this);   
+    }
+
+    public override void OnStopAuthority()
+    {
+        base.OnStopAuthority();
+
+        AuthortyOnUnitDeSpawned?.Invoke(this);
+    }
+
+    #endregion
 
     public void MoveTo(Vector3 dest)
     {
@@ -61,7 +77,6 @@ public class UnitNetwork : NetworkBehaviour
        // Debug.Log("dest:" + dest);
         dest.z = 0;
         agent.SetDestination(dest);
-        
     }
 
     public Vector3 getDest(){
@@ -84,35 +99,4 @@ public class UnitNetwork : NetworkBehaviour
         return selectable;
     }
 
-    // private void OnTriggerEnter2D(Collider2D collision){
-    //     if (collision.gameObject.GetComponent<BoxCollection>()){
-    //         spriteRenderer.color = new Color(1f,0f,0f,1f);
-    //         unitSelected = true;
-    //     }
-    // }
-
-    // private void OnMouseDown(){
-    //     mouseOverUnit = true;
-    // }
-
-    //  private void OnMouseUp(){
-    //     mouseOverUnit = false;
-    //     dragSelectedUnitAllowed = false;
-    // }
-
-    // private void OnMouseDrag(){
-    //     dragSelectedUnitAllowed = true;
-
-    //     if (!unitSelected){
-    //         dragSelectedUnitAllowed = false;
-    //     }
-      
-    //   mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //   transform.position = new Vector2(mousePos.x - dragOffsetX, mousePos.y - dragOffsetY);
-    // }
-
-
-    // public void FlipSideSprite(){
-    //     transform.localScale = new Vector3 (Mathf.Sign(agent.velocity.x), 1f);
-    // }
 }

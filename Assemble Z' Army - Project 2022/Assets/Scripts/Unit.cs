@@ -27,7 +27,6 @@ public class Unit : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-
     }
 
     private void Update()
