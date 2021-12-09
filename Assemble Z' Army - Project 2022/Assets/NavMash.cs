@@ -7,7 +7,7 @@ public class NavMash : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var agent = GetComponent<NavMashAgent>();
+      //  var agent = GetComponent<NavMashAgent>();
 
 
 

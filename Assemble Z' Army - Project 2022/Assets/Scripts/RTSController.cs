@@ -1,16 +1,17 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
-using System;
 
 public class RTSController : MonoBehaviour
 {
-    private List<Unit> selectedUnits;
-    private Vector3 startPos;
-    [SerializeField] private LayerMask layerMask = new LayerMask();
     private Camera mainCamera;
+    private List <Unit> selectedUnits;
+    private Vector3 startPos;
+    private Vector2 startPosition;
+    //    [SerializeField] private LayerMask layerMask = new LayerMask();
+    [SerializeField] private RectTransform unitSelectionArea = null;
 
     private void Awake()
     {
@@ -20,61 +21,44 @@ public class RTSController : MonoBehaviour
 
     private void Update()
     {
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     selectedUnits.Clear();
-        //     startPos = Utils.GetMouseWorldPosition();
-        // }
-
-        if (Input.GetMouseButtonUp(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Collider2D[] inChosenArea = Physics2D.OverlapAreaAll(startPos, Utils.GetMouseWorldPosition());
-            foreach (Collider2D obj in inChosenArea)
-            {
-                Unit unit = obj.GetComponent<Unit>();
-                if (unit != null && unit.isSelectable())
-                {
-                    selectedUnits.Add(unit);
-                    ///  unit.SetColorSelcted();
-                    unit.Select();
-                }
-            }
+            StartSelectionArea();
+        }
+        else if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            ClearSelectionArea();
+        }
+        else if (Mouse.current.leftButton.isPressed)
+        {
+            UpdateSelectionArea();
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
-            foreach (Unit unit in selectedUnits)
-            {
-                unit.MoveTo(Utils.GetMouseWorldPosition());
-                unit.ResetColor();
-            }
-
+            MoveUnits();
         }
 
         foreach (Unit unit in selectedUnits)
         {
-            // Debug.Log("unit pos: " + unit.transform.position);
-            //  Debug.Log("dest========== " + unit.getDest());
             if (unit.transform.position.x == unit.getDest().x
             && unit.transform.position.y == unit.getDest().y)
             {
-                //  Debug.Log("true");
-                unit.Stop();
+                unit.Stop(); // when the unit get to its destination will stop change the animation
             }
-
-        }
-
-        if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            StartSelectionArea();
-
-        }
-        else if (Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            // ClearSelectionArea();
         }
     }
-//-------------------------------------
+
+    private void MoveUnits()
+    {
+        foreach (Unit unit in selectedUnits)
+        {
+            unit.MoveTo(Utils.GetMouseWorldPosition());
+           // MoveUnit(unit);
+        }
+    }
+
+    //-------------------------------------
     private void StartSelectionArea()
     {
         foreach (Unit selectedUnit in selectedUnits)
@@ -84,10 +68,93 @@ public class RTSController : MonoBehaviour
 
         selectedUnits.Clear();
         startPos = Utils.GetMouseWorldPosition();
+
+        unitSelectionArea.gameObject.SetActive(true);
+        startPosition = new Vector2(Utils.GetMouseWorldPosition().x - 350,
+                                 Utils.GetMouseWorldPosition().y - 350);
+        // startPosition = Mouse.current.position.ReadValue();
+
+        UpdateSelectionArea();
+    }
+    //--------------------------------
+    private void ClearSelectionArea()
+    {
+        unitSelectionArea.gameObject.SetActive(false);
+
+        Collider2D[] inChosenArea = Physics2D.OverlapAreaAll(startPos, Utils.GetMouseWorldPosition());
+        foreach (Collider2D obj in inChosenArea)
+        {
+            Unit unit = obj.GetComponent<Unit>();
+            if (unit != null && unit.isSelectable())
+            {
+                selectedUnits.Add(unit);
+                ///  unit.SetColorSelcted();
+                unit.Select();
+            }
+        }
     }
 
-    // private void ClearSelectionArea()
-    // {
-    //     throw new NotImplementedException();
-    // }
+    //--------------------------------
+    private void UpdateSelectionArea()
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        float areaWidth = mousePosition.x - startPosition.x;
+        float areaHeight = mousePosition.y - startPosition.y;
+
+        unitSelectionArea.sizeDelta = new Vector2(Mathf.Abs(areaWidth), Mathf.Abs(areaHeight));
+        unitSelectionArea.anchoredPosition = startPosition + new Vector2(areaWidth / 2, areaHeight / 2);
+
+    }
+    //-----------------------------------
+    public List<Unit> GetMyUnits()
+    {
+        return selectedUnits;
+    }
 }
+
+
+
+
+
+
+
+// public List<Unit> GetMyUnits()
+// {
+//     return selectedUnits;
+// }
+
+
+
+
+
+// unitSelectionArea.gameObject.SetActive(false);
+// if (unitSelectionArea.sizeDelta.magnitude == 0)
+// {
+//     Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+//     if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)) { return; }
+//     if (!hit.collider.TryGetComponent<Unit>(out Unit unit)) { return; }
+//      selectedUnits.Add(unit);
+
+//     foreach (Unit selectedUnit in selectedUnits)
+//     {
+//         selectedUnit.Select();
+//     }
+
+//     return;
+// }
+
+// Vector2 min = unitSelectionArea.anchoredPosition - (unitSelectionArea.sizeDelta / 2);
+// Vector2 max = unitSelectionArea.anchoredPosition + (unitSelectionArea.sizeDelta / 2);
+
+// foreach (Unit unit in player.GetMyUnits())
+// {
+//     Vector3 screenPosition = mainCamera.WorldToScreenPoint(unit.transform.position);
+
+//     if (screenPosition.x > min.x && screenPosition.x < max.x &&
+//         screenPosition.y > min.y && screenPosition.y < max.y)
+//     {
+//         selectedUnits.Add(unit);
+//         unit.Select();
+//     }
+// }

@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
+       //[SerializeField] private UnitMovement unitMovement = null;
 
 
     private void Start()
@@ -26,7 +27,6 @@ public class Unit : MonoBehaviour
 
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
     }
 
     private void Update()
@@ -37,8 +37,6 @@ public class Unit : MonoBehaviour
     public void MoveTo(Vector3 dest)
     {
         myAnimator.SetBool("isRunning", true);
-
-        // Debug.Log("dest:" + dest);
         dest.z = 0;
         agent.SetDestination(dest);
 
@@ -78,7 +76,4 @@ public class Unit : MonoBehaviour
     {
         onDeselected?.Invoke();
     }
-
-
-
 }
