@@ -19,13 +19,13 @@ public class UnitMovement : MonoBehaviour
     // }
 
     // //-----------------------------
-    // public void MoveUnit(Unit unit)
-    // {
-    //     //foreach (Unit unit in GetMyUnits())
-    //     {
-    //         unit.MoveTo(Utils.GetMouseWorldPosition());
+     public void MoveUnit(Unit unit)
+    {
+        //foreach (Unit unit in GetMyUnits())
+        {
+            unit.MoveTo(Utils.GetMouseWorldPosition());
         
-    //     }
-    // }
+        }
+    }
  
 }
