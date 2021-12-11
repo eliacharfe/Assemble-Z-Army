@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using System;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
@@ -29,6 +30,12 @@ public class Building : MonoBehaviour
 
         Unit unit = Instantiate(unitPrefab, spawnPoint.position,Quaternion.identity) as Unit;
 
+    }
+
+
+    public Sprite GetBuildingSprite()
+    {
+        return GetComponent<Sprite>();
     }
 
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6912373976665505981}
   - component: {fileID: 1801245389}
   - component: {fileID: 7784999203533053926}
-  - component: {fileID: 6497247530576129256}
+  - component: {fileID: 2869317554764529570}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -66,19 +66,32 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!65 &6497247530576129256
-BoxCollider:
+--- !u!61 &2869317554764529570
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594850713533669745}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 20, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 20, y: 20}
+  m_EdgeRadius: 0
 --- !u!1 &3108167449440912815
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 1174373771
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -8196011035689451076, guid: bb57a04c0d32ca14498199337658ebc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
