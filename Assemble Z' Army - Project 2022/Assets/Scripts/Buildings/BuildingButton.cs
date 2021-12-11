@@ -26,13 +26,14 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         if (spritePreview == null) { return; }
 
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane;
+
+        mousePos.z = 1;
+
         spritePreview.transform.position = Camera.main.ScreenToWorldPoint(mousePos);
 
-        Vector3 placePosition = spritePreview.transform.position;
         spritePreview.GetComponent<SpriteRenderer>().color = Color.green;
 
-        if(!CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>(), placePosition))
+        if(!CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>()))
         {
             spritePreview.GetComponent<SpriteRenderer>().color = Color.red;
         }
@@ -51,39 +52,31 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
         Vector3 placePosition = spritePreview.transform.position;
 
-        if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>(),placePosition)) {
-            Instantiate(building, spritePreview.transform.position, Quaternion.identity);
+        if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>())) {
+            spawnBuilding(spritePreview.transform.position);
         }
 
         Destroy(spritePreview);
     }
 
 
-    public void spawnBuilding()
+    public void spawnBuilding(Vector3 pos)
     {
-        Instantiate(building, Camera.main.transform.position, Quaternion.identity);
+        Instantiate(building, pos, Quaternion.identity);
     }
 
 
-    private bool CanPlaceBuilding(BoxCollider2D buildingCollider, Vector3 pos)
+    private bool CanPlaceBuilding(BoxCollider2D buildingCollider)
     {
-        Vector2 positiosn2D = new Vector2(pos.x,pos.y);
 
         var buildings = FindObjectsOfType<Building>();
 
-        Debug.Log("Intial check building:" + buildingCollider.transform.position);
+        foreach (var building in buildings){
 
-        foreach (var building in buildings)
-        {
-
-            if (building.GetComponent<BoxCollider2D>().bounds.Intersects(buildingCollider.bounds))
-            {
-                Debug.Log("Intersection !!!!");
+            if (buildingCollider.bounds.Intersects(building.GetComponent<BoxCollider2D>().bounds)){
                 return false;
             }
         }
-
-        Debug.Log("Can be placed building");
         return true;
     }
 
