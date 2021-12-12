@@ -21,7 +21,10 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         selectable = true;
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
         agent = GetComponent<NavMeshAgent>();
+        
+
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
