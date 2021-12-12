@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5975238431581766608}
   - component: {fileID: 5975238431581766618}
   - component: {fileID: 5975238431581766621}
+  - component: {fileID: 2583957116982578537}
   m_Layer: 9
   m_Name: Knight Prefab
   m_TagString: Untagged
@@ -150,7 +151,7 @@ NavMeshAgent:
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -219,6 +220,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2583957116982578537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975238431581766611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cd71f044c1b4c42a6fd8394653ac73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
 --- !u!1 &6098854397056669279
 GameObject:
   m_ObjectHideFlags: 0

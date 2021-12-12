@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using Utilities;
 
 public class Unit : MonoBehaviour
 {
@@ -15,16 +16,15 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-       //[SerializeField] private UnitMovement unitMovement = null;
+    //[SerializeField] private UnitMovement unitMovement = null;
 
 
     private void Start()
     {
         selectable = true;
         gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        agent = GetComponent<NavMeshAgent>();
-        
 
+        agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
@@ -34,7 +34,17 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
+        if (!agent.hasPath)
+        {
+            return;
+        }
 
+        if (agent.remainingDistance > agent.stoppingDistance)
+        {
+            return;
+        }
+
+        agent.ResetPath();
     }
 
     public void MoveTo(Vector3 dest)
@@ -78,5 +88,13 @@ public class Unit : MonoBehaviour
     public void Deselect()
     {
         onDeselected?.Invoke();
+    }
+
+    public void Move()
+    {
+        MoveTo(Utils.GetMouseWorldPosition());
+        // Camera.main.ScreenToWorldPoint(
+        //     new Vector2(Utils.GetMouseWorldPosition().x, 
+        //                 Utils.GetMouseWorldPosition().y));
     }
 }

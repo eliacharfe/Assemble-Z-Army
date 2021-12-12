@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
+// using UnitMove;
+using Cinemachine;
 
 public class RTSController : MonoBehaviour
 {
+    UnitMove movement;
     private Camera mainCamera;
-    private List <Unit> selectedUnits;
+    public CinemachineVirtualCamera VCam;
+    public Transform tFollowTarget;
+
+    private List<Unit> selectedUnits;
     private Vector3 startPos;
     private Vector2 startPosition;
     //    [SerializeField] private LayerMask layerMask = new LayerMask();
@@ -15,7 +21,9 @@ public class RTSController : MonoBehaviour
 
     private void Awake()
     {
+        movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMove>();
         mainCamera = Camera.main;
+        VCam = GetComponent<CinemachineVirtualCamera>();
         selectedUnits = new List<Unit>();
     }
 
@@ -53,25 +61,35 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
-            unit.MoveTo(Utils.GetMouseWorldPosition());
-           // MoveUnit(unit);
+            unit.Move();
+           // movement.MoveU(unit);
+
+           // Movement.MoveUnit(unit);
+           // tFollowTarget = unit.transform;
+            // VCam.Follow = tFollowTarget;
         }
     }
 
     //-------------------------------------
     private void StartSelectionArea()
     {
-        foreach (Unit selectedUnit in selectedUnits)
+
+        if (!Keyboard.current.leftShiftKey.isPressed)
         {
-            selectedUnit.Deselect();
+            Debug.Log("shift key is not pressed");
+            foreach (Unit selectedUnit in selectedUnits)
+            {
+                selectedUnit.Deselect();
+            }
+            selectedUnits.Clear();
         }
 
-        selectedUnits.Clear();
         startPos = Utils.GetMouseWorldPosition();
-
         unitSelectionArea.gameObject.SetActive(true);
-        startPosition = new Vector2(Utils.GetMouseWorldPosition().x - 350,
-                                 Utils.GetMouseWorldPosition().y - 350);
+        startPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+
+        //  new Vector2(Utils.GetMouseWorldPosition().x ,
+        //                          Utils.GetMouseWorldPosition().y );
         // startPosition = Mouse.current.position.ReadValue();
 
         UpdateSelectionArea();
@@ -84,7 +102,10 @@ public class RTSController : MonoBehaviour
         Collider2D[] inChosenArea = Physics2D.OverlapAreaAll(startPos, Utils.GetMouseWorldPosition());
         foreach (Collider2D obj in inChosenArea)
         {
+             
             Unit unit = obj.GetComponent<Unit>();
+            if (selectedUnits.Contains(unit)) { continue; }
+
             if (unit != null && unit.isSelectable())
             {
                 selectedUnits.Add(unit);
