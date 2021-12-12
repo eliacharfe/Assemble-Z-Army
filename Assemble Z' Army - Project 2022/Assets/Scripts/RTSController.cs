@@ -45,6 +45,7 @@ public class RTSController : MonoBehaviour
         if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
             MoveUnits();
+          
         }
 
         foreach (Unit unit in selectedUnits)
