@@ -9,6 +9,7 @@ using Utilities;
 public class Unit : MonoBehaviour
 {
     private bool selectable;
+    public bool waitingToBeRecruited = true;
 
     private NavMeshAgent agent;
     private Animator myAnimator;
@@ -52,7 +53,6 @@ public class Unit : MonoBehaviour
         myAnimator.SetBool("isRunning", true);
         dest.z = 0;
         agent.SetDestination(dest);
-
     }
 
     public Vector3 getDest()
@@ -97,4 +97,6 @@ public class Unit : MonoBehaviour
         //     new Vector2(Utils.GetMouseWorldPosition().x, 
         //                 Utils.GetMouseWorldPosition().y));
     }
+
+
 }
