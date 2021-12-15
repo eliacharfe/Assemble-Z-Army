@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4a42c4cb496cb4c8be55fd5f652925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitPrefab: {fileID: 3640658298281610020, guid: 50e633d333892dd4c8924b67ef2f90c4, type: 3}
+  unitInPrefab: {fileID: 3640658298281610020, guid: 50e633d333892dd4c8924b67ef2f90c4, type: 3}
+  unitOutPrefab: {fileID: 5975238431581766621, guid: db0eacf87adf3744295bc08017aaba96, type: 3}
   spawnTime: 5
   spawnPoint: {fileID: 7687285496895391796}
 --- !u!208 &7784999203533053926
