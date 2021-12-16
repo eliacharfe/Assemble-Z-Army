@@ -12,14 +12,10 @@ public class CameraInputSystem : MonoBehaviour
     [SerializeField] private float screenBorderThikeness = 10f;
     [SerializeField] private Vector2 screenXLimits = Vector2.zero;
     [SerializeField] private Vector2 screenZLimits = Vector2.zero;
-    // public float inputX, inputZ;
+
     private Controls controls;
     private Vector2 prevInput;
 
-    private void SetPrevInput(InputAction.CallbackContext ctx)
-    {
-        prevInput = ctx.ReadValue<Vector2>();
-    }
 
     void Start()
     {
@@ -31,10 +27,14 @@ public class CameraInputSystem : MonoBehaviour
         controls.Enable();
     }
 
-
     void Update()
     {
         MoveCamera();
+    }
+
+    private void SetPrevInput(InputAction.CallbackContext ctx)
+    {
+        prevInput = ctx.ReadValue<Vector2>();
     }
 
     public void MoveCamera()
@@ -47,21 +47,14 @@ public class CameraInputSystem : MonoBehaviour
             Vector2 cursorPosition = Mouse.current.position.ReadValue();
 
             if (cursorPosition.y >= Screen.height - screenBorderThikeness)
-            {
                 cursorMovement.z += 1;
-            }
             else if (cursorPosition.y <= screenBorderThikeness)
-            {
                 cursorMovement.z -= 1;
-            }
+
             if (cursorPosition.x >= Screen.width - screenBorderThikeness)
-            {
                 cursorMovement.x += 1;
-            }
             else if (cursorPosition.x <= screenBorderThikeness)
-            {
                 cursorMovement.x -= 1;
-            }
 
             pos += cursorMovement.normalized * speed * Time.deltaTime;
         }

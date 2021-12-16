@@ -17,17 +17,32 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-    //[SerializeField] private UnitMovement unitMovement = null;
-
 
     private void Start()
     {
-        selectable = true;
-        gameObject.GetComponent<NavMeshAgent>().enabled = true;
-
         agent = GetComponent<NavMeshAgent>();
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        agent.enabled = false;
+        agent.enabled = true;
+
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+      //  NavMeshHit closestHit;
+        // if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
+        //     gameObject.transform.position = closestHit.position;
+        // else
+        // {
+        //   //   Debug.LogError("Could not find position on NavMesh!");
+        //     Debug.Log("in err: " + transform.position);
+        //     transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        //     Debug.Log("After: " + transform.position);
+        //     agent.enabled = false;
+        //     agent.enabled = true;
+        // }
+
+        selectable = true;
 
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -36,16 +51,17 @@ public class Unit : MonoBehaviour
     private void Update()
     {
         if (!agent.hasPath)
-        {
             return;
-        }
 
         if (agent.remainingDistance > agent.stoppingDistance)
-        {
             return;
-        }
 
         agent.ResetPath();
+    }
+
+    public void Move()
+    {
+        MoveTo(Utils.GetMouseWorldPosition());
     }
 
     public void MoveTo(Vector3 dest)
@@ -88,14 +104,6 @@ public class Unit : MonoBehaviour
     public void Deselect()
     {
         onDeselected?.Invoke();
-    }
-
-    public void Move()
-    {
-        MoveTo(Utils.GetMouseWorldPosition());
-        // Camera.main.ScreenToWorldPoint(
-        //     new Vector2(Utils.GetMouseWorldPosition().x, 
-        //                 Utils.GetMouseWorldPosition().y));
     }
 
 

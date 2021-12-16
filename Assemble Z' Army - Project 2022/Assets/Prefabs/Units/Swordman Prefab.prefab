@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6888a79bf1ce7bc4fac5bb53c34ac8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitingToBeRecruited: 1
   onSelected:
     m_PersistentCalls:
       m_Calls:
@@ -312,7 +313,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3640658298281610026}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b526069e4759dbe4e8b8ae4552c3a860, type: 3}
   m_Name: 
