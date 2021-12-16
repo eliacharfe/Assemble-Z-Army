@@ -16,7 +16,7 @@ public class RTSController : MonoBehaviour
     private List<Unit> selectedUnits;
     private Vector3 startPos;
     private Vector2 startPosition;
-    //    [SerializeField] private LayerMask layerMask = new LayerMask();
+    // [SerializeField] private LayerMask layerMask = new LayerMask();
     [SerializeField] private RectTransform unitSelectionArea = null;
 
     private void Awake()
@@ -25,6 +25,8 @@ public class RTSController : MonoBehaviour
         mainCamera = Camera.main;
         VCam = GetComponent<CinemachineVirtualCamera>();
         selectedUnits = new List<Unit>();
+
+        Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
     }
 
     private void Update()
@@ -132,6 +134,11 @@ public class RTSController : MonoBehaviour
     public List<Unit> GetMyUnits()
     {
         return selectedUnits;
+    }
+
+    private void HandleDeSpawnUnit(Unit unit)
+    {
+        selectedUnits.Remove(unit);
     }
 }
 

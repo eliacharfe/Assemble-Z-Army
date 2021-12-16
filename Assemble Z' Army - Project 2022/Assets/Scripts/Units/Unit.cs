@@ -18,6 +18,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
 
+    public static event Action<Unit> OnDeUnitSpawned;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -57,6 +59,11 @@ public class Unit : MonoBehaviour
             return;
 
         agent.ResetPath();
+    }
+
+    private void OnDestroy()
+    {
+        OnDeUnitSpawned?.Invoke(this);
     }
 
     public void Move()

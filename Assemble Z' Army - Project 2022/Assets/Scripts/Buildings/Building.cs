@@ -6,6 +6,7 @@ using System;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.EventSystems;
 
 public class Building : MonoBehaviour
 {
@@ -13,13 +14,17 @@ public class Building : MonoBehaviour
     [SerializeField] Unit unitOutPrefab = null;
     [SerializeField] float spawnTime = 5f;
     [SerializeField] Transform spawnPoint = null;
+    [SerializeField] GameObject token = null;
 
     private bool inProgess = false;
-
 
     // Start is called before the first frame update
     void Start()
     {
+        //Set the building accoridng to the existed navmesh z position.
+        Vector3 pos = FindObjectOfType<NavMeshScript>().transform.position;
+        gameObject.transform.position =  new Vector3
+            (gameObject.transform.position.x, gameObject.transform.position.y,pos.z);
     }
 
     // Update is called once per frame
@@ -42,15 +47,16 @@ public class Building : MonoBehaviour
             return;
         }
 
-        if (unit.waitingToBeRecruited && unit.name == unitInPrefab.name)
+        // Compare the building unit prefab tag is equal the incoming unit tag.
+        if (unit.waitingToBeRecruited && unit.tag == unitInPrefab.tag)
         {
             // Todo - destroy unit and add it to player list.
-            unit.gameObject.SetActive(false);
+            Destroy(unit.gameObject);
             spawnNewUnit();
         }
         else
         {
-            Debug.Log("Unit can not be recruited here." + unit.name);
+            Debug.Log("Unit can not be recruited here(Check the tag fit the building unit)." + unit.name);
         }
     }
 
@@ -58,7 +64,5 @@ public class Building : MonoBehaviour
     {
         Unit unit = Instantiate(unitOutPrefab, spawnPoint.position, Quaternion.identity) as Unit;
     }
-
-
 
 }
