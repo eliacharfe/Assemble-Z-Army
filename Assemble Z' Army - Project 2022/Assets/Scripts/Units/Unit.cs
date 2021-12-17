@@ -18,6 +18,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
 
+    public static event Action<Unit> OnUnitSpawned;
     public static event Action<Unit> OnDeUnitSpawned;
 
     private void Start()
@@ -31,7 +32,9 @@ public class Unit : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-      //  NavMeshHit closestHit;
+        OnUnitSpawned?.Invoke(this);
+
+        //  NavMeshHit closestHit;
         // if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
         //     gameObject.transform.position = closestHit.position;
         // else

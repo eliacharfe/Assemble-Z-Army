@@ -12,11 +12,16 @@ public class Building : MonoBehaviour
 {
     [SerializeField] Unit unitInPrefab = null;
     [SerializeField] Unit unitOutPrefab = null;
+
     [SerializeField] float spawnTime = 5f;
+
     [SerializeField] Transform spawnPoint = null;
     [SerializeField] GameObject token = null;
 
+    [SerializeField]UnitSlider timeSlider = null;
+
     private bool inProgess = false;
+    private float timeLeft = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +35,25 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(inProgess)
+        {
+            if (timeLeft / spawnTime < 1)
+            {
+                timeSlider.setFill(timeLeft / spawnTime);
+                timeLeft += Time.deltaTime;
+            }
+            else
+            {
+                timeLeft = 0f;
+                spawnNewUnit();
+                inProgess = false;
+                timeSlider.resetSlider();
+            }
+        }
+
+   
+
+
     }
 
     public Sprite GetBuildingSprite()
@@ -41,8 +64,8 @@ public class Building : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Unit unit = collision.gameObject.GetComponent<Unit>();
-
-        if (!unit)
+        Debug.Log(inProgess);
+        if (!unit || inProgess)
         {
             return;
         }
@@ -50,9 +73,9 @@ public class Building : MonoBehaviour
         // Compare the building unit prefab tag is equal the incoming unit tag.
         if (unit.waitingToBeRecruited && unit.tag == unitInPrefab.tag)
         {
+            inProgess = true;
             // Todo - destroy unit and add it to player list.
             Destroy(unit.gameObject);
-            spawnNewUnit();
         }
         else
         {
