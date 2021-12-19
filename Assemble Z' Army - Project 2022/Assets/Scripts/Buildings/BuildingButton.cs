@@ -14,23 +14,27 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     private GameObject spritePreview;
 
+    private float navMeshZAxis;
+
 
     private void Start()
     {
         Sprite buildingSprite = building.GetComponentInChildren<SpriteRenderer>().sprite;
         gameObject.GetComponent<Image>().sprite = buildingSprite;
         buildingPreview.GetComponent<SpriteRenderer>().sprite = buildingSprite;
+
+        navMeshZAxis = FindObjectOfType<NavMeshScript>().transform.position.z;
     }
 
     private void Update()
     {
         if (spritePreview == null) { return; }
 
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        mousePos.z = 1;
+        mousePos.z = navMeshZAxis;
 
-        spritePreview.transform.position = Camera.main.ScreenToWorldPoint(mousePos);
+        spritePreview.transform.position = mousePos;
 
         spritePreview.GetComponent<SpriteRenderer>().color = Color.green;
 
@@ -45,14 +49,14 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
         if (eventData.button != PointerEventData.InputButton.Left) { return; }
 
-        spritePreview = Instantiate(buildingPreview, Input.mousePosition, Quaternion.identity);
+        spritePreview = Instantiate(buildingPreview, 
+            Camera.main.ScreenToWorldPoint(Input.mousePosition),
+            Quaternion.identity);
     }
 
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Vector3 placePosition = spritePreview.transform.position;
-
         if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>())) {
             spawnBuilding(spritePreview.transform.position);
         }
@@ -71,7 +75,7 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
 
         var buildings = FindObjectsOfType<Building>();
-
+        
         foreach (var building in buildings){
 
             if (buildingCollider.bounds.Intersects(building.GetComponent<BoxCollider2D>().bounds)){
