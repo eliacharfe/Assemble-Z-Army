@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class Building : MonoBehaviour
 {
     // Type of solider building recived and create.
-    [SerializeField] Unit unitInPrefab = null;// TODO - set array of possibles options.
-    [SerializeField] Unit unitOutPrefab = null;// Create a class which create the wanted unit according.
+    private Unit unitInPrefab = null;// TODO - set array of possibles options.
+    private Unit unitOutPrefab = null;// Create a class which create the wanted unit according.
 
     [SerializeField] float spawnTime = 5f;
 
@@ -22,6 +22,18 @@ public class Building : MonoBehaviour
     private bool inProgess = false;
     private float timeLeft = 0;
 
+    private UnitsFactory unitsFactory = null;
+
+    public enum Units
+    {
+        unit1,
+        unit2,
+        unit3
+    }
+
+    public Units unit;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +41,14 @@ public class Building : MonoBehaviour
         Vector3 pos = FindObjectOfType<NavMeshScript>().transform.position;
         gameObject.transform.position =  new Vector3
             (gameObject.transform.position.x, gameObject.transform.position.y,pos.z);
+
+        unitsFactory = FindObjectOfType<UnitsFactory>();
+
+        unitInPrefab = unitsFactory.GetBuildingOutputUnit(Macros.Building.ARMORY, Macros.Units.SWORDMAN) as Unit;
+
+        Debug.Log("Unit tag recived from" + unitInPrefab.tag);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -38,7 +57,7 @@ public class Building : MonoBehaviour
         {
             token.SetActive(false);
 
-            showBuildingPanel(false);
+            ShowBuildingPanel(false);
         }
 
         if (!inProgess)
@@ -53,19 +72,21 @@ public class Building : MonoBehaviour
         }
         else
         {
-            spawnNewUnit();
+            SpawnNewUnit();
 
             FreeBuildingSpace();
         }
     }
 
+
     private void OnMouseUp()
     {
         token.SetActive(true);
 
-        showBuildingPanel(true);
+        ShowBuildingPanel(true);
 
     }
+
 
     private void OnMouseEnter()
     {
@@ -75,15 +96,18 @@ public class Building : MonoBehaviour
         }
     }
 
+
     private void OnMouseExit()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
 
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        tryToRecruitUnit(collision);
+        TryToRecruitUnit(collision);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -106,7 +130,7 @@ public class Building : MonoBehaviour
     }
 
     // Try to recruit if building is not middle of recruitment.
-    void tryToRecruitUnit(Collider2D collision)
+    void TryToRecruitUnit(Collider2D collision)
     {
         Unit unit = collision.gameObject.GetComponent<Unit>();
 
@@ -115,14 +139,16 @@ public class Building : MonoBehaviour
             return;
         }
 
+        unitOutPrefab = unitsFactory.GetBuildingOutputUnit(Macros.Building.ARMORY, unit.tag) as Unit;
         // Compare the building unit prefab tag is equal the incoming unit tag.
-        if (unit.waitingToBeRecruited && unit.tag == unitInPrefab.tag)
+        if (unit.waitingToBeRecruited && unitOutPrefab.tag != Macros.Units.NONE)
         {
             inProgess = true;
 
             waitingUnit.Remove(unit);
 
-            // Todo - destroy unit and add it to player list.
+            unitOutPrefab = unitsFactory.GetBuildingOutputUnit(Macros.Building.ARMORY, unit.tag) as Unit;
+
             Destroy(unit.gameObject);
 
             
@@ -136,7 +162,7 @@ public class Building : MonoBehaviour
 
 
     //Spawn new unit.
-    private void spawnNewUnit()
+    private void SpawnNewUnit()
     {
         Unit unit = Instantiate(unitOutPrefab, spawnPoint.position, Quaternion.identity) as Unit;
 
@@ -155,7 +181,7 @@ public class Building : MonoBehaviour
     }
 
     // Show the building panel info for description.
-    private void showBuildingPanel(bool value)
+    private void ShowBuildingPanel(bool value)
     {
         BuildinPanelDisplay panel = FindObjectOfType<BuildinPanelDisplay>();
 

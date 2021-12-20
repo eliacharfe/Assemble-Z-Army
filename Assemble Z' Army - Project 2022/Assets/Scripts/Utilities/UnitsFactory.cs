@@ -4,9 +4,9 @@ using UnityEngine;
 
 using Macros;
 
-public class UnitsFactory
+public class UnitsFactory : MonoBehaviour
 {
-    public GameObject
+    public Unit
         swordman,
         spearman,
         archer,
@@ -23,7 +23,7 @@ public class UnitsFactory
         scout;
 
 
-    GameObject GetBuildingOutputUnit(string buildingTag,string unitTag)
+    public Unit GetBuildingOutputUnit(string buildingTag,string unitTag)
     {
         switch(buildingTag)
         {
@@ -60,26 +60,26 @@ public class UnitsFactory
     private bool IsRecruit(string unitTag){
         return unitTag == Units.RECRUIT;
     }
-    GameObject GetHealerUnit(string unitTag){
+    Unit GetHealerUnit(string unitTag){
         return IsRecruit(unitTag) ? healer : null;
     }
 
-    GameObject GetCrossbowUnit(string unitTag){
+    Unit GetCrossbowUnit(string unitTag){
         return IsRecruit(unitTag) ? crossbow : null;
     }
 
 
-    GameObject GetCatapultUnit(string unitTag){
+    Unit GetCatapultUnit(string unitTag){
         return IsRecruit(unitTag) ? catapult : null;
     }
 
 
-    GameObject GetScoutUnit(string unitTag){
+    Unit GetScoutUnit(string unitTag){
         return IsRecruit(unitTag) ? scout : null;
     }
 
 
-    GameObject GetSwordmanUnit(string unitTag){
+    Unit GetSwordmanUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SIMPLE_HORSE:
@@ -91,7 +91,7 @@ public class UnitsFactory
         return null;
     }
 
-    GameObject GetSpearUnit(string unitTag){
+    Unit GetSpearUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SIMPLE_HORSE:
@@ -103,7 +103,7 @@ public class UnitsFactory
         return null;
     }
 
-    GameObject GetArcherUnit(string unitTag){
+    Unit GetArcherUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SIMPLE_HORSE:
@@ -115,7 +115,7 @@ public class UnitsFactory
         return null;
     }
 
-    GameObject GetArmoredUnit(string unitTag){
+    Unit GetArmoredUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SWORDMAN:
@@ -132,7 +132,7 @@ public class UnitsFactory
     }
 
 
-    GameObject GetStableUnit(string unitTag){
+    Unit GetStableUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SWORDMAN:
