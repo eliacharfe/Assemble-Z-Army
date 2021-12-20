@@ -64,13 +64,15 @@ public class CameraInputSystem : MonoBehaviour
             pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
         }
 
+        playerCameraTransform.position = pos;
+    }
+}
+
+
+
+
         // pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
         // pos.z = Mathf.Clamp(pos.z, screenXLimits.x, screenXLimits.y);
   
         // float scroll = Input.GetAxis("Mouse ScrollWheel");
         // pos.y += scroll * scrollSpeed * 200f * Time.deltaTime;
-
-        playerCameraTransform.position = pos;
-    }
-}
-

@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Lens.FarClipPlane
       value: 20000
       objectReference: {fileID: 0}
+    - target: {fileID: 3432725189714683134, guid: 50e633d333892dd4c8924b67ef2f90c4, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 3640658298281610019, guid: 50e633d333892dd4c8924b67ef2f90c4, type: 3}
       propertyPath: m_Enabled
       value: 0

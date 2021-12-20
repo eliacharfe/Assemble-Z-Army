@@ -91,10 +91,6 @@ public class RTSController : MonoBehaviour
         unitSelectionArea.gameObject.SetActive(true);
         startPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
 
-        //  new Vector2(Utils.GetMouseWorldPosition().x ,
-        //                          Utils.GetMouseWorldPosition().y );
-        // startPosition = Mouse.current.position.ReadValue();
-
         UpdateSelectionArea();
     }
     //--------------------------------
