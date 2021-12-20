@@ -4,6 +4,9 @@ using UnityEngine;
 
 using Macros;
 
+// The class return units according the building and unit given.
+// The comprantion between units is mad according the given tags.
+// TODO compare types by scripts object.
 public class UnitsFactory : MonoBehaviour
 {
     public Unit
@@ -60,26 +63,26 @@ public class UnitsFactory : MonoBehaviour
     private bool IsRecruit(string unitTag){
         return unitTag == Units.RECRUIT;
     }
-    Unit GetHealerUnit(string unitTag){
+    private Unit GetHealerUnit(string unitTag){
         return IsRecruit(unitTag) ? healer : null;
     }
 
-    Unit GetCrossbowUnit(string unitTag){
+    private Unit GetCrossbowUnit(string unitTag){
         return IsRecruit(unitTag) ? crossbow : null;
     }
 
 
-    Unit GetCatapultUnit(string unitTag){
+    private Unit GetCatapultUnit(string unitTag){
         return IsRecruit(unitTag) ? catapult : null;
     }
 
 
-    Unit GetScoutUnit(string unitTag){
+    private Unit GetScoutUnit(string unitTag){
         return IsRecruit(unitTag) ? scout : null;
     }
 
 
-    Unit GetSwordmanUnit(string unitTag){
+    private Unit GetSwordmanUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SIMPLE_HORSE:
@@ -91,7 +94,7 @@ public class UnitsFactory : MonoBehaviour
         return null;
     }
 
-    Unit GetSpearUnit(string unitTag){
+    private Unit GetSpearUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SIMPLE_HORSE:
@@ -103,7 +106,7 @@ public class UnitsFactory : MonoBehaviour
         return null;
     }
 
-    Unit GetArcherUnit(string unitTag){
+    private Unit GetArcherUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SIMPLE_HORSE:
@@ -115,7 +118,7 @@ public class UnitsFactory : MonoBehaviour
         return null;
     }
 
-    Unit GetArmoredUnit(string unitTag){
+    private Unit GetArmoredUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SWORDMAN:
@@ -132,7 +135,7 @@ public class UnitsFactory : MonoBehaviour
     }
 
 
-    Unit GetStableUnit(string unitTag){
+    private Unit GetStableUnit(string unitTag){
         switch (unitTag)
         {
             case Units.SWORDMAN:

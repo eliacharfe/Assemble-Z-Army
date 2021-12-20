@@ -15,11 +15,11 @@ public class CamController : MonoBehaviour
 
         if (Input.GetKey("w"))
         {
-            pos.z += speed * Time.deltaTime;
+            pos.y += speed * Time.deltaTime;
         }
         if (Input.GetKey("a"))
         {
-            pos.z -= speed * Time.deltaTime;
+            pos.y -= speed * Time.deltaTime;
         }
         if (Input.GetKey("s"))
         {
@@ -30,9 +30,9 @@ public class CamController : MonoBehaviour
             pos.x -= speed * Time.deltaTime;
         }
 
-        float scroll = Input.GetAxis("MouseScrollWheel");
-        pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
-        Debug.Log(pos);
+        //float scroll = Input.GetAxis("MouseScrollWheel");
+        //pos.z -= scroll * scrollSpeed * 100f * Time.deltaTime;
+        //Debug.Log(pos);
         transform.position = pos;
     }
 }

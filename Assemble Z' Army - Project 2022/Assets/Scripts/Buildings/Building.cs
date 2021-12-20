@@ -24,16 +24,6 @@ public class Building : MonoBehaviour
 
     private UnitsFactory unitsFactory = null;
 
-    public enum Units
-    {
-        unit1,
-        unit2,
-        unit3
-    }
-
-    public Units unit;
-
-
     // Start is called before the first frame update
     void Start()
     {

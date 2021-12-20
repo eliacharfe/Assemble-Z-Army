@@ -48,9 +48,9 @@ public class CameraInputSystem : MonoBehaviour
             Vector2 cursorPosition = Mouse.current.position.ReadValue();
 
             if (cursorPosition.y >= Screen.height - screenBorderThikeness)
-                cursorMovement.z += 1;
+                cursorMovement.y += 1;
             else if (cursorPosition.y <= screenBorderThikeness)
-                cursorMovement.z -= 1;
+                cursorMovement.y -= 1;
 
             if (cursorPosition.x >= Screen.width - screenBorderThikeness)
                 cursorMovement.x += 1;
@@ -61,7 +61,7 @@ public class CameraInputSystem : MonoBehaviour
         }
         else
         {  // if keyboard
-            pos += new Vector3(prevInput.x, 0f, prevInput.y) * speed * Time.deltaTime;
+            pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
         }
 
         // pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
