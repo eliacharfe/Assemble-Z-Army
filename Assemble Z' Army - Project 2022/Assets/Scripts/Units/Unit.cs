@@ -34,19 +34,6 @@ public class Unit : MonoBehaviour
 
         OnUnitSpawned?.Invoke(this);
 
-        //  NavMeshHit closestHit;
-        // if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
-        //     gameObject.transform.position = closestHit.position;
-        // else
-        // {
-        //   //   Debug.LogError("Could not find position on NavMesh!");
-        //     Debug.Log("in err: " + transform.position);
-        //     transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        //     Debug.Log("After: " + transform.position);
-        //     agent.enabled = false;
-        //     agent.enabled = true;
-        // }
-
         selectable = true;
 
         myAnimator = GetComponent<Animator>();
@@ -115,6 +102,21 @@ public class Unit : MonoBehaviour
     {
         onDeselected?.Invoke();
     }
-
-
 }
+
+
+
+
+
+        //  NavMeshHit closestHit;
+        // if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
+        //     gameObject.transform.position = closestHit.position;
+        // else
+        // {
+        //   //   Debug.LogError("Could not find position on NavMesh!");
+        //     Debug.Log("in err: " + transform.position);
+        //     transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        //     Debug.Log("After: " + transform.position);
+        //     agent.enabled = false;
+        //     agent.enabled = true;
+        // }

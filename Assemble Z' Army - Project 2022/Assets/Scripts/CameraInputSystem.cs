@@ -16,14 +16,15 @@ public class CameraInputSystem : MonoBehaviour
     private Controls controls;
     private Vector2 prevInput;
 
+    //private float scrollSpeed = 40f;
 
     void Start()
     {
         playerCameraTransform.gameObject.SetActive(true);
+        
         controls = new Controls();
         controls.Player.MoveCamera.performed += SetPrevInput;
         controls.Player.MoveCamera.canceled += SetPrevInput;
-
         controls.Enable();
     }
 
@@ -63,30 +64,13 @@ public class CameraInputSystem : MonoBehaviour
             pos += new Vector3(prevInput.x, 0f, prevInput.y) * speed * Time.deltaTime;
         }
 
-        pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
-        pos.z = Mathf.Clamp(pos.z, screenXLimits.x, screenXLimits.y);
+        // pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
+        // pos.z = Mathf.Clamp(pos.z, screenXLimits.x, screenXLimits.y);
+  
+        // float scroll = Input.GetAxis("Mouse ScrollWheel");
+        // pos.y += scroll * scrollSpeed * 200f * Time.deltaTime;
 
         playerCameraTransform.position = pos;
-
     }
 }
 
-
-
-
-        // if (Keyboard.current.rightArrowKey.isPressed)
-        // {
-        //     transform.position = new Vector3(speed * Time.deltaTime, 0, 0);
-        // }
-        // if (Keyboard.current.leftArrowKey.isPressed)
-        // {
-        //     transform.position = new Vector3(-speed * Time.deltaTime,0,0);
-        // }
-        // if (Keyboard.current.downArrowKey.isPressed)
-        // {
-        //     transform.position = new Vector3(0,-speed * Time.deltaTime,0);
-        // }
-        // if (Keyboard.current.upArrowKey.isPressed)
-        // {
-        //     transform.position = new Vector3(0,speed * Time.deltaTime,0);
-        // }

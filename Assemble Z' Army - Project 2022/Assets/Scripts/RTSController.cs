@@ -111,6 +111,7 @@ public class RTSController : MonoBehaviour
 
             if (unit != null && unit.isSelectable())
             {
+                Debug.Log("unitPos: " + unit.transform.position);
                 selectedUnits.Add(unit);
                 ///  unit.SetColorSelcted();
                 unit.Select();
