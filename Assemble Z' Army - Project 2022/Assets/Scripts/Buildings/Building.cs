@@ -6,10 +6,8 @@ using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
+    private Unit spawnUnitPrefab = null;
     // Type of solider building recived and create.
-    private Unit unitInPrefab = null;// TODO - set array of possibles options.
-    private Unit unitOutPrefab = null;// Create a class which create the wanted unit according.
-
     [SerializeField] float spawnTime = 5f;
 
     [SerializeField] Transform spawnPoint = null;
@@ -24,19 +22,18 @@ public class Building : MonoBehaviour
 
     private UnitsFactory unitsFactory = null;
 
+    public Macros.Buildings id;
+
     // Start is called before the first frame update
     void Start()
     {
         //Set the building accoridng to the existed navmesh z position.
         Vector3 pos = FindObjectOfType<NavMeshScript>().transform.position;
+
         gameObject.transform.position =  new Vector3
             (gameObject.transform.position.x, gameObject.transform.position.y,pos.z);
 
         unitsFactory = FindObjectOfType<UnitsFactory>();
-
-        unitInPrefab = unitsFactory.GetBuildingOutputUnit(Macros.Building.ARMORY, Macros.Units.SWORDMAN) as Unit;
-
-        Debug.Log("Unit tag recived from" + unitInPrefab.tag);
     }
 
 
@@ -95,6 +92,7 @@ public class Building : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        Debug.Log("Collision called");
         TryToRecruitUnit(collision);
     }
 
@@ -103,7 +101,7 @@ public class Building : MonoBehaviour
     {
         Unit unit = collision.gameObject.GetComponent<Unit>();
 
-        if (unit.waitingToBeRecruited && unit.tag == unitInPrefab.tag)
+        if (unit.waitingToBeRecruited && unitsFactory.GetBuildingOutputUnit(this.id,unit.id))
         {
             if(!waitingUnit.Contains(unit))
             {
@@ -129,19 +127,17 @@ public class Building : MonoBehaviour
             return;
         }
 
-        unitOutPrefab = unitsFactory.GetBuildingOutputUnit(Macros.Building.ARMORY, unit.tag) as Unit;
+        spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
+
+        Debug.Log("Following unit to spawm."+spawnUnitPrefab);
         // Compare the building unit prefab tag is equal the incoming unit tag.
-        if (unit.waitingToBeRecruited && unitOutPrefab.tag != Macros.Units.NONE)
+        if (spawnUnitPrefab && unit.waitingToBeRecruited)
         {
             inProgess = true;
 
             waitingUnit.Remove(unit);
 
-            unitOutPrefab = unitsFactory.GetBuildingOutputUnit(Macros.Building.ARMORY, unit.tag) as Unit;
-
             Destroy(unit.gameObject);
-
-            
         }
         else
         {
@@ -154,11 +150,12 @@ public class Building : MonoBehaviour
     //Spawn new unit.
     private void SpawnNewUnit()
     {
-        Unit unit = Instantiate(unitOutPrefab, spawnPoint.position, Quaternion.identity) as Unit;
+        Unit unit = Instantiate(spawnUnitPrefab, spawnPoint.position, Quaternion.identity) as Unit;
 
+        spawnUnitPrefab = null;
         // To do - move the unit away from the building.
         //unit.MoveTo(new Vector3(spawnPoint.position.x+100f, 0,0));
-        
+
     }
 
 

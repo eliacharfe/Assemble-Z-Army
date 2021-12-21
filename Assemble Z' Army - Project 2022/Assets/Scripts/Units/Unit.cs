@@ -21,6 +21,8 @@ public class Unit : MonoBehaviour
     public static event Action<Unit> OnUnitSpawned;
     public static event Action<Unit> OnDeUnitSpawned;
 
+    public Macros.Units id;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();

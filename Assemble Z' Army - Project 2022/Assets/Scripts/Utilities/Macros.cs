@@ -1,6 +1,42 @@
 namespace Macros
 {
 
+    public enum Buildings{
+        NONE,
+        ARCHERY_FIELD,
+        CROSSBOW_FIELD,
+        STABLE,
+        SWORD_SMITH,
+        SPEAR_SMITH,
+        ARMORY,
+        CAMP,
+        TEMPLE,
+        WORKSHOP
+    }
+
+    public enum Units
+    {
+        NONE,
+        RECRUIT,
+        SWORDMAN,
+        ARCHER,
+        SPEARMAN,
+        SWORD_KNIGHT,
+        SPEAR_KNIGHT,
+        SIMPLE_HORSE,
+        ARCHER_HORSE,
+        SPEAR_HORSE,
+        SWORD_HORSE,
+        SPEAR_HORSE_KNIGHT,
+        SWORD_HORSE_KNIGHT,
+        CROSSBOW,
+        HEALER,
+        CATAPULT,
+        SCOUT
+    }
+}
+
+/*
     public static class Building
     {
         public const string
@@ -17,7 +53,7 @@ namespace Macros
     }
 
 
-    public static class Units
+    public static class Unitss
     {
         // Foot units
         public const string
@@ -54,6 +90,6 @@ namespace Macros
             NONE = "";
     }
 
-
-
 }
+*/
+

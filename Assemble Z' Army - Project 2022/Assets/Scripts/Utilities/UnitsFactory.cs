@@ -26,64 +26,64 @@ public class UnitsFactory : MonoBehaviour
         scout;
 
 
-    public Unit GetBuildingOutputUnit(string buildingTag,string unitTag)
+    public Unit GetBuildingOutputUnit(Buildings buildingId, Units unitId)
     {
-        switch(buildingTag)
+        switch(buildingId)
         {
-            case Macros.Building.SWORD_SMITH:
-                return GetSwordmanUnit(unitTag);
+            case Buildings.SWORD_SMITH:
+                return GetSwordmanUnit(unitId);
 
-            case Macros.Building.SPEAR_SMITH:
-                return GetSpearUnit(unitTag);
+            case Buildings.SPEAR_SMITH:
+                return GetSpearUnit(unitId);
 
-            case Macros.Building.ARCHERY_FIELD:
-                return GetArcherUnit(unitTag);
+            case Buildings.ARCHERY_FIELD:
+                return GetArcherUnit(unitId);
 
-            case Macros.Building.ARMORY:
-                return GetArmoredUnit(unitTag);
+            case Buildings.ARMORY:
+                return GetArmoredUnit(unitId);
 
-            case Macros.Building.STABLE:
-                return GetStableUnit(unitTag);
+            case Buildings.STABLE:
+                return GetStableUnit(unitId);
 
-            case Macros.Building.CROSSBOW_FIELD:
-                return GetCrossbowUnit(unitTag);
+            case Buildings.CROSSBOW_FIELD:
+                return GetCrossbowUnit(unitId);
 
-            case Macros.Building.WORKSHOP:
-                return GetCatapultUnit(unitTag);
+            case Buildings.WORKSHOP:
+                return GetCatapultUnit(unitId);
 
-            case Macros.Building.TEMPLE:
-                return GetHealerUnit(unitTag);
+            case Buildings.TEMPLE:
+                return GetHealerUnit(unitId);
 
-            case Macros.Building.CAMP:
-                return GetScoutUnit(unitTag);
+            case Buildings.CAMP:
+                return GetScoutUnit(unitId);
         }
         return null;
     }
 
-    private bool IsRecruit(string unitTag){
-        return unitTag == Units.RECRUIT;
+    private bool IsRecruit(Units unitId){
+        return unitId == Units.RECRUIT;
     }
-    private Unit GetHealerUnit(string unitTag){
-        return IsRecruit(unitTag) ? healer : null;
-    }
-
-    private Unit GetCrossbowUnit(string unitTag){
-        return IsRecruit(unitTag) ? crossbow : null;
+    private Unit GetHealerUnit(Units unitId){
+        return IsRecruit(unitId) ? healer : null;
     }
 
-
-    private Unit GetCatapultUnit(string unitTag){
-        return IsRecruit(unitTag) ? catapult : null;
+    private Unit GetCrossbowUnit(Units unitId){
+        return IsRecruit(unitId) ? crossbow : null;
     }
 
 
-    private Unit GetScoutUnit(string unitTag){
-        return IsRecruit(unitTag) ? scout : null;
+    private Unit GetCatapultUnit(Units unitId){
+        return IsRecruit(unitId) ? catapult : null;
     }
 
 
-    private Unit GetSwordmanUnit(string unitTag){
-        switch (unitTag)
+    private Unit GetScoutUnit(Units unitId){
+        return IsRecruit(unitId) ? scout : null;
+    }
+
+
+    private Unit GetSwordmanUnit(Units unitId){
+        switch (unitId)
         {
             case Units.SIMPLE_HORSE:
                 return swordHorse;
@@ -94,8 +94,8 @@ public class UnitsFactory : MonoBehaviour
         return null;
     }
 
-    private Unit GetSpearUnit(string unitTag){
-        switch (unitTag)
+    private Unit GetSpearUnit(Units unitId){
+        switch (unitId)
         {
             case Units.SIMPLE_HORSE:
                 return spearHorse;
@@ -106,8 +106,8 @@ public class UnitsFactory : MonoBehaviour
         return null;
     }
 
-    private Unit GetArcherUnit(string unitTag){
-        switch (unitTag)
+    private Unit GetArcherUnit(Units unitId){
+        switch (unitId)
         {
             case Units.SIMPLE_HORSE:
                 return archerHorse;
@@ -118,8 +118,8 @@ public class UnitsFactory : MonoBehaviour
         return null;
     }
 
-    private Unit GetArmoredUnit(string unitTag){
-        switch (unitTag)
+    private Unit GetArmoredUnit(Units unitId){
+        switch (unitId)
         {
             case Units.SWORDMAN:
                 return swordKnight;
@@ -135,8 +135,8 @@ public class UnitsFactory : MonoBehaviour
     }
 
 
-    private Unit GetStableUnit(string unitTag){
-        switch (unitTag)
+    private Unit GetStableUnit(Units unitId){
+        switch (unitId)
         {
             case Units.SWORDMAN:
                 return swordHorse;
