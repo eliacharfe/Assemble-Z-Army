@@ -66,6 +66,23 @@ public class Unit : MonoBehaviour
         myAnimator.SetBool("isRunning", true);
         dest.z = 0;
         agent.SetDestination(dest);
+
+        FlipSideSprite(dest);
+
+    }
+
+    private void FlipSideSprite(Vector3 dest)
+    {
+         if (dest.x < transform.position.x && transform.localScale.x > Mathf.Epsilon)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
+            transform.localScale.z);
+        }
+        else if (dest.x > transform.position.x && transform.localScale.x < Mathf.Epsilon)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
+                        transform.localScale.z);
+        }
     }
 
     public Vector3 getDest()
@@ -108,15 +125,15 @@ public class Unit : MonoBehaviour
 
 
 
-        //  NavMeshHit closestHit;
-        // if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
-        //     gameObject.transform.position = closestHit.position;
-        // else
-        // {
-        //   //   Debug.LogError("Could not find position on NavMesh!");
-        //     Debug.Log("in err: " + transform.position);
-        //     transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        //     Debug.Log("After: " + transform.position);
-        //     agent.enabled = false;
-        //     agent.enabled = true;
-        // }
+//  NavMeshHit closestHit;
+// if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
+//     gameObject.transform.position = closestHit.position;
+// else
+// {
+//   //   Debug.LogError("Could not find position on NavMesh!");
+//     Debug.Log("in err: " + transform.position);
+//     transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+//     Debug.Log("After: " + transform.position);
+//     agent.enabled = false;
+//     agent.enabled = true;
+// }
