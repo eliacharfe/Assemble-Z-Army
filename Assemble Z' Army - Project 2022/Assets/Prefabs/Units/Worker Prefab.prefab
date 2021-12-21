@@ -224,6 +224,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  id: 0
 --- !u!114 &2644113536506946191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,13 +440,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1079770842211189009, guid: c9fed129ed44258418d0e35f490dbe57, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3447214825118638460, guid: c9fed129ed44258418d0e35f490dbe57, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8616355328560109236, guid: c9fed129ed44258418d0e35f490dbe57, type: 3}
       propertyPath: m_Name
       value: Health Bar Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 8616355328560109236, guid: c9fed129ed44258418d0e35f490dbe57, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9fed129ed44258418d0e35f490dbe57, type: 3}

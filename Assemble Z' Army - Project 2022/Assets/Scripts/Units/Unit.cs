@@ -65,7 +65,7 @@ public class Unit : MonoBehaviour
 
     public void MoveTo(Vector3 dest)
     {
-        myAnimator.SetBool("isRunning", true);
+        myAnimator.SetBool("Run", true);
         dest.z = 0;
         agent.SetDestination(dest);
 
@@ -94,7 +94,7 @@ public class Unit : MonoBehaviour
 
     public void Stop()
     {
-        myAnimator.SetBool("isRunning", false);
+        myAnimator.SetBool("Run", false);
     }
 
     public void SetColorSelcted()
