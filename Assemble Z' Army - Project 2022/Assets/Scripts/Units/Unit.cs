@@ -23,6 +23,8 @@ public class Unit : MonoBehaviour
 
     public Macros.Units id;
 
+    private Vector3 destination;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -68,17 +70,44 @@ public class Unit : MonoBehaviour
 
     public void MoveTo(Vector3 dest)
     {
-        myAnimator.SetBool("Run", true);
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+         dest = hit.point;
+        //   MoveTo(hit.point);
+        myAnimator.SetBool("isRunning", true);
         dest.z = 0;
         agent.SetDestination(dest);
 
         FlipSideSprite(dest);
-
     }
+
+    public bool ReachedDestination()
+    {
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance < agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                   return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // public Vector3 getDestinaion()
+    // {
+    //     return destination;
+    // }
+
+    // public Vector3 getPosition()
+    // {
+    //     return agent.destination;// transform.position;
+    // }
 
     private void FlipSideSprite(Vector3 dest)
     {
-         if (dest.x < transform.position.x && transform.localScale.x > Mathf.Epsilon)
+        if (dest.x < transform.position.x && transform.localScale.x > Mathf.Epsilon)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
             transform.localScale.z);
@@ -90,14 +119,9 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public Vector3 getDest()
-    {
-        return agent.destination;
-    }
-
     public void Stop()
     {
-        myAnimator.SetBool("Run", false);
+        myAnimator.SetBool("isRunning", false);
     }
 
     public void SetColorSelcted()

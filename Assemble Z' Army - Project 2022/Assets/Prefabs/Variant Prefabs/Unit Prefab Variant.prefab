@@ -60,6 +60,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4032915064396438825, guid: 454b27e6d7f6a7446b6a4e4f3c8206cc, type: 3}
+      propertyPath: m_Speed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032915064396438825, guid: 454b27e6d7f6a7446b6a4e4f3c8206cc, type: 3}
+      propertyPath: m_Acceleration
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032915064396438825, guid: 454b27e6d7f6a7446b6a4e4f3c8206cc, type: 3}
       propertyPath: m_StoppingDistance
       value: 1
       objectReference: {fileID: 0}

@@ -16,11 +16,13 @@ public class RTSController : MonoBehaviour
     private List<Unit> selectedUnits;
     private Vector3 startPos;
     private Vector2 startPosition;
-    // [SerializeField] private LayerMask layerMask = new LayerMask();
-    [SerializeField] private RectTransform unitSelectionArea = null;
+
+    [SerializeField] private Transform selectionAreaTransform;
 
     private void Awake()
     {
+        selectionAreaTransform.gameObject.SetActive(false);
+
         movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMove>();
         mainCamera = Camera.main;
         VCam = GetComponent<CinemachineVirtualCamera>();
@@ -47,39 +49,67 @@ public class RTSController : MonoBehaviour
         if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
             MoveUnits();
-          
         }
 
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.transform.position.x == unit.getDest().x
-            && unit.transform.position.y == unit.getDest().y)
-            {
-                unit.Stop(); // when the unit get to its destination will stop change the animation
-            }
+            if (unit.ReachedDestination())
+                unit.Stop();
         }
     }
 
-    private void MoveUnits()
+    //-------------
+     private void MoveUnits()
     {
+        Vector3 moveToPos = Utils.GetMouseWorldPosition();
+
+        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {10, 20, 30}, new int[] {5, 10, 20});
+
+        int targetPosIndex = 0;
         foreach (Unit unit in selectedUnits)
         {
-            unit.Move();
-           // movement.MoveU(unit);
-
-           // Movement.MoveUnit(unit);
-           // tFollowTarget = unit.transform;
-            // VCam.Follow = tFollowTarget;
+            unit.MoveTo(targetPosList[targetPosIndex]);
+            targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
         }
     }
+
+    private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
+    {
+           List<Vector3> posList = new List<Vector3>();
+           posList.Add(startPos);
+           for(int i = 0; i < ringPosCountArr.Length; i++){
+               posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
+           }
+           return posList;
+    }
+
+    private List<Vector3> GetPosListAround(Vector3 startPostion, float distance, int posCount)
+    {
+        List<Vector3> posList = new List<Vector3>();
+        for (int i = 0; i < posCount; i++)
+        {
+            float angle = i * (360f / posCount);
+            Vector3 direction = ApplyRotationToVec(new Vector3(1, 0), angle);
+            Vector3 position = startPostion + direction * distance;
+            posList.Add(position);
+        }
+        return posList;
+    }
+
+    private Vector3 ApplyRotationToVec(Vector3 vec, float angle)
+    {
+        return Quaternion.Euler(0, 0, angle) * vec;
+    }
+
 
     //-------------------------------------
     private void StartSelectionArea()
     {
+        startPosition = Utils.GetMouseWorldPosition();
+        selectionAreaTransform.gameObject.SetActive(true);
 
         if (!Keyboard.current.leftShiftKey.isPressed)
         {
-            Debug.Log("shift key is not pressed");
             foreach (Unit selectedUnit in selectedUnits)
             {
                 selectedUnit.Deselect();
@@ -88,7 +118,6 @@ public class RTSController : MonoBehaviour
         }
 
         startPos = Utils.GetMouseWorldPosition();
-        unitSelectionArea.gameObject.SetActive(true);
         startPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
 
         UpdateSelectionArea();
@@ -96,12 +125,12 @@ public class RTSController : MonoBehaviour
     //--------------------------------
     private void ClearSelectionArea()
     {
-        unitSelectionArea.gameObject.SetActive(false);
+        selectionAreaTransform.gameObject.SetActive(false);
 
         Collider2D[] inChosenArea = Physics2D.OverlapAreaAll(startPos, Utils.GetMouseWorldPosition());
         foreach (Collider2D obj in inChosenArea)
         {
-             
+
             Unit unit = obj.GetComponent<Unit>();
             if (selectedUnits.Contains(unit)) { continue; }
 
@@ -109,7 +138,6 @@ public class RTSController : MonoBehaviour
             {
                 Debug.Log("unitPos: " + unit.transform.position);
                 selectedUnits.Add(unit);
-                ///  unit.SetColorSelcted();
                 unit.Select();
             }
         }
@@ -118,20 +146,22 @@ public class RTSController : MonoBehaviour
     //--------------------------------
     private void UpdateSelectionArea()
     {
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector3 currMousePos = Utils.GetMouseWorldPosition();
+        Vector3 buttomLeft = new Vector3(
+            Mathf.Min(startPosition.x, currMousePos.x),
+            Mathf.Min(startPosition.y, currMousePos.y));
+        Vector3 topRight = new Vector3(
+            Mathf.Max(startPosition.x, currMousePos.x),
+            Mathf.Max(startPosition.y, currMousePos.y));
 
-        float areaWidth = mousePosition.x - startPosition.x;
-        float areaHeight = mousePosition.y - startPosition.y;
-
-        unitSelectionArea.sizeDelta = new Vector2(Mathf.Abs(areaWidth), Mathf.Abs(areaHeight));
-        unitSelectionArea.anchoredPosition = startPosition + new Vector2(areaWidth / 2, areaHeight / 2);
-
+        selectionAreaTransform.position = buttomLeft;
+        selectionAreaTransform.localScale = topRight - buttomLeft;
     }
     //-----------------------------------
-    public List<Unit> GetMyUnits()
-    {
-        return selectedUnits;
-    }
+    // public List<Unit> GetMyUnits()
+    // {
+    //     return selectedUnits;
+    // }
 
     private void HandleDeSpawnUnit(Unit unit)
     {
