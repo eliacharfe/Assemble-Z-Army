@@ -13,7 +13,7 @@ public class Building : MonoBehaviour
     [SerializeField] Transform spawnPoint = null;
     
     [SerializeField] GameObject token = null;
-    [SerializeField] UnitSlider timeSlider = null;
+    [SerializeField] CostumeSlider timeSlider = null;
 
     private List<Unit> waitingUnit = new List<Unit>();
 

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UnitSlider:MonoBehaviour
+public class CostumeSlider:MonoBehaviour
 {
     [SerializeField] GameObject timeLeft;
 
@@ -22,17 +23,15 @@ public class UnitSlider:MonoBehaviour
     public void setFill(float value)
     {
 
-        if (timeLeft.transform.localScale.x <= 1f)
+        if (timeLeft.GetComponent<Image>().fillAmount <= 1f)
         {
             Debug.Log("Increase slider by" +  value);
-            timeLeft.transform.localScale = new Vector3( value,
-                timeLeft.transform.localScale.y, 0);
+            timeLeft.GetComponent<Image>().fillAmount = value;
         }
     }
 
     public void resetSlider()
     {
-        timeLeft.transform.localScale = (new Vector3(0,
-            timeLeft.transform.localScale.y, 0));
+        timeLeft.GetComponent<Image>().fillAmount = 0;
     }
 }

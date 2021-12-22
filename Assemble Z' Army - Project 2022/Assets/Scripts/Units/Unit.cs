@@ -60,7 +60,10 @@ public class Unit : MonoBehaviour
 
     public void Move()
     {
-        MoveTo(Utils.GetMouseWorldPosition());
+        // Get the position mouse is clicked on by using ray.
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+        MoveTo(hit.point);
     }
 
     public void MoveTo(Vector3 dest)
