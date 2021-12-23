@@ -17,6 +17,7 @@ namespace Macros
     public enum Units
     {
         NONE,
+        WORKER,
         RECRUIT,
         SWORDMAN,
         ARCHER,

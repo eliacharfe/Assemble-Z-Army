@@ -40,6 +40,7 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Hide UI elements.
         if(Input.GetMouseButtonDown(0))
         {
             token.SetActive(false);
@@ -47,34 +48,21 @@ public class Building : MonoBehaviour
             ShowBuildingPanel(false);
         }
 
-        if (!inProgess)
-        {
-            return;
-        }
+        SpawningProgession();
 
-        if (timeLeft / spawnTime < 1)
-        {
-            timeSlider.setFill(timeLeft / spawnTime);
-            timeLeft += Time.deltaTime;
-        }
-        else
-        {
-            SpawnNewUnit();
-
-            FreeBuildingSpace();
-        }
     }
 
 
+    // Show building token and panel.
     private void OnMouseUp()
     {
         token.SetActive(true);
 
         ShowBuildingPanel(true);
-
     }
 
 
+    // When mouse hover.
     private void OnMouseEnter()
     {
         if (!token.activeSelf)
@@ -83,22 +71,26 @@ public class Building : MonoBehaviour
         }
     }
 
-
+    // When mouse doesnt hover.
     private void OnMouseExit()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
 
 
+    // Try to recruit.
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Collision called");
+        if (!enabled) { return; }
         TryToRecruitUnit(collision);
     }
 
 
+    // When unit approch insert it into the list.
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!enabled) { return; }
+
         Unit unit = collision.gameObject.GetComponent<Unit>();
 
         if (unit.waitingToBeRecruited && unitsFactory.GetBuildingOutputUnit(this.id,unit.id))
@@ -109,12 +101,6 @@ public class Building : MonoBehaviour
             }
 
         }
-    }
-
-
-    public Sprite GetBuildingSprite()
-    {
-        return GetComponent<Sprite>();
     }
 
     // Try to recruit if building is not middle of recruitment.
@@ -129,7 +115,6 @@ public class Building : MonoBehaviour
 
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
 
-        Debug.Log("Following unit to spawm."+spawnUnitPrefab);
         // Compare the building unit prefab tag is equal the incoming unit tag.
         if (spawnUnitPrefab && unit.waitingToBeRecruited)
         {
@@ -139,11 +124,7 @@ public class Building : MonoBehaviour
 
             Destroy(unit.gameObject);
         }
-        else
-        {
-            Debug.Log("Unit can not be recruited here(Check the tag fit the building unit)." 
-                + unit.name);
-        }
+
     }
 
 
@@ -152,10 +133,7 @@ public class Building : MonoBehaviour
     {
         Unit unit = Instantiate(spawnUnitPrefab, spawnPoint.position, Quaternion.identity) as Unit;
 
-        spawnUnitPrefab = null;
-        // To do - move the unit away from the building.
-        //unit.MoveTo(new Vector3(spawnPoint.position.x+100f, 0,0));
-
+        unit.MoveTo(spawnPoint.position + new Vector3(10f,0,0));
     }
 
 
@@ -167,7 +145,7 @@ public class Building : MonoBehaviour
         timeSlider.resetSlider();
     }
 
-    // Show the building panel info for description.
+    // Show the building panel info for description or options.
     private void ShowBuildingPanel(bool value)
     {
         BuildinPanelDisplay panel = FindObjectOfType<BuildinPanelDisplay>();
@@ -177,5 +155,35 @@ public class Building : MonoBehaviour
             panel.GetComponent<Image>().enabled = value;
         }
 
+    }
+
+
+    // Deal with unit spawing time.
+    private void SpawningProgession()
+    {
+        if (!inProgess) { return; }
+
+        if (timeLeft < 0.1f)
+        {
+            timeLeft += Time.deltaTime;
+        }
+        else
+        {
+            timeSlider.IncreaseSlider(0.1f / spawnTime);
+            timeLeft = 0;
+        }
+
+        if (timeSlider.SliderFinished())
+        {
+            SpawnNewUnit();
+
+            FreeBuildingSpace();
+        }
+    }
+
+
+    public Sprite GetBuildingSprite()
+    {
+        return GetComponent<Sprite>();
     }
 }

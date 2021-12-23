@@ -25,7 +25,7 @@ public class Unit : MonoBehaviour
 
     private Vector3 destination;
 
-    private void Start()
+    private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
@@ -43,6 +43,9 @@ public class Unit : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
+    private void Start()
+    {}
 
     private void Update()
     {
@@ -63,10 +66,7 @@ public class Unit : MonoBehaviour
     }
 
     public void MoveTo(Vector3 dest)
-    {
-        //RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        // dest = hit.point;
-    
+    {    
         myAnimator.SetBool("isRunning", true);
         dest.z = 0;
         agent.SetDestination(dest);
@@ -133,6 +133,22 @@ public class Unit : MonoBehaviour
     {
         onDeselected?.Invoke();
     }
+
+    public void StopMove()
+    {
+        agent.ResetPath();
+    }
+
+    public void ContinutMove()
+    {
+        agent.isStopped = false;
+    }
+
+    public bool isMoving()
+    {
+        return !agent.isStopped;
+    }
+
 }
 
 

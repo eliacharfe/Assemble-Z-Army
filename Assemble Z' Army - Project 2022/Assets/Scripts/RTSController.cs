@@ -48,7 +48,8 @@ public class RTSController : MonoBehaviour
 
         if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
-            MoveUnits();
+            GiveMovmentCommand();
+
         }
 
         foreach (Unit unit in selectedUnits)
@@ -58,9 +59,39 @@ public class RTSController : MonoBehaviour
         }
     }
 
-    //-------------
-     private void MoveUnits()
+    private void GiveMovmentCommand()
     {
+        BuilidingConstruction building = null;
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+        if(hit.collider)
+        {
+            building = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
+        }
+
+        if (building && building.enabled)
+            SendToBuild(building,hit);
+        else
+            MoveUnits();
+    }
+
+    private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
+    {
+        foreach (Unit unit in selectedUnits)
+        {
+            if (unit.id == Macros.Units.WORKER)
+            {
+                (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).SetBuildingTarget(building);
+                unit.MoveTo(hit.point);
+            }
+        }
+        
+    }
+
+
+    //-------------
+    private void MoveUnits()
+      {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
 
         List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {10, 20, 30}, new int[] {5, 10, 20});
@@ -70,8 +101,14 @@ public class RTSController : MonoBehaviour
         {
             unit.MoveTo(targetPosList[targetPosIndex]);
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
+
+            if (unit.id == Macros.Units.WORKER)
+            {
+                (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).ResetBuildingTarget();
+            }
         }
     }
+
 
     private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
     {
