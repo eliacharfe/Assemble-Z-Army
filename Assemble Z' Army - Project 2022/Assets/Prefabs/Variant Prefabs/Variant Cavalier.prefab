@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3025256314400404147, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_StoppingDistance
-      value: 1.42
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3025256314400404159, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_RootOrder
@@ -115,6 +115,26 @@ PrefabInstance:
     - target: {fileID: 3025256314400404159, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342095262600495304, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342095262600495304, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342095262600495304, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931866011805513139, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: m_Intensity
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7931866011805513139, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: m_FalloffIntensity
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}

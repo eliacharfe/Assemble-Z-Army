@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
+// using UnityEngine.Experimental.Rendering.LWRP;
+// using UnityEngine.Experimental.Rendering.Universal;
 
 public class CameraInputSystem : MonoBehaviour
 {
@@ -16,6 +18,10 @@ public class CameraInputSystem : MonoBehaviour
     private Controls controls;
     private Vector2 prevInput;
 
+    //[SerializeField] Light2D light;
+
+   // UnityEngine.Experimental.Rendering.LWRP.Light2D m_Light2D = null;
+
     //private float scrollSpeed = 40f;
 
     void Start()
@@ -26,6 +32,8 @@ public class CameraInputSystem : MonoBehaviour
         controls.Player.MoveCamera.performed += SetPrevInput;
         controls.Player.MoveCamera.canceled += SetPrevInput;
         controls.Enable();
+
+       // light = GetComponent<Light2D>();
     }
 
     void Update()
@@ -65,6 +73,7 @@ public class CameraInputSystem : MonoBehaviour
         }
 
         playerCameraTransform.position = pos;
+        GetComponent<Light>().transform.position = pos;
     }
 }
 

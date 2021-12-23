@@ -54,7 +54,7 @@ public class RTSController : MonoBehaviour
         foreach (Unit unit in selectedUnits)
         {
             if (unit.ReachedDestination())
-                unit.Stop();
+                unit.StopAnimation();
         }
     }
 

@@ -49,10 +49,12 @@ public class Unit : MonoBehaviour
         if (!agent.hasPath)
             return;
 
-        if (agent.remainingDistance > agent.stoppingDistance)
+        if (agent.remainingDistance  > agent.stoppingDistance )
             return;
 
         agent.ResetPath();
+        StopAnimation();
+
     }
 
     private void OnDestroy()
@@ -60,19 +62,11 @@ public class Unit : MonoBehaviour
         OnDeUnitSpawned?.Invoke(this);
     }
 
-    public void Move()
-    {
-        // Get the position mouse is clicked on by using ray.
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-        MoveTo(hit.point);
-    }
-
     public void MoveTo(Vector3 dest)
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-         dest = hit.point;
-        //   MoveTo(hit.point);
+        //RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        // dest = hit.point;
+    
         myAnimator.SetBool("isRunning", true);
         dest.z = 0;
         agent.SetDestination(dest);
@@ -84,26 +78,17 @@ public class Unit : MonoBehaviour
     {
         if (!agent.pathPending)
         {
-            if (agent.remainingDistance < agent.stoppingDistance)
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
+                       agent.ResetPath();
                    return true;
                 }
             }
         }
         return false;
     }
-
-    // public Vector3 getDestinaion()
-    // {
-    //     return destination;
-    // }
-
-    // public Vector3 getPosition()
-    // {
-    //     return agent.destination;// transform.position;
-    // }
 
     private void FlipSideSprite(Vector3 dest)
     {
@@ -119,7 +104,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public void Stop()
+    public void StopAnimation()
     {
         myAnimator.SetBool("isRunning", false);
     }
