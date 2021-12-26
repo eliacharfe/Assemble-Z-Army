@@ -1462,6 +1462,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: 0, y: 0}
   screenZLimits: {x: 0, y: 0}
+  light: {fileID: 0}
 --- !u!114 &603128124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2349,6 +2350,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: 0, y: 0}
   screenZLimits: {x: 0, y: 0}
+  light: {fileID: 0}
 --- !u!4 &1214521400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2328121520340731523, guid: 970241d4c7ffb594cb055fa1c9ef24d1, type: 3}
@@ -3153,6 +3155,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: 0, y: 0}
   screenZLimits: {x: 0, y: 0}
+  light: {fileID: 0}
 --- !u!114 &1544485455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3494,6 +3497,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: 0, y: 0}
   screenZLimits: {x: 0, y: 0}
+  light: {fileID: 0}
 --- !u!1001 &1787799378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3685,6 +3689,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: 0, y: 0}
   screenZLimits: {x: 0, y: 0}
+  light: {fileID: 0}
 --- !u!4 &1872595817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4930170893203616285, guid: ef642ca909db16b40b8995db389b6244, type: 3}

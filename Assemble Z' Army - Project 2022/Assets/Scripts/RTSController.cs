@@ -10,7 +10,7 @@ public class RTSController : MonoBehaviour
 {
     UnitMove movement;
     private Camera mainCamera;
-    public CinemachineVirtualCamera VCam;
+   // public CinemachineVirtualCamera VCam;
     public Transform tFollowTarget;
 
     private List<Unit> selectedUnits;
@@ -25,7 +25,7 @@ public class RTSController : MonoBehaviour
 
         movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMove>();
         mainCamera = Camera.main;
-        VCam = GetComponent<CinemachineVirtualCamera>();
+      //  VCam = GetComponent<CinemachineVirtualCamera>();
         selectedUnits = new List<Unit>();
 
         Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
