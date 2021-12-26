@@ -73,7 +73,7 @@ public class CameraInputSystem : MonoBehaviour
         }
 
         playerCameraTransform.position = pos;
-        GetComponent<Light>().transform.position = pos;
+       //GetComponent<Light>().transform.position = pos;
     }
 }
 

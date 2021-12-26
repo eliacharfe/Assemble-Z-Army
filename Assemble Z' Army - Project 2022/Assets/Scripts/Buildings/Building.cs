@@ -11,6 +11,7 @@ public class Building : MonoBehaviour
     [SerializeField] float spawnTime = 5f;
 
     [SerializeField] Transform spawnPoint = null;
+    [SerializeField] Transform enterPoint = null;
     
     [SerializeField] GameObject token = null;
     [SerializeField] CostumeSlider timeSlider = null;
@@ -185,5 +186,10 @@ public class Building : MonoBehaviour
     public Sprite GetBuildingSprite()
     {
         return GetComponent<Sprite>();
+    }
+
+    public Transform GetBuildingEnteringPoint()
+    {
+        return enterPoint;
     }
 }

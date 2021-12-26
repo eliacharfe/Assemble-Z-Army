@@ -61,18 +61,34 @@ public class RTSController : MonoBehaviour
 
     private void GiveMovmentCommand()
     {
-        BuilidingConstruction building = null;
+        BuilidingConstruction buildingToConstruct = null;
+        Building building = null;
+
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
         if(hit.collider)
         {
-            building = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
+            buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
+            building = hit.collider.gameObject.GetComponent<Building>();
         }
 
-        if (building && building.enabled)
-            SendToBuild(building,hit);
+        if (buildingToConstruct && buildingToConstruct.enabled)
+            SendToBuild(buildingToConstruct, hit);
+        else if (building && building.enabled)
+            SendToRecruit(building,hit);
         else
             MoveUnits();
+    }
+
+    private void SendToRecruit(Building building, RaycastHit2D hit)
+    {
+        foreach (Unit unit in selectedUnits)
+        {
+            if (unit.id != Macros.Units.WORKER)
+            {
+                unit.MoveTo(building.GetBuildingEnteringPoint().position);
+            }
+        }
     }
 
     private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
