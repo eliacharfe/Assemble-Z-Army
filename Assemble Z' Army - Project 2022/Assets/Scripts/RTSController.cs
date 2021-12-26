@@ -86,7 +86,9 @@ public class RTSController : MonoBehaviour
         {
             if (unit.id != Macros.Units.WORKER)
             {
-                unit.MoveTo(building.GetBuildingEnteringPoint().position);
+                unit.SetBuildingRecruiting(building);
+
+                unit.MoveTo(building.EnterWaitingRecruitment(unit));
             }
         }
     }
@@ -115,7 +117,10 @@ public class RTSController : MonoBehaviour
         int targetPosIndex = 0;
         foreach (Unit unit in selectedUnits)
         {
+            unit.RemoveBuildingRecruiting();
+
             unit.MoveTo(targetPosList[targetPosIndex]);
+
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
 
             if (unit.id == Macros.Units.WORKER)

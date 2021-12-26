@@ -9,7 +9,7 @@ using Utilities;
 public class Unit : MonoBehaviour
 {
     private bool selectable;
-    public bool waitingToBeRecruited = true;
+    public  Building recrutingBuilding = null;
 
     private NavMeshAgent agent;
     private Animator myAnimator;
@@ -147,6 +147,21 @@ public class Unit : MonoBehaviour
     public bool isMoving()
     {
         return !agent.isStopped;
+    }
+
+    public void SetBuildingRecruiting(Building building)
+    {
+        recrutingBuilding = building;
+    }
+
+    public void RemoveBuildingRecruiting()
+    {
+        if(recrutingBuilding)
+        {
+            Debug.Log("removed from current building");
+            recrutingBuilding.removeUnitFromWaitingList(this);
+            recrutingBuilding = null;
+        }
     }
 
 }

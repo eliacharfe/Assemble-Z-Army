@@ -50,7 +50,6 @@ public class Building : MonoBehaviour
         }
 
         SpawningProgession();
-
     }
 
 
@@ -93,15 +92,6 @@ public class Building : MonoBehaviour
         if (!enabled) { return; }
 
         Unit unit = collision.gameObject.GetComponent<Unit>();
-
-        if (unit.waitingToBeRecruited && unitsFactory.GetBuildingOutputUnit(this.id,unit.id))
-        {
-            if(!waitingUnit.Contains(unit))
-            {
-                waitingUnit.Add(unit);
-            }
-
-        }
     }
 
     // Try to recruit if building is not middle of recruitment.
@@ -117,7 +107,7 @@ public class Building : MonoBehaviour
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
 
         // Compare the building unit prefab tag is equal the incoming unit tag.
-        if (spawnUnitPrefab && unit.waitingToBeRecruited)
+        if (spawnUnitPrefab)
         {
             inProgess = true;
 
@@ -188,8 +178,29 @@ public class Building : MonoBehaviour
         return GetComponent<Sprite>();
     }
 
-    public Transform GetBuildingEnteringPoint()
+    public Vector3 EnterWaitingRecruitment(Unit unit)
     {
-        return enterPoint;
+
+        if (!waitingUnit.Contains(unit))
+        {
+            waitingUnit.Add(unit);
+        }
+
+        return enterPoint.position + new Vector3(-20 * waitingUnit.Count,0,0);
+    }
+
+    public void removeUnitFromWaitingList(Unit unit)
+    {
+        Debug.Log("Unit removed");
+
+        if (waitingUnit.Contains(unit))
+        {
+            waitingUnit.Remove(unit);
+
+            foreach (Unit currentUnit in waitingUnit)
+            {
+                currentUnit.MoveTo(enterPoint.position + new Vector3(-20 * waitingUnit.Count, 0, 0));
+            }
+        }
     }
 }
