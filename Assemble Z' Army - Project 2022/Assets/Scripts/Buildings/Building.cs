@@ -16,7 +16,7 @@ public class Building : MonoBehaviour
     [SerializeField] GameObject token = null;
     [SerializeField] CostumeSlider timeSlider = null;
 
-    public List<Unit> waitingUnit = new List<Unit>();
+    private List<Unit> waitingUnit = new List<Unit>();
 
     private bool inProgess = false;
     private float timeLeft = 0;
@@ -41,23 +41,12 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if(!this.enabled)
-        {
-            return;
-        }
         // Hide UI elements.
         if(Input.GetMouseButtonDown(0))
         {
             token.SetActive(false);
 
             ShowBuildingPanel(false);
-        }
-
-
-        if (waitingUnit.Count <= 0)
-        {
-            return;
         }
 
         SpawningProgession();
@@ -82,7 +71,6 @@ public class Building : MonoBehaviour
         }
     }
 
-
     // When mouse doesnt hover.
     private void OnMouseExit()
     {
@@ -90,35 +78,40 @@ public class Building : MonoBehaviour
     }
 
 
-    // Try to recruit if building is not middle of recruitment.
-    void TryToRecruitUnit()
+    // Try to recruit.
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(waitingUnit.Count <= 0)
-        {
-            return;
-        }
+        if (!enabled) { return; }
+        TryToRecruitUnit(collision);
+    }
 
-        Unit unit = waitingUnit[0];
 
-        if (!unit)
-        {
-            return;
-        }
+    // When unit approch insert it into the list.
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!enabled) { return; }
 
-        if(Vector2.Distance(unit.transform.position, enterPoint.position) > 1)
+        Unit unit = collision.gameObject.GetComponent<Unit>();
+    }
+
+    // Try to recruit if building is not middle of recruitment.
+    void TryToRecruitUnit(Collider2D collision)
+    {
+        Unit unit = collision.gameObject.GetComponent<Unit>();
+
+        if (!unit || inProgess)
         {
-            Debug.Log("Unit is too far!!"+ Vector2.Distance(unit.transform.position, enterPoint.position));
             return;
         }
 
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
 
         // Compare the building unit prefab tag is equal the incoming unit tag.
-        this.removeUnitFromWaitingList(unit);
-
         if (spawnUnitPrefab)
         {
             inProgess = true;
+
+            waitingUnit.Remove(unit);
 
             Destroy(unit.gameObject);
         }
@@ -143,7 +136,6 @@ public class Building : MonoBehaviour
         timeSlider.resetSlider();
     }
 
-
     // Show the building panel info for description or options.
     private void ShowBuildingPanel(bool value)
     {
@@ -160,10 +152,9 @@ public class Building : MonoBehaviour
     // Deal with unit spawing time.
     private void SpawningProgession()
     {
-        if (!inProgess) {
-            TryToRecruitUnit();
-        }
-        else if (timeLeft < 0.1f)
+        if (!inProgess) { return; }
+
+        if (timeLeft < 0.1f)
         {
             timeLeft += Time.deltaTime;
         }
@@ -190,27 +181,25 @@ public class Building : MonoBehaviour
     public Vector3 EnterWaitingRecruitment(Unit unit)
     {
 
-        if (!waitingUnit.Contains(unit) && unitsFactory.GetBuildingOutputUnit(this.id,unit.id))
+        if (!waitingUnit.Contains(unit))
         {
             waitingUnit.Add(unit);
-
-            return enterPoint.position + new Vector3(-20 * (waitingUnit.Count - 1), 0, 0);
         }
 
-        return Vector3.zero;
+        return enterPoint.position + new Vector3(-20 * waitingUnit.Count,0,0);
     }
-
 
     public void removeUnitFromWaitingList(Unit unit)
     {
+        Debug.Log("Unit removed");
 
         if (waitingUnit.Contains(unit))
         {
             waitingUnit.Remove(unit);
 
-            for(int i=0;i<waitingUnit.Count;i++)
+            foreach (Unit currentUnit in waitingUnit)
             {
-                waitingUnit[i].MoveTo(enterPoint.position + new Vector3(-20 * i, 0, 0));
+                currentUnit.MoveTo(enterPoint.position + new Vector3(-20 * waitingUnit.Count, 0, 0));
             }
         }
     }

@@ -34,7 +34,7 @@ public class CameraInputSystem : MonoBehaviour
         controls.Player.MoveCamera.canceled += SetPrevInput;
         controls.Enable();
 
-        //light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
+        light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
     }
 
     void Update()
@@ -51,7 +51,7 @@ public class CameraInputSystem : MonoBehaviour
     {
         Vector3 pos = playerCameraTransform.position;
 
-       /* if (prevInput == Vector2.zero) // if mouse
+        if (prevInput == Vector2.zero) // if mouse
         {
             Vector3 cursorMovement = Vector3.zero;
             Vector2 cursorPosition = Mouse.current.position.ReadValue();
@@ -68,7 +68,7 @@ public class CameraInputSystem : MonoBehaviour
 
             pos += cursorMovement.normalized * speed * Time.deltaTime;
         }
-        else*/
+        else
         {  // if keyboard
             pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
         }
