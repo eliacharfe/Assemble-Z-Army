@@ -328,6 +328,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: -45, y: 45}
   screenZLimits: {x: -55, y: 35}
+  light: {fileID: 0}
 --- !u!114 &692702320095221925
 MonoBehaviour:
   m_ObjectHideFlags: 0
