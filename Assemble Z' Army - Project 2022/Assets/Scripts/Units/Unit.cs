@@ -159,7 +159,7 @@ public class Unit : MonoBehaviour
         if(recrutingBuilding)
         {
             Debug.Log("removed from current building");
-            recrutingBuilding.removeUnitFromWaitingList(this);
+            recrutingBuilding.RemoveUnitFromWaitingList(this);
             recrutingBuilding = null;
         }
     }

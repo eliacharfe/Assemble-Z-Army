@@ -19,6 +19,7 @@ public class RTSController : MonoBehaviour
 
     [SerializeField] private Transform selectionAreaTransform;
 
+
     private void Awake()
     {
         selectionAreaTransform.gameObject.SetActive(false);
@@ -30,6 +31,7 @@ public class RTSController : MonoBehaviour
 
         Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
     }
+
 
     private void Update()
     {
@@ -59,6 +61,7 @@ public class RTSController : MonoBehaviour
         }
     }
 
+
     private void GiveMovmentCommand()
     {
         BuilidingConstruction buildingToConstruct = null;
@@ -80,6 +83,8 @@ public class RTSController : MonoBehaviour
             MoveUnits();
     }
 
+
+    // Send unit to building for recruitment.
     private void SendToRecruit(Building building, RaycastHit2D hit)
     {
         foreach (Unit unit in selectedUnits)
@@ -93,6 +98,8 @@ public class RTSController : MonoBehaviour
         }
     }
 
+
+    // Send workers to construct the building.
     private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
     {
         foreach (Unit unit in selectedUnits)
@@ -107,7 +114,7 @@ public class RTSController : MonoBehaviour
     }
 
 
-    //-------------
+    // Move units to position clicked on.
     private void MoveUnits()
       {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
@@ -131,6 +138,7 @@ public class RTSController : MonoBehaviour
     }
 
 
+    // Get positions around the point given.
     private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
     {
            List<Vector3> posList = new List<Vector3>();
@@ -140,6 +148,7 @@ public class RTSController : MonoBehaviour
            }
            return posList;
     }
+
 
     private List<Vector3> GetPosListAround(Vector3 startPostion, float distance, int posCount)
     {
@@ -153,6 +162,7 @@ public class RTSController : MonoBehaviour
         }
         return posList;
     }
+
 
     private Vector3 ApplyRotationToVec(Vector3 vec, float angle)
     {
@@ -194,7 +204,6 @@ public class RTSController : MonoBehaviour
 
             if (unit != null && unit.isSelectable())
             {
-                Debug.Log("unitPos: " + unit.transform.position);
                 selectedUnits.Add(unit);
                 unit.Select();
             }
