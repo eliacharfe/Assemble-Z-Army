@@ -13,7 +13,7 @@ public class HealthDisplay : MonoBehaviour
     private void Awake()
     {
         healthBar.SetActive(true);
-      //  health.ClientOnHealthUpdate += HandleHealthUpdated;
+        health.ClientOnHealthUpdate += HandleHealthUpdated;
     }
 
     private void OnDestroy()

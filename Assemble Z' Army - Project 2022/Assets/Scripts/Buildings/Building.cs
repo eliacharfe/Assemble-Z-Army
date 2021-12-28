@@ -108,7 +108,7 @@ public class Building : MonoBehaviour
 
         if (!unit) { return; }
 
-        if (Vector2.Distance(unit.transform.position, enterPoint.position) > 1)
+        if (Vector2.Distance(unit.transform.position, enterPoint.position) > 1.5)
         {
             return;
         }

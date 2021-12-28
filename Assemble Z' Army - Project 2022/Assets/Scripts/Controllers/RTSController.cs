@@ -51,7 +51,6 @@ public class RTSController : MonoBehaviour
         if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
             GiveMovmentCommand();
-
         }
 
         foreach (Unit unit in selectedUnits)
@@ -66,6 +65,7 @@ public class RTSController : MonoBehaviour
     {
         BuilidingConstruction buildingToConstruct = null;
         Building building = null;
+        Targetable targetable = null;
 
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
@@ -73,14 +73,32 @@ public class RTSController : MonoBehaviour
         {
             buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
             building = hit.collider.gameObject.GetComponent<Building>();
+            targetable = hit.collider.gameObject.GetComponent<Targetable>();
         }
 
         if (buildingToConstruct && buildingToConstruct.enabled)
             SendToBuild(buildingToConstruct, hit);
         else if (building && building.enabled)
             SendToRecruit(building,hit);
+        else if(targetable)
+        {
+            AttackUnit(targetable, hit);
+        }
         else
             MoveUnits();
+    }
+
+    private void AttackUnit(Targetable targetable, RaycastHit2D hit)
+    {
+        foreach (Unit unit in selectedUnits)
+        {
+            if (unit.id != Macros.Units.WORKER)
+            {
+                unit.GetComponent<Attacker>().SetTargetable(targetable);
+
+                //unit.MoveTo(hit.point);
+            }
+        }
     }
 
 

@@ -15,6 +15,8 @@ public class Unit : MonoBehaviour
     private Animator myAnimator;
     private SpriteRenderer spriteRenderer;
 
+    [SerializeField] private Targeter targeter;
+
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
 
@@ -158,10 +160,14 @@ public class Unit : MonoBehaviour
     {
         if(recrutingBuilding)
         {
-            Debug.Log("removed from current building");
             recrutingBuilding.RemoveUnitFromWaitingList(this);
             recrutingBuilding = null;
         }
+    }
+
+    public Targeter GetTargeter()
+    {
+        return targeter;
     }
 
 }

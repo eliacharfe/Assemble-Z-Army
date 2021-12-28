@@ -14,7 +14,7 @@ public class Health : MonoBehaviour // NetworkBehavior
 
     // public event Action ServerOnDie;
 
-    // public event Action<int, int> ClientOnHealthUpdate;
+    public event Action<int, int> ClientOnHealthUpdate;
 
 
     void Start()
@@ -25,26 +25,23 @@ public class Health : MonoBehaviour // NetworkBehavior
     // Update is called once per frame
     void Update()
     {
-      //  DealDamage();
 
     }
 
-    // public void DealDamage(int damageAmount)
-    // {
-        
-    //      if (currHealth == 0)
-    //        return;
+     public void DealDamage(int damageAmount)
+     {
+      
+          if (currHealth == 0)
+            return;
 
-    //     currHealth = Mathf.Max(currHealth - damageAmount, 0);
+         currHealth = Mathf.Max(currHealth - damageAmount, 0);
 
+        ClientOnHealthUpdate?.Invoke(currHealth, maxHealth);
 
-    //     if (currHealth != 0)
-    //       return;
+        if (currHealth != 0)
+           return;
 
-    //     ServerOnDie?.Invoke();
-
-    //     Debug.Log("Die");
-    // }
+    }
 
      // client
     // private void HandleHealthUpdated(int oldHealth, int newHealth)
