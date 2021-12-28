@@ -34,7 +34,7 @@ public class CameraInputSystem : MonoBehaviour
         controls.Player.MoveCamera.canceled += SetPrevInput;
         controls.Enable();
 
-        light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
+        //light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
     }
 
     void Update()
