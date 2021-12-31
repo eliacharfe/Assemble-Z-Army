@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb = null;
+    [Header("Projectile Settings")]
     [SerializeField] private int damageToDeal = 20;
     [SerializeField] private float destroyAfterSeconds = 5;
-    [SerializeField] private float lauchForce = 10f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -8,7 +8,7 @@ using Cinemachine;
 
 public class RTSController : MonoBehaviour
 {
-    UnitMove movement;
+    UnitMovement movement;
     private Camera mainCamera;
    // public CinemachineVirtualCamera VCam;
     public Transform tFollowTarget;
@@ -24,7 +24,7 @@ public class RTSController : MonoBehaviour
     {
         selectionAreaTransform.gameObject.SetActive(false);
 
-        movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMove>();
+        movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMovement>();
         mainCamera = Camera.main;
       //  VCam = GetComponent<CinemachineVirtualCamera>();
         selectedUnits = new List<Unit>();

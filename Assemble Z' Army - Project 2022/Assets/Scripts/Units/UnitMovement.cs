@@ -9,7 +9,7 @@ using Utilities;
 using Cinemachine;
 
 
-public class UnitMove : MonoBehaviour
+public class UnitMovement : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent = null;
 

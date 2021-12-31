@@ -8,16 +8,26 @@ public class Building : MonoBehaviour
 {
 
     // Type of solider building recived and create.
-    [SerializeField] float spawnTime = 5f;
 
-    [SerializeField] Transform spawnPoint = null;
-    [SerializeField] Transform enterPoint = null;
 
-    [SerializeField] GameObject token = null;
-    [SerializeField] CostumeSlider timeSlider = null;
+    [Header("Spawning Settings")]
+    [SerializeField] private float spawnTime = 5f;
+    [SerializeField] private float spawnDistancePoint = 1.5f;
+    [SerializeField] private Transform spawnPoint = null;
+    [SerializeField] private Transform enterPoint = null;
 
-    public Macros.Buildings Id;
+    [Header("Building Type")]
+    [SerializeField] private Macros.Buildings Id;
 
+    [Header("Costs")]
+    [SerializeField] private float treeCost;
+    [SerializeField] private float metalCost;
+    [SerializeField] private float goldCost;
+    [SerializeField] private float jewelsCost;
+
+    [Header("UI")]
+    [SerializeField] private GameObject token = null;
+    [SerializeField] private CostumeSlider timeSlider = null;
     // Units waiting to be recruited.
     public List<Unit> waitingUnit = new List<Unit>();
 
@@ -28,10 +38,6 @@ public class Building : MonoBehaviour
     private float timeLeft = 0;
 
     private UnitsFactory unitsFactory = null;
-
-
-
-
 
 
     // Start is called before the first frame update
@@ -63,7 +69,6 @@ public class Building : MonoBehaviour
 
             ShowBuildingPanel(false);
         }
-
 
         SpawningProgession();
     }
@@ -99,23 +104,18 @@ public class Building : MonoBehaviour
     void TryToRecruitUnit()
     {
 
-        if (waitingUnit.Count <= 0)
-        {
-            return;
-        }
+        if (waitingUnit.Count <= 0){ return; }
 
         Unit unit = waitingUnit[0];
 
         if (!unit) { return; }
 
-        if (Vector2.Distance(unit.transform.position, enterPoint.position) > 1.5)
-        {
-            return;
-        }
+        if (Vector2.Distance(unit.transform.position, enterPoint.position) 
+            > spawnDistancePoint){ return; }
 
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.Id, unit.id);
 
-        this.RemoveUnitFromWaitingList(unit);
+        RemoveUnitFromWaitingList(unit);
 
         if (spawnUnitPrefab)
         {

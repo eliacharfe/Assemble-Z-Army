@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Abstract class for multiple attacks types.
 public abstract class Attacker : MonoBehaviour
 {
     protected Targetable target = null;
+
+    [Header("Attack Settings")]
     [SerializeField] private float attackTime = 1f;
-    [SerializeField] private float range;
+    [SerializeField] private float range = 1f;
     [SerializeField] protected int damage = 5;
 
     private float time = 0;

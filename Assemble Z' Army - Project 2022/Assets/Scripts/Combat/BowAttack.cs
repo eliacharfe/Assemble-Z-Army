@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BowAttack : Attacker
 {
+    [Header("Projectile Settings")]
     [SerializeField] private GameObject arrowPrefab = null;
     [SerializeField] private float arrowSpeed = 15f;
 

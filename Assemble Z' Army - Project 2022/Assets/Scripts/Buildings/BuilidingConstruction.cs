@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BuilidingConstruction : MonoBehaviour
 {
     [SerializeField] private CostumeSlider buldingConstructionSlider = null;
-
+    [SerializeField] private TextMeshProUGUI cancelBuilding;
     public float constructionTime = 5f;
 
     private void Start()
@@ -20,6 +21,8 @@ public class BuilidingConstruction : MonoBehaviour
         if(buldingConstructionSlider.FillAmount() >= 1f) {
             FinishConstruction();
         }
+
+        
     }
 
 
