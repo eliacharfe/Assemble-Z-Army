@@ -25,6 +25,11 @@ public class Health : MonoBehaviour // NetworkBehavior
     // Update is called once per frame
     void Update()
     {
+        if (currHealth <= 0)
+        {
+            GetComponent<Unit>().StopMove();
+            Destroy(gameObject);
+        }
 
     }
 

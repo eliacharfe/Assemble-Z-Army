@@ -17,7 +17,8 @@ public abstract class Attacker : MonoBehaviour
 
         if(Vector2.Distance(gameObject.transform.position,this.target.transform.position) < range)
         {
-            if(time < attackTime)
+            GetComponent<Unit>().StopMove();
+            if (time < attackTime)
             {
                 time += Time.deltaTime;
             }else

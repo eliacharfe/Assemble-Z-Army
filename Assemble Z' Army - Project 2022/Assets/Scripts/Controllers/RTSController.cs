@@ -76,14 +76,16 @@ public class RTSController : MonoBehaviour
             targetable = hit.collider.gameObject.GetComponent<Targetable>();
         }
 
+
         if (buildingToConstruct && buildingToConstruct.enabled)
             SendToBuild(buildingToConstruct, hit);
+
         else if (building && building.enabled)
             SendToRecruit(building,hit);
+
         else if(targetable)
-        {
             AttackUnit(targetable, hit);
-        }
+
         else
             MoveUnits();
     }
@@ -95,8 +97,6 @@ public class RTSController : MonoBehaviour
             if (unit.id != Macros.Units.WORKER)
             {
                 unit.GetComponent<Attacker>().SetTargetable(targetable);
-
-                //unit.MoveTo(hit.point);
             }
         }
     }
@@ -142,7 +142,7 @@ public class RTSController : MonoBehaviour
         int targetPosIndex = 0;
         foreach (Unit unit in selectedUnits)
         {
-            unit.RemoveBuildingRecruiting();
+            ClearPreviousCommands(unit);
 
             unit.MoveTo(targetPosList[targetPosIndex]);
 
@@ -153,6 +153,17 @@ public class RTSController : MonoBehaviour
                 (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).ResetBuildingTarget();
             }
         }
+    }
+
+
+    // Clear previous commands such as attack target or recruit.
+    private void ClearPreviousCommands(Unit unit)
+    {
+        unit.RemoveBuildingRecruiting();
+
+        if (unit.GetComponent<Attacker>())
+            unit.GetComponent<Attacker>().SetTargetable(null);
+
     }
 
 

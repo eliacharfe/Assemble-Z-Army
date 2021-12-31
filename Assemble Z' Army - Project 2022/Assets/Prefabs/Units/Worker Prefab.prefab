@@ -688,7 +688,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6888a79bf1ce7bc4fac5bb53c34ac8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingToBeRecruited: 1
+  recrutingBuilding: {fileID: 0}
+  targeter: {fileID: 0}
   onSelected:
     m_PersistentCalls:
       m_Calls:

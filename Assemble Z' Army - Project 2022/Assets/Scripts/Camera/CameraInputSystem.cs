@@ -50,7 +50,7 @@ public class CameraInputSystem : MonoBehaviour
     public void MoveCamera()
     {
         Vector3 pos = playerCameraTransform.position;
-
+        /*
         if (prevInput == Vector2.zero) // if mouse
         {
             Vector3 cursorMovement = Vector3.zero;
@@ -68,7 +68,7 @@ public class CameraInputSystem : MonoBehaviour
 
             pos += cursorMovement.normalized * speed * Time.deltaTime;
         }
-        else
+        else*/
         {  // if keyboard
             pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
         }

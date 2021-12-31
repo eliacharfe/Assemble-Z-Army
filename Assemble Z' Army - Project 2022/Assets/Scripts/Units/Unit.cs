@@ -80,7 +80,7 @@ public class Unit : MonoBehaviour
     {
         if (!agent.pathPending)
         {
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (agent && agent.remainingDistance <= agent.stoppingDistance)
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {

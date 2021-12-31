@@ -9,10 +9,14 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float destroyAfterSeconds = 5;
     [SerializeField] private float lauchForce = 10f;
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
+        Health target = collision.GetComponent<Health>();
+        if (target)
+        {
+            target.DealDamage(damageToDeal);
+        }
 
+        Destroy(gameObject);
+    }
 }
