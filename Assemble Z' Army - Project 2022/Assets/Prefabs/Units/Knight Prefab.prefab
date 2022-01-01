@@ -131,7 +131,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.3
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.25
+  m_Intensity: 0.3
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 0000000065a6cbc877da2f60b9271ed99941682c8b85ff4583057404d37e9fee090e7c7e
@@ -777,6 +777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recrutingBuilding: {fileID: 0}
+  targeter: {fileID: 0}
   onSelected:
     m_PersistentCalls:
       m_Calls:

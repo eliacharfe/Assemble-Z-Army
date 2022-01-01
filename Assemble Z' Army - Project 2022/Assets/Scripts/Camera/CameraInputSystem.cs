@@ -18,8 +18,10 @@ public class CameraInputSystem : MonoBehaviour
     private Controls controls;
     private Vector2 prevInput;
 
-    private GameObject gameObj;
-    [SerializeField] UnityEngine.Experimental.Rendering.Universal.Light2D light;
+   [SerializeField] private GameObject gameObj;
+    [SerializeField] public new UnityEngine.Experimental.Rendering.Universal.Light2D light;
+
+    //[SerializeField] private Light2D light;
 
    // UnityEngine.Experimental.Rendering.LWRP.Light2D m_Light2D = null;
 
@@ -34,7 +36,8 @@ public class CameraInputSystem : MonoBehaviour
         controls.Player.MoveCamera.canceled += SetPrevInput;
         controls.Enable();
 
-        //light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
+      //  light = GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
+        light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
     }
 
     void Update()
@@ -74,7 +77,7 @@ public class CameraInputSystem : MonoBehaviour
         }
         
         playerCameraTransform.position = pos;
-       //GetComponent<Light>().transform.position = pos;
+        light.transform.position = pos;
     }
 }
 
