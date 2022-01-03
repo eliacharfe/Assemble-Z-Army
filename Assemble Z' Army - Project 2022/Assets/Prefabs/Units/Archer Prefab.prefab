@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8550278457205747388}
   - component: {fileID: 4102206643138920935}
   - component: {fileID: 44933692179150969}
+  - component: {fileID: 6282632853109780855}
   m_Layer: 9
   m_Name: Archer Prefab
   m_TagString: Untagged
@@ -259,6 +260,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: 0, y: 0}
   screenZLimits: {x: 0, y: 0}
+  gameObj: {fileID: 0}
   light: {fileID: 0}
 --- !u!114 &4102206643138920935
 MonoBehaviour:
@@ -288,6 +290,28 @@ MonoBehaviour:
   health: {fileID: 4102206643138920935}
   healthBar: {fileID: 6765047242092649738}
   healthBarImage: {fileID: 407505965196094146}
+--- !u!114 &6282632853109780855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540240371280817607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674ef1760fadb284e8a8e1d98ac61614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP:
+    BaseValue: 100
+  Attack:
+    BaseValue: 10
+  Defense:
+    BaseValue: 0
+  ReachDistance:
+    BaseValue: 8
+  SpeedAttack:
+    BaseValue: 0.5
 --- !u!1 &4127628265508480907
 GameObject:
   m_ObjectHideFlags: 0

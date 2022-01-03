@@ -6,10 +6,12 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using Utilities;
 
+using Char.CharacterStat;
+
 public class Unit : MonoBehaviour
 {
     private bool selectable;
-    public  Building recrutingBuilding = null;
+    public Building recrutingBuilding = null;
 
     private NavMeshAgent agent;
     private Animator myAnimator;
@@ -24,8 +26,11 @@ public class Unit : MonoBehaviour
     public static event Action<Unit> OnDeUnitSpawned;
 
     public Macros.Units id;
-
     private Vector3 destination;
+
+    UnitMovement move = new UnitMovement(); 
+
+    // StatModifier mod1, mod2;
 
     private void Awake()
     {
@@ -47,14 +52,14 @@ public class Unit : MonoBehaviour
     }
 
     private void Start()
-    {}
+    { }
 
     private void Update()
     {
         if (!agent.hasPath)
             return;
 
-        if (agent.remainingDistance  > agent.stoppingDistance )
+        if (agent.remainingDistance > agent.stoppingDistance)
             return;
 
         agent.ResetPath();
@@ -67,14 +72,13 @@ public class Unit : MonoBehaviour
         OnDeUnitSpawned?.Invoke(this);
     }
 
-    public void MoveTo(Vector3 dest)
-    {    
-        myAnimator.SetBool("isRunning", true);
-        dest.z = 0;
-        agent.SetDestination(dest);
 
-        FlipSideSprite(dest);
+    public void MoveTo(Vector3 dest)
+    {
+        myAnimator.SetBool("isRunning", true);
+        move.Move(this, agent, dest);
     }
+
 
     public bool ReachedDestination()
     {
@@ -84,26 +88,12 @@ public class Unit : MonoBehaviour
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
-                       agent.ResetPath();
-                   return true;
+                    agent.ResetPath();
+                    return true;
                 }
             }
         }
         return false;
-    }
-
-    private void FlipSideSprite(Vector3 dest)
-    {
-        if (dest.x < transform.position.x && transform.localScale.x > Mathf.Epsilon)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
-            transform.localScale.z);
-        }
-        else if (dest.x > transform.position.x && transform.localScale.x < Mathf.Epsilon)
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
-                        transform.localScale.z);
-        }
     }
 
     public void StopAnimation()
@@ -158,7 +148,7 @@ public class Unit : MonoBehaviour
 
     public void RemoveBuildingRecruiting()
     {
-        if(recrutingBuilding)
+        if (recrutingBuilding)
         {
             recrutingBuilding.RemoveUnitFromWaitingList(this);
             recrutingBuilding = null;
@@ -168,6 +158,20 @@ public class Unit : MonoBehaviour
     public Targeter GetTargeter()
     {
         return targeter;
+    }
+
+    public void Equip(Stat stat)
+    {
+        // We need to store our modifiers in variables before adding them to the stat.
+        stat.Attack.AddModifier(new StatModifier(10, StatModType.Flat, this));
+        stat.Attack.AddModifier(new StatModifier(0.1f, StatModType.PercentMult, this));
+    }
+
+    public void Unequip(Stat stat)
+    {
+        // Here we need to use the stored modifiers in order to remove them.
+        // Otherwise they would be "lost" in the stat forever.
+        stat.Attack.RemoveAllModifiersFromSource(this);
     }
 
 }

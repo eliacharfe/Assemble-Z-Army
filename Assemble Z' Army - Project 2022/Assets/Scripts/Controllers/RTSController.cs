@@ -24,7 +24,7 @@ public class RTSController : MonoBehaviour
     {
         selectionAreaTransform.gameObject.SetActive(false);
 
-        movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMovement>();
+       // movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMovement>();
         mainCamera = Camera.main;
       //  VCam = GetComponent<CinemachineVirtualCamera>();
         selectedUnits = new List<Unit>();
@@ -145,6 +145,7 @@ public class RTSController : MonoBehaviour
             ClearPreviousCommands(unit);
 
             unit.MoveTo(targetPosList[targetPosIndex]);
+
 
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
 

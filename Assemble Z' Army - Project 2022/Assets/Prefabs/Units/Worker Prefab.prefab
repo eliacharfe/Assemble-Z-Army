@@ -512,6 +512,7 @@ GameObject:
   - component: {fileID: 2644113536506946191}
   - component: {fileID: 2317675082532159996}
   - component: {fileID: 3864184547338987839}
+  - component: {fileID: 8754764550867976278}
   m_Layer: 9
   m_Name: Worker Prefab
   m_TagString: Untagged
@@ -762,6 +763,28 @@ MonoBehaviour:
   health: {fileID: 2317675082532159996}
   healthBar: {fileID: 8311433633812281899}
   healthBarImage: {fileID: 3106818268697710051}
+--- !u!114 &8754764550867976278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384757247955166901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674ef1760fadb284e8a8e1d98ac61614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP:
+    BaseValue: 100
+  Attack:
+    BaseValue: 5
+  Defense:
+    BaseValue: 0
+  ReachDistance:
+    BaseValue: 1
+  SpeedAttack:
+    BaseValue: 2
 --- !u!1 &6833089366330585913
 GameObject:
   m_ObjectHideFlags: 0

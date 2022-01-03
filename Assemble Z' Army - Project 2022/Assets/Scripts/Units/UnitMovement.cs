@@ -9,40 +9,31 @@ using Utilities;
 using Cinemachine;
 
 
-public class UnitMovement : MonoBehaviour
+public class UnitMovement 
 {
-    [SerializeField] private NavMeshAgent agent = null;
 
-    void Start()
+    public void Move(Unit unit, NavMeshAgent agent, Vector3 dest)
     {
-        //  gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        //  agent = GetComponent<NavMeshAgent>();
-        // agent.updateRotation = false;
-        // agent.updateUpAxis = false;
+        dest.z = 0;
+        agent.SetDestination(dest);
+
+        FlipSideSprite(unit , dest);
     }
 
-    void Update()
+
+    private void FlipSideSprite(Unit unit, Vector3 dest)
     {
-        // Debug.Log("upd unitMove");
-
-        // if (!agent.hasPath){
-        //     return;
-        // }
-
-        // if (agent.remainingDistance > agent.stoppingDistance){
-        //     return;
-        // }
-
-        // agent.ResetPath();
+        if (dest.x < unit.transform.position.x && unit.transform.localScale.x > Mathf.Epsilon)
+        {
+            unit.transform.localScale = new Vector3(-unit.transform.localScale.x, unit.transform.localScale.y,
+            unit.transform.localScale.z);
+        }
+        else if (dest.x > unit.transform.position.x && unit.transform.localScale.x < Mathf.Epsilon)
+        {
+            unit.transform.localScale = new Vector3(-unit.transform.localScale.x, unit.transform.localScale.y,
+                        unit.transform.localScale.z);
+        }
     }
-
-    // public void MoveU(Unit unit)
-    // {
-    //     unit.MoveTo(Utils.GetMouseWorldPosition());
-    //     // Camera.main.ScreenToWorldPoint(
-    //     //     new Vector2(Utils.GetMouseWorldPosition().x, 
-    //     //                 Utils.GetMouseWorldPosition().y));
-    // }
 }
 
 
@@ -63,7 +54,7 @@ public class UnitMovement : MonoBehaviour
 //     private static void Update()
 //     {
 //         Debug.Log("upd unitMove");
-       
+
 //     }
 
 //     public static void MoveUnit(Unit unit)

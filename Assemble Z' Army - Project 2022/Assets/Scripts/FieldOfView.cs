@@ -19,7 +19,6 @@ public class FieldOfView : MonoBehaviour
         origin = Vector3.zero;
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         int rayCount = 50;

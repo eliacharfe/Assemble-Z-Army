@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4032915064396438830}
   - component: {fileID: 4032915064396438829}
   - component: {fileID: 4032915064396438828}
+  - component: {fileID: 6431276831482720909}
   m_Layer: 9
   m_Name: Unit Prefab
   m_TagString: Untagged
@@ -151,7 +152,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.93749994
-  m_Speed: 35
+  m_Speed: 30
   m_Acceleration: 35
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -239,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cd71f044c1b4c42a6fd8394653ac73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
 --- !u!114 &4032915064396438829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +268,28 @@ MonoBehaviour:
   health: {fileID: 4032915064396438829}
   healthBar: {fileID: 4640039567231907168}
   healthBarImage: {fileID: 1738738536450605736}
+--- !u!114 &6431276831482720909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4032915064396438803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 674ef1760fadb284e8a8e1d98ac61614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP:
+    BaseValue: 100
+  Attack:
+    BaseValue: 0
+  Defense:
+    BaseValue: 0
+  ReachDistance:
+    BaseValue: 0
+  SpeedAttack:
+    BaseValue: 0
 --- !u!1 &4032915065206257492
 GameObject:
   m_ObjectHideFlags: 0
