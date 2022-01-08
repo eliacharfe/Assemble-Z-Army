@@ -11,12 +11,14 @@ public class GameSceneManager:MonoBehaviour
     // TODO - For testing only.
     public void LoadNetworkScene()
     {
+        Debug.Log("Load the network scene");
         SceneManager.LoadScene(NETWORK_SCENE_PLAYGROUND);
     }
 
     // TODO - For testing only.
     public void LoadOfflineScene()
     {
+        Debug.Log("Load the offline scene");
         SceneManager.LoadScene(OFFLINE_SCENE_PLAYGROUND);
     }
 

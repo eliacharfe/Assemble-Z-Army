@@ -17,10 +17,10 @@ public class Unit : MonoBehaviour
     private Animator myAnimator;
     private SpriteRenderer spriteRenderer;
 
-    [SerializeField] private Targeter targeter;
-
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
+
+    [SerializeField] private SpriteRenderer selectionCircle = null;
 
     public static event Action<Unit> OnUnitSpawned;
     public static event Action<Unit> OnDeUnitSpawned;
@@ -28,12 +28,13 @@ public class Unit : MonoBehaviour
     public Macros.Units id;
     private Vector3 destination;
 
-    UnitMovement move = new UnitMovement(); 
+    UnitMovement move;
 
     // StatModifier mod1, mod2;
 
     private void Awake()
     {
+
         agent = GetComponent<NavMeshAgent>();
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         agent.enabled = false;
@@ -49,6 +50,12 @@ public class Unit : MonoBehaviour
 
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        move = GetComponent<UnitMovement>();
+
+        if (selectionCircle)
+        {
+            selectionCircle.color = getTeamColor();
+        }
     }
 
     private void Start()
@@ -128,6 +135,7 @@ public class Unit : MonoBehaviour
 
     public void StopMove()
     {
+        gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
         agent.ResetPath();
     }
 
@@ -155,11 +163,6 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public Targeter GetTargeter()
-    {
-        return targeter;
-    }
-
     public void Equip(Stat stat)
     {
         // We need to store our modifiers in variables before adding them to the stat.
@@ -172,6 +175,17 @@ public class Unit : MonoBehaviour
         // Here we need to use the stored modifiers in order to remove them.
         // Otherwise they would be "lost" in the stat forever.
         stat.Attack.RemoveAllModifiersFromSource(this);
+    }
+
+
+    // Todo- delete later.
+    private Color getTeamColor()
+    {
+        if (gameObject.GetComponent<Targetable>())
+        {
+            return gameObject.GetComponent<Targetable>().teamNumber == 0 ? Color.red : Color.green;
+        }
+        return Color.green;
     }
 
 }

@@ -2,73 +2,272 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using Mirror;
+using UnityEngine.InputSystem;
+using Utilities;
 
 public class RTSNetworkController : NetworkBehaviour
 {
-    private List<UnitNetwork> selectedUnits;
+    UnitMovement movement;
+    private Camera mainCamera;
+    // public CinemachineVirtualCamera VCam;
+    public Transform tFollowTarget;
+
+    private List<Unit> selectedUnits;
     private Vector3 startPos;
+    private Vector2 startPosition;
+
+    [SerializeField] private Transform selectionAreaTransform;
+
 
     private void Awake()
     {
-        selectedUnits = new List<UnitNetwork>();
+        selectionAreaTransform.gameObject.SetActive(false);
+
+        // movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMovement>();
+        mainCamera = Camera.main;
+        //  VCam = GetComponent<CinemachineVirtualCamera>();
+        selectedUnits = new List<Unit>();
+
+        Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
     }
+
 
     private void Update()
     {
-        if (!isLocalPlayer)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            return;
+            StartSelectionArea();
+        }
+        else if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            ClearSelectionArea();
+        }
+        else if (Mouse.current.leftButton.isPressed)
+        {
+            UpdateSelectionArea();
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.rightButton.wasReleasedThisFrame)
         {
-            selectedUnits.Clear();
-            startPos = Utilities.Utils.GetMouseWorldPosition();
+            GiveMovmentCommand();
         }
 
-        if (Input.GetMouseButtonUp(0))
+        foreach (Unit unit in selectedUnits)
         {
-            Collider2D[] inChosenArea = Physics2D.OverlapAreaAll(startPos, Utilities.Utils.GetMouseWorldPosition());
-            foreach (Collider2D obj in inChosenArea)
-            {
-                UnitNetwork unit = obj.GetComponent<UnitNetwork>();
-                if (unit != null && unit.isSelectable())
-                {
-                    selectedUnits.Add(unit);
-                    unit.SetColorSelcted();
-                    // Debug.Log(unit.transform.position);
-                }
-                // else {
-                //     foreach (Unit un in selectedUnits)
-                //        un.ResetColor();
-                // }
-            }
-            // Debug.Log("RTS says hi");
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            foreach (UnitNetwork unit in selectedUnits)
-            {
-                unit.MoveTo(Utilities.Utils.GetMouseWorldPosition());
-                unit.ResetColor();
-            }
-
-        }
-
-        foreach (UnitNetwork unit in selectedUnits)
-        {
-            // Debug.Log("unit pos: " + unit.transform.position);
-            //  Debug.Log("dest========== " + unit.getDest());
-            if (unit.transform.position.x == unit.getDest().x
-            && unit.transform.position.y == unit.getDest().y)
-            {
-                //  Debug.Log("true");
-                unit.Stop();
-            }
-
+            if (unit.ReachedDestination())
+                unit.StopAnimation();
         }
     }
 
-    
+
+    private void GiveMovmentCommand()
+    {
+        BuilidingConstruction buildingToConstruct = null;
+        Building building = null;
+        Targetable targetable = null;
+
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+        if (hit.collider)
+        {
+            buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
+            building = hit.collider.gameObject.GetComponent<Building>();
+            targetable = hit.collider.gameObject.GetComponent<Targetable>();
+        }
+
+        if (buildingToConstruct && buildingToConstruct.enabled)
+            SendToBuild(buildingToConstruct, hit);
+
+        else if (building && building.enabled)
+            SendToRecruit(building, hit);
+
+        else if (targetable)
+            AttackUnit(targetable, hit);
+
+        else
+            MoveUnits();
+    }
+
+    private void AttackUnit(Targetable targetable, RaycastHit2D hit)
+    {
+
+        foreach (Unit unit in selectedUnits)
+        {
+            if (unit.id != Macros.Units.WORKER)
+            {
+                if (targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                {
+                    return;
+                }
+
+                unit.GetComponent<Attacker>().SetTargetable(targetable);
+            }
+        }
+    }
+
+
+    // Send unit to building for recruitment.
+    private void SendToRecruit(Building building, RaycastHit2D hit)
+    {
+        foreach (Unit unit in selectedUnits)
+        {
+            if (unit.id != Macros.Units.WORKER)
+            {
+                unit.SetBuildingRecruiting(building);
+
+                unit.MoveTo(building.EnterWaitingRecruitment(unit));
+            }
+        }
+    }
+
+
+    // Send workers to construct the building.
+    private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
+    {
+        foreach (Unit unit in selectedUnits)
+        {
+            if (unit.id == Macros.Units.WORKER)
+            {
+                (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).SetBuildingTarget(building);
+                unit.MoveTo(hit.point);
+            }
+        }
+
+    }
+
+
+    // Move units to position clicked on.
+    private void MoveUnits()
+    {
+        Vector3 moveToPos = Utilities.Utils.GetMouseWorldPosition();
+
+        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] { 10, 20, 30 }, new int[] { 5, 10, 20 });
+
+        int targetPosIndex = 0;
+        foreach (Unit unit in selectedUnits)
+        {
+            ClearPreviousCommands(unit);
+
+            unit.MoveTo(targetPosList[targetPosIndex]);
+
+
+            targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
+
+            if (unit.id == Macros.Units.WORKER)
+            {
+                (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).ResetBuildingTarget();
+            }
+        }
+    }
+
+
+    // Clear previous commands such as attack target or recruit.
+    private void ClearPreviousCommands(Unit unit)
+    {
+        unit.RemoveBuildingRecruiting();
+
+        if (unit.GetComponent<Attacker>())
+            unit.GetComponent<Attacker>().SetTargetable(null);
+
+    }
+
+
+    // Get positions around the point given.
+    private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
+    {
+        List<Vector3> posList = new List<Vector3>();
+        posList.Add(startPos);
+        for (int i = 0; i < ringPosCountArr.Length; i++)
+        {
+            posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
+        }
+        return posList;
+    }
+
+
+    private List<Vector3> GetPosListAround(Vector3 startPostion, float distance, int posCount)
+    {
+        List<Vector3> posList = new List<Vector3>();
+        for (int i = 0; i < posCount; i++)
+        {
+            float angle = i * (360f / posCount);
+            Vector3 direction = ApplyRotationToVec(new Vector3(1, 0), angle);
+            Vector3 position = startPostion + direction * distance;
+            posList.Add(position);
+        }
+        return posList;
+    }
+
+
+    private Vector3 ApplyRotationToVec(Vector3 vec, float angle)
+    {
+        return Quaternion.Euler(0, 0, angle) * vec;
+    }
+
+
+    //-------------------------------------
+    private void StartSelectionArea()
+    {
+        startPosition = Utilities.Utils.GetMouseWorldPosition();
+        selectionAreaTransform.gameObject.SetActive(true);
+
+        if (!Keyboard.current.leftShiftKey.isPressed)
+        {
+            foreach (Unit selectedUnit in selectedUnits)
+            {
+                selectedUnit.Deselect();
+            }
+            selectedUnits.Clear();
+        }
+
+        startPos = Utilities.Utils.GetMouseWorldPosition();
+        startPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+
+        UpdateSelectionArea();
+    }
+    //--------------------------------
+    private void ClearSelectionArea()
+    {
+        selectionAreaTransform.gameObject.SetActive(false);
+
+        Collider2D[] inChosenArea = Physics2D.OverlapAreaAll(startPos, Utilities.Utils.GetMouseWorldPosition());
+        foreach (Collider2D obj in inChosenArea)
+        {
+
+            Unit unit = obj.GetComponent<Unit>();
+            if (selectedUnits.Contains(unit)) { continue; }
+
+            if (unit != null && unit.isSelectable())
+            {
+                selectedUnits.Add(unit);
+                unit.Select();
+            }
+        }
+    }
+
+    //--------------------------------
+    private void UpdateSelectionArea()
+    {
+        Vector3 currMousePos = Utilities.Utils.GetMouseWorldPosition();
+        Vector3 buttomLeft = new Vector3(
+            Mathf.Min(startPosition.x, currMousePos.x),
+            Mathf.Min(startPosition.y, currMousePos.y));
+        Vector3 topRight = new Vector3(
+            Mathf.Max(startPosition.x, currMousePos.x),
+            Mathf.Max(startPosition.y, currMousePos.y));
+
+        selectionAreaTransform.position = buttomLeft;
+        selectionAreaTransform.localScale = topRight - buttomLeft;
+    }
+    //-----------------------------------
+    // public List<Unit> GetMyUnits()
+    // {
+    //     return selectedUnits;
+    // }
+
+    private void HandleDeSpawnUnit(Unit unit)
+    {
+        selectedUnits.Remove(unit);
+    }
+
 }

@@ -17,6 +17,7 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: 0, y: 0}
   screenZLimits: {x: 0, y: 0}
+  gameObj: {fileID: 0}
   light: {fileID: 0}
 --- !u!114 &1271833794225127126
 MonoBehaviour:
@@ -67,7 +68,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3025256314400404147, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_Acceleration
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3025256314400404147, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_StoppingDistance

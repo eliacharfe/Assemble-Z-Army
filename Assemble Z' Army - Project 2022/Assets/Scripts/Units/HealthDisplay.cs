@@ -12,7 +12,7 @@ public class HealthDisplay : MonoBehaviour
 
     private void Awake()
     {
-        healthBar.SetActive(false);
+        healthBar.SetActive(true);
         health.ClientOnHealthUpdate += HandleHealthUpdated;
     }
 
@@ -23,12 +23,12 @@ public class HealthDisplay : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        healthBar.SetActive(true);
+        //healthBar.SetActive(true);
     }
 
      private void OnMouseExit()
     {
-        healthBar.SetActive(false);
+        //healthBar.SetActive(false);
     }
 
     private void HandleHealthUpdated(int currHealth, int maxHealth)
