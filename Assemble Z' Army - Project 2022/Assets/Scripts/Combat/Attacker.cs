@@ -6,6 +6,8 @@ using UnityEngine;
 // Abstract class for multiple attacks types.
 public abstract class Attacker : MonoBehaviour
 {
+    protected bool isAttacking = false;
+
     protected Targetable target = null;
 
     [Header("Attack Settings")]
@@ -17,7 +19,14 @@ public abstract class Attacker : MonoBehaviour
 
     private void Update()
     {
-        if (!target) { return; }
+        if (!target) {
+            if(isAttacking)
+            {
+                StopAttack();
+                isAttacking = false;
+            }
+            return; 
+        }
 
         if(Vector2.Distance(gameObject.transform.position,this.target.transform.position) < range)
         {
@@ -28,11 +37,13 @@ public abstract class Attacker : MonoBehaviour
             }else
             {
                 time = 0;
+                isAttacking = true;
                 Attack();
             }
         }
         else
         {
+            isAttacking = false;
             GetComponent<Unit>().MoveTo(this.target.transform.position);
         }
     }
@@ -41,6 +52,9 @@ public abstract class Attacker : MonoBehaviour
     {
         this.target = target;
     }
+
+
+    public abstract void StopAttack();
 
     public abstract void Attack();
 }

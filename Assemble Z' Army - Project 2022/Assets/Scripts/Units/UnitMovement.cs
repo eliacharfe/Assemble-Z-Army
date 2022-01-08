@@ -9,7 +9,7 @@ using Utilities;
 using Cinemachine;
 
 
-public class UnitMovement 
+public class UnitMovement:MonoBehaviour
 {
 
     public void Move(Unit unit, NavMeshAgent agent, Vector3 dest)

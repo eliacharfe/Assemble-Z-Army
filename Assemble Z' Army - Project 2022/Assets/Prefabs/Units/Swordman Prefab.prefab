@@ -85,7 +85,9 @@ GameObject:
   - component: {fileID: 3640658298281610025}
   - component: {fileID: 3640658298281610019}
   - component: {fileID: 3640658298281610020}
+  - component: {fileID: 451812603179174195}
   - component: {fileID: 8252639136877617093}
+  - component: {fileID: 9055786008858406624}
   - component: {fileID: 4168039145541977739}
   - component: {fileID: 692702320095221925}
   - component: {fileID: 1328228118866838922}
@@ -300,6 +302,20 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   id: 0
+--- !u!114 &451812603179174195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640658298281610026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 239fb73361226ef44aaebed06f9506ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimAtPoint: {fileID: 0}
+  teamNumber: 0
 --- !u!114 &8252639136877617093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +328,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cd71f044c1b4c42a6fd8394653ac73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
+--- !u!114 &9055786008858406624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640658298281610026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87c554a06bfe9d243b368d47d5de6ec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackTime: 1
+  range: 1
+  damage: 5
 --- !u!114 &4168039145541977739
 MonoBehaviour:
   m_ObjectHideFlags: 0

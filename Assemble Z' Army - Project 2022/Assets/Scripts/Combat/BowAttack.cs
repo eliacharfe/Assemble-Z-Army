@@ -8,6 +8,11 @@ public class BowAttack : Attacker
     [SerializeField] private GameObject arrowPrefab = null;
     [SerializeField] private float arrowSpeed = 15f;
 
+    public override void StopAttack()
+    {
+        GetComponent<Animator>().SetBool("isAttacking", false);
+    }
+
     public override void Attack()
     {
         Vector3 targetPos = target.transform.position;
@@ -17,6 +22,8 @@ public class BowAttack : Attacker
         targetPos.y = targetPos.y - objectPos.y;
 
         Vector2 dir = new Vector2(targetPos.x, targetPos.y);
+
+        GetComponent<Animator>().SetBool("isAttacking", true);
 
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
 

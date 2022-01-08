@@ -76,7 +76,6 @@ public class RTSController : MonoBehaviour
             targetable = hit.collider.gameObject.GetComponent<Targetable>();
         }
 
-
         if (buildingToConstruct && buildingToConstruct.enabled)
             SendToBuild(buildingToConstruct, hit);
 
@@ -92,10 +91,16 @@ public class RTSController : MonoBehaviour
 
     private void AttackUnit(Targetable targetable, RaycastHit2D hit)
     {
+
         foreach (Unit unit in selectedUnits)
         {
             if (unit.id != Macros.Units.WORKER)
             {
+                if(targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                {
+                    return;
+                }
+
                 unit.GetComponent<Attacker>().SetTargetable(targetable);
             }
         }
