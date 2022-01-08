@@ -74,6 +74,10 @@ PrefabInstance:
       propertyPath: m_StoppingDistance
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3025256314400404158, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: selectionCircle
+      value: 
+      objectReference: {fileID: 520197024315072417}
     - target: {fileID: 3025256314400404159, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -118,6 +122,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3556275202364747253, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556275202364747253, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: damage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556275202364747253, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: attackTime
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4342095262600495304, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -148,6 +164,11 @@ GameObject:
 --- !u!4 &1562918097390865206 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3025256314400404159, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+  m_PrefabInstance: {fileID: 4344644521952606601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &520197024315072417 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4283868016058770984, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
   m_PrefabInstance: {fileID: 4344644521952606601}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5793306773519160482

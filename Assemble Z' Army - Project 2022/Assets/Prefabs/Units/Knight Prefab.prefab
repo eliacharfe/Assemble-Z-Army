@@ -794,8 +794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTime: 1
-  range: 1
-  damage: 5
+  range: 15
+  damage: 20
 --- !u!114 &5975238431581766621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,8 +839,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  selectionCircle: {fileID: 0}
-  id: 0
+  selectionCircle: {fileID: 4640056061526628171}
+  id: 6
 --- !u!114 &2583957116982578537
 MonoBehaviour:
   m_ObjectHideFlags: 0

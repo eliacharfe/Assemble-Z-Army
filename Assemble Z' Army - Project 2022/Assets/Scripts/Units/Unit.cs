@@ -30,16 +30,16 @@ public class Unit : MonoBehaviour
 
     UnitMovement move;
 
+    private bool isDead;
+
     // StatModifier mod1, mod2;
 
     private void Awake()
     {
-
         agent = GetComponent<NavMeshAgent>();
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         agent.enabled = false;
         agent.enabled = true;
-
         gameObject.GetComponent<NavMeshAgent>().enabled = true;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -47,6 +47,7 @@ public class Unit : MonoBehaviour
         OnUnitSpawned?.Invoke(this);
 
         selectable = true;
+        isDead = false;
 
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -56,11 +57,15 @@ public class Unit : MonoBehaviour
         {
             selectionCircle.color = getTeamColor();
         }
+
+        if (gameObject.GetComponent<Targetable>() && gameObject.GetComponent<Targetable>().teamNumber == 1)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
+            transform.localScale.z);
+        }
     }
 
-    private void Start()
-    { }
-
+    //--------------------------
     private void Update()
     {
         if (!agent.hasPath)
@@ -71,24 +76,26 @@ public class Unit : MonoBehaviour
 
         agent.ResetPath();
         StopAnimation();
-
     }
-
+    //---------------------
     private void OnDestroy()
     {
         OnDeUnitSpawned?.Invoke(this);
     }
-
-
+    //----------------------------
     public void MoveTo(Vector3 dest)
     {
         myAnimator.SetBool("isRunning", true);
         move.Move(this, agent, dest);
     }
-
-
+    //------------------------------
     public bool ReachedDestination()
     {
+        if (isDead)
+        {
+            return false;
+        }
+
         if (!agent.pathPending)
         {
             if (agent && agent.remainingDistance <= agent.stoppingDistance)
@@ -103,57 +110,63 @@ public class Unit : MonoBehaviour
         return false;
     }
 
+    //----------------------------
     public void StopAnimation()
     {
         myAnimator.SetBool("isRunning", false);
     }
-
+    //----------------------------
     public void SetColorSelcted()
     {
         spriteRenderer.color = new Color(1f, 0f, 0f, 1f);
     }
-
+    //----------------------------
     public void ResetColor()
     {
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
     }
-
+    //----------------------------
     public bool isSelectable()
     {
         return selectable;
     }
-
+    //----------------------------
     public void Select()
     {
         onSelected?.Invoke();
     }
-
+    //----------------------------
     public void Deselect()
     {
         onDeselected?.Invoke();
     }
-
+    //----------------------------
     public void StopMove()
     {
         gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
         agent.ResetPath();
     }
-
+    //---------------------------
+    public void SetDead ()
+    {
+        isDead = true;
+    }
+    //----------------------------
     public void ContinutMove()
     {
         agent.isStopped = false;
     }
-
+    //----------------------------
     public bool isMoving()
     {
         return !agent.isStopped;
     }
-
+    //----------------------------
     public void SetBuildingRecruiting(Building building)
     {
         recrutingBuilding = building;
     }
-
+    //----------------------------
     public void RemoveBuildingRecruiting()
     {
         if (recrutingBuilding)
@@ -162,7 +175,7 @@ public class Unit : MonoBehaviour
             recrutingBuilding = null;
         }
     }
-
+    //----------------------------
     public void Equip(Stat stat)
     {
         // We need to store our modifiers in variables before adding them to the stat.
@@ -189,20 +202,3 @@ public class Unit : MonoBehaviour
     }
 
 }
-
-
-
-
-
-//  NavMeshHit closestHit;
-// if (NavMesh.SamplePosition(gameObject.transform.position, out closestHit, 500f, NavMesh.AllAreas))
-//     gameObject.transform.position = closestHit.position;
-// else
-// {
-//   //   Debug.LogError("Could not find position on NavMesh!");
-//     Debug.Log("in err: " + transform.position);
-//     transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-//     Debug.Log("After: " + transform.position);
-//     agent.enabled = false;
-//     agent.enabled = true;
-// }

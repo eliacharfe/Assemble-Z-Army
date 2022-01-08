@@ -53,25 +53,25 @@ public class CameraInputSystem : MonoBehaviour
     public void MoveCamera()
     {
         Vector3 pos = playerCameraTransform.position;
-        /*
-        if (prevInput == Vector2.zero) // if mouse
-        {
-            Vector3 cursorMovement = Vector3.zero;
-            Vector2 cursorPosition = Mouse.current.position.ReadValue();
+        
+        // if (prevInput == Vector2.zero) // if mouse
+        // {
+        //     Vector3 cursorMovement = Vector3.zero;
+        //     Vector2 cursorPosition = Mouse.current.position.ReadValue();
 
-            if (cursorPosition.y >= Screen.height - screenBorderThikeness)
-                cursorMovement.y += 1;
-            else if (cursorPosition.y <= screenBorderThikeness)
-                cursorMovement.y -= 1;
+        //     if (cursorPosition.y >= Screen.height - screenBorderThikeness)
+        //         cursorMovement.y += 1;
+        //     else if (cursorPosition.y <= screenBorderThikeness)
+        //         cursorMovement.y -= 1;
 
-            if (cursorPosition.x >= Screen.width - screenBorderThikeness)
-                cursorMovement.x += 1;
-            else if (cursorPosition.x <= screenBorderThikeness)
-                cursorMovement.x -= 1;
+        //     if (cursorPosition.x >= Screen.width - screenBorderThikeness)
+        //         cursorMovement.x += 1;
+        //     else if (cursorPosition.x <= screenBorderThikeness)
+        //         cursorMovement.x -= 1;
 
-            pos += cursorMovement.normalized * speed * Time.deltaTime;
-        }
-        else*/
+        //     pos += cursorMovement.normalized * speed * Time.deltaTime;
+        // }
+        // else
         {  // if keyboard
             pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
         }

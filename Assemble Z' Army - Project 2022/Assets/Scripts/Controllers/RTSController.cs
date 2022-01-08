@@ -3,36 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
-// using UnitMove;
-using Cinemachine;
 
 public class RTSController : MonoBehaviour
 {
-    UnitMovement movement;
     private Camera mainCamera;
-   // public CinemachineVirtualCamera VCam;
-    public Transform tFollowTarget;
-
-    private List<Unit> selectedUnits;
+    private List < Unit > selectedUnits;
     private Vector3 startPos;
     private Vector2 startPosition;
 
     [SerializeField] private Transform selectionAreaTransform;
 
-
     private void Awake()
     {
-        selectionAreaTransform.gameObject.SetActive(false);
-
-       // movement = GameObject.FindGameObjectWithTag("UnitMove").GetComponent<UnitMovement>();
-        mainCamera = Camera.main;
-      //  VCam = GetComponent<CinemachineVirtualCamera>();
         selectedUnits = new List<Unit>();
-
+        selectionAreaTransform.gameObject.SetActive(false);
+        mainCamera = Camera.main;
         Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
     }
-
-
+    //------------------------
     private void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -60,7 +48,7 @@ public class RTSController : MonoBehaviour
         }
     }
 
-
+    //--------------------------------- 
     private void GiveMovmentCommand()
     {
         BuilidingConstruction buildingToConstruct = null;
@@ -85,10 +73,10 @@ public class RTSController : MonoBehaviour
         else if(targetable)
             AttackUnit(targetable, hit);
 
-        else
-            MoveUnits();
+        else MoveUnits();
     }
 
+    //--------------------------------------
     private void AttackUnit(Targetable targetable, RaycastHit2D hit)
     {
 
@@ -105,7 +93,6 @@ public class RTSController : MonoBehaviour
             }
         }
     }
-
 
     // Send unit to building for recruitment.
     private void SendToRecruit(Building building, RaycastHit2D hit)
@@ -141,16 +128,13 @@ public class RTSController : MonoBehaviour
     private void MoveUnits()
       {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
-
         List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {10, 20, 30}, new int[] {5, 10, 20});
 
         int targetPosIndex = 0;
         foreach (Unit unit in selectedUnits)
         {
             ClearPreviousCommands(unit);
-
             unit.MoveTo(targetPosList[targetPosIndex]);
-
 
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
 
@@ -169,7 +153,6 @@ public class RTSController : MonoBehaviour
 
         if (unit.GetComponent<Attacker>())
             unit.GetComponent<Attacker>().SetTargetable(null);
-
     }
 
 
@@ -184,7 +167,7 @@ public class RTSController : MonoBehaviour
            return posList;
     }
 
-
+    //---------------------------------------------
     private List<Vector3> GetPosListAround(Vector3 startPostion, float distance, int posCount)
     {
         List<Vector3> posList = new List<Vector3>();
@@ -198,12 +181,11 @@ public class RTSController : MonoBehaviour
         return posList;
     }
 
-
+    //-------------------------------------------
     private Vector3 ApplyRotationToVec(Vector3 vec, float angle)
     {
         return Quaternion.Euler(0, 0, angle) * vec;
     }
-
 
     //-------------------------------------
     private void StartSelectionArea()
@@ -260,10 +242,6 @@ public class RTSController : MonoBehaviour
         selectionAreaTransform.localScale = topRight - buttomLeft;
     }
     //-----------------------------------
-    // public List<Unit> GetMyUnits()
-    // {
-    //     return selectedUnits;
-    // }
 
     private void HandleDeSpawnUnit(Unit unit)
     {

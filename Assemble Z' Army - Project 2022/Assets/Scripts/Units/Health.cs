@@ -9,7 +9,7 @@ public class Health : MonoBehaviour // NetworkBehavior
 
     [SerializeField] private int maxHealth = 100;
 
-   // [SyncVar (hook = nameof(HandleHealthUpdated))]
+    // [SyncVar (hook = nameof(HandleHealthUpdated))]
     private int currHealth;
 
     // public event Action ServerOnDie;
@@ -22,33 +22,33 @@ public class Health : MonoBehaviour // NetworkBehavior
         currHealth = maxHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (currHealth <= 0)
         {
+            GetComponent<Unit>().SetDead();
             GetComponent<Unit>().StopMove();
             Destroy(gameObject);
         }
 
     }
 
-     public void DealDamage(int damageAmount)
-     {
-      
-          if (currHealth == 0)
+    public void DealDamage(int damageAmount)
+    {
+
+        if (currHealth == 0)
             return;
 
-         currHealth = Mathf.Max(currHealth - damageAmount, 0);
+        currHealth = Mathf.Max(currHealth - damageAmount, 0);
 
         ClientOnHealthUpdate?.Invoke(currHealth, maxHealth);
 
         if (currHealth != 0)
-           return;
+            return;
 
     }
 
-     // client
+    // client
     // private void HandleHealthUpdated(int oldHealth, int newHealth)
     // {
     //     ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);

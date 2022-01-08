@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: range
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 568581926997592383, guid: 454b27e6d7f6a7446b6a4e4f3c8206cc, type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1477170288526375925, guid: 454b27e6d7f6a7446b6a4e4f3c8206cc, type: 3}
       propertyPath: m_IsActive
       value: 1
