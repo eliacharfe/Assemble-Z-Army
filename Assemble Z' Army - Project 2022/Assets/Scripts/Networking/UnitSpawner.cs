@@ -14,6 +14,11 @@ public class UnitSpawner : NetworkBehaviour
         CmdSpawnAUnit();
     }
 
+    public override void OnStartClient()
+    {
+       
+    }
+
     [Command]
     void CmdSpawnAUnit()
     {
@@ -25,6 +30,5 @@ public class UnitSpawner : NetworkBehaviour
     private void OnMouseDown()
     {
         Debug.Log("Mouse clicked on spawner");
-        CmdSpawnAUnit();
     }
 }

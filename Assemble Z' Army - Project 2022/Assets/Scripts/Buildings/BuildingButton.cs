@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
+using Mirror;
 
 public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 {
@@ -13,6 +14,8 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     public GameObject buildingPreview;
 
     private GameObject spritePreview;
+
+    private RTSPlayer player;
 
     private float navMeshZAxis;
 
@@ -29,6 +32,11 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     private void Update()
     {
         if (spritePreview == null) { return; }
+
+        if (!player) {
+            Debug.Log("Player set");
+            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+        }
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -58,16 +66,19 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     public void OnPointerUp(PointerEventData eventData)
     {
         if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>())) {
-            spawnBuilding(spritePreview.transform.position);
+            SpawnBuilding(spritePreview.transform.position);
         }
 
         Destroy(spritePreview);
     }
 
 
-    public void spawnBuilding(Vector3 pos)
+    public void SpawnBuilding(Vector3 pos)
     {
-        Instantiate(building, pos, Quaternion.identity);
+
+       Debug.Log(building);
+       player.CmdTryPlaceBuilding(building.GetBuildingId(),pos);
+
     }
 
 

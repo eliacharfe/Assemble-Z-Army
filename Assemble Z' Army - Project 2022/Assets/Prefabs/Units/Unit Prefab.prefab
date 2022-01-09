@@ -165,7 +165,7 @@ NavMeshAgent:
   m_Height: 2.06
   m_BaseOffset: 1.0312499
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!95 &4032915064396438824
 Animator:
   serializedVersion: 3
@@ -197,6 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6888a79bf1ce7bc4fac5bb53c34ac8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   recrutingBuilding: {fileID: 0}
   onSelected:
     m_PersistentCalls:

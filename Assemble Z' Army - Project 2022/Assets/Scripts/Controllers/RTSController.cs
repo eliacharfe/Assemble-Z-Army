@@ -18,8 +18,11 @@ public class RTSController : MonoBehaviour
         selectedUnits = new List<Unit>();
         selectionAreaTransform.gameObject.SetActive(false);
         mainCamera = Camera.main;
-        Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
+        Unit.AuthortyOnUnitDeSpawned += HandleDeSpawnUnit;
     }
+
+    
+
     //------------------------
     private void Update()
     {
@@ -59,21 +62,22 @@ public class RTSController : MonoBehaviour
 
         if(hit.collider)
         {
-            buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
-            building = hit.collider.gameObject.GetComponent<Building>();
-            targetable = hit.collider.gameObject.GetComponent<Targetable>();
+            hit.collider.gameObject.TryGetComponent<BuilidingConstruction>(out buildingToConstruct);
+            hit.collider.gameObject.TryGetComponent<Building>(out building);
+            hit.collider.gameObject.TryGetComponent<Targetable>(out targetable);
         }
 
         if (buildingToConstruct && buildingToConstruct.enabled)
             SendToBuild(buildingToConstruct, hit);
 
-        else if (building && building.enabled)
+        else if (building && building.enabled && building.hasAuthority)
             SendToRecruit(building,hit);
 
-        else if(targetable)
+        else if(targetable && !targetable.hasAuthority)
             AttackUnit(targetable, hit);
 
-        else MoveUnits();
+        else 
+            MoveUnits();
     }
 
     //--------------------------------------
@@ -219,7 +223,7 @@ public class RTSController : MonoBehaviour
             Unit unit = obj.GetComponent<Unit>();
             if (selectedUnits.Contains(unit)) { continue; }
 
-            if (unit != null && unit.isSelectable())
+            if (unit != null && unit.isSelectable() && unit.hasAuthority)
             {
                 selectedUnits.Add(unit);
                 unit.Select();

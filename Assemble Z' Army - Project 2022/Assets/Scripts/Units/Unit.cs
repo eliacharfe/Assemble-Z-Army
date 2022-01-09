@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using Mirror;
 using Utilities;
 
 using Char.CharacterStat;
 
-public class Unit : MonoBehaviour
+public class Unit : NetworkBehaviour
 {
     private bool selectable;
     public Building recrutingBuilding = null;
@@ -22,8 +23,16 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private SpriteRenderer selectionCircle = null;
 
-    public static event Action<Unit> OnUnitSpawned;
-    public static event Action<Unit> OnDeUnitSpawned;
+
+    // Server Unit spawned event.
+    public static event Action<Unit> ServerOnUnitSpawned;
+    // Server Unit despawned event.
+    public static event Action<Unit> ServerOnUnitDeSpawned;
+
+    // Authorty Unit spawned event. 
+    public static event Action<Unit> AuthortyOnUnitSpawned;
+    // Authorty Unit despawned event. 
+    public static event Action<Unit> AuthortyOnUnitDeSpawned;
 
     public Macros.Units id;
     private Vector3 destination;
@@ -44,7 +53,7 @@ public class Unit : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        OnUnitSpawned?.Invoke(this);
+        ServerOnUnitSpawned?.Invoke(this);
 
         selectable = true;
         isDead = false;
@@ -65,6 +74,31 @@ public class Unit : MonoBehaviour
         }
     }
 
+    #region server
+    public override void OnStartServer()
+    {
+        ServerOnUnitSpawned?.Invoke(this);
+    }
+
+    public override void OnStopServer()
+    {
+        ServerOnUnitDeSpawned.Invoke(this);
+    }
+    #endregion
+
+
+    #region Authority
+    public override void OnStartAuthority()
+    {
+        AuthortyOnUnitSpawned?.Invoke(this);
+    }
+
+    public override void OnStopAuthority()
+    {
+        AuthortyOnUnitDeSpawned?.Invoke(this);
+    }
+    #endregion
+
     //--------------------------
     private void Update()
     {
@@ -78,10 +112,7 @@ public class Unit : MonoBehaviour
         StopAnimation();
     }
     //---------------------
-    private void OnDestroy()
-    {
-        OnDeUnitSpawned?.Invoke(this);
-    }
+
     //----------------------------
     public void MoveTo(Vector3 dest)
     {

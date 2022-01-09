@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class BuilidingConstruction : MonoBehaviour
+public class BuilidingConstruction : NetworkBehaviour
 {
     [SerializeField] private CostumeSlider buldingConstructionSlider = null;
-    [SerializeField] private TextMeshProUGUI cancelBuilding;
     public float constructionTime = 5f;
 
     private void Start()

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
-public class CostumeSlider : MonoBehaviour
+public class CostumeSlider : NetworkBehaviour
 {
     [SerializeField] GameObject timeLeft;
 
