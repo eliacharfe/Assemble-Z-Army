@@ -3068,7 +3068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_Acceleration
@@ -6632,7 +6632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_Acceleration
@@ -6640,7 +6640,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_AngularSpeed
-      value: 1000
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_StoppingDistance
@@ -12535,7 +12535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_AutoBraking
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1422649243423591503, guid: 06aa8f099d5c67f45814cbafc182c704, type: 3}
       propertyPath: m_Acceleration
