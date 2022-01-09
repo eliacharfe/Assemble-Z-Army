@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using Utilities;
 
 using Char.CharacterStat;
+using Macros;
 
 public class Unit : MonoBehaviour
 {
@@ -27,7 +28,6 @@ public class Unit : MonoBehaviour
 
     public Macros.Units id;
     private Vector3 destination;
-
     UnitMovement move;
 
     private BoxCollider2D myBoxCollider = null;
@@ -35,6 +35,10 @@ public class Unit : MonoBehaviour
     private bool isDead;
 
     public CharacterStat Speed;
+    public CharacterStat Attack;
+    public CharacterStat Defense;
+    public CharacterStat ReachDistance;
+    public CharacterStat SpeedAttack;
 
     // StatModifier mod1, mod2;
 
@@ -45,8 +49,7 @@ public class Unit : MonoBehaviour
         agent.enabled = false;
         agent.enabled = true;
         gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        agent.updateRotation = agent.updateUpAxis = false;
 
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // setting Quality avoidance to none
 
@@ -61,8 +64,12 @@ public class Unit : MonoBehaviour
 
         myBoxCollider = GetComponent<BoxCollider2D>();
 
-        // we need to identify the Unit and return the specific Speed.BaseValue for the unit 
-        Speed.BaseValue = 30; // for now (each unit should have its own speed)
+        // Debug.Log(id);
+        Speed.BaseValue = agent.speed = GetSpeed(id);
+        Attack.BaseValue = GetAttack(id);
+        Defense.BaseValue = GetDefense(id);
+        ReachDistance.BaseValue = GetReachedDistance(id);
+        SpeedAttack.BaseValue = GetSpeedAttack(id);
 
         if (selectionCircle)
         {
@@ -232,6 +239,96 @@ public class Unit : MonoBehaviour
             return gameObject.GetComponent<Targetable>().teamNumber == 0 ? Color.red : Color.green;
         }
         return Color.green;
+    }
+
+
+       private float GetSpeed(Units id)
+    {
+        switch (id)
+        {
+            case Units.SWORDMAN: return 30f;
+            case Units.ARCHER: return 30f;
+            case Units.SWORD_KNIGHT: return 20f;
+            case Units.SIMPLE_HORSE: return 65f;
+            case Units.SWORD_HORSE: return 60f;
+            case Units.SWORD_HORSE_KNIGHT: return 50f;
+            case Units.WORKER: return 25f;
+            case Units.SPEARMAN: return 20f;
+                // ...
+        }
+        return 30f;
+    }
+
+    private float GetAttack(Units id)
+    {
+        switch (id)
+        {
+            case Units.SWORDMAN: return 15f;
+            case Units.ARCHER: return 10f;
+            case Units.SWORD_KNIGHT: return 20f;
+            case Units.SIMPLE_HORSE: return 10f;
+            case Units.SWORD_HORSE: return 25f;
+            case Units.SWORD_HORSE_KNIGHT: return 30f;
+            case Units.WORKER: return 5f;
+            case Units.SPEARMAN:
+                {
+                    // add power 25 against horses
+                    return 10f;
+                }
+                // ...
+        }
+        return 10f;
+    }
+
+    private float GetDefense(Units id)
+    {
+        switch (id)
+        {
+            case Units.SWORDMAN: return 5f;
+            case Units.ARCHER: return 5f;
+            case Units.SWORD_KNIGHT: return 15f;
+            case Units.SIMPLE_HORSE: return 5f;
+            case Units.SWORD_HORSE: return 10f;
+            case Units.SPEAR_HORSE_KNIGHT: return 20f;
+            case Units.WORKER: return 0f;
+            case Units.SPEARMAN: return 5f;
+                // ...
+        }
+        return 5f;
+    }
+
+    private float GetReachedDistance(Units id)
+    {
+        switch (id)
+        {
+            case Units.SWORDMAN: return 10f;
+            case Units.ARCHER: return 50f;
+            case Units.SWORD_KNIGHT: return 15f;
+            case Units.SIMPLE_HORSE: return 10f;
+            case Units.SWORD_HORSE: return 15f;
+            case Units.SPEAR_HORSE_KNIGHT: return 20f;
+            case Units.WORKER: return 5f;
+            case Units.SPEARMAN: return 20f;
+                // ...
+        }
+        return 10f;
+    }
+
+    private float GetSpeedAttack(Units id)
+    {
+        switch (id)
+        {
+            case Units.SWORDMAN: return 1f;
+            case Units.ARCHER: return 1f;
+            case Units.SWORD_KNIGHT: return 1f;
+            case Units.SIMPLE_HORSE: return 2f;
+            case Units.SWORD_HORSE: return 1.5f;
+            case Units.SPEAR_HORSE_KNIGHT: return 1.5f;
+            case Units.WORKER: return 1.5f;
+            case Units.SPEARMAN: return 1.5f;
+                // ...
+        }
+        return 1f;
     }
 
 }
