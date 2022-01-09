@@ -9,29 +9,30 @@ using Utilities;
 using Cinemachine;
 
 
-public class UnitMovement:MonoBehaviour
+public class UnitMovement : MonoBehaviour
 {
-
-    public void Move(Unit unit, NavMeshAgent agent, Vector3 dest)
+    public void Move(NavMeshAgent agent, Vector3 dest)
     {
         dest.z = 0;
         agent.SetDestination(dest);
 
-        FlipSideSprite(unit , dest);
+        FlipSideSprite(dest);
     }
 
 
-    private void FlipSideSprite(Unit unit, Vector3 dest)
+    private void FlipSideSprite(Vector3 dest)
     {
-        if (dest.x < unit.transform.position.x && unit.transform.localScale.x > Mathf.Epsilon)
+        Transform tr = gameObject.transform;
+
+        if (dest.x < tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
-            unit.transform.localScale = new Vector3(-unit.transform.localScale.x, unit.transform.localScale.y,
-            unit.transform.localScale.z);
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
+                                        tr.localScale.z);
         }
-        else if (dest.x > unit.transform.position.x && unit.transform.localScale.x < Mathf.Epsilon)
+        else if (dest.x > tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
-            unit.transform.localScale = new Vector3(-unit.transform.localScale.x, unit.transform.localScale.y,
-                        unit.transform.localScale.z);
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
+                                         tr.localScale.z);
         }
     }
 }

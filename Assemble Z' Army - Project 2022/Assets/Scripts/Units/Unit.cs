@@ -30,7 +30,11 @@ public class Unit : MonoBehaviour
 
     UnitMovement move;
 
+    private BoxCollider2D myBoxCollider = null;
+
     private bool isDead;
+
+    public CharacterStat Speed;
 
     // StatModifier mod1, mod2;
 
@@ -44,6 +48,8 @@ public class Unit : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // setting Quality avoidance to none
+
         OnUnitSpawned?.Invoke(this);
 
         selectable = true;
@@ -52,6 +58,11 @@ public class Unit : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         move = GetComponent<UnitMovement>();
+
+        myBoxCollider = GetComponent<BoxCollider2D>();
+
+        // we need to identify the Unit and return the specific Speed.BaseValue for the unit 
+        Speed.BaseValue = 30; // for now (each unit should have its own speed)
 
         if (selectionCircle)
         {
@@ -68,6 +79,8 @@ public class Unit : MonoBehaviour
     //--------------------------
     private void Update()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+
         if (!agent.hasPath)
             return;
 
@@ -77,6 +90,25 @@ public class Unit : MonoBehaviour
         agent.ResetPath();
         StopAnimation();
     }
+    //-------------------------------------
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+            agent.speed = Speed.BaseValue / 3; // when collide with water
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+            agent.speed = Speed.BaseValue / 3; // inside water
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        agent.speed = Speed.BaseValue; // exit from trigger
+    }
+
+
     //---------------------
     private void OnDestroy()
     {
@@ -86,7 +118,7 @@ public class Unit : MonoBehaviour
     public void MoveTo(Vector3 dest)
     {
         myAnimator.SetBool("isRunning", true);
-        move.Move(this, agent, dest);
+        move.Move(agent, dest);
     }
     //------------------------------
     public bool ReachedDestination()
@@ -143,11 +175,12 @@ public class Unit : MonoBehaviour
     //----------------------------
     public void StopMove()
     {
-        gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        agent.velocity = Vector3.zero;
+        //gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
         agent.ResetPath();
     }
     //---------------------------
-    public void SetDead ()
+    public void SetDead()
     {
         isDead = true;
     }

@@ -18,12 +18,12 @@ TagManager:
   - Ground
   - Walls
   - Unit
-  - Waterr
+  - WaterWater
   - Buidings
   - SelectionArea
   - FogOfWarMain
   - FogOfWarSecondary
-  - 
+  - W
   - 
   - 
   - 
@@ -47,10 +47,13 @@ TagManager:
   - name: Background
     uniqueID: 3368789605
     locked: 0
+  - name: W
+    uniqueID: 1721005923
+    locked: 0
   - name: Ground
     uniqueID: 1613748855
     locked: 0
-  - name: Waterr
+  - name: Water
     uniqueID: 3642632121
     locked: 0
   - name: Walls
