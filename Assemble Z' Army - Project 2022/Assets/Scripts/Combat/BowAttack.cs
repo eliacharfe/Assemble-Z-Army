@@ -8,7 +8,7 @@ public class BowAttack : Attacker
     [SerializeField] private GameObject arrowPrefab = null;
     [SerializeField] private float arrowSpeed = 15f;
 
-    public override void StopAttack()
+    public override void StopAttackAnime()
     {
         GetComponent<Animator>().SetBool("isAttacking", false);
     }

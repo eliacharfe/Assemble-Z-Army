@@ -116,8 +116,7 @@ public class Unit : NetworkBehaviour
     //----------------------------
     public void MoveTo(Vector3 dest)
     {
-        myAnimator.SetBool("isRunning", true);
-        move.Move(this, agent, dest);
+        move.CmdMove(dest);
     }
     //------------------------------
     public bool ReachedDestination()
@@ -127,7 +126,7 @@ public class Unit : NetworkBehaviour
             return false;
         }
 
-        if (!agent.pathPending)
+        if (agent && !agent.pathPending)
         {
             if (agent && agent.remainingDistance <= agent.stoppingDistance)
             {

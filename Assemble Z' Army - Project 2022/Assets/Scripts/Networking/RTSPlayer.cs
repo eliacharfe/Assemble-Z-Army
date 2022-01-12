@@ -29,14 +29,14 @@ public class RTSPlayer : NetworkBehaviour
     #region Server
     public override void OnStartServer()
     {
-        //Unit.ServerOnUnitSpawned += addUnit;
-       // Unit.ServerOnUnitDeSpawned += removeUnit;
+        Unit.ServerOnUnitSpawned += addUnit;
+        Unit.ServerOnUnitDeSpawned += removeUnit;
     }
 
     public override void OnStopServer()
     {
-        //Unit.ServerOnUnitSpawned -= addUnit;
-       // Unit.ServerOnUnitDeSpawned -= removeUnit;
+        Unit.ServerOnUnitSpawned -= addUnit;
+        Unit.ServerOnUnitDeSpawned -= removeUnit;
     }
 
     #endregion
@@ -45,13 +45,13 @@ public class RTSPlayer : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
-        //Unit.AuthortyOnUnitSpawned += addUnit;
-        //Unit.AuthortyOnUnitDeSpawned += removeUnit;
+        Unit.AuthortyOnUnitSpawned += addUnit;
+        Unit.AuthortyOnUnitDeSpawned += removeUnit;
     }
     public override void OnStopAuthority()
     {
-       // Unit.AuthortyOnUnitSpawned -= addUnit;
-       // Unit.AuthortyOnUnitDeSpawned -= removeUnit;
+        Unit.AuthortyOnUnitSpawned -= addUnit;
+        Unit.AuthortyOnUnitDeSpawned -= removeUnit;
     }
 
     [Command]
@@ -67,7 +67,7 @@ public class RTSPlayer : NetworkBehaviour
     #endregion
     void addUnit(Unit unit)
     {
-        if(!unit.hasAuthority)
+        if(!unit.hasAuthority && unit.id != Macros.Units.WORKER)
             m_units.Add(unit);
     }
 

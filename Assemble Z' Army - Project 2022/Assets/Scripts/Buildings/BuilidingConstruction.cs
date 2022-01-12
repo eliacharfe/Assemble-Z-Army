@@ -9,7 +9,9 @@ public class BuilidingConstruction : NetworkBehaviour
 {
     [SerializeField] private CostumeSlider buldingConstructionSlider = null;
     public float constructionTime = 5f;
-    [SerializeField] [SyncVar] float timePassed = 0;
+    [SerializeField] [SyncVar(hook =nameof(HandleConstructionUpdated))] float timePassed = 0;
+
+    public event Action<float, float> ClientOnConstructionUpdated;
 
     private void Start()
     {
@@ -19,8 +21,6 @@ public class BuilidingConstruction : NetworkBehaviour
     // Todo - increase time by worker.
     private void Update()
     {
-        buldingConstructionSlider.setValue(timePassed);
-
         if(buldingConstructionSlider.FillAmount() >= 1f) {
             FinishConstruction();
         }
@@ -33,7 +33,6 @@ public class BuilidingConstruction : NetworkBehaviour
     public void CmdIncreasingBuildingTime(float value)
     {
         timePassed += value / constructionTime;
-        //buldingConstructionSlider.IncreaseSlider(value / constructionTime);
     }
     #endregion
 
@@ -54,6 +53,12 @@ public class BuilidingConstruction : NetworkBehaviour
     private float GetBuildingConstructionTime()
     {
         return buldingConstructionSlider.FillAmount();
+    }
+
+
+    private void HandleConstructionUpdated(float oldTime,float newTime)
+    {
+        buldingConstructionSlider.setValue(newTime);
     }
 
 }

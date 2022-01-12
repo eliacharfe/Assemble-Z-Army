@@ -48,6 +48,7 @@ public class Building : NetworkBehaviour
  
     public static event Action<Building> AuthortyOnBuildingSpawned;
     public static event Action<Building> AuthortyOnBuildingDeSpawned;
+
     #region Server
 
     public override void OnStartServer()
