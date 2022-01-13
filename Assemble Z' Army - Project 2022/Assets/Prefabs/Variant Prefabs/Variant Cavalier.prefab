@@ -64,7 +64,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3025256314400404147, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_Speed
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3025256314400404147, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_Acceleration
@@ -73,6 +73,10 @@ PrefabInstance:
     - target: {fileID: 3025256314400404147, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: m_StoppingDistance
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025256314400404158, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
+      propertyPath: id
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3025256314400404158, guid: 746e4a60000e509409e1b8f71b255be9, type: 3}
       propertyPath: selectionCircle

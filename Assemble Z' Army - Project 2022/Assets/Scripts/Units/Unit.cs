@@ -8,6 +8,7 @@ using Mirror;
 using Utilities;
 
 using Char.CharacterStat;
+using Macros;
 
 public class Unit : NetworkBehaviour
 {
@@ -36,10 +37,17 @@ public class Unit : NetworkBehaviour
 
     public Macros.Units id;
     private Vector3 destination;
-
     UnitMovement move;
 
+    private BoxCollider2D myBoxCollider = null;
+
     private bool isDead;
+
+    public CharacterStat Speed;
+    public CharacterStat Attack;
+    public CharacterStat Defense;
+    public CharacterStat ReachDistance;
+    public CharacterStat SpeedAttack;
 
     // StatModifier mod1, mod2;
 
@@ -50,8 +58,9 @@ public class Unit : NetworkBehaviour
         agent.enabled = false;
         agent.enabled = true;
         gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
+        agent.updateRotation = agent.updateUpAxis = false;
+
+        agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // setting Quality avoidance to none
 
         ServerOnUnitSpawned?.Invoke(this);
 
@@ -61,6 +70,17 @@ public class Unit : NetworkBehaviour
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         move = GetComponent<UnitMovement>();
+
+        myBoxCollider = GetComponent<BoxCollider2D>();
+
+        // Debug.Log(id);
+        // Speed.BaseValue = agent.speed = GetSpeed(id);
+        // Attack.BaseValue = GetAttack(id);
+        // Defense.BaseValue = GetDefense(id);
+        // ReachDistance.BaseValue = GetReachedDistance(id);
+        // SpeedAttack.BaseValue = GetSpeedAttack(id);
+
+        InitStats(id);
 
         if (selectionCircle)
         {
@@ -102,6 +122,8 @@ public class Unit : NetworkBehaviour
     //--------------------------
     private void Update()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+
         if (!agent.hasPath)
             return;
 
@@ -111,6 +133,25 @@ public class Unit : NetworkBehaviour
         agent.ResetPath();
         StopAnimation();
     }
+    //-------------------------------------
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+            agent.speed = Speed.BaseValue / 3; // when collide with water
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+            agent.speed = Speed.BaseValue / 3; // inside water
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        agent.speed = Speed.BaseValue; // exit from trigger
+    }
+
+
     //---------------------
 
     //----------------------------
@@ -173,11 +214,12 @@ public class Unit : NetworkBehaviour
     //----------------------------
     public void StopMove()
     {
-        gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        agent.velocity = Vector3.zero;
+        //gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
         agent.ResetPath();
     }
     //---------------------------
-    public void SetDead ()
+    public void SetDead()
     {
         isDead = true;
     }
@@ -220,7 +262,6 @@ public class Unit : NetworkBehaviour
         stat.Attack.RemoveAllModifiersFromSource(this);
     }
 
-
     // Todo- delete later.
     private Color getTeamColor()
     {
@@ -231,4 +272,177 @@ public class Unit : NetworkBehaviour
         return Color.green;
     }
 
+    //-------------------
+    private void InitStats(Units id)
+    {
+        switch (id)
+        {
+            case Units.SWORDMAN:
+                {
+                    Speed.BaseValue = agent.speed = 30f;
+                    Attack.BaseValue = 15f;
+                    Defense.BaseValue = 5f;
+                    ReachDistance.BaseValue = 10f;
+                    SpeedAttack.BaseValue = 1f;
+                    break;
+                };
+            case Units.ARCHER:
+                {
+                    Speed.BaseValue = agent.speed = 30f;
+                    Attack.BaseValue = 10f;
+                    Defense.BaseValue = 5f;
+                    ReachDistance.BaseValue = 50f;
+                    SpeedAttack.BaseValue = 1f;
+                    break;
+                };
+            case Units.SWORD_KNIGHT:
+                {
+                    Speed.BaseValue = agent.speed = 20f;
+                    Attack.BaseValue = 20f;
+                    Defense.BaseValue = 15f;
+                    ReachDistance.BaseValue = 15f;
+                    SpeedAttack.BaseValue = 1f;
+                    break;
+                };
+            case Units.SIMPLE_HORSE:
+                {
+                    Speed.BaseValue = agent.speed = 65f;
+                    Attack.BaseValue = 10f;
+                    Defense.BaseValue = 5f;
+                    ReachDistance.BaseValue = 10f;
+                    SpeedAttack.BaseValue = 2f;
+                    break;
+                };
+            case Units.SWORD_HORSE:
+                {
+                    Speed.BaseValue = agent.speed = 60f;
+                    Attack.BaseValue = 25f;
+                    Defense.BaseValue = 10f;
+                    ReachDistance.BaseValue = 15f;
+                    SpeedAttack.BaseValue = 1.5f;
+                    break;
+                };
+            case Units.SWORD_HORSE_KNIGHT:
+                {
+                    Speed.BaseValue = agent.speed = 50f;
+                    Attack.BaseValue = 30f;
+                    Defense.BaseValue = 20f;
+                    ReachDistance.BaseValue = 15f;
+                    SpeedAttack.BaseValue = 1.5f;
+                    break;
+                };
+            case Units.WORKER:
+                {
+                    Speed.BaseValue = agent.speed = 25f;
+                    Attack.BaseValue = 5f;
+                    Defense.BaseValue = 0f;
+                    ReachDistance.BaseValue = 5f;
+                    SpeedAttack.BaseValue = 2f;
+                    break;
+                };
+            case Units.SPEARMAN:
+                {
+                    Speed.BaseValue = agent.speed = 20f;
+                    Attack.BaseValue = 10f;
+                    Defense.BaseValue = 5f;
+                    ReachDistance.BaseValue = 20f;
+                    SpeedAttack.BaseValue = 1.5f;
+                    break;
+                }
+        }
+    }
+
+
 }
+
+
+
+
+    // private float GetSpeed(Units id)
+    // {
+    //     switch (id)
+    //     {
+    //         case Units.SWORDMAN: return 30f;
+    //         case Units.ARCHER: return 30f;
+    //         case Units.SWORD_KNIGHT: return 20f;
+    //         case Units.SIMPLE_HORSE: return 65f;
+    //         case Units.SWORD_HORSE: return 60f;
+    //         case Units.SWORD_HORSE_KNIGHT: return 50f;
+    //         case Units.WORKER: return 25f;
+    //         case Units.SPEARMAN: return 20f;
+    //             // ...
+    //     }
+    //     return 30f;
+    // }
+
+    // private float GetAttack(Units id)
+    // {
+    //     switch (id)
+    //     {
+    //         case Units.SWORDMAN: return 15f;
+    //         case Units.ARCHER: return 10f;
+    //         case Units.SWORD_KNIGHT: return 20f;
+    //         case Units.SIMPLE_HORSE: return 10f;
+    //         case Units.SWORD_HORSE: return 25f;
+    //         case Units.SWORD_HORSE_KNIGHT: return 30f;
+    //         case Units.WORKER: return 5f;
+    //         case Units.SPEARMAN:
+    //             {
+    //                 // add power 25 against horses
+    //                 return 10f;
+    //             }
+    //             // ...
+    //     }
+    //     return 10f;
+    // }
+
+    // private float GetDefense(Units id)
+    // {
+    //     switch (id)
+    //     {
+    //         case Units.SWORDMAN: return 5f;
+    //         case Units.ARCHER: return 5f;
+    //         case Units.SWORD_KNIGHT: return 15f;
+    //         case Units.SIMPLE_HORSE: return 5f;
+    //         case Units.SWORD_HORSE: return 10f;
+    //         case Units.SWORD_HORSE_KNIGHT: return 20f;
+    //         case Units.WORKER: return 0f;
+    //         case Units.SPEARMAN: return 5f;
+    //             // ...
+    //     }
+    //     return 5f;
+    // }
+
+    // private float GetReachedDistance(Units id)
+    // {
+    //     switch (id)
+    //     {
+    //         case Units.SWORDMAN: return 10f;
+    //         case Units.ARCHER: return 50f;
+    //         case Units.SWORD_KNIGHT: return 15f;
+    //         case Units.SIMPLE_HORSE: return 10f;
+    //         case Units.SWORD_HORSE: return 15f;
+    //         case Units.SWORD_HORSE_KNIGHT: return 20f;
+    //         case Units.WORKER: return 5f;
+    //         case Units.SPEARMAN: return 20f;
+    //             // ...
+    //     }
+    //     return 10f;
+    // }
+
+    // private float GetSpeedAttack(Units id)
+    // {
+    //     switch (id)
+    //     {
+    //         case Units.SWORDMAN: return 1f;
+    //         case Units.ARCHER: return 1f;
+    //         case Units.SWORD_KNIGHT: return 1f;
+    //         case Units.SIMPLE_HORSE: return 2f;
+    //         case Units.SWORD_HORSE: return 1.5f;
+    //         case Units.SWORD_HORSE_KNIGHT: return 1.5f;
+    //         case Units.WORKER: return 1.5f;
+    //         case Units.SPEARMAN: return 1.5f;
+    //             // ...
+    //     }
+    //     return 1f;
+    // }

@@ -733,7 +733,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5975238431581766611}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.8
   m_Speed: 30
@@ -747,7 +747,7 @@ NavMeshAgent:
   m_Height: 1.35
   m_BaseOffset: 0.71
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!95 &5975238431581766618
 Animator:
   serializedVersion: 3

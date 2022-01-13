@@ -11,6 +11,7 @@ public class Stat : MonoBehaviour
     public CharacterStat Defense;
     public CharacterStat ReachDistance;
     public CharacterStat SpeedAttack;
+    public CharacterStat Speed;
     // speed ?
 }
 

@@ -87,11 +87,11 @@ GameObject:
   - component: {fileID: 3640658298281610020}
   - component: {fileID: 451812603179174195}
   - component: {fileID: 8252639136877617093}
+  - component: {fileID: 1585420542229363171}
   - component: {fileID: 9055786008858406624}
   - component: {fileID: 4168039145541977739}
   - component: {fileID: 692702320095221925}
   - component: {fileID: 1328228118866838922}
-  - component: {fileID: 8131574493950438156}
   m_Layer: 9
   m_Name: Swordman Prefab
   m_TagString: Untagged
@@ -328,6 +328,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48cd71f044c1b4c42a6fd8394653ac73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1585420542229363171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640658298281610026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac9e97dbce1f824bb432241ec000552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP:
+    BaseValue: 0
+  Attack:
+    BaseValue: 0
+  Defense:
+    BaseValue: 0
+  ReachDistance:
+    BaseValue: 0
+  SpeedAttack:
+    BaseValue: 0
 --- !u!114 &9055786008858406624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTime: 1
-  range: 1
-  damage: 5
+  range: 10
+  damage: 10
 --- !u!114 &4168039145541977739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,28 +412,6 @@ MonoBehaviour:
   health: {fileID: 692702320095221925}
   healthBar: {fileID: 742389098931535156}
   healthBarImage: {fileID: 5911248186979715836}
---- !u!114 &8131574493950438156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3640658298281610026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674ef1760fadb284e8a8e1d98ac61614, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP:
-    BaseValue: 100
-  Attack:
-    BaseValue: 15
-  Defense:
-    BaseValue: 5
-  ReachDistance:
-    BaseValue: 1.5
-  SpeedAttack:
-    BaseValue: 1
 --- !u!1 &3803574788655586982
 GameObject:
   m_ObjectHideFlags: 0

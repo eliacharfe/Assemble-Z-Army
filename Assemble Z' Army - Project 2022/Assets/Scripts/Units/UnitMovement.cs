@@ -51,23 +51,19 @@ public class UnitMovement:NetworkBehaviour
     }
 
 
-    [ClientRpc]
-    public void RpcMoveAnime()
-    {
-        GetComponent<Animator>().SetBool("isRunning", true);
-    }
-
     private void FlipSideSprite(Vector3 dest)
     {
-        if (dest.x < unit.transform.position.x && unit.transform.localScale.x > Mathf.Epsilon)
+        Transform tr = gameObject.transform;
+
+        if (dest.x < tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
-            unit.transform.localScale = new Vector3(-unit.transform.localScale.x, unit.transform.localScale.y,
-            unit.transform.localScale.z);
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
+                                        tr.localScale.z);
         }
-        else if (dest.x > unit.transform.position.x && unit.transform.localScale.x < Mathf.Epsilon)
+        else if (dest.x > tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
-            unit.transform.localScale = new Vector3(-unit.transform.localScale.x, unit.transform.localScale.y,
-                        unit.transform.localScale.z);
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
+                                         tr.localScale.z);
         }
     }
 }
