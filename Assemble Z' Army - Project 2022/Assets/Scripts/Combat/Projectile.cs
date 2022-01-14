@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Projectile : MonoBehaviour
+public class Projectile : NetworkBehaviour
 {
     [Header("Projectile Settings")]
     [SerializeField] private int damageToDeal = 20;
@@ -10,12 +11,20 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Health target = collision.GetComponent<Health>();
-        if (target)
+        if (collision.TryGetComponent<NetworkIdentity>(out NetworkIdentity networkIdentity))
         {
-            target.DealDamage(damageToDeal);
-        }
+            if (networkIdentity.connectionToClient == connectionToClient) {
 
-        Destroy(gameObject);
+                Debug.Log("Belong to the same client:" + connectionToClient + " arrow client:" + networkIdentity.connectionToClient);
+                return; }
+
+            Health target = networkIdentity.GetComponent<Health>();
+            if (target)
+            {
+                target.DealDamage(damageToDeal);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }
