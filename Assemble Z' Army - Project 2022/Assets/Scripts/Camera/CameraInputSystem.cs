@@ -18,25 +18,30 @@ public class CameraInputSystem : MonoBehaviour
     private Controls controls;
     private Vector2 prevInput;
 
-   [SerializeField] private GameObject gameObj;
+    [SerializeField] private GameObject gameObj;
     [SerializeField] public new UnityEngine.Experimental.Rendering.Universal.Light2D light;
 
     //[SerializeField] private Light2D light;
-
-   // UnityEngine.Experimental.Rendering.LWRP.Light2D m_Light2D = null;
-
+    // UnityEngine.Experimental.Rendering.LWRP.Light2D m_Light2D = null;
     //private float scrollSpeed = 40f;
+
+    private Vector3 startCameraPos, minCam, maxCam;
+    float leftLimit, rightLimit, topLimit, buttomLimit;
 
     void Start()
     {
+        startCameraPos = transform.position;
+        minCam = new Vector3(startCameraPos.x - 100, startCameraPos.y - 100, transform.position.z);
+        maxCam = new Vector3(startCameraPos.x + 100, startCameraPos.y + 100, transform.position.z);
+
         playerCameraTransform.gameObject.SetActive(true);
-        
+
         controls = new Controls();
         controls.Player.MoveCamera.performed += SetPrevInput;
         controls.Player.MoveCamera.canceled += SetPrevInput;
         controls.Enable();
 
-      //  light = GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
+        //  light = GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
         light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
     }
 
@@ -53,8 +58,8 @@ public class CameraInputSystem : MonoBehaviour
     public void MoveCamera()
     {
         Vector3 pos = playerCameraTransform.position;
-        
-        // if (prevInput == Vector2.zero) // if mouse
+
+        // if (prevInput == Vector2.zero) // if mouse dragged
         // {
         //     Vector3 cursorMovement = Vector3.zero;
         //     Vector2 cursorPosition = Mouse.current.position.ReadValue();
@@ -75,8 +80,14 @@ public class CameraInputSystem : MonoBehaviour
         {  // if keyboard
             pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
         }
-        
+
         playerCameraTransform.position = pos;
+
+        playerCameraTransform.position = new Vector3(
+        Mathf.Clamp(playerCameraTransform.position.x, minCam.x, maxCam.x),
+        Mathf.Clamp(playerCameraTransform.position.y, minCam.y, maxCam.y),
+        Mathf.Clamp(playerCameraTransform.position.z, minCam.z, maxCam.z)); // boundies to camera
+
         light.transform.position = pos;
     }
 }
@@ -84,8 +95,8 @@ public class CameraInputSystem : MonoBehaviour
 
 
 
-        // pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
-        // pos.z = Mathf.Clamp(pos.z, screenXLimits.x, screenXLimits.y);
-  
-        // float scroll = Input.GetAxis("Mouse ScrollWheel");
-        // pos.y += scroll * scrollSpeed * 200f * Time.deltaTime;
+// pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
+// pos.z = Mathf.Clamp(pos.z, screenXLimits.x, screenXLimits.y);
+
+// float scroll = Input.GetAxis("Mouse ScrollWheel");
+// pos.y += scroll * scrollSpeed * 200f * Time.deltaTime;
