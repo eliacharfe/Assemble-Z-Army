@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 859365072441089634}
   - component: {fileID: 859365072441089633}
   - component: {fileID: 839477805822477457}
+  - component: {fileID: 4311631306903062891}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -64,6 +65,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  m_units: []
+--- !u!114 &4311631306903062891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859365072441089663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5845885b7977ee54486f3ac3a5e60a8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gold: 0
+  metal: 0
+  tree: 0
+  diamonds: 0
 --- !u!1001 &4827683244045493920
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,11 +5,11 @@ using Mirror;
 
 public class RTSPlayer : NetworkBehaviour
 {
-    
-
     public List<Unit> m_units = new List<Unit>();
 
     private BuildingsFactory buildingsFactory = null;
+
+    private bool isPartyOwner = false;
 
 
     // Start is called before the first frame update
@@ -19,64 +19,120 @@ public class RTSPlayer : NetworkBehaviour
     }
 
 
-
     // Update is called once per frame
     void Update()
     {
         
     }
 
+    #region Setters
+    public void SetPartyOwner(bool state) { isPartyOwner = state; }
+
+    #endregion
+
 
     #region Server
     public override void OnStartServer()
     {
-        Unit.ServerOnUnitSpawned += addUnit;
-        Unit.ServerOnUnitDeSpawned += removeUnit;
+        Unit.ServerOnUnitSpawned += AddUnit;
+        Unit.ServerOnUnitDeSpawned += RemoveUnit;
+
+        DontDestroyOnLoad(gameObject);
     }
+
 
     public override void OnStopServer()
     {
-        Unit.ServerOnUnitSpawned -= addUnit;
-        Unit.ServerOnUnitDeSpawned -= removeUnit;
+        Unit.ServerOnUnitSpawned -= AddUnit;
+        Unit.ServerOnUnitDeSpawned -= RemoveUnit;
+    }
+
+
+    // Command the server to start the game.
+    [Command]
+    public void CmdStartGame()
+    {
+        if (!isPartyOwner) { return; }
+
+        ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
     }
 
     #endregion
 
     #region Client
+    public override void OnStartClient()
+    {
+        if (NetworkServer.active) return;
+
+        DontDestroyOnLoad(gameObject);
+
+        ((RtsNetworkManager)NetworkManager.singleton).players.Add(this);
+    }
+
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+
+        if (!isClientOnly) return;
+
+        ((RtsNetworkManager)NetworkManager.singleton).players.Remove(this);
+
+        if (!hasAuthority) return;
+
+        Unit.AuthortyOnUnitSpawned -= AddUnit;
+        Unit.AuthortyOnUnitDeSpawned -= RemoveUnit;
+    }
+
 
     public override void OnStartAuthority()
     {
-        Unit.AuthortyOnUnitSpawned += addUnit;
-        Unit.AuthortyOnUnitDeSpawned += removeUnit;
+        Unit.AuthortyOnUnitSpawned += AddUnit;
+        Unit.AuthortyOnUnitDeSpawned += RemoveUnit;
     }
+
+
     public override void OnStopAuthority()
     {
-        Unit.AuthortyOnUnitSpawned -= addUnit;
-        Unit.AuthortyOnUnitDeSpawned -= removeUnit;
+        Unit.AuthortyOnUnitSpawned -= AddUnit;
+        Unit.AuthortyOnUnitDeSpawned -= RemoveUnit;
     }
+
 
     [Command]
     public void CmdTryPlaceBuilding(int buildingId, Vector3 point)
     {
-        Debug.Log(buildingId + " " + point);
-
         GameObject buildingInstance = Instantiate(buildingsFactory.GetBuildingById(buildingId), point, Quaternion.identity);
 
         NetworkServer.Spawn(buildingInstance, connectionToClient);
     }
-
     #endregion
-    void addUnit(Unit unit)
+
+
+    void AddUnit(Unit unit)
     {
         if(!unit.hasAuthority && unit.id != Macros.Units.WORKER)
             m_units.Add(unit);
     }
 
-    void removeUnit(Unit unit)
+
+    void RemoveUnit(Unit unit)
     {
         if (!unit.hasAuthority)
             m_units.Remove(unit);
     }
+
+
+    public void HideUnits()
+    {
+        foreach(Unit unit in m_units)
+        {
+            unit.gameObject.SetActive(false);
+            Debug.Log("Unit is now hidden");
+        }
+    }
+
+
 
 
 

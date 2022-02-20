@@ -98,6 +98,8 @@ public class Unit : NetworkBehaviour
     public override void OnStartServer()
     {
         ServerOnUnitSpawned?.Invoke(this);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnStopServer()

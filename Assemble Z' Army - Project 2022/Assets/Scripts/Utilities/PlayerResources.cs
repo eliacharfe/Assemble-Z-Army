@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-
-public class PlayerResources :NetworkBehaviour
+[System.Serializable]
+public class PlayerResources :MonoBehaviour
 {
-    [SerializeField] int gold;
-    [SerializeField] int metal;
-    [SerializeField] int tree;
-    [SerializeField] int diamonds;
-
-
-    
+    [SerializeField]public int gold;
+    [SerializeField]public int metal;
+    [SerializeField]public int tree;
+    [SerializeField]public int diamonds;
 }
