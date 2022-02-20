@@ -28,17 +28,16 @@ public class BowAttack : Attacker
         GetComponent<Animator>().SetBool("isAttacking", true);
 
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
-        
+
         GameObject arrow = Instantiate(arrowPrefab, gameObject.transform.position, Quaternion.identity);
         Physics2D.IgnoreCollision(arrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        float radius = Vector3.Distance(transform.position, targPos) / 2f;
         Vector3 middle = new Vector3((gameObject.transform.position.x + targPos.x) / 2,
                                      (gameObject.transform.position.y + targPos.y) / 2, 0f);
 
-        arrow.GetComponent<Projectile>().rad = radius;
         arrow.GetComponent<Projectile>().rotationCenter = middle;
+        arrow.GetComponent<Projectile>().radius = Vector3.Distance(transform.position, targPos) / 2f; ;
         arrow.GetComponent<Projectile>().teamNumber = gameObject.GetComponent<Targetable>().teamNumber;
         arrow.GetComponent<Projectile>().targetPosition = targPos;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Projectile : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float destroyAfterSeconds = 5;
 
     public Vector3 rotationCenter, targetPosition;
-    public float rad;
+    public float radius;
     private float posX, posY, angle, angleEnd;
     public int teamNumber;
 
@@ -17,11 +18,22 @@ public class Projectile : MonoBehaviour
 
     private Vector3 arrowPos;
 
+    UnitMovement move;
+
     private void Start()
     {
         // Debug.Log("radius: " + rad);
         // Debug.Log("mid: " + rotationCenter);
-        // Debug.Log("targPos = "+ targetPosition);
+
+        // Debug.Log("Pos = "+ transform.position);
+        //  Debug.Log("targPos = "+ targetPosition);
+
+        // if (transform.position.y > targetPosition.y)
+        // {
+        //     Vector3 dest = new Vector3(transform.position.x, targetPosition.y, targetPosition.z);
+        //     Debug.Log("dest: "+ dest);
+        //     move.Move(GetComponent<NavMeshAgent>(), dest);
+        // }
 
         // ToDo : need to calculate the correct angle start and end
         if (transform.position.x < targetPosition.x)
@@ -35,14 +47,16 @@ public class Projectile : MonoBehaviour
             angleEnd = Mathf.PI;
         }
 
-
         AngularSpeed = 1f;
     }
     //--------------------------------
     private void Update()
     {
-        posX = rotationCenter.x + Mathf.Cos(angle) * rad;
-        posY = rotationCenter.y + Mathf.Sin(angle) * rad;
+        // if (transform.position.y > targetPosition.y)
+        //     return;
+
+        posX = rotationCenter.x + Mathf.Cos(angle) * radius;
+        posY = rotationCenter.y + Mathf.Sin(angle) * radius;
 
         if (transform.position.x < targetPosition.x)
         {
