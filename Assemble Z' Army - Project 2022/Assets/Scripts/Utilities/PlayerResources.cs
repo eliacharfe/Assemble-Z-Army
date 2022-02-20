@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 
 
-public class Resources :NetworkBehaviour
+public class PlayerResources :NetworkBehaviour
 {
     [SerializeField] int gold;
     [SerializeField] int metal;
