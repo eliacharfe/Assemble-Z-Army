@@ -44,7 +44,7 @@ public class ConstructBuilding : MonoBehaviour
         }
         else
         {
-            building.IncreasingBuildingTime(0.1f);
+            building.CmdIncreasingBuildingTime(0.1f);
             time = 0;
         }
     }

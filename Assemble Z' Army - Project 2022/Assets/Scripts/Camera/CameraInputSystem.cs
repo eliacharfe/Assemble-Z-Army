@@ -40,9 +40,6 @@ public class CameraInputSystem : MonoBehaviour
         controls.Player.MoveCamera.performed += SetPrevInput;
         controls.Player.MoveCamera.canceled += SetPrevInput;
         controls.Enable();
-
-        //  light = GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
-        light = gameObj.GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
     }
 
     void Update()
@@ -82,13 +79,12 @@ public class CameraInputSystem : MonoBehaviour
         }
 
         playerCameraTransform.position = pos;
-
+        /*
         playerCameraTransform.position = new Vector3(
         Mathf.Clamp(playerCameraTransform.position.x, minCam.x, maxCam.x),
         Mathf.Clamp(playerCameraTransform.position.y, minCam.y, maxCam.y),
         Mathf.Clamp(playerCameraTransform.position.z, minCam.z, maxCam.z)); // boundies to camera
-
-        light.transform.position = pos;
+        */
     }
 }
 

@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Mirror;
 
-public class BuilidingConstruction : MonoBehaviour
+public class BuilidingConstruction : NetworkBehaviour
 {
     [SerializeField] private CostumeSlider buldingConstructionSlider = null;
-    [SerializeField] private TextMeshProUGUI cancelBuilding;
     public float constructionTime = 5f;
+    [SerializeField] [SyncVar(hook =nameof(HandleConstructionUpdated))] float timePassed = 0;
+
+    public event Action<float, float> ClientOnConstructionUpdated;
 
     private void Start()
     {
@@ -21,9 +24,17 @@ public class BuilidingConstruction : MonoBehaviour
         if(buldingConstructionSlider.FillAmount() >= 1f) {
             FinishConstruction();
         }
-
-        
     }
+
+    #region Server
+
+    // Add building time.
+    [Command]
+    public void CmdIncreasingBuildingTime(float value)
+    {
+        timePassed += value / constructionTime;
+    }
+    #endregion
 
 
     // Enable building functionallity and disable construction
@@ -36,17 +47,18 @@ public class BuilidingConstruction : MonoBehaviour
     }
 
 
-    // Add building time.
-    public void IncreasingBuildingTime(float value)
-    {
-        buldingConstructionSlider.IncreaseSlider(value / constructionTime);
-    }
 
 
     // Get building time passed.
     private float GetBuildingConstructionTime()
     {
         return buldingConstructionSlider.FillAmount();
+    }
+
+
+    private void HandleConstructionUpdated(float oldTime,float newTime)
+    {
+        buldingConstructionSlider.setValue(newTime);
     }
 
 }

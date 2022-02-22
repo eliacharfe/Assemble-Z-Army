@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1801245389}
   - component: {fileID: 7784999203533053926}
   - component: {fileID: 2869317554764529570}
+  - component: {fileID: 8307833347673991249}
+  - component: {fileID: 2148565589696975590}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -52,8 +54,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a338cd32738d6584a86a1e52650ff496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   buldingConstructionSlider: {fileID: 465014552052168490}
   constructionTime: 10
+  timePassed: 0
 --- !u!114 &1801245389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,12 +71,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4a42c4cb496cb4c8be55fd5f652925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   spawnTime: 5
+  spawnDistancePoint: 1.5
   spawnPoint: {fileID: 7687285496895391796}
   enterPoint: {fileID: 9021328820710509342}
+  Id: 6
+  treeCost: 0
+  metalCost: 0
+  goldCost: 0
+  jewelsCost: 0
   token: {fileID: 3824360112819498004}
   timeSlider: {fileID: 3050743307702186120}
-  Id: 6
+  waitingUnit: []
 --- !u!208 &7784999203533053926
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -114,6 +127,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
+--- !u!114 &8307833347673991249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594850713533669745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 0
+  bufferTimeMultiplier: 1
+  bufferSizeLimit: 64
+  catchupThreshold: 4
+  catchupMultiplier: 0.1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &2148565589696975590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594850713533669745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  visible: 0
+  m_AssetId: bea6643a0969b2847be222a0c0a69752
+  hasSpawned: 0
 --- !u!1 &2892958916528571777
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +692,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -10, y: -1.41}
+  m_AnchoredPosition: {x: -10, y: -1.45}
   m_SizeDelta: {x: 20, y: 2}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &5085862700653141449

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Mirror;
+using System;
 
-public class Building : MonoBehaviour
+public class Building : NetworkBehaviour
 {
 
     // Type of solider building recived and create.
@@ -28,6 +30,7 @@ public class Building : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject token = null;
     [SerializeField] private CostumeSlider timeSlider = null;
+
     // Units waiting to be recruited.
     public List<Unit> waitingUnit = new List<Unit>();
 
@@ -40,6 +43,38 @@ public class Building : MonoBehaviour
     private UnitsFactory unitsFactory = null;
 
 
+    public static event Action<Building> ServerOnBuildingSpawned;
+    public static event Action<Building> ServerOnBuildingDeSpawned;
+ 
+    public static event Action<Building> AuthortyOnBuildingSpawned;
+    public static event Action<Building> AuthortyOnBuildingDeSpawned;
+
+    #region Server
+
+    public override void OnStartServer()
+    {
+        ServerOnBuildingSpawned?.Invoke(this);
+    }
+
+    public override void OnStopServer()
+    {
+        ServerOnBuildingDeSpawned?.Invoke(this);
+    }
+    #endregion
+
+
+    #region Client
+    public override void OnStartAuthority()
+    {
+        AuthortyOnBuildingSpawned?.Invoke(this);
+    }
+
+    public override void OnStopAuthority()
+    {
+        AuthortyOnBuildingDeSpawned?.Invoke(this);
+    }
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +86,7 @@ public class Building : MonoBehaviour
 
         unitsFactory = FindObjectOfType<UnitsFactory>();
     }
+
 
 
     // Update is called once per frame
@@ -217,7 +253,10 @@ public class Building : MonoBehaviour
         }
     }
 
-
+    public int GetBuildingId()
+    {
+        return (int)Id ;
+    }
     public Sprite GetBuildingSprite()
     {
         return GetComponent<Sprite>();

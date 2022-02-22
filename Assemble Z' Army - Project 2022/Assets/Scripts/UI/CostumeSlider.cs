@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Mirror;
 
 public class CostumeSlider : MonoBehaviour
 {
@@ -23,10 +24,15 @@ public class CostumeSlider : MonoBehaviour
     // Increase slider time.
     public void IncreaseSlider(float value)
     {
-        if (timeLeft.GetComponent<Image>().fillAmount < 1f)
+        /*if (timeLeft.GetComponent<Image>().fillAmount < 1f)
         {
             timeLeft.GetComponent<Image>().fillAmount += value;
-        }
+        }*/
+    }
+
+    public void setValue(float value)
+    {
+        timeLeft.GetComponent<Image>().fillAmount = value;
     }
 
     // Intilize slider to 0.

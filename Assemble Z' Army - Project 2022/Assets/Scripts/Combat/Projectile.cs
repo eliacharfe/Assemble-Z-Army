@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 using UnityEngine.AI;
 
-public class Projectile : MonoBehaviour
+public class Projectile : NetworkBehaviour
 {
     [Header("Projectile Settings")]
     [SerializeField] private int damageToDeal = 20;
@@ -47,14 +48,14 @@ public class Projectile : MonoBehaviour
             angleEnd = Mathf.PI;
         }
 
-        AngularSpeed = 1f;
+        AngularSpeed = 0.1f;
     }
     //--------------------------------
     private void Update()
     {
         // if (transform.position.y > targetPosition.y)
         //     return;
-
+        /*
         posX = rotationCenter.x + Mathf.Cos(angle) * radius;
         posY = rotationCenter.y + Mathf.Sin(angle) * radius;
 
@@ -75,23 +76,29 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
 
             angle += 0.1f + Time.deltaTime * AngularSpeed;
-        }
+        }*/
     }
     //----------------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        arrowPos = transform.position;
-        Health target = collision.GetComponent<Health>();
-        int collisionTeamNumber = collision.gameObject.GetComponent<Targetable>().teamNumber;
-
-        if (target && collisionTeamNumber != teamNumber
-         && Vector3.Distance(arrowPos, targetPosition) < 7f)
+        if (collision.TryGetComponent<NetworkIdentity>(out NetworkIdentity networkIdentity))
         {
-            target.DealDamage(damageToDeal);
-        }
+            arrowPos = transform.position;
 
-        if (collisionTeamNumber != teamNumber
-         && Vector3.Distance(arrowPos, targetPosition) < 7f)
+            if (networkIdentity.connectionToClient == connectionToClient)
+            {
+                return;
+            }
+
+            Health target = networkIdentity.GetComponent<Health>();
+            if (target)
+            {
+                target.DealDamage(damageToDeal);
+            }
             Destroy(gameObject);
+
+            //if (Vector3.Distance(arrowPos, targetPosition) < 7f)
+              //  Destroy(gameObject);
+        }
     }
 }
