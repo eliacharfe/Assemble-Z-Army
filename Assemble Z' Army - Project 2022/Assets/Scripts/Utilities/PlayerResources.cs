@@ -6,8 +6,13 @@ using Mirror;
 [System.Serializable]
 public class PlayerResources :MonoBehaviour
 {
-    [SerializeField]public int gold;
-    [SerializeField]public int metal;
-    [SerializeField]public int tree;
-    [SerializeField]public int diamonds;
+    [SerializeField] private int gold {get; set; }
+    [SerializeField] private int metal { get; set; }
+    [SerializeField] private int tree { get; set; }
+    [SerializeField] private int diamonds { get; set; }
+
+
+
+
+
 }

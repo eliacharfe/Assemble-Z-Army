@@ -10,8 +10,7 @@ public class RtsNetworkManager : NetworkManager
 
     public List<RTSPlayer> players = new List<RTSPlayer>();
     //Temporary
-    int playerCount = 0;
-
+    
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
@@ -27,11 +26,6 @@ public class RtsNetworkManager : NetworkManager
         NetworkServer.Spawn(baseInstance, player.connectionToClient);
 
         player.SetPartyOwner(players.Count == 1);
- 
-        if(players.Count >= 2)
-        {
-            player.CmdStartGame();
-        }
 
     }
 
