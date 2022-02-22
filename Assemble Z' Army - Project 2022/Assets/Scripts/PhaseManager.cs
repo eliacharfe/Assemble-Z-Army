@@ -15,7 +15,7 @@ public class PhaseManager : NetworkBehaviour
     {
         base.OnStartServer();
         Debug.Log("Loaded the phases manager");
-        Invoke("ChangePhase", timer);
+        //Invoke("ChangePhase", timer);
     }
 
     IEnumerator SetTimer()
