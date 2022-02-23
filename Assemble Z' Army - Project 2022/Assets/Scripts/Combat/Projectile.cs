@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 using UnityEngine.AI;
 
-public class Projectile : NetworkBehaviour
+public class Projectile : MonoBehaviour
 {
     [Header("Projectile Settings")]
     [SerializeField] private int damageToDeal = 20;
@@ -48,14 +47,14 @@ public class Projectile : NetworkBehaviour
             angleEnd = Mathf.PI;
         }
 
-        AngularSpeed = 0.1f;
+        AngularSpeed = 1f;
     }
     //--------------------------------
     private void Update()
     {
         // if (transform.position.y > targetPosition.y)
         //     return;
-        /*
+
         posX = rotationCenter.x + Mathf.Cos(angle) * radius;
         posY = rotationCenter.y + Mathf.Sin(angle) * radius;
 
@@ -76,29 +75,23 @@ public class Projectile : NetworkBehaviour
                 Destroy(gameObject);
 
             angle += 0.1f + Time.deltaTime * AngularSpeed;
-        }*/
+        }
     }
     //----------------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<NetworkIdentity>(out NetworkIdentity networkIdentity))
+        arrowPos = transform.position;
+        Health target = collision.GetComponent<Health>();
+        int collisionTeamNumber = collision.gameObject.GetComponent<Targetable>().teamNumber;
+
+        if (target && collisionTeamNumber != teamNumber
+         && Vector3.Distance(arrowPos, targetPosition) < 7f)
         {
-            arrowPos = transform.position;
-
-            if (networkIdentity.connectionToClient == connectionToClient)
-            {
-                return;
-            }
-
-            Health target = networkIdentity.GetComponent<Health>();
-            if (target)
-            {
-                target.DealDamage(damageToDeal);
-            }
-            Destroy(gameObject);
-
-            //if (Vector3.Distance(arrowPos, targetPosition) < 7f)
-              //  Destroy(gameObject);
+            target.DealDamage(damageToDeal);
         }
+
+        if (collisionTeamNumber != teamNumber
+         && Vector3.Distance(arrowPos, targetPosition) < 7f)
+            Destroy(gameObject);
     }
 }

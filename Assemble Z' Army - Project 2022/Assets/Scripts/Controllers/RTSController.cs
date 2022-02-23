@@ -18,11 +18,8 @@ public class RTSController : MonoBehaviour
         selectedUnits = new List<Unit>();
         selectionAreaTransform.gameObject.SetActive(false);
         mainCamera = Camera.main;
-        Unit.AuthortyOnUnitDeSpawned += HandleDeSpawnUnit;
+        Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
     }
-
-    
-
     //------------------------
     private void Update()
     {
@@ -46,8 +43,8 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.ReachedDestination()) { }
-               //unit.StopAnimation();
+            if (unit.ReachedDestination())
+                unit.StopAnimation();
         }
     }
 
@@ -62,25 +59,21 @@ public class RTSController : MonoBehaviour
 
         if(hit.collider)
         {
-            hit.collider.gameObject.TryGetComponent<BuilidingConstruction>(out buildingToConstruct);
-            hit.collider.gameObject.TryGetComponent<Building>(out building);
-            hit.collider.gameObject.TryGetComponent<Targetable>(out targetable);
+            buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
+            building = hit.collider.gameObject.GetComponent<Building>();
+            targetable = hit.collider.gameObject.GetComponent<Targetable>();
         }
 
-        if (buildingToConstruct && buildingToConstruct.enabled && buildingToConstruct.hasAuthority)
+        if (buildingToConstruct && buildingToConstruct.enabled)
             SendToBuild(buildingToConstruct, hit);
 
-        else if (building && building.enabled && building.hasAuthority)
-            SendToRecruit(building, hit);
+        else if (building && building.enabled)
+            SendToRecruit(building,hit);
 
-        else if (targetable && !targetable.hasAuthority)
-        {
-            Debug.Log("Attack unit");
+        else if(targetable)
             AttackUnit(targetable, hit);
 
-        }
-        else
-            MoveUnits();
+        else MoveUnits();
     }
 
     //--------------------------------------
@@ -89,9 +82,14 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.id != Macros.Units.WORKER && !targetable.hasAuthority)
+            if (unit.id != Macros.Units.WORKER)
             {
-                unit.GetComponent<Attacker>().CmdSetTargetable(targetable);
+                if(targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                {
+                    return;
+                }
+
+                unit.GetComponent<Attacker>().SetTargetable(targetable);
             }
         }
     }
@@ -136,7 +134,6 @@ public class RTSController : MonoBehaviour
         foreach (Unit unit in selectedUnits)
         {
             ClearPreviousCommands(unit);
-
             unit.MoveTo(targetPosList[targetPosIndex]);
 
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
@@ -155,7 +152,7 @@ public class RTSController : MonoBehaviour
         unit.RemoveBuildingRecruiting();
 
         if (unit.GetComponent<Attacker>())
-            unit.GetComponent<Attacker>().CmdSetTargetable(null);
+            unit.GetComponent<Attacker>().SetTargetable(null);
     }
 
 
@@ -222,7 +219,7 @@ public class RTSController : MonoBehaviour
             Unit unit = obj.GetComponent<Unit>();
             if (selectedUnits.Contains(unit)) { continue; }
 
-            if (unit != null && unit.isSelectable() && unit.hasAuthority)
+            if (unit != null && unit.isSelectable())
             {
                 selectedUnits.Add(unit);
                 unit.Select();

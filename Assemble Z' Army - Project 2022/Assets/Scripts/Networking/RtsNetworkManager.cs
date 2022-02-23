@@ -2,55 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using UnityEngine.SceneManagement;
 
 public class RtsNetworkManager : NetworkManager
 {
     [SerializeField] GameObject spawnerPrefab = null;
 
-    public List<RTSPlayer> players = new List<RTSPlayer>();
     //Temporary
-    
+    int playerCount = 0;
+
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
 
-        RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
-
-        players.Add(player);
+        Debug.Log(conn.identity.GetComponent<RTSPlayer>());
         
         GameObject baseInstance = Instantiate(spawnerPrefab,
                GetStartPosition().position, Quaternion.identity);
 
+        RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
+
         NetworkServer.Spawn(baseInstance, player.connectionToClient);
-
-        player.SetPartyOwner(players.Count == 1);
-
-    }
-
-
-    public override void OnServerChangeScene(string newSceneName)
-    {
-
-        Debug.Log(newSceneName + " !!" + SceneManager.GetActiveScene().name);
-
-        if (newSceneName == "Battlefield")
-        {
-            Debug.Log("Changing to battlefield scene");
-            foreach(RTSPlayer player in players)
-            {
-                player.HideUnits();
-            }
-
-        }
-
-    }
-
-
-    public void ShowBattleField()
-    {
-        NetworkManager.singleton.ServerChangeScene("Battlefield");
     }
 
 }

@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
+
 
 // Abstract class for multiple attacks types.
-public abstract class Attacker : NetworkBehaviour
+public abstract class Attacker : MonoBehaviour
 {
     protected bool isAttacking = false;
 
     protected Targetable target = null;
-
-    protected UnitMovement movement = null;
 
     [Header("Attack Settings")]
     [SerializeField] private float attackTime = 1f;
@@ -19,19 +17,12 @@ public abstract class Attacker : NetworkBehaviour
 
     private float time = 0;
 
-    private void Awake()
-    {
-        movement = GetComponent<UnitMovement>();
-    }
-
-
-    [ServerCallback]
     private void Update()
     {
         if (!target) {
             if(isAttacking)
             {
-                StopAttackAnime();
+                StopAttack();
                 isAttacking = false;
             }
             return; 
@@ -53,19 +44,18 @@ public abstract class Attacker : NetworkBehaviour
         else
         {
             isAttacking = false;
-            StopAttackAnime();
-            movement.Move(this.target.transform.position);
+            GetComponent<Unit>().MoveTo(this.target.transform.position);
         }
     }
 
-    [Command]
-    public void CmdSetTargetable(Targetable target)
+    public void SetTargetable(Targetable target)
     {
         this.target = target;
     }
 
 
-    public abstract void StopAttackAnime();
+    public abstract void StopAttack();
 
     public abstract void Attack();
 }
+

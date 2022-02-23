@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 public class BowAttack : Attacker
 {
@@ -10,7 +9,7 @@ public class BowAttack : Attacker
     [SerializeField] private GameObject arrowPrefab = null;
     [SerializeField] private float arrowSpeed = 10f;
 
-    public override void StopAttackAnime()
+    public override void StopAttack()
     {
         GetComponent<Animator>().SetBool("isAttacking", false);
     }
@@ -31,9 +30,6 @@ public class BowAttack : Attacker
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
 
         GameObject arrow = Instantiate(arrowPrefab, gameObject.transform.position, Quaternion.identity);
-
-        NetworkServer.Spawn(arrow, connectionToClient);
-
         Physics2D.IgnoreCollision(arrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
@@ -47,6 +43,4 @@ public class BowAttack : Attacker
 
         arrow.GetComponent<Rigidbody2D>().velocity = dir.normalized * arrowSpeed;
     }
-
-
 }

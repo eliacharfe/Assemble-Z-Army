@@ -47,6 +47,6 @@ public class PhaseManager : NetworkBehaviour
 
         public void ChangePhase()
     {
-        rtsNetworkManager.ShowBattleField();
+        // rtsNetworkManager.ShowBattleField();
     }
 }

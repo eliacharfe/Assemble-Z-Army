@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class Health : NetworkBehaviour // NetworkBehavior
+public class Health : MonoBehaviour // NetworkBehavior
 {
 
-    private int maxHealth = 100;
+    [SerializeField] private int maxHealth = 100;
 
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
-    [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdated))] private int currHealth;
+    private int currHealth;
 
     // public event Action ServerOnDie;
 
@@ -48,10 +48,9 @@ public class Health : NetworkBehaviour // NetworkBehavior
 
     }
 
-   
-     private void HandleHealthUpdated(int oldHealth, int newHealth)
-     {
-        Debug.Log("Health updated");
-         ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
-    }
+    // client
+    // private void HandleHealthUpdated(int oldHealth, int newHealth)
+    // {
+    //     ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
+    // }
 }
