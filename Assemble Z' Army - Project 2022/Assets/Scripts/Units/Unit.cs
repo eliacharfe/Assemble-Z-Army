@@ -193,6 +193,7 @@ public class Unit : MonoBehaviour
     public void SetDead()
     {
         isDead = true;
+        myAnimator.SetBool("isDead", true);
     }
     //----------------------------
     public void ContinutMove()

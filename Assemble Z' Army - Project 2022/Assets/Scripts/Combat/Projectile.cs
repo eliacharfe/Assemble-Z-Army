@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour
             angleEnd = Mathf.PI;
         }
 
-        AngularSpeed = 1f;
+        AngularSpeed = 0.5f;
     }
     //--------------------------------
     private void Update()
@@ -83,15 +83,16 @@ public class Projectile : MonoBehaviour
         arrowPos = transform.position;
         Health target = collision.GetComponent<Health>();
         int collisionTeamNumber = collision.gameObject.GetComponent<Targetable>().teamNumber;
+        Debug.Log(collisionTeamNumber); 
 
-        if (target && collisionTeamNumber != teamNumber
-         && Vector3.Distance(arrowPos, targetPosition) < 7f)
+        if (target && collisionTeamNumber != teamNumber)
         {
             target.DealDamage(damageToDeal);
+            Destroy(gameObject);
         }
 
-        if (collisionTeamNumber != teamNumber
-         && Vector3.Distance(arrowPos, targetPosition) < 7f)
-            Destroy(gameObject);
+        // if (collisionTeamNumber != teamNumber
+        //  && Vector3.Distance(arrowPos, targetPosition) < 7f)
+        //     Destroy(gameObject);
     }
 }

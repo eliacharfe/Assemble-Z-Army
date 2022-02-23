@@ -26,11 +26,15 @@ public class Health : MonoBehaviour // NetworkBehavior
     {
         if (currHealth <= 0)
         {
-            GetComponent<Unit>().SetDead();
             GetComponent<Unit>().StopMove();
-            Destroy(gameObject);
+            GetComponent<Unit>().SetDead();
+           // Destroy(gameObject);
         }
+    }
 
+    void Dead()
+    {
+        Destroy(gameObject);
     }
 
     public void DealDamage(int damageAmount)
