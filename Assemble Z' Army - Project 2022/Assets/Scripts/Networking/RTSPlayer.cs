@@ -28,6 +28,12 @@ public class RTSPlayer : NetworkBehaviour
     #region Setters
     public void SetPartyOwner(bool state) { isPartyOwner = state; }
 
+
+    public void SetCameraPosition(Vector3 pos)
+    {
+        Camera.main.transform.position = pos;
+    }
+
     #endregion
 
 

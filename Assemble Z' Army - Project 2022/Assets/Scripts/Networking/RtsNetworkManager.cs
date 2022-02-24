@@ -27,8 +27,9 @@ public class RtsNetworkManager : NetworkManager
 
         player.SetPartyOwner(players.Count == 1);
 
+        player.SetCameraPosition(base.transform.position);
     }
-
+    
 
     public override void OnServerChangeScene(string newSceneName)
     {
