@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-
+using UnityEngine.EventSystems;
 
 public class UnitSpawner : NetworkBehaviour
 {
@@ -30,10 +30,5 @@ public class UnitSpawner : NetworkBehaviour
     private void OnMouseDown()
     {
         CmdSpawnAUnit();
-        if (isLocalPlayer)
-        {
-
-            Debug.Log("Mouse clicked on spawner");
-        }
     }
 }

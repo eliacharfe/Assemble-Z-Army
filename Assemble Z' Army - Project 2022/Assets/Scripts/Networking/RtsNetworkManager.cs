@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
+using Utilities;
+using System;
 
 public class RtsNetworkManager : NetworkManager
 {
     [SerializeField] GameObject spawnerPrefab = null;
 
     public List<RTSPlayer> players = new List<RTSPlayer>();
-    //Temporary
-    
 
+    // Client connections events
+    public static event Action ClientOnConnected;
+    public static event Action ClientOnDisConnected;
+
+    # region Server 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
@@ -27,10 +32,15 @@ public class RtsNetworkManager : NetworkManager
 
         player.SetPartyOwner(players.Count == 1);
 
-        player.SetCameraPosition(base.transform.position);
-    }
-    
+        Vector3 position = Utilities.Utils.ChangeZAxis(baseInstance.transform.position, -10);
 
+        player.SetCameraPosition(position);
+
+        if(players.Count >= 1)
+        {
+           FindObjectOfType<PhaseManager>().SetTimer(true);
+        }
+    }
     public override void OnServerChangeScene(string newSceneName)
     {
 
@@ -39,7 +49,7 @@ public class RtsNetworkManager : NetworkManager
         if (newSceneName == "Battlefield")
         {
             Debug.Log("Changing to battlefield scene");
-            foreach(RTSPlayer player in players)
+            foreach (RTSPlayer player in players)
             {
                 player.HideUnits();
             }
@@ -47,6 +57,27 @@ public class RtsNetworkManager : NetworkManager
         }
 
     }
+    #endregion
+
+
+    #region Client
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        base.OnClientConnect(conn);
+
+        ClientOnConnected?.Invoke();
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        base.OnClientDisconnect(conn);
+
+        ClientOnDisConnected?.Invoke();
+    }
+
+    #endregion
+
+
 
 
     public void ShowBattleField()

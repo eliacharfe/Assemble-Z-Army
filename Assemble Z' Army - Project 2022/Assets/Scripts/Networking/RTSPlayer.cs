@@ -40,8 +40,8 @@ public class RTSPlayer : NetworkBehaviour
     #region Server
     public override void OnStartServer()
     {
-        Unit.ServerOnUnitSpawned += AddUnit;
-        Unit.ServerOnUnitDeSpawned += RemoveUnit;
+        Unit.ServerOnUnitSpawned += ServerHandleUnitSpawned;
+        Unit.ServerOnUnitDeSpawned += ServerHandleUnitDeSpawned;
 
         DontDestroyOnLoad(gameObject);
     }
@@ -49,8 +49,34 @@ public class RTSPlayer : NetworkBehaviour
 
     public override void OnStopServer()
     {
-        Unit.ServerOnUnitSpawned -= AddUnit;
-        Unit.ServerOnUnitDeSpawned -= RemoveUnit;
+
+        Debug.Log("Stop player server");
+
+        Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
+        Unit.ServerOnUnitDeSpawned -= ServerHandleUnitDeSpawned;
+    }
+
+
+    // Add new unit to the server 'myUnits' list.
+    private void ServerHandleUnitSpawned(Unit unit)
+    {
+        if (isUnitBelongToClient(unit))
+            m_units.Add(unit);
+    }
+
+
+    // Remove unit from the server 'myUnits' list
+    private void ServerHandleUnitDeSpawned(Unit unit)
+    {
+        Debug.Log("Units removed");
+        if (isUnitBelongToClient(unit))
+            m_units.Remove(unit);
+    }
+
+    private bool isUnitBelongToClient(Unit unit)
+    {
+        return unit.connectionToClient.connectionId ==
+            connectionToClient.connectionId;
     }
 
 
@@ -62,6 +88,7 @@ public class RTSPlayer : NetworkBehaviour
 
         ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
     }
+
 
     #endregion
 
@@ -86,22 +113,22 @@ public class RTSPlayer : NetworkBehaviour
 
         if (!hasAuthority) return;
 
-        Unit.AuthortyOnUnitSpawned -= AddUnit;
-        Unit.AuthortyOnUnitDeSpawned -= RemoveUnit;
+        Unit.AuthortyOnUnitSpawned -= AuthortyHandleUnitSpawned;
+        Unit.AuthortyOnUnitDeSpawned -= AuthortyHandleUnitDeSpawned;
     }
 
 
     public override void OnStartAuthority()
     {
-        Unit.AuthortyOnUnitSpawned += AddUnit;
-        Unit.AuthortyOnUnitDeSpawned += RemoveUnit;
+        Unit.AuthortyOnUnitSpawned += AuthortyHandleUnitSpawned;
+        Unit.AuthortyOnUnitDeSpawned += AuthortyHandleUnitDeSpawned;
     }
 
 
     public override void OnStopAuthority()
     {
-        Unit.AuthortyOnUnitSpawned -= AddUnit;
-        Unit.AuthortyOnUnitDeSpawned -= RemoveUnit;
+        Unit.AuthortyOnUnitSpawned -= AuthortyHandleUnitSpawned;
+        Unit.AuthortyOnUnitDeSpawned -= AuthortyHandleUnitDeSpawned;
     }
 
 
@@ -114,20 +141,23 @@ public class RTSPlayer : NetworkBehaviour
     }
     #endregion
 
-
-    void AddUnit(Unit unit)
+    // Add unit to authorty 'list'.
+    private void AuthortyHandleUnitDeSpawned(Unit unit)
     {
-        if(!unit.hasAuthority && unit.id != Macros.Units.WORKER)
-            m_units.Add(unit);
+
+        Debug.Log("Units removed");
+
+        if (!hasAuthority) return;
+        m_units.Remove(unit);
     }
 
 
-    void RemoveUnit(Unit unit)
+    // Remove unit to authorty 'list'.
+    private void AuthortyHandleUnitSpawned(Unit unit)
     {
-        if (!unit.hasAuthority)
-            m_units.Remove(unit);
+        if (!hasAuthority) return;
+        m_units.Add(unit);
     }
-
 
     public void HideUnits()
     {

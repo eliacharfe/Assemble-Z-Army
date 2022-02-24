@@ -62,8 +62,6 @@ public class Unit : NetworkBehaviour
 
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // setting Quality avoidance to none
 
-        ServerOnUnitSpawned?.Invoke(this);
-
         selectable = true;
         isDead = false;
 
@@ -98,12 +96,11 @@ public class Unit : NetworkBehaviour
     public override void OnStartServer()
     {
         ServerOnUnitSpawned?.Invoke(this);
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnStopServer()
     {
+        Debug.Log("Stop Units server");
         ServerOnUnitDeSpawned.Invoke(this);
     }
     #endregion
