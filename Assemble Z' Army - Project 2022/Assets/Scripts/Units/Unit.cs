@@ -322,6 +322,16 @@ public class Unit : MonoBehaviour
                     SpeedAttack.BaseValue = 2f;
                     break;
                 };
+            case Units.RECRUIT:
+                {
+                    Speed.BaseValue = agent.speed = 35f;
+                    Attack.BaseValue = 5f;
+                    Defense.BaseValue = 0f;
+                    ReachDistance.BaseValue = 5f;
+                    SpeedAttack.BaseValue = 1f;
+                    break;
+                };
+                
             case Units.SPEARMAN:
                 {
                     Speed.BaseValue = agent.speed = 20f;
