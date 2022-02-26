@@ -303,6 +303,15 @@ public class Unit : MonoBehaviour
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 };
+            case Units.ARCHER_HORSE:
+                {
+                    Speed.BaseValue = agent.speed = 60f;
+                    Attack.BaseValue = 15f;
+                    Defense.BaseValue = 10f;
+                    ReachDistance.BaseValue = 50f;
+                    SpeedAttack.BaseValue = 1f;
+                    break;
+                };
             case Units.WORKER:
                 {
                     Speed.BaseValue = agent.speed = 25f;
@@ -330,91 +339,91 @@ public class Unit : MonoBehaviour
 
 
 
-    // private float GetSpeed(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 30f;
-    //         case Units.ARCHER: return 30f;
-    //         case Units.SWORD_KNIGHT: return 20f;
-    //         case Units.SIMPLE_HORSE: return 65f;
-    //         case Units.SWORD_HORSE: return 60f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 50f;
-    //         case Units.WORKER: return 25f;
-    //         case Units.SPEARMAN: return 20f;
-    //             // ...
-    //     }
-    //     return 30f;
-    // }
+// private float GetSpeed(Units id)
+// {
+//     switch (id)
+//     {
+//         case Units.SWORDMAN: return 30f;
+//         case Units.ARCHER: return 30f;
+//         case Units.SWORD_KNIGHT: return 20f;
+//         case Units.SIMPLE_HORSE: return 65f;
+//         case Units.SWORD_HORSE: return 60f;
+//         case Units.SWORD_HORSE_KNIGHT: return 50f;
+//         case Units.WORKER: return 25f;
+//         case Units.SPEARMAN: return 20f;
+//             // ...
+//     }
+//     return 30f;
+// }
 
-    // private float GetAttack(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 15f;
-    //         case Units.ARCHER: return 10f;
-    //         case Units.SWORD_KNIGHT: return 20f;
-    //         case Units.SIMPLE_HORSE: return 10f;
-    //         case Units.SWORD_HORSE: return 25f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 30f;
-    //         case Units.WORKER: return 5f;
-    //         case Units.SPEARMAN:
-    //             {
-    //                 // add power 25 against horses
-    //                 return 10f;
-    //             }
-    //             // ...
-    //     }
-    //     return 10f;
-    // }
+// private float GetAttack(Units id)
+// {
+//     switch (id)
+//     {
+//         case Units.SWORDMAN: return 15f;
+//         case Units.ARCHER: return 10f;
+//         case Units.SWORD_KNIGHT: return 20f;
+//         case Units.SIMPLE_HORSE: return 10f;
+//         case Units.SWORD_HORSE: return 25f;
+//         case Units.SWORD_HORSE_KNIGHT: return 30f;
+//         case Units.WORKER: return 5f;
+//         case Units.SPEARMAN:
+//             {
+//                 // add power 25 against horses
+//                 return 10f;
+//             }
+//             // ...
+//     }
+//     return 10f;
+// }
 
-    // private float GetDefense(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 5f;
-    //         case Units.ARCHER: return 5f;
-    //         case Units.SWORD_KNIGHT: return 15f;
-    //         case Units.SIMPLE_HORSE: return 5f;
-    //         case Units.SWORD_HORSE: return 10f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 20f;
-    //         case Units.WORKER: return 0f;
-    //         case Units.SPEARMAN: return 5f;
-    //             // ...
-    //     }
-    //     return 5f;
-    // }
+// private float GetDefense(Units id)
+// {
+//     switch (id)
+//     {
+//         case Units.SWORDMAN: return 5f;
+//         case Units.ARCHER: return 5f;
+//         case Units.SWORD_KNIGHT: return 15f;
+//         case Units.SIMPLE_HORSE: return 5f;
+//         case Units.SWORD_HORSE: return 10f;
+//         case Units.SWORD_HORSE_KNIGHT: return 20f;
+//         case Units.WORKER: return 0f;
+//         case Units.SPEARMAN: return 5f;
+//             // ...
+//     }
+//     return 5f;
+// }
 
-    // private float GetReachedDistance(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 10f;
-    //         case Units.ARCHER: return 50f;
-    //         case Units.SWORD_KNIGHT: return 15f;
-    //         case Units.SIMPLE_HORSE: return 10f;
-    //         case Units.SWORD_HORSE: return 15f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 20f;
-    //         case Units.WORKER: return 5f;
-    //         case Units.SPEARMAN: return 20f;
-    //             // ...
-    //     }
-    //     return 10f;
-    // }
+// private float GetReachedDistance(Units id)
+// {
+//     switch (id)
+//     {
+//         case Units.SWORDMAN: return 10f;
+//         case Units.ARCHER: return 50f;
+//         case Units.SWORD_KNIGHT: return 15f;
+//         case Units.SIMPLE_HORSE: return 10f;
+//         case Units.SWORD_HORSE: return 15f;
+//         case Units.SWORD_HORSE_KNIGHT: return 20f;
+//         case Units.WORKER: return 5f;
+//         case Units.SPEARMAN: return 20f;
+//             // ...
+//     }
+//     return 10f;
+// }
 
-    // private float GetSpeedAttack(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 1f;
-    //         case Units.ARCHER: return 1f;
-    //         case Units.SWORD_KNIGHT: return 1f;
-    //         case Units.SIMPLE_HORSE: return 2f;
-    //         case Units.SWORD_HORSE: return 1.5f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 1.5f;
-    //         case Units.WORKER: return 1.5f;
-    //         case Units.SPEARMAN: return 1.5f;
-    //             // ...
-    //     }
-    //     return 1f;
-    // }
+// private float GetSpeedAttack(Units id)
+// {
+//     switch (id)
+//     {
+//         case Units.SWORDMAN: return 1f;
+//         case Units.ARCHER: return 1f;
+//         case Units.SWORD_KNIGHT: return 1f;
+//         case Units.SIMPLE_HORSE: return 2f;
+//         case Units.SWORD_HORSE: return 1.5f;
+//         case Units.SWORD_HORSE_KNIGHT: return 1.5f;
+//         case Units.WORKER: return 1.5f;
+//         case Units.SPEARMAN: return 1.5f;
+//             // ...
+//     }
+//     return 1f;
+// }
