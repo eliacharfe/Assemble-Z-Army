@@ -7,7 +7,7 @@ using Mirror;
 using UnityEngine.Experimental.Rendering.LWRP;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class CameraInputSystem : MonoBehaviour
+public class CameraInputSystem : NetworkBehaviour
 {
     [SerializeField] private Transform playerCameraTransform = null;
     [SerializeField] private float speed = 20.0f;
@@ -28,7 +28,7 @@ public class CameraInputSystem : MonoBehaviour
     private Vector3 startCameraPos, minCam, maxCam;
     float leftLimit, rightLimit, topLimit, buttomLimit;
 
-    void Start()
+    public override void OnStartAuthority()
     {
         startCameraPos = transform.position;
         minCam = new Vector3(startCameraPos.x - 100, startCameraPos.y - 100, transform.position.z);
@@ -37,13 +37,23 @@ public class CameraInputSystem : MonoBehaviour
         playerCameraTransform.gameObject.SetActive(true);
 
         controls = new Controls();
+
         controls.Player.MoveCamera.performed += SetPrevInput;
         controls.Player.MoveCamera.canceled += SetPrevInput;
+
         controls.Enable();
     }
 
+    public override void OnStopAuthority()
+    {
+        Camera.main.transform.position = new Vector3(0, 0, 0);
+    }
+
+    [ClientCallback]
     void Update()
     {
+        if (!hasAuthority || !Application.isFocused) { return; }
+
         MoveCamera();
     }
 
@@ -75,8 +85,10 @@ public class CameraInputSystem : MonoBehaviour
         // }
         // else
         {  // if keyboard
-            pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
+           
         }
+
+        pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
 
         playerCameraTransform.position = pos;
         /*

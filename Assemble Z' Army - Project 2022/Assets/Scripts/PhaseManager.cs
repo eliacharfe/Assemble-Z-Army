@@ -18,13 +18,6 @@ public class PhaseManager : NetworkBehaviour
         base.OnStartServer();
         Debug.Log("Loaded the phases manager");
     }
-
-    IEnumerator SetTimer()
-    {
-        timerText.text = Mathf.Floor(timer) + "";
-        yield return new WaitForSeconds(timer);
-        ChangePhase();
-    }
         
 
     public void SetTimer(bool value)
@@ -53,12 +46,12 @@ public class PhaseManager : NetworkBehaviour
             else
             {
                 startTimer = false;
-                ChangePhase();
+                //ChangePhase();
             }
 
         }
 
-        timerText.text = Mathf.Floor(timer) + "";
+        //timerText.text = Mathf.Floor(timer) + "";
 
     }
 

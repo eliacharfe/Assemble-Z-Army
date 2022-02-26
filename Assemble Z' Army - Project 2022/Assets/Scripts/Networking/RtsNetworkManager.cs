@@ -26,19 +26,17 @@ public class RtsNetworkManager : NetworkManager
         players.Add(player);
         
         GameObject baseInstance = Instantiate(spawnerPrefab,
-               GetStartPosition().position, Quaternion.identity);
+              player.transform.position, Quaternion.identity);
 
         NetworkServer.Spawn(baseInstance, player.connectionToClient);
 
         player.SetPartyOwner(players.Count == 1);
 
-        Vector3 position = Utilities.Utils.ChangeZAxis(baseInstance.transform.position, -10);
+        //player.SetCameraPosition(position);
 
-        player.SetCameraPosition(position);
-
-        if(players.Count >= 1)
+        if(players.Count >= 2)
         {
-           FindObjectOfType<PhaseManager>().SetTimer(true);
+           //FindObjectOfType<PhaseManager>().SetTimer(true);
         }
     }
     public override void OnServerChangeScene(string newSceneName)
@@ -82,7 +80,7 @@ public class RtsNetworkManager : NetworkManager
 
     public void ShowBattleField()
     {
-        NetworkManager.singleton.ServerChangeScene("Battlefield");
+        //NetworkManager.singleton.ServerChangeScene("Battlefield");
     }
 
 }

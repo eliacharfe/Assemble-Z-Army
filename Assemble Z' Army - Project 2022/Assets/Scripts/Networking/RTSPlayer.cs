@@ -5,6 +5,9 @@ using Mirror;
 
 public class RTSPlayer : NetworkBehaviour
 {
+    // Following camera of the player.
+    [SerializeField] private Transform cameraTransfornm = null;
+
     public List<Unit> m_units = new List<Unit>();
 
     private BuildingsFactory buildingsFactory = null;
@@ -31,7 +34,7 @@ public class RTSPlayer : NetworkBehaviour
 
     public void SetCameraPosition(Vector3 pos)
     {
-        Camera.main.transform.position = pos;
+        cameraTransfornm.position = pos;
     }
 
     #endregion
@@ -42,6 +45,8 @@ public class RTSPlayer : NetworkBehaviour
     {
         Unit.ServerOnUnitSpawned += ServerHandleUnitSpawned;
         Unit.ServerOnUnitDeSpawned += ServerHandleUnitDeSpawned;
+
+        Debug.Log(transform.position);
 
         DontDestroyOnLoad(gameObject);
     }
@@ -54,6 +59,8 @@ public class RTSPlayer : NetworkBehaviour
 
         Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
         Unit.ServerOnUnitDeSpawned -= ServerHandleUnitDeSpawned;
+
+        Camera.main.transform.position = new Vector3(0, 0, 0);
     }
 
 
@@ -95,6 +102,9 @@ public class RTSPlayer : NetworkBehaviour
     #region Client
     public override void OnStartClient()
     {
+
+        Debug.Log(transform.position);
+
         if (NetworkServer.active) return;
 
         DontDestroyOnLoad(gameObject);
