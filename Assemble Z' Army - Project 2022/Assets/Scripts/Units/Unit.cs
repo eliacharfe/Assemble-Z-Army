@@ -312,6 +312,15 @@ public class Unit : MonoBehaviour
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
+            case Units.SPEAR_HORSE:
+                {
+                    Speed.BaseValue = agent.speed = 55f;
+                    Attack.BaseValue = 20f;
+                    Defense.BaseValue = 5f;
+                    ReachDistance.BaseValue = 20f;
+                    SpeedAttack.BaseValue = 1.8f;
+                    break;
+                };
             case Units.WORKER:
                 {
                     Speed.BaseValue = agent.speed = 25f;
