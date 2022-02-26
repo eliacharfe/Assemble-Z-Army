@@ -312,15 +312,7 @@ public class Unit : MonoBehaviour
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
-            case Units.SPEAR_HORSE:
-                {
-                    Speed.BaseValue = agent.speed = 55f;
-                    Attack.BaseValue = 20f;
-                    Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 20f;
-                    SpeedAttack.BaseValue = 1.8f;
-                    break;
-                };
+
             case Units.WORKER:
                 {
                     Speed.BaseValue = agent.speed = 25f;
@@ -339,6 +331,33 @@ public class Unit : MonoBehaviour
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 }
+            case Units.SPEAR_KNIGHT:
+                {
+                    Speed.BaseValue = agent.speed = 15f;
+                    Attack.BaseValue = 15f;
+                    Defense.BaseValue = 10f;
+                    ReachDistance.BaseValue = 25f;
+                    SpeedAttack.BaseValue = 1.5f;
+                    break;
+                }
+            case Units.SPEAR_HORSE:
+                {
+                    Speed.BaseValue = agent.speed = 55f;
+                    Attack.BaseValue = 20f;
+                    Defense.BaseValue = 5f;
+                    ReachDistance.BaseValue = 20f;
+                    SpeedAttack.BaseValue = 1.8f;
+                    break;
+                };
+            case Units.SPEAR_HORSE_KNIGHT:
+                {
+                    Speed.BaseValue = agent.speed = 50f;
+                    Attack.BaseValue = 25f;
+                    Defense.BaseValue = 20f;
+                    ReachDistance.BaseValue = 25f;
+                    SpeedAttack.BaseValue = 2f;
+                    break;
+                };
         }
     }
 
