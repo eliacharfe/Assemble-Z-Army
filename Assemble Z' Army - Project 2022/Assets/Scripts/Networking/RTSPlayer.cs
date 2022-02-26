@@ -40,6 +40,13 @@ public class RTSPlayer : NetworkBehaviour
     #endregion
 
 
+    #region Getters
+    public Vector3 GetCameraPosition()
+    {
+        return cameraTransfornm.position;
+    }
+    #endregion
+
     #region Server
     public override void OnStartServer()
     {
@@ -102,8 +109,6 @@ public class RTSPlayer : NetworkBehaviour
     #region Client
     public override void OnStartClient()
     {
-
-        Debug.Log(transform.position);
 
         if (NetworkServer.active) return;
 

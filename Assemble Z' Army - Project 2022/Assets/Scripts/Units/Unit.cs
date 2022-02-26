@@ -101,7 +101,7 @@ public class Unit : NetworkBehaviour
     public override void OnStopServer()
     {
         Debug.Log("Stop Units server");
-        ServerOnUnitDeSpawned.Invoke(this);
+        //ServerOnUnitDeSpawned.Invoke(this);
     }
     #endregion
 

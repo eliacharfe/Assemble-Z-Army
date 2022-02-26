@@ -24,9 +24,12 @@ public class RtsNetworkManager : NetworkManager
         RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
 
         players.Add(player);
-        
+
+
         GameObject baseInstance = Instantiate(spawnerPrefab,
               player.transform.position, Quaternion.identity);
+
+        Debug.Log("Given player " + players.Count + " position: " + player.transform.position);
 
         NetworkServer.Spawn(baseInstance, player.connectionToClient);
 

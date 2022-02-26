@@ -30,9 +30,10 @@ public class CameraInputSystem : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
-        startCameraPos = transform.position;
-        minCam = new Vector3(startCameraPos.x - 100, startCameraPos.y - 100, transform.position.z);
-        maxCam = new Vector3(startCameraPos.x + 100, startCameraPos.y + 100, transform.position.z);
+
+       // startCameraPos = transform.position;
+       // minCam = new Vector3(startCameraPos.x - 100, startCameraPos.y - 100, transform.position.z);
+       // maxCam = new Vector3(startCameraPos.x + 100, startCameraPos.y + 100, transform.position.z);
 
         playerCameraTransform.gameObject.SetActive(true);
 
@@ -42,6 +43,8 @@ public class CameraInputSystem : NetworkBehaviour
         controls.Player.MoveCamera.canceled += SetPrevInput;
 
         controls.Enable();
+
+        print(playerCameraTransform.position);
     }
 
     public override void OnStopAuthority()
