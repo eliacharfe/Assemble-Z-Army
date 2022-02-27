@@ -17,6 +17,13 @@ public abstract class Attacker : MonoBehaviour
 
     private float time = 0;
 
+
+    private void Start()
+    {
+        attackTime = GetComponent<Unit>().SpeedAttack.BaseValue;
+        Debug.Log(attackTime);
+    }
+
     private void Update()
     {
         if (!target) {

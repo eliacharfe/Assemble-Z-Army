@@ -64,14 +64,8 @@ public class Unit : MonoBehaviour
 
         myBoxCollider = GetComponent<BoxCollider2D>();
 
-        // Debug.Log(id);
-        // Speed.BaseValue = agent.speed = GetSpeed(id);
-        // Attack.BaseValue = GetAttack(id);
-        // Defense.BaseValue = GetDefense(id);
-        // ReachDistance.BaseValue = GetReachedDistance(id);
-        // SpeedAttack.BaseValue = GetSpeedAttack(id);
-
         InitStats(id);
+
 
         if (selectionCircle)
         {
@@ -255,7 +249,7 @@ public class Unit : MonoBehaviour
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 10f;
-                    SpeedAttack.BaseValue = 1f;
+                    SpeedAttack.BaseValue = 3f; // to change to 1
                     break;
                 };
             case Units.ARCHER:
@@ -264,7 +258,7 @@ public class Unit : MonoBehaviour
                     Attack.BaseValue = 10f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 50f;
-                    SpeedAttack.BaseValue = 1f;
+                    SpeedAttack.BaseValue = 3f;// to change to 1
                     break;
                 };
             case Units.SWORD_KNIGHT:

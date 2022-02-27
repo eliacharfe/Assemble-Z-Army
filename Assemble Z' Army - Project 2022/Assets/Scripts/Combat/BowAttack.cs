@@ -18,7 +18,7 @@ public class BowAttack : Attacker
 
     public override void Attack()
     {
-        GetComponent<Animator>().SetBool("isArcherAttacking", true); // the animation will call realseArrow func
+        GetComponent<Animator>().SetBool("isArcherAttacking", true); // the animation will call realseArrow func  
     }
 
     public void realeseArrow()
@@ -37,11 +37,6 @@ public class BowAttack : Attacker
         Vector2 dir = new Vector2(targetPos.x, targetPos.y);
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
 
-        // Vector3 startPosArrow;
-        // if (archerPos.x < targPos.x)
-        //     startPosArrow = new Vector3(archerPos.x + 12f, archerPos.y, archerPos.z);
-        // else startPosArrow = new Vector3(archerPos.x - 12f, archerPos.y, archerPos.z);
-
         shootStartPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         GameObject arrow = Instantiate(arrowPrefab, shootStartPoint.transform.position, shootStartPoint.transform.rotation);
@@ -59,12 +54,6 @@ public class BowAttack : Attacker
         arrow.GetComponent<Projectile>().teamNumber = gameObject.GetComponent<Targetable>().teamNumber;
         arrow.GetComponent<Projectile>().targetPosition = targPos;
         arrow.GetComponent<Projectile>().archerPosition = archerPos;
-
-      //  arrow.GetComponent<Projectile>().archerRotation = gameObject.transform.rotation;
-       //  arrow.GetComponent<Projectile>().targetTransform = target.transform;
-
-       // arrow.GetComponent<Rigidbody2D>().velocity = dir.normalized * arrowSpeed;
-        
 
     }
 
