@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spearman
       objectReference: {fileID: 0}
+    - target: {fileID: 2690916693063583071, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3980643642929494255, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -123,6 +127,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.6415094
       objectReference: {fileID: 0}
+    - target: {fileID: 7944859623299647963, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8020596067051547752, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -169,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8020596067051547752, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.1
+      value: -9.4
       objectReference: {fileID: 0}
     - target: {fileID: 8020596067051547752, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -189,11 +197,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8020596067051547752, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -165.40033
+      value: -150.09999
       objectReference: {fileID: 0}
     - target: {fileID: 8020596067051547752, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 4.904297
+      value: 22.3
       objectReference: {fileID: 0}
     - target: {fileID: 8020596067051547752, guid: 1a3cfc6bd49af8048bef5360e2bba4a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

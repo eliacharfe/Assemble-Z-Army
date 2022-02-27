@@ -6,19 +6,19 @@ using UnityEngine;
 
 public class Health : MonoBehaviour // NetworkBehavior
 {
-
     [SerializeField] private int maxHealth = 100;
 
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
-    private int currHealth;
+    private float currHealth;
 
     // public event Action ServerOnDie;
 
     public event Action<int, int> ClientOnHealthUpdate;
-
+    Unit unit;
 
     void Start()
     {
+        unit = GetComponent<Unit>();
         currHealth = maxHealth;
     }
 
@@ -26,9 +26,8 @@ public class Health : MonoBehaviour // NetworkBehavior
     {
         if (currHealth <= 0)
         {
-            GetComponent<Unit>().StopMove();
-            GetComponent<Unit>().SetDead();
-           // Destroy(gameObject);
+            unit.StopMove();
+            unit.SetDead();
         }
     }
 
@@ -37,15 +36,14 @@ public class Health : MonoBehaviour // NetworkBehavior
         Destroy(gameObject);
     }
 
-    public void DealDamage(int damageAmount)
+    public void DealDamage(float damageAmount)
     {
-
         if (currHealth == 0)
             return;
 
-        currHealth = Mathf.Max(currHealth - damageAmount, 0);
+        currHealth = Mathf.Max(currHealth - damageAmount + unit.Defense.BaseValue , 0);
 
-        ClientOnHealthUpdate?.Invoke(currHealth, maxHealth);
+        ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
 
         if (currHealth != 0)
             return;

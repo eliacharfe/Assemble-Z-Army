@@ -7,7 +7,7 @@ public class BowAttack : Attacker
 {
     [Header("Projectile Settings")]
     [SerializeField] private GameObject arrowPrefab = null;
-    [SerializeField] private float arrowSpeed = 1f;
+    //[SerializeField] private float arrowSpeed = 1f;
 
     [SerializeField] GameObject shootStartPoint;
 

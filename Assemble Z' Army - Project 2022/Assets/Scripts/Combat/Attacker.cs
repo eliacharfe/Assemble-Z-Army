@@ -13,7 +13,7 @@ public abstract class Attacker : MonoBehaviour
     [Header("Attack Settings")]
     [SerializeField] private float attackTime = 1f;
     [SerializeField] private float range = 1f;
-    [SerializeField] protected int damage = 5;
+    [SerializeField] protected float damage = 5f;
 
     private float time = 0;
 
@@ -21,7 +21,7 @@ public abstract class Attacker : MonoBehaviour
     private void Start()
     {
         attackTime = GetComponent<Unit>().SpeedAttack.BaseValue;
-        Debug.Log(attackTime);
+        damage = GetComponent<Unit>().Attack.BaseValue;
     }
 
     private void Update()

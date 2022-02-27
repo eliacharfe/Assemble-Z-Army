@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 {
     [Header("Projectile Settings")]
     [SerializeField] private int damageToDeal = 20;
-    [SerializeField] private float destroyAfterSeconds = 5;
+    //[SerializeField] private float destroyAfterSeconds = 5;
 
     public Vector3 rotationCenter, targetPosition, archerPosition;
     public float radius;
