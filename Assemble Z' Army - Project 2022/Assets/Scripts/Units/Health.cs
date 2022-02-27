@@ -9,7 +9,7 @@ public class Health : MonoBehaviour // NetworkBehavior
     [SerializeField] private int maxHealth = 100;
 
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
-    private float currHealth;
+    public float currHealth;
 
     // public event Action ServerOnDie;
 

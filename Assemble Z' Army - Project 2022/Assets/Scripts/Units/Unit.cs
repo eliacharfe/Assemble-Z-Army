@@ -238,24 +238,33 @@ public class Unit : MonoBehaviour
         return Color.green;
     }
 
+
+    //--------------
+    public void StopHeal()
+    {
+       myAnimator.SetBool("isHealing", false);
+    }
+
     //-------------------
     private void InitStats(Units id)
     {
         switch (id)
         {
+
+
             case Units.SWORDMAN:
                 {
                     Speed.BaseValue = agent.speed = 30f;
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 10f;
-                    SpeedAttack.BaseValue = 1f; 
+                    SpeedAttack.BaseValue = 1f;
                     break;
                 };
             case Units.ARCHER:
                 {
                     Speed.BaseValue = agent.speed = 30f;
-                    Attack.BaseValue = 10f;
+                    Attack.BaseValue = 13f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 50f;
                     SpeedAttack.BaseValue = 1f;
@@ -265,7 +274,7 @@ public class Unit : MonoBehaviour
                 {
                     Speed.BaseValue = agent.speed = 20f;
                     Attack.BaseValue = 20f;
-                    Defense.BaseValue = 15f;
+                    Defense.BaseValue = 11f;
                     ReachDistance.BaseValue = 15f;
                     SpeedAttack.BaseValue = 1f;
                     break;
@@ -283,8 +292,8 @@ public class Unit : MonoBehaviour
                 {
                     Speed.BaseValue = agent.speed = 60f;
                     Attack.BaseValue = 25f;
-                    Defense.BaseValue = 10f;
-                    ReachDistance.BaseValue = 15f;
+                    Defense.BaseValue = 9f;
+                    ReachDistance.BaseValue = 12f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 };
@@ -292,7 +301,7 @@ public class Unit : MonoBehaviour
                 {
                     Speed.BaseValue = agent.speed = 50f;
                     Attack.BaseValue = 30f;
-                    Defense.BaseValue = 20f;
+                    Defense.BaseValue = 12f;
                     ReachDistance.BaseValue = 15f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
@@ -311,7 +320,7 @@ public class Unit : MonoBehaviour
                     Speed.BaseValue = agent.speed = 25f;
                     Attack.BaseValue = 5f;
                     Defense.BaseValue = 0f;
-                    ReachDistance.BaseValue = 5f;
+                    ReachDistance.BaseValue = 10f;
                     SpeedAttack.BaseValue = 2f;
                     break;
                 };
@@ -329,7 +338,7 @@ public class Unit : MonoBehaviour
                     Speed.BaseValue = agent.speed = 20f;
                     Attack.BaseValue = 10f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 20f;
+                    ReachDistance.BaseValue = 15f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 }
@@ -338,7 +347,7 @@ public class Unit : MonoBehaviour
                     Speed.BaseValue = agent.speed = 15f;
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 10f;
-                    ReachDistance.BaseValue = 25f;
+                    ReachDistance.BaseValue = 20f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 }
@@ -355,7 +364,7 @@ public class Unit : MonoBehaviour
                 {
                     Speed.BaseValue = agent.speed = 50f;
                     Attack.BaseValue = 25f;
-                    Defense.BaseValue = 20f;
+                    Defense.BaseValue = 15f;
                     ReachDistance.BaseValue = 25f;
                     SpeedAttack.BaseValue = 2f;
                     break;

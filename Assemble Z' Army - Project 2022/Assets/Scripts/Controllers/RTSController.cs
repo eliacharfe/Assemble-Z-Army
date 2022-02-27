@@ -82,6 +82,15 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
+            if (unit.id == Macros.Units.HEALER)
+            {
+                if(targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                {
+                    unit.GetComponent<Animator>().SetBool("isHealing", true);
+                    targetable.Heal();
+                }
+            }
+
             if (unit.id != Macros.Units.WORKER)
             {
                 if(targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)

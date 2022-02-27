@@ -17,4 +17,9 @@ public class Targetable : MonoBehaviour
         return teamNumber;
     }
 
+    public void Heal()
+    {
+        GetComponent<Health>().currHealth = 100f;
+        GetComponent<HealthDisplay>().HandleHealthUpdated(100, 100);
+    }
 }
