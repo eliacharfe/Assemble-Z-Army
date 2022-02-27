@@ -98,8 +98,9 @@ MonoBehaviour:
   playerCameraTransform: {fileID: 2314966873016920755}
   speed: 40
   screenBorderThikeness: 10
-  screenXLimits: {x: -45, y: 45}
-  screenZLimits: {x: -55, y: 35}
+  screenXLimits: {x: -100, y: 100}
+  screenZLimits: {x: -100, y: 100}
+  confinerBound: 100
   gameObj: {fileID: 0}
   light: {fileID: 0}
 --- !u!1 &5733446734606861208

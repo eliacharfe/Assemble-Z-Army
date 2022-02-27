@@ -14,6 +14,7 @@ public class CameraInputSystem : NetworkBehaviour
     [SerializeField] private float screenBorderThikeness = 10f;
     [SerializeField] private Vector2 screenXLimits = Vector2.zero;
     [SerializeField] private Vector2 screenZLimits = Vector2.zero;
+    [SerializeField] private float confinerBound = 100;
 
     private Controls controls;
     private Vector2 prevInput;
@@ -31,9 +32,13 @@ public class CameraInputSystem : NetworkBehaviour
     public override void OnStartAuthority()
     {
 
-       // startCameraPos = transform.position;
-       // minCam = new Vector3(startCameraPos.x - 100, startCameraPos.y - 100, transform.position.z);
-       // maxCam = new Vector3(startCameraPos.x + 100, startCameraPos.y + 100, transform.position.z);
+        startCameraPos = playerCameraTransform.position;
+        screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
+        screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
+
+        print("X limits values : " + screenXLimits);
+        print("Z limits values : " + screenZLimits);
+        print("Intial value given : " + startCameraPos);
 
         playerCameraTransform.gameObject.SetActive(true);
 
@@ -93,11 +98,13 @@ public class CameraInputSystem : NetworkBehaviour
 
         pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
 
+        pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
+        pos.y = Mathf.Clamp(pos.y, screenZLimits.x, screenZLimits.y);
+
         playerCameraTransform.position = pos;
         /*
         playerCameraTransform.position = new Vector3(
-        Mathf.Clamp(playerCameraTransform.position.x, minCam.x, maxCam.x),
-        Mathf.Clamp(playerCameraTransform.position.y, minCam.y, maxCam.y),
+
         Mathf.Clamp(playerCameraTransform.position.z, minCam.z, maxCam.z)); // boundies to camera
         */
     }
