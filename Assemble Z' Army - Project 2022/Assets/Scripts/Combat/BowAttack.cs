@@ -37,10 +37,10 @@ public class BowAttack : Attacker
         Vector2 dir = new Vector2(targetPos.x, targetPos.y);
         float angle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg;
 
-        Vector3 startPosArrow;
-        if (archerPos.x < targPos.x)
-            startPosArrow = new Vector3(archerPos.x + 12f, archerPos.y, archerPos.z);
-        else startPosArrow = new Vector3(archerPos.x - 12f, archerPos.y, archerPos.z);
+        // Vector3 startPosArrow;
+        // if (archerPos.x < targPos.x)
+        //     startPosArrow = new Vector3(archerPos.x + 12f, archerPos.y, archerPos.z);
+        // else startPosArrow = new Vector3(archerPos.x - 12f, archerPos.y, archerPos.z);
 
         shootStartPoint.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
@@ -51,11 +51,11 @@ public class BowAttack : Attacker
 
         FlipSideSprite(targPos);
 
-        Vector3 middle = new Vector3((startPosArrow.x + targPos.x) / 2,
-                                     (startPosArrow.y + targPos.y) / 2, 0f);
+        Vector3 middle = new Vector3((shootStartPoint.transform.position.x + targPos.x) / 2,
+                                     (shootStartPoint.transform.position.y + targPos.y) / 2, 0f);
 
         arrow.GetComponent<Projectile>().rotationCenter = middle;
-        arrow.GetComponent<Projectile>().radius = Vector3.Distance(startPosArrow, targPos) / 2f; ;
+        arrow.GetComponent<Projectile>().radius = Vector3.Distance(shootStartPoint.transform.position, targPos) / 2f; ;
         arrow.GetComponent<Projectile>().teamNumber = gameObject.GetComponent<Targetable>().teamNumber;
         arrow.GetComponent<Projectile>().targetPosition = targPos;
         arrow.GetComponent<Projectile>().archerPosition = archerPos;
