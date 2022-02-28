@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Mana : MonoBehaviour
 {
-    [SerializeField] private int maxMana = 100;
+    [SerializeField] ParticleSystem manaEffect;
+    [SerializeField] GameObject healingPointStart;
 
+    [SerializeField] private int maxMana = 100;
     public float currMana;
 
     private float time;
@@ -16,6 +19,11 @@ public class Mana : MonoBehaviour
     public bool canHeal;
     private bool isRegenerating;
 
+    private Image manaBarImage;
+    Color BaseColor;
+
+    public event Action<int, int> ClientOnManaUpdate;
+
     private void Start()
     {
         currMana = maxMana;
@@ -23,6 +31,8 @@ public class Mana : MonoBehaviour
         regenerateTime = 5f;
         canHeal = true;
         isRegenerating = false;
+        manaBarImage = GetComponent<ManaDisplay>().manaBarImage;
+        BaseColor = manaBarImage.color;
     }
 
     // To Do: mana timer regeration
@@ -39,21 +49,32 @@ public class Mana : MonoBehaviour
             {
                 canHeal = false;
                 time += Time.deltaTime;
-                currMana = time * 20;
-                GetComponent<ManaDisplay>().HandleHealthUpdated((int)currMana, 100);
+                currMana = time * 20f;
+                //GetComponent<ManaDisplay>().HandleManaUpdated((int)currMana, 100);
+                manaBarImage.color = Color.yellow;
+                ClientOnManaUpdate?.Invoke((int)currMana, 100);
             }
             else
             {
                 time = 0;
                 canHeal = true;
-                currMana = 100f;
-                GetComponent<ManaDisplay>().HandleHealthUpdated((int)currMana, 100);
                 isRegenerating = false;
+                currMana = 100f;
+               // GetComponent<ManaDisplay>().HandleManaUpdated((int)currMana, 100);
+                manaBarImage.color = BaseColor;
+                ClientOnManaUpdate?.Invoke((int)currMana, 100);
             }
         }
 
-        // }
+    }
 
+    public void PlayManaEffect()
+    {
+        if (manaEffect != null)
+        {
+            ParticleSystem instance = Instantiate(manaEffect, healingPointStart.transform.position, Quaternion.identity);
+            Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
+        }
     }
 
 }

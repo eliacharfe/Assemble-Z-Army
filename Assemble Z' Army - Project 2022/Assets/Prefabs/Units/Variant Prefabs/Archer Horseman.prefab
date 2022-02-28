@@ -2550,6 +2550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
+  currHealth: 0
 --- !u!195 &6479335012518545268
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2643,7 +2645,6 @@ MonoBehaviour:
   range: 50
   damage: 5
   arrowPrefab: {fileID: 4631532840544127888, guid: a6f22b08044b9624fb22948ad5f1cab8, type: 3}
-  arrowSpeed: 15
   shootStartPoint: {fileID: 5267659290449378178}
 --- !u!1 &4050596254586091433
 GameObject:
@@ -12264,7 +12265,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6102529227079400968}
-  m_LocalRotation: {x: -0, y: 0.008726558, z: -0, w: 0.999962}
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
   m_LocalPosition: {x: 0, y: 0, z: 5.2}
   m_LocalScale: {x: -15, y: 15, z: 1}
   m_Children:

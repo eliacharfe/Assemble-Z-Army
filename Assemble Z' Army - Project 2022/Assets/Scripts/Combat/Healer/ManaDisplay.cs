@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class ManaDisplay : MonoBehaviour
 {
-    [SerializeField] private Health mana = null;
+    [SerializeField] private Mana mana = null;
     [SerializeField] private GameObject manaBar = null;
-    [SerializeField] private Image manaBarImage = null;
+    [SerializeField] public Image manaBarImage = null;
 
 
     private void Awake()
     {
         manaBar.SetActive(true);
-        mana.ClientOnHealthUpdate += HandleHealthUpdated;
+        mana.ClientOnManaUpdate += HandleManaUpdated;
     }
 
     private void OnDestroy()
     {
-        mana.ClientOnHealthUpdate -= HandleHealthUpdated;
+        mana.ClientOnManaUpdate -= HandleManaUpdated;
     }
 
     private void OnMouseEnter()
@@ -31,8 +31,8 @@ public class ManaDisplay : MonoBehaviour
         //healthBar.SetActive(false);
     }
 
-    public void HandleHealthUpdated(int currHealth, int maxHealth)
+    public void HandleManaUpdated(int currMana, int maxMana)
     {
-        manaBarImage.fillAmount = (float)currHealth / maxHealth;
+        manaBarImage.fillAmount = (float)currMana / maxMana;
     }
 }

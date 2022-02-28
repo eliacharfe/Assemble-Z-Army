@@ -117,6 +117,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -3618802667364733500, guid: 2a3a0fb6512cb0b49bf57fee36051d50, type: 3}
+    - target: {fileID: 4318553057515879647, guid: 77fa395dc80436b49a770336aac049ac, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
     - target: {fileID: 5254684668392599769, guid: 77fa395dc80436b49a770336aac049ac, type: 3}
       propertyPath: m_Sprite
       value: 

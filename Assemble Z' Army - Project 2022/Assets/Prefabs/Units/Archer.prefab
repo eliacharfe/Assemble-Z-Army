@@ -1283,7 +1283,6 @@ MonoBehaviour:
   range: 50
   damage: 5
   arrowPrefab: {fileID: 4631532840544127888, guid: a6f22b08044b9624fb22948ad5f1cab8, type: 3}
-  arrowSpeed: 15
   shootStartPoint: {fileID: 8698382259529515473}
 --- !u!114 &8838922672579629382
 MonoBehaviour:
@@ -1310,6 +1309,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
+  currHealth: 0
 --- !u!114 &2567698320729567831
 MonoBehaviour:
   m_ObjectHideFlags: 0

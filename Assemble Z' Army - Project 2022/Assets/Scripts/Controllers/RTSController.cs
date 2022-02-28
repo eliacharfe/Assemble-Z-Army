@@ -90,7 +90,9 @@ public class RTSController : MonoBehaviour
                         unit.GetComponent<Animator>().SetBool("isHealing", true);
                         targetable.Heal();
                         unit.GetComponent<Mana>().currMana -= 35f;
-                        unit.GetComponent<ManaDisplay>().HandleHealthUpdated((int)unit.GetComponent<Mana>().currMana, 100);
+                        unit.GetComponent<ManaDisplay>().HandleManaUpdated((int)unit.GetComponent<Mana>().currMana, 100);
+                        unit.GetComponent<Mana>().PlayManaEffect();
+                        Debug.Log("healer position: " + unit.transform.position);
                     }
                 }
             }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 291065876}
   - component: {fileID: 291065875}
   m_Layer: 9
-  m_Name: ManaBar_Health
+  m_Name: ManaBar_Mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.1, y: 1.06}
+  m_AnchoredPosition: {x: -0.1, y: 0.83}
   m_SizeDelta: {x: 1, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1250526890
@@ -244,7 +244,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.1, y: 0.81421715}
+  m_AnchoredPosition: {x: -0.1, y: 1.04}
   m_SizeDelta: {x: 1, y: 0.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1549140610
@@ -268,6 +268,36 @@ Canvas:
   m_SortingLayerID: 74712451
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1661158095
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1661158096}
+  m_Layer: 0
+  m_Name: HealingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1661158096
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661158095}
+  m_LocalRotation: {x: -0, y: 0.008726557, z: 0, w: 0.9999619}
+  m_LocalPosition: {x: -0.47, y: 0.36, z: 0.1}
+  m_LocalScale: {x: -0.066685624, y: 0.06666667, z: 0.9957538}
+  m_Children: []
+  m_Father: {fileID: 7263171530354994623}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1667852536
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,6 +3270,7 @@ Transform:
   - {fileID: 1667852537}
   - {fileID: 1549140609}
   - {fileID: 1250526889}
+  - {fileID: 1661158096}
   m_Father: {fileID: 194420679837925453}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3348,6 +3379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
   currHealth: 0
 --- !u!195 &282371936367487678
 NavMeshAgent:
@@ -3464,7 +3496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0c7cbf7feadd94cb35d180722dfd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mana: {fileID: 3941107258277545204}
+  mana: {fileID: 1495240764}
   manaBar: {fileID: 1250526888}
   manaBarImage: {fileID: 291065875}
 --- !u!114 &1495240764
@@ -3479,6 +3511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3df534dae68d544adc8ad36a8e01d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manaEffect: {fileID: 5741338418869833594, guid: b143720ba25efeb4abeaa53b25bc480e, type: 3}
+  healingPointStart: {fileID: 1661158095}
   maxMana: 100
   currMana: 0
   canHeal: 0

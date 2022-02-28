@@ -4062,6 +4062,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
+  currHealth: 0
 --- !u!195 &1220832746549869013
 NavMeshAgent:
   m_ObjectHideFlags: 0

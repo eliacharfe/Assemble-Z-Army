@@ -250,8 +250,6 @@ public class Unit : MonoBehaviour
     {
         switch (id)
         {
-
-
             case Units.SWORDMAN:
                 {
                     Speed.BaseValue = agent.speed = 30f;
@@ -267,16 +265,16 @@ public class Unit : MonoBehaviour
                     Attack.BaseValue = 13f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 50f;
-                    SpeedAttack.BaseValue = 1f;
+                    SpeedAttack.BaseValue = 1.4f;
                     break;
                 };
 
                   case Units.CROSSBOW:
                 {
                     Speed.BaseValue = agent.speed = 30f;
-                    Attack.BaseValue = 13f;
+                    Attack.BaseValue = 12f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 50f;
+                    ReachDistance.BaseValue = 40f;
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
@@ -286,7 +284,7 @@ public class Unit : MonoBehaviour
                     Attack.BaseValue = 20f;
                     Defense.BaseValue = 11f;
                     ReachDistance.BaseValue = 15f;
-                    SpeedAttack.BaseValue = 1f;
+                    SpeedAttack.BaseValue = 1.4f;
                     break;
                 };
             case Units.SIMPLE_HORSE:
@@ -313,7 +311,7 @@ public class Unit : MonoBehaviour
                     Attack.BaseValue = 30f;
                     Defense.BaseValue = 12f;
                     ReachDistance.BaseValue = 15f;
-                    SpeedAttack.BaseValue = 1.5f;
+                    SpeedAttack.BaseValue = 1.7f;
                     break;
                 };
             case Units.ARCHER_HORSE:
@@ -322,7 +320,7 @@ public class Unit : MonoBehaviour
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 10f;
                     ReachDistance.BaseValue = 50f;
-                    SpeedAttack.BaseValue = 1f;
+                    SpeedAttack.BaseValue = 1.4f;
                     break;
                 };
             case Units.WORKER:
@@ -394,7 +392,7 @@ public class Unit : MonoBehaviour
                     Attack.BaseValue = 5f;
                     Defense.BaseValue = 0f;
                     ReachDistance.BaseValue = 10f;
-                    SpeedAttack.BaseValue = 1f;
+                    SpeedAttack.BaseValue = 1.5f;
                     break;
                 };
         }
