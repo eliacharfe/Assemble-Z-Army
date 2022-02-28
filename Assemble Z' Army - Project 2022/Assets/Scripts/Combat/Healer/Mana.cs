@@ -14,6 +14,7 @@ public class Mana : MonoBehaviour
     private float regenerateTime;
 
     public bool canHeal;
+    private bool isRegenerating;
 
     private void Start()
     {
@@ -21,17 +22,25 @@ public class Mana : MonoBehaviour
         time = 0;
         regenerateTime = 5f;
         canHeal = true;
+        isRegenerating = false;
     }
 
     // To Do: mana timer regeration
     private void Update()
     {
-        if (currMana <= 0)
+        if (currMana <= 0 && !isRegenerating)
+        {
+            isRegenerating = true;
+        }
+
+        if (isRegenerating)
         {
             if (time < regenerateTime)
             {
                 canHeal = false;
                 time += Time.deltaTime;
+                currMana = time * 20;
+                GetComponent<ManaDisplay>().HandleHealthUpdated((int)currMana, 100);
             }
             else
             {
@@ -39,8 +48,11 @@ public class Mana : MonoBehaviour
                 canHeal = true;
                 currMana = 100f;
                 GetComponent<ManaDisplay>().HandleHealthUpdated((int)currMana, 100);
+                isRegenerating = false;
             }
         }
+
+        // }
 
     }
 
