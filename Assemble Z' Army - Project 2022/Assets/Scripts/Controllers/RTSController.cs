@@ -71,17 +71,17 @@ public class RTSController : MonoBehaviour
             SendToRecruit(building,hit);
 
         else if(targetable)
-            AttackUnit(targetable, hit);
+            AttackUnit(targetable);
 
         else MoveUnits();
     }
 
     //--------------------------------------
-    private void AttackUnit(Targetable targetable, RaycastHit2D hit)
+    private void AttackUnit(Targetable targetable)
     {
-
         foreach (Unit unit in selectedUnits)
         {
+        
             if (unit.id == Macros.Units.HEALER)
             {
                 if(targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
@@ -97,6 +97,10 @@ public class RTSController : MonoBehaviour
                 {
                     return;
                 }
+
+            //         if (unit.id == Macros.Units.CROSSBOW){
+            //     Debug.Log("CB targ= " + targetable);
+            // }
 
                 unit.GetComponent<Attacker>().SetTargetable(targetable);
             }

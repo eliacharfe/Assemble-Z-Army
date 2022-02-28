@@ -10,7 +10,7 @@ public abstract class Attacker : MonoBehaviour
 
     protected Targetable target = null;
 
-        [Header("Attack Settings")]
+    [Header("Attack Settings")]
     // [SerializeField] private float attackTime = 1f;
     // [SerializeField] private float range = 1f;
     // [SerializeField] protected float damage = 5f;
@@ -29,22 +29,24 @@ public abstract class Attacker : MonoBehaviour
 
     private void Update()
     {
-        if (!target) {
-            if(isAttacking)
+        if (!target)
+        {
+            if (isAttacking)
             {
                 StopAttack();
                 isAttacking = false;
             }
-            return; 
+            return;
         }
-
-        if(Vector2.Distance(gameObject.transform.position,this.target.transform.position) < range)
+        
+        if (Vector2.Distance(gameObject.transform.position, this.target.transform.position) < range)
         {
             GetComponent<Unit>().StopMove();
             if (time < attackTime)
             {
                 time += Time.deltaTime;
-            }else
+            }
+            else
             {
                 time = 0;
                 isAttacking = true;

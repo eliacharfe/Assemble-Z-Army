@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BowAttack : Attacker
+public class CrossbowAttack : Attacker
 {
-    [Header("Projectile Settings")]
+    [Header("CB Projectile Settings")]
     [SerializeField] private GameObject arrowPrefab = null;
-    //[SerializeField] private float arrowSpeed = 1f;
+    [SerializeField] private float arrowSpeed = 20f;
 
     [SerializeField] GameObject shootStartPoint;
 
@@ -18,13 +17,13 @@ public class BowAttack : Attacker
 
     public override void Attack()
     {
-        GetComponent<Animator>().SetBool("isArcherAttacking", true); // the animation will call realseArrow func  
+        GetComponent<Animator>().SetBool("isArcherAttacking", true); // the animation will call realseArrow func 
     }
 
     public void realeseArrow()
     {
-       if (!target)
-         return;
+        if (!target)
+            return;
 
         Vector3 targetPos = target.transform.position;
         Vector3 targPos = target.transform.position;
@@ -45,18 +44,12 @@ public class BowAttack : Attacker
 
         FlipSideSprite(targPos);
 
-        Vector3 middle = new Vector3((shootStartPoint.transform.position.x + targPos.x) / 2,
-                                     (shootStartPoint.transform.position.y + targPos.y) / 2, 0f);
+        arrow.GetComponent<CBProjectile>().teamNum = gameObject.GetComponent<Targetable>().teamNumber;
+        arrow.GetComponent<CBProjectile>().damage = GetComponent<Unit>().Attack.BaseValue;
 
-        arrow.GetComponent<Projectile>().rotationCenter = middle;
-        arrow.GetComponent<Projectile>().radius = Vector3.Distance(shootStartPoint.transform.position, targPos) / 2f; ;
-        arrow.GetComponent<Projectile>().teamNumber = gameObject.GetComponent<Targetable>().teamNumber;
-        arrow.GetComponent<Projectile>().targetPosition = targPos;
-        arrow.GetComponent<Projectile>().archerPosition = archerPos;
-
-        arrow.GetComponent<Projectile>().damage = GetComponent<Unit>().Attack.BaseValue;
-
+        arrow.GetComponent<Rigidbody2D>().velocity = dir.normalized * arrowSpeed;
     }
+
 
 
     private void FlipSideSprite(Vector3 target)
@@ -72,5 +65,4 @@ public class BowAttack : Attacker
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
         }
     }
-
 }

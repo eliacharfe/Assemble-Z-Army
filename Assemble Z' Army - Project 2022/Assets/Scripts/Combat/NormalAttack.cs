@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordAttack : Attacker
+public class NormalAttack : Attacker
 {
 
     public override void StopAttack()

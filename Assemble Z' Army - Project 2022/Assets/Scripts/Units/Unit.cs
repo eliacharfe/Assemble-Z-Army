@@ -270,6 +270,16 @@ public class Unit : MonoBehaviour
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
+
+                  case Units.CROSSBOW:
+                {
+                    Speed.BaseValue = agent.speed = 30f;
+                    Attack.BaseValue = 13f;
+                    Defense.BaseValue = 5f;
+                    ReachDistance.BaseValue = 50f;
+                    SpeedAttack.BaseValue = 1f;
+                    break;
+                };
             case Units.SWORD_KNIGHT:
                 {
                     Speed.BaseValue = agent.speed = 20f;

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Projectile : MonoBehaviour
 {
     [Header("Projectile Settings")]
-    [SerializeField] private int damageToDeal = 20;
+    //[SerializeField] private int damageToDeal = 20;
     //[SerializeField] private float destroyAfterSeconds = 5;
 
     public Vector3 rotationCenter, targetPosition, archerPosition;
@@ -14,14 +14,14 @@ public class Projectile : MonoBehaviour
     private float posX, posY, angle, angleEnd;
     public int teamNumber;
 
+    public float damage;
+
     Transform targetTransform;
     Quaternion archerRotation = Quaternion.Euler(0, 0, 0);
 
     [SerializeField] private float AngularSpeed;
 
     private Vector3 arrowPos;
-
-    UnitMovement move;
 
     private void Start()
     {
@@ -95,7 +95,7 @@ public class Projectile : MonoBehaviour
 
         if (target && collisionTeamNumber != teamNumber)
         {
-            target.DealDamage(damageToDeal);
+            target.DealDamage(damage);
             Destroy(gameObject);
         }
     }
