@@ -1921,6 +1921,41 @@ Transform:
   m_Father: {fileID: 1924756271}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1287115626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287115627}
+  m_Layer: 5
+  m_Name: hitPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1287115627
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287115626}
+  m_LocalRotation: {x: -0, y: -0.0000012172386, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -6.0466785}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8155147984694801062}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.96}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1294519777
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,6 +4098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
+  hitPoint: {fileID: 1287115626}
   currHealth: 0
 --- !u!195 &1220832746549869013
 NavMeshAgent:
@@ -4978,6 +5014,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 858da6f48adb73a429c09d1ae51b777d, type: 3}
+--- !u!1 &8155147984694801057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1113570507, guid: 858da6f48adb73a429c09d1ae51b777d, type: 3}
+  m_PrefabInstance: {fileID: 8155147983582023274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8155147984694801062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1113570508, guid: 858da6f48adb73a429c09d1ae51b777d, type: 3}
@@ -4986,10 +5027,5 @@ Transform:
 --- !u!4 &3411871119685226927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6806488621435510725, guid: 858da6f48adb73a429c09d1ae51b777d, type: 3}
-  m_PrefabInstance: {fileID: 8155147983582023274}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8155147984694801057 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1113570507, guid: 858da6f48adb73a429c09d1ae51b777d, type: 3}
   m_PrefabInstance: {fileID: 8155147983582023274}
   m_PrefabAsset: {fileID: 0}

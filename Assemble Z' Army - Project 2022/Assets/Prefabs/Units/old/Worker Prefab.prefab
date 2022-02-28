@@ -774,6 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   hitEffect: {fileID: 0}
+  hitPoint: {fileID: 0}
   currHealth: 0
 --- !u!114 &3864184547338987839
 MonoBehaviour:

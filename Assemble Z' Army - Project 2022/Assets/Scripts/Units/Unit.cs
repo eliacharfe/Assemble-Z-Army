@@ -244,6 +244,11 @@ public class Unit : MonoBehaviour
     {
        myAnimator.SetBool("isHealing", false);
     }
+    //----------------
+    public void StopConfusion()
+    {
+         myAnimator.SetBool("gotHit", false);
+    }
 
     //-------------------
     private void InitStats(Units id)

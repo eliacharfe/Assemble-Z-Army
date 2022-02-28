@@ -8,6 +8,7 @@ public class Health : MonoBehaviour // NetworkBehavior
 {
     [SerializeField] private int maxHealth = 100;
     [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] GameObject hitPoint;
 
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
     public float currHealth;
@@ -46,6 +47,7 @@ public class Health : MonoBehaviour // NetworkBehavior
         {
             currHealth = Mathf.Max(currHealth - damageAmount + unit.Defense.BaseValue, 0);
             PlayHitEffect();
+            GetComponent<Animator>().SetBool("gotHit", true);
         }
 
         ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
@@ -58,10 +60,10 @@ public class Health : MonoBehaviour // NetworkBehavior
 
     public void PlayHitEffect()
     {
-        Vector3 position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
+       // Vector3 position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
         if (hitEffect != null)
         {
-            ParticleSystem instance = Instantiate(hitEffect, position , Quaternion.identity);
+            ParticleSystem instance = Instantiate(hitEffect, hitPoint.transform.position , Quaternion.identity);
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
     }
