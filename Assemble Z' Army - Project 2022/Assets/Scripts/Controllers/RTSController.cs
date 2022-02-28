@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class RTSController : MonoBehaviour
 {
     private Camera mainCamera;
-    private List < Unit > selectedUnits;
+    private List<Unit> selectedUnits;
     private Vector3 startPos;
     private Vector2 startPosition;
 
@@ -57,7 +57,7 @@ public class RTSController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-        if(hit.collider)
+        if (hit.collider)
         {
             buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
             building = hit.collider.gameObject.GetComponent<Building>();
@@ -68,9 +68,9 @@ public class RTSController : MonoBehaviour
             SendToBuild(buildingToConstruct, hit);
 
         else if (building && building.enabled)
-            SendToRecruit(building,hit);
+            SendToRecruit(building, hit);
 
-        else if(targetable)
+        else if (targetable)
             AttackUnit(targetable);
 
         else MoveUnits();
@@ -81,26 +81,26 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
-        
             if (unit.id == Macros.Units.HEALER)
             {
-                if(targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                if (targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
                 {
-                    unit.GetComponent<Animator>().SetBool("isHealing", true);
-                    targetable.Heal();
+                    if (unit.GetComponent<Mana>().canHeal)
+                    {
+                        unit.GetComponent<Animator>().SetBool("isHealing", true);
+                        targetable.Heal();
+                        unit.GetComponent<Mana>().currMana -= 35f;
+                        unit.GetComponent<ManaDisplay>().HandleHealthUpdated((int)unit.GetComponent<Mana>().currMana, 100);
+                    }
                 }
             }
 
             if (unit.id != Macros.Units.WORKER)
             {
-                if(targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                if (targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
                 {
                     return;
                 }
-
-            //         if (unit.id == Macros.Units.CROSSBOW){
-            //     Debug.Log("CB targ= " + targetable);
-            // }
 
                 unit.GetComponent<Attacker>().SetTargetable(targetable);
             }
@@ -133,15 +133,15 @@ public class RTSController : MonoBehaviour
                 unit.MoveTo(hit.point);
             }
         }
-        
+
     }
 
 
     // Move units to position clicked on.
     private void MoveUnits()
-      {
+    {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
-        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {10, 20, 30}, new int[] {5, 10, 20});
+        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] { 10, 20, 30 }, new int[] { 5, 10, 20 });
 
         int targetPosIndex = 0;
         foreach (Unit unit in selectedUnits)
@@ -172,12 +172,13 @@ public class RTSController : MonoBehaviour
     // Get positions around the point given.
     private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
     {
-           List<Vector3> posList = new List<Vector3>();
-           posList.Add(startPos);
-           for(int i = 0; i < ringPosCountArr.Length; i++){
-               posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
-           }
-           return posList;
+        List<Vector3> posList = new List<Vector3>();
+        posList.Add(startPos);
+        for (int i = 0; i < ringPosCountArr.Length; i++)
+        {
+            posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
+        }
+        return posList;
     }
 
     //---------------------------------------------
