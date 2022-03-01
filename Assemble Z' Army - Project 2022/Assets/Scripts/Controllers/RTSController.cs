@@ -13,12 +13,15 @@ public class RTSController : MonoBehaviour
 
     [SerializeField] private Transform selectionAreaTransform;
 
+    AudioPlayer audioPlayer;
+
     private void Awake()
     {
         selectedUnits = new List<Unit>();
         selectionAreaTransform.gameObject.SetActive(false);
         mainCamera = Camera.main;
         Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
     //------------------------
     private void Update()
@@ -87,12 +90,12 @@ public class RTSController : MonoBehaviour
                 {
                     if (unit.GetComponent<Mana>().canHeal)
                     {
+                        audioPlayer.PlayHealingClip();
                         unit.GetComponent<Animator>().SetBool("isHealing", true);
                         targetable.Heal();
                         unit.GetComponent<Mana>().currMana -= 35f;
                         unit.GetComponent<ManaDisplay>().HandleManaUpdated((int)unit.GetComponent<Mana>().currMana, 100);
                         unit.GetComponent<Mana>().PlayManaEffect();
-                        Debug.Log("healer position: " + unit.transform.position);
                     }
                 }
             }

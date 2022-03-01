@@ -11,6 +11,13 @@ public class BowAttack : Attacker
 
     [SerializeField] GameObject shootStartPoint;
 
+    AudioPlayer audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
     public override void StopAttack()
     {
         GetComponent<Animator>().SetBool("isArcherAttacking", false);
@@ -23,8 +30,8 @@ public class BowAttack : Attacker
 
     public void realeseArrow()
     {
-       if (!target)
-         return;
+        if (!target)
+            return;
 
         Vector3 targetPos = target.transform.position;
         Vector3 targPos = target.transform.position;
@@ -42,6 +49,8 @@ public class BowAttack : Attacker
         GameObject arrow = Instantiate(arrowPrefab, shootStartPoint.transform.position, shootStartPoint.transform.rotation);
         Physics2D.IgnoreCollision(arrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        audioPlayer.PlayShootingClip();
 
         FlipSideSprite(targPos);
 

@@ -42,6 +42,8 @@ public class Unit : MonoBehaviour
 
     // StatModifier mod1, mod2;
 
+    AudioPlayer audioPlayer;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -57,6 +59,8 @@ public class Unit : MonoBehaviour
 
         selectable = true;
         isDead = false;
+
+        audioPlayer = FindObjectOfType<AudioPlayer>();
 
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -188,6 +192,7 @@ public class Unit : MonoBehaviour
     {
         isDead = true;
         myAnimator.SetBool("isDead", true);
+
     }
     //----------------------------
     public void ContinutMove()
@@ -242,12 +247,12 @@ public class Unit : MonoBehaviour
     //--------------
     public void StopHeal()
     {
-       myAnimator.SetBool("isHealing", false);
+        myAnimator.SetBool("isHealing", false);
     }
     //----------------
     public void StopConfusion()
     {
-         myAnimator.SetBool("gotHit", false);
+        myAnimator.SetBool("gotHit", false);
     }
 
     //-------------------
@@ -274,7 +279,7 @@ public class Unit : MonoBehaviour
                     break;
                 };
 
-                  case Units.CROSSBOW:
+            case Units.CROSSBOW:
                 {
                     Speed.BaseValue = agent.speed = 30f;
                     Attack.BaseValue = 12f;

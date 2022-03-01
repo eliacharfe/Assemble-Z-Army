@@ -6,9 +6,16 @@ public class CrossbowAttack : Attacker
 {
     [Header("CB Projectile Settings")]
     [SerializeField] private GameObject arrowPrefab = null;
-    [SerializeField] private float arrowSpeed = 20f;
+    [SerializeField] private float arrowSpeed = 30f;
 
     [SerializeField] GameObject shootStartPoint;
+
+    AudioPlayer audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
 
     public override void StopAttack()
     {
@@ -41,6 +48,8 @@ public class CrossbowAttack : Attacker
         GameObject arrow = Instantiate(arrowPrefab, shootStartPoint.transform.position, shootStartPoint.transform.rotation);
         Physics2D.IgnoreCollision(arrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        audioPlayer.PlayShootingClip();
 
         FlipSideSprite(targPos);
 

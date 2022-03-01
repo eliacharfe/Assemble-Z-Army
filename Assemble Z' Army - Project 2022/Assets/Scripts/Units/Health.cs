@@ -18,6 +18,13 @@ public class Health : MonoBehaviour // NetworkBehavior
     public event Action<int, int> ClientOnHealthUpdate;
     Unit unit;
 
+    AudioPlayer audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
     void Start()
     {
         unit = GetComponent<Unit>();
@@ -36,6 +43,7 @@ public class Health : MonoBehaviour // NetworkBehavior
     void Dead()
     {
         Destroy(gameObject);
+        audioPlayer.PlayDeathClip();
     }
 
     public void DealDamage(float damageAmount)
@@ -48,6 +56,8 @@ public class Health : MonoBehaviour // NetworkBehavior
             currHealth = Mathf.Max(currHealth - damageAmount + unit.Defense.BaseValue, 0);
             PlayHitEffect();
             GetComponent<Animator>().SetBool("gotHit", true);
+            if (currHealth > 0)
+               audioPlayer.PlayDamageClip();
         }
 
         ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
