@@ -154,6 +154,7 @@ public class Unit : MonoBehaviour
     public void StopAnimation()
     {
         myAnimator.SetBool("isRunning", false);
+
     }
     //----------------------------
     public void SetColorSelcted()
@@ -253,6 +254,16 @@ public class Unit : MonoBehaviour
     public void StopConfusion()
     {
         myAnimator.SetBool("gotHit", false);
+    }
+    //-------------
+    public void HorseGallop()
+    {
+        audioPlayer.PlayHorseGallopClip();
+    }
+    //---------------------------
+    public void StopHorseGallop()
+    {
+        audioPlayer.StopHorseGallopClip();
     }
 
     //-------------------

@@ -20,6 +20,19 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip deadClip;
     [SerializeField] [Range(0f, 1f)] float deadVolume = 1f;
 
+    [Header("Horse Gallop")]
+    [SerializeField] AudioClip horseGallopClip;
+    [SerializeField] [Range(0f, 1f)] float horseGallopVolume = 1f;
+
+    // [SerializeField]
+    // AudioSource myAudioSource;
+
+    //   void Start()
+    // {
+    //     myAudioSource = GetComponent<AudioSource>();
+     
+    // }
+
 
     public void PlayShootingClip()
     {
@@ -41,7 +54,15 @@ public class AudioPlayer : MonoBehaviour
         PlayClip(deadClip, deadVolume);
     }
 
+    public void PlayHorseGallopClip()
+    {
+        PlayClip(horseGallopClip, horseGallopVolume);
+    }
 
+    public void StopHorseGallopClip()
+    {
+      //GetComponent<AudioSource>().Stop();
+    }
 
     private void PlayClip(AudioClip clip, float volume)
     {
