@@ -716,6 +716,18 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7891732390367065903, guid: 2352b2bd8a6204c44b89960af4113bd2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 786270578}
+    - target: {fileID: 7891732390367065903, guid: 2352b2bd8a6204c44b89960af4113bd2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangePhase
+      objectReference: {fileID: 0}
+    - target: {fileID: 7891732390367065903, guid: 2352b2bd8a6204c44b89960af4113bd2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PhaseManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7987736257675602458, guid: 2352b2bd8a6204c44b89960af4113bd2, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -284.99994
@@ -839,7 +851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964868551}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 472.8, y: 355.59998, z: 0}
+  m_LocalPosition: {x: -2, y: 483, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.SceneManagement;
 
 public class RTSPlayer : NetworkBehaviour
 {
@@ -35,6 +36,8 @@ public class RTSPlayer : NetworkBehaviour
     public void SetCameraPosition(Vector3 pos)
     {
         cameraTransfornm.position = pos;
+
+        GetComponent<CameraInputSystem>().OnChangeMap();
     }
 
     #endregion
@@ -112,9 +115,9 @@ public class RTSPlayer : NetworkBehaviour
 
         if (NetworkServer.active) return;
 
-        DontDestroyOnLoad(gameObject);
-
         ((RtsNetworkManager)NetworkManager.singleton).players.Add(this);
+
+        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -130,6 +133,8 @@ public class RTSPlayer : NetworkBehaviour
 
         Unit.AuthortyOnUnitSpawned -= AuthortyHandleUnitSpawned;
         Unit.AuthortyOnUnitDeSpawned -= AuthortyHandleUnitDeSpawned;
+
+        SceneManager.LoadScene("Playground");
     }
 
 
@@ -174,12 +179,27 @@ public class RTSPlayer : NetworkBehaviour
         m_units.Add(unit);
     }
 
-    public void HideUnits()
+
+    public void ShowUnits(bool value)
     {
-        foreach(Unit unit in m_units)
+        foreach (Unit unit in m_units)
         {
-            unit.gameObject.SetActive(false);
+            unit.ReintilizeNavMesh();
+
+            unit.gameObject.SetActive(value);
+
             Debug.Log("Unit is now hidden");
+        }
+    }
+
+
+    public void SetUnitsPositions(Vector3 pos)
+    {
+        foreach (Unit unit in m_units)
+        {
+            unit.SetPostion(pos);
+
+            Debug.Log("Unit new position:" + pos);
         }
     }
 
@@ -189,7 +209,7 @@ public class RTSPlayer : NetworkBehaviour
 
 
 
-  
+
 
 
 }

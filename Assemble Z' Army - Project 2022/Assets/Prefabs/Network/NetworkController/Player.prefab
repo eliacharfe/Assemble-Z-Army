@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 839477805822477457}
   - component: {fileID: 4311631306903062891}
   - component: {fileID: 879520603341138646}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6159922295485907590}
   - component: {fileID: 3422091979884999090}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2314966873016920755}
   - component: {fileID: 1033901520396552464}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,6 +223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 859365072441089634}
     m_Modifications:
+    - target: {fileID: 5184584981534702115, guid: da7541b0eb405f04cb70bd700249d645, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 5184584981743693924, guid: da7541b0eb405f04cb70bd700249d645, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -270,6 +274,14 @@ PrefabInstance:
     - target: {fileID: 5184584981743693925, guid: da7541b0eb405f04cb70bd700249d645, type: 3}
       propertyPath: m_Name
       value: Selection Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184584981743693925, guid: da7541b0eb405f04cb70bd700249d645, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184584981743693925, guid: da7541b0eb405f04cb70bd700249d645, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da7541b0eb405f04cb70bd700249d645, type: 3}

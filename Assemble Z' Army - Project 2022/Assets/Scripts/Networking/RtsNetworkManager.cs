@@ -25,7 +25,6 @@ public class RtsNetworkManager : NetworkManager
 
         players.Add(player);
 
-
         GameObject baseInstance = Instantiate(spawnerPrefab,
               player.transform.position, Quaternion.identity);
 
@@ -37,24 +36,54 @@ public class RtsNetworkManager : NetworkManager
 
         //player.SetCameraPosition(position);
 
-        if(players.Count >= 2)
+        if(players.Count >= 1)
         {
-           //FindObjectOfType<PhaseManager>().SetTimer(true);
+           FindObjectOfType<PhaseManager>().SetTimer(true);
         }
     }
     public override void OnServerChangeScene(string newSceneName)
     {
-
-        Debug.Log(newSceneName + " !!" + SceneManager.GetActiveScene().name);
 
         if (newSceneName == "Battlefield")
         {
             Debug.Log("Changing to battlefield scene");
             foreach (RTSPlayer player in players)
             {
-                player.HideUnits();
+                //player.ShowUnits(false);
+
+                //print("New pos given is:" + pos.position);
             }
 
+        }
+
+    }
+
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+
+        foreach (RTSPlayer player in players)
+        {
+
+            var startPos = GetStartPosition().position;
+
+            print("The Real starting point" + startPos);
+
+            var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
+
+            print("New pos given is:" + pos);
+
+            player.ShowUnits(false);
+
+            player.SetUnitsPositions(startPos);
+
+            player.SetCameraPosition(pos);
+
+            GameObject baseInstance = Instantiate(spawnerPrefab,
+             startPos, Quaternion.identity);
+
+            // Spawn the player on server.
+            NetworkServer.Spawn(baseInstance, player.connectionToClient);
         }
 
     }
@@ -83,7 +112,8 @@ public class RtsNetworkManager : NetworkManager
 
     public void ShowBattleField()
     {
-        //NetworkManager.singleton.ServerChangeScene("Battlefield");
+        print("Changed to battlefield");
+        NetworkManager.singleton.ServerChangeScene("Battlefield");
     }
 
 }

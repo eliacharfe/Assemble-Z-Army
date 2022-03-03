@@ -6,7 +6,7 @@ using Mirror;
 
 public class PhaseManager : NetworkBehaviour
 {
-    [SyncVar] public float timer = 30f;
+    [SyncVar] public float timer = 1f;
     [SyncVar]bool startTimer = false;
     public TextMeshProUGUI timerText;
     [SerializeField] RtsNetworkManager rtsNetworkManager;
@@ -29,15 +29,13 @@ public class PhaseManager : NetworkBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-
-        Invoke("ChangePhase", timer);
     }
 
        // Update is called once per frame
     void Update()
     {
 
-        if (isServer && startTimer)
+        if (hasAuthority && startTimer)
         {
             if (timer > 0)
             {
@@ -45,6 +43,7 @@ public class PhaseManager : NetworkBehaviour
             }
             else
             {
+                print("Time is up, show battlefield");
                 startTimer = false;
                 //ChangePhase();
             }

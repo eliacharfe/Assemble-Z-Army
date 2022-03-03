@@ -36,10 +36,6 @@ public class CameraInputSystem : NetworkBehaviour
         screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
         screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
 
-        print("X limits values : " + screenXLimits);
-        print("Z limits values : " + screenZLimits);
-        print("Intial value given : " + startCameraPos);
-
         playerCameraTransform.gameObject.SetActive(true);
 
         controls = new Controls();
@@ -48,8 +44,17 @@ public class CameraInputSystem : NetworkBehaviour
         controls.Player.MoveCamera.canceled += SetPrevInput;
 
         controls.Enable();
+    }
 
-        print(playerCameraTransform.position);
+ 
+
+   public void OnChangeMap()
+    {
+        startCameraPos = playerCameraTransform.position;
+
+        print("Start position given is: " + startCameraPos);
+        screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
+        screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
     }
 
     public override void OnStopAuthority()

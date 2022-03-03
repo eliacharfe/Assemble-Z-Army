@@ -96,12 +96,14 @@ public class Unit : NetworkBehaviour
     public override void OnStartServer()
     {
         ServerOnUnitSpawned?.Invoke(this);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnStopServer()
     {
         Debug.Log("Stop Units server");
-        //ServerOnUnitDeSpawned.Invoke(this);
+        ServerOnUnitDeSpawned.Invoke(this);
     }
     #endregion
 
@@ -116,6 +118,14 @@ public class Unit : NetworkBehaviour
     {
         AuthortyOnUnitDeSpawned?.Invoke(this);
     }
+    #endregion
+
+    #region client
+    public override void OnStartClient()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     #endregion
 
     //--------------------------
@@ -151,7 +161,19 @@ public class Unit : NetworkBehaviour
     }
 
 
-    //---------------------
+    //----------------------------
+    public void SetPostion(Vector3 pos)
+    {
+        gameObject.transform.position = pos;
+    }
+
+    //----------------------------
+    public void ReintilizeNavMesh()
+    {
+        agent.enabled = false;
+
+        //agent.enabled = true;
+    }
 
     //----------------------------
     public void MoveTo(Vector3 dest)
@@ -166,9 +188,16 @@ public class Unit : NetworkBehaviour
             return false;
         }
 
+        if (!agent.enabled)
+        {
+            agent.enabled = true;
+            return false;
+        }
+
+
         if (agent && !agent.pathPending)
         {
-            if (agent && agent.remainingDistance <= agent.stoppingDistance)
+            if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
                 {
@@ -214,7 +243,7 @@ public class Unit : NetworkBehaviour
     public void StopMove()
     {
         agent.velocity = Vector3.zero;
-        //gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+
         agent.ResetPath();
     }
     //---------------------------
