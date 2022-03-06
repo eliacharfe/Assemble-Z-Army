@@ -21,9 +21,8 @@ public class RTSPlayer : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        buildingsFactory = FindObjectOfType<BuildingsFactory>();
+        
     }
-
 
     // Update is called once per frame
     void Update()
@@ -105,14 +104,7 @@ public class RTSPlayer : NetworkBehaviour
     }
 
 
-    // Command the server to start the game.
-    [Command]
-    public void CmdStartGame()
-    {
-        if (!isPartyOwner) { return; }
 
-        ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
-    }
 
 
     #endregion
@@ -160,13 +152,7 @@ public class RTSPlayer : NetworkBehaviour
     }
 
 
-    [Command]
-    public void CmdTryPlaceBuilding(int buildingId, Vector3 point)
-    {
-        GameObject buildingInstance = Instantiate(buildingsFactory.GetBuildingById(buildingId), point, Quaternion.identity);
 
-        NetworkServer.Spawn(buildingInstance, connectionToClient);
-    }
     #endregion
 
     // Add unit to authorty 'list'.

@@ -7,22 +7,22 @@ using UnityEngine.InputSystem;
 public class RTSController : MonoBehaviour
 {
     private Camera mainCamera;
-    private List < Unit > selectedUnits;
+    private List<Unit> selectedUnits;
     private Vector3 startPos;
     private Vector2 startPosition;
 
     [SerializeField] private Transform selectionAreaTransform;
+
+    AudioPlayer audioPlayer;
 
     private void Awake()
     {
         selectedUnits = new List<Unit>();
         selectionAreaTransform.gameObject.SetActive(false);
         mainCamera = Camera.main;
-        Unit.AuthortyOnUnitDeSpawned += HandleDeSpawnUnit;
+        Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
-
-    
-
     //------------------------
     private void Update()
     {
@@ -46,8 +46,8 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.ReachedDestination()) { }
-               //unit.StopAnimation();
+            if (unit.ReachedDestination())
+                unit.StopAnimation();
         }
     }
 
@@ -60,38 +60,54 @@ public class RTSController : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-        if(hit.collider)
+        if (hit.collider)
         {
-            hit.collider.gameObject.TryGetComponent<BuilidingConstruction>(out buildingToConstruct);
-            hit.collider.gameObject.TryGetComponent<Building>(out building);
-            hit.collider.gameObject.TryGetComponent<Targetable>(out targetable);
+            buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
+            building = hit.collider.gameObject.GetComponent<Building>();
+            targetable = hit.collider.gameObject.GetComponent<Targetable>();
         }
 
-        if (buildingToConstruct && buildingToConstruct.enabled && buildingToConstruct.hasAuthority)
+        if (buildingToConstruct && buildingToConstruct.enabled)
             SendToBuild(buildingToConstruct, hit);
 
-        else if (building && building.enabled && building.hasAuthority)
+        else if (building && building.enabled)
             SendToRecruit(building, hit);
 
-        else if (targetable && !targetable.hasAuthority)
-        {
-            Debug.Log("Attack unit");
-            AttackUnit(targetable, hit);
+        else if (targetable)
+            AttackUnit(targetable);
 
-        }
-        else
-            MoveUnits();
+        else MoveUnits();
     }
 
     //--------------------------------------
-    private void AttackUnit(Targetable targetable, RaycastHit2D hit)
+    private void AttackUnit(Targetable targetable)
     {
-
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.id != Macros.Units.WORKER && !targetable.hasAuthority)
+            if (unit.id == Macros.Units.HEALER)
             {
-                unit.GetComponent<Attacker>().CmdSetTargetable(targetable);
+                if (targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                {
+                    if (unit.GetComponent<Mana>().canHeal)
+                    {
+                        audioPlayer.PlayHealingClip();
+                        unit.GetComponent<Animator>().SetBool("isHealing", true);
+                        targetable.Heal();
+                        unit.GetComponent<Mana>().currMana -= 35f;
+                        unit.GetComponent<ManaDisplay>().HandleManaUpdated((int)unit.GetComponent<Mana>().currMana, 100);
+                        unit.GetComponent<Mana>().PlayManaEffect();
+                    }
+                }
+            }
+
+            if (unit.id != Macros.Units.WORKER)
+            {
+                if (targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
+                {
+                    return;
+                }
+
+                unit.GetComponent<Attacker>().SetTargetable(targetable);
             }
         }
     }
@@ -122,21 +138,20 @@ public class RTSController : MonoBehaviour
                 unit.MoveTo(hit.point);
             }
         }
-        
+
     }
 
 
     // Move units to position clicked on.
     private void MoveUnits()
-      {
+    {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
-        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {10, 20, 30}, new int[] {5, 10, 20});
+        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] { 10, 20, 30 }, new int[] { 5, 10, 20 });
 
         int targetPosIndex = 0;
         foreach (Unit unit in selectedUnits)
         {
             ClearPreviousCommands(unit);
-
             unit.MoveTo(targetPosList[targetPosIndex]);
 
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
@@ -155,19 +170,20 @@ public class RTSController : MonoBehaviour
         unit.RemoveBuildingRecruiting();
 
         if (unit.GetComponent<Attacker>())
-            unit.GetComponent<Attacker>().CmdSetTargetable(null);
+            unit.GetComponent<Attacker>().SetTargetable(null);
     }
 
 
     // Get positions around the point given.
     private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
     {
-           List<Vector3> posList = new List<Vector3>();
-           posList.Add(startPos);
-           for(int i = 0; i < ringPosCountArr.Length; i++){
-               posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
-           }
-           return posList;
+        List<Vector3> posList = new List<Vector3>();
+        posList.Add(startPos);
+        for (int i = 0; i < ringPosCountArr.Length; i++)
+        {
+            posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
+        }
+        return posList;
     }
 
     //---------------------------------------------
@@ -222,7 +238,7 @@ public class RTSController : MonoBehaviour
             Unit unit = obj.GetComponent<Unit>();
             if (selectedUnits.Contains(unit)) { continue; }
 
-            if (unit != null && unit.isSelectable() && unit.hasAuthority)
+            if (unit != null && unit.isSelectable())
             {
                 selectedUnits.Add(unit);
                 unit.Select();

@@ -1,5 +1,12 @@
 namespace Macros
 {
+     public enum Resources {
+        NONE,
+        WOOD = 1800,
+        METAL = 1500,
+        GOLD = 400,
+        DIAMONDS = 100
+    }
 
     public enum Buildings{
         NONE,

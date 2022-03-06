@@ -3559,36 +3559,6 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_Neck/Pivot_Head
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_Neck/Pivot_Head
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_Neck/Pivot_Head
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
     path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_Neck
     classID: 4
     script: {fileID: 0}
@@ -3619,7 +3589,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot
+    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_FootFrontSet/Pivot_FrontFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3629,7 +3599,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot
+    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_FootFrontSet/Pivot_FrontFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3639,7 +3609,67 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot
+    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_FootFrontSet/Pivot_FrontFoot/PivotBottom
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_Neck/Pivot_Head
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_Neck/Pivot_Head
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_Neck/Pivot_Head
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Pivot_Main/Pivot_Root/Pivot_Body
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Pivot_Main/Pivot_Root/Pivot_Body
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Pivot_Main/Pivot_Root/Pivot_Body
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3679,6 +3709,36 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
     path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_FootFrontSet/Pivot_BackFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
@@ -3709,7 +3769,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot/PivotBottom
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_FrontFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3719,7 +3779,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot/PivotBottom
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_FrontFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3729,7 +3789,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot/PivotBottom
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_FrontFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3799,7 +3859,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_FootFrontSet/Pivot_FrontFoot/PivotBottom
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3809,7 +3869,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_FootFrontSet/Pivot_FrontFoot/PivotBottom
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3819,37 +3879,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Pivot_Main/Pivot_Root/Pivot_Body/Pivot_FootFrontSet/Pivot_FrontFoot/PivotBottom
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Pivot_Main/Pivot_Root/Pivot_Body
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Pivot_Main/Pivot_Root/Pivot_Body
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Pivot_Main/Pivot_Root/Pivot_Body
+    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_BackFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3880,36 +3910,6 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_FrontFoot
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_FrontFoot/PivotBottom
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_FrontFoot/PivotBottom
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Pivot_Main/Pivot_Root/Pivot_FootBackSet/Pivot_FrontFoot/PivotBottom
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -3944,4 +3944,11 @@ AnimationClip:
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: StopHorseGallop
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
