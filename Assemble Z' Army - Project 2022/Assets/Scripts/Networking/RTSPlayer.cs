@@ -7,14 +7,16 @@ using UnityEngine.SceneManagement;
 public class RTSPlayer : NetworkBehaviour
 {
     // Following camera of the player.
-    [SerializeField] private Transform cameraTransfornm = null;
+    [SerializeField] private Transform cameraTransform = null;
+
+    //TODO - set access modifier
+    [SyncVar(hook = nameof(SetPhaseThreeCamera))] public Vector3 phaseThreePos = new Vector3(0,0,0);
 
     public List<Unit> m_units = new List<Unit>();
 
     private BuildingsFactory buildingsFactory = null;
 
     private bool isPartyOwner = false;
-
 
     // Start is called before the first frame update
     void Start()
@@ -35,18 +37,24 @@ public class RTSPlayer : NetworkBehaviour
 
     public void SetCameraPosition(Vector3 pos)
     {
-        cameraTransfornm.position = pos;
+        cameraTransform.position = pos;
 
         GetComponent<CameraInputSystem>().OnChangeMap();
     }
 
+
+    public void SetPhaseThreeCamera(Vector3 oldPos,Vector3 newPos)
+    {
+        print("Phase three position changed!!!! ");
+        SetCameraPosition(newPos);
+    }
     #endregion
 
 
     #region Getters
     public Vector3 GetCameraPosition()
     {
-        return cameraTransfornm.position;
+        return cameraTransform.position;
     }
     #endregion
 
@@ -70,7 +78,7 @@ public class RTSPlayer : NetworkBehaviour
         Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
         Unit.ServerOnUnitDeSpawned -= ServerHandleUnitDeSpawned;
 
-        Camera.main.transform.position = new Vector3(0, 0, 0);
+        Camera.main.transform.position = cameraTransform.position;
     }
 
 
@@ -202,14 +210,5 @@ public class RTSPlayer : NetworkBehaviour
             Debug.Log("Unit new position:" + pos);
         }
     }
-
-
-
-
-
-
-
-
-
 
 }

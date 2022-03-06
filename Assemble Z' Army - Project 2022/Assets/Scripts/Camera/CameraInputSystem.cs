@@ -47,7 +47,6 @@ public class CameraInputSystem : NetworkBehaviour
     }
 
  
-
    public void OnChangeMap()
     {
         startCameraPos = playerCameraTransform.position;

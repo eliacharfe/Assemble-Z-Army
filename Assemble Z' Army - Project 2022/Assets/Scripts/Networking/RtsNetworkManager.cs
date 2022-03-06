@@ -28,8 +28,6 @@ public class RtsNetworkManager : NetworkManager
         GameObject baseInstance = Instantiate(spawnerPrefab,
               player.transform.position, Quaternion.identity);
 
-        Debug.Log("Given player " + players.Count + " position: " + player.transform.position);
-
         NetworkServer.Spawn(baseInstance, player.connectionToClient);
 
         player.SetPartyOwner(players.Count == 1);
@@ -46,7 +44,6 @@ public class RtsNetworkManager : NetworkManager
 
         if (newSceneName == "Battlefield")
         {
-            Debug.Log("Changing to battlefield scene");
             foreach (RTSPlayer player in players)
             {
                 //player.ShowUnits(false);
@@ -67,17 +64,13 @@ public class RtsNetworkManager : NetworkManager
 
             var startPos = GetStartPosition().position;
 
-            print("The Real starting point" + startPos);
-
             var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
-
-            print("New pos given is:" + pos);
 
             player.ShowUnits(false);
 
             player.SetUnitsPositions(startPos);
 
-            player.SetCameraPosition(pos);
+            player.phaseThreePos = pos;
 
             GameObject baseInstance = Instantiate(spawnerPrefab,
              startPos, Quaternion.identity);
@@ -98,13 +91,17 @@ public class RtsNetworkManager : NetworkManager
         ClientOnConnected?.Invoke();
     }
 
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(0, 0, 100, 100), "SOME");
+    }
+
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientDisconnect(conn);
 
         ClientOnDisConnected?.Invoke();
     }
-
     #endregion
 
 

@@ -171,8 +171,6 @@ public class Unit : NetworkBehaviour
     public void ReintilizeNavMesh()
     {
         agent.enabled = false;
-
-        //agent.enabled = true;
     }
 
     //----------------------------

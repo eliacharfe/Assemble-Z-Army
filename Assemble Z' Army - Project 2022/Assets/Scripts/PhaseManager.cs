@@ -54,8 +54,16 @@ public class PhaseManager : NetworkBehaviour
 
     }
 
-        public void ChangePhase()
-        {
-            rtsNetworkManager.ShowBattleField();
-        }
+    public void ChangePhase()
+    {
+        rtsNetworkManager.ShowBattleField();
+
+        testingClientRPC();
+    }
+
+    [ClientRpc]
+    public void testingClientRPC()
+    {
+        print("Client recived this rpc");
+    }
 }
