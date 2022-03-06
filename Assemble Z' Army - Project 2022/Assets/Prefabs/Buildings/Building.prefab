@@ -78,10 +78,10 @@ MonoBehaviour:
   spawnPoint: {fileID: 7687285496895391796}
   enterPoint: {fileID: 9021328820710509342}
   Id: 6
-  treeCost: 0
-  metalCost: 0
-  goldCost: 0
-  jewelsCost: 0
+  woodCost: 150
+  metalCost: 77
+  goldCost: 11
+  diamondsCost: 4
   token: {fileID: 3824360112819498004}
   timeSlider: {fileID: 3050743307702186120}
   waitingUnit: []
@@ -439,7 +439,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1174373771
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 5
   m_Sprite: {fileID: -8196011035689451076, guid: bb57a04c0d32ca14498199337658ebc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -530,7 +530,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1174373771
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c8a47b132ee4eff48bfeb344ad857e12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

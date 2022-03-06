@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.AI;
 using Mirror;
 
-public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
+public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Building building = null;
 
@@ -19,9 +19,13 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     private float navMeshZAxis;
 
+    ResourcesPlayer resourcesPlayer = null;
 
     private void Start()
     {
+        resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
+        building.InitiateCosts();
+
         Sprite buildingSprite = building.GetComponentInChildren<SpriteRenderer>().sprite;
         gameObject.GetComponent<Image>().sprite = buildingSprite;
         buildingPreview.GetComponent<SpriteRenderer>().sprite = buildingSprite;
@@ -33,9 +37,11 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
         if (spritePreview == null) { return; }
 
-        if (!player) {
-            Debug.Log("Player set");
-            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+        if (!player)
+        {
+            // Debug.Log("Player set");
+            // player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
         }
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -46,7 +52,7 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
         spritePreview.GetComponent<SpriteRenderer>().color = Color.green;
 
-        if(!CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>()))
+        if (!CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>()))
         {
             spritePreview.GetComponent<SpriteRenderer>().color = Color.red;
         }
@@ -57,7 +63,7 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
         if (eventData.button != PointerEventData.InputButton.Left) { return; }
 
-        spritePreview = Instantiate(buildingPreview, 
+        spritePreview = Instantiate(buildingPreview,
             Camera.main.ScreenToWorldPoint(Input.mousePosition),
             Quaternion.identity);
     }
@@ -65,7 +71,8 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>())) {
+        if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>()))
+        {
             SpawnBuilding(spritePreview.transform.position);
         }
 
@@ -75,21 +82,23 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     public void SpawnBuilding(Vector3 pos)
     {
-
-       Debug.Log(building);
-    //    player.CmdTryPlaceBuilding(building.GetBuildingId(),pos);
+        if (resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
+        {
+            resourcesPlayer.DecreaseResource(building.getCostBuilding());
+        }
 
     }
 
 
     private bool CanPlaceBuilding(BoxCollider2D buildingCollider)
     {
-
         var buildings = FindObjectsOfType<Building>();
-        
-        foreach (var building in buildings){
 
-            if (buildingCollider.bounds.Intersects(building.GetComponent<BoxCollider2D>().bounds)){
+        foreach (var building in buildings)
+        {
+
+            if (buildingCollider.bounds.Intersects(building.GetComponent<BoxCollider2D>().bounds))
+            {
                 return false;
             }
         }

@@ -22,10 +22,10 @@ public class Building : NetworkBehaviour
     [SerializeField] private Macros.Buildings Id;
 
     [Header("Costs")]
-    [SerializeField] private float treeCost;
-    [SerializeField] private float metalCost;
-    [SerializeField] private float goldCost;
-    [SerializeField] private float jewelsCost;
+    [SerializeField] private int woodCost;
+    [SerializeField] private int metalCost;
+    [SerializeField] private int goldCost;
+    [SerializeField] private int diamondsCost;
 
     [Header("UI")]
     [SerializeField] private GameObject token = null;
@@ -33,6 +33,7 @@ public class Building : NetworkBehaviour
 
     // Units waiting to be recruited.
     public List<Unit> waitingUnit = new List<Unit>();
+    public List<int> costResourcesBuilding = null;
 
     // Prefab of the current unit need to be spawned.
     private Unit spawnUnitPrefab = null;
@@ -42,12 +43,38 @@ public class Building : NetworkBehaviour
 
     private UnitsFactory unitsFactory = null;
 
-
     public static event Action<Building> ServerOnBuildingSpawned;
     public static event Action<Building> ServerOnBuildingDeSpawned;
- 
+
     public static event Action<Building> AuthortyOnBuildingSpawned;
     public static event Action<Building> AuthortyOnBuildingDeSpawned;
+
+    void Start()
+    {
+        //Set the building accoridng to the existed navmesh z position.
+        Vector3 pos = FindObjectOfType<NavMeshScript>().transform.position;
+
+        gameObject.transform.position = new Vector3
+            (gameObject.transform.position.x, gameObject.transform.position.y, pos.z);
+
+        unitsFactory = FindObjectOfType<UnitsFactory>();
+    }
+    //-------------
+    public List<int> getCostBuilding()
+    {
+        return costResourcesBuilding;
+    }
+    //-------------------
+    public void InitiateCosts()
+    {
+        costResourcesBuilding = new List<int>();
+
+        costResourcesBuilding.Add(woodCost);
+        costResourcesBuilding.Add(metalCost);
+        costResourcesBuilding.Add(goldCost);
+        costResourcesBuilding.Add(diamondsCost);
+    }
+
 
     #region Server
 
@@ -74,19 +101,6 @@ public class Building : NetworkBehaviour
         AuthortyOnBuildingDeSpawned?.Invoke(this);
     }
     #endregion
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Set the building accoridng to the existed navmesh z position.
-        Vector3 pos = FindObjectOfType<NavMeshScript>().transform.position;
-
-        gameObject.transform.position = new Vector3
-            (gameObject.transform.position.x, gameObject.transform.position.y, pos.z);
-
-        unitsFactory = FindObjectOfType<UnitsFactory>();
-    }
-
 
 
     // Update is called once per frame
@@ -140,14 +154,14 @@ public class Building : NetworkBehaviour
     void TryToRecruitUnit()
     {
 
-        if (waitingUnit.Count <= 0){ return; }
+        if (waitingUnit.Count <= 0) { return; }
 
         Unit unit = waitingUnit[0];
 
         if (!unit) { return; }
 
-        if (Vector2.Distance(unit.transform.position, enterPoint.position) 
-            > spawnDistancePoint){ return; }
+        if (Vector2.Distance(unit.transform.position, enterPoint.position)
+            > spawnDistancePoint) { return; }
 
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.Id, unit.id);
 
@@ -255,7 +269,7 @@ public class Building : NetworkBehaviour
 
     public int GetBuildingId()
     {
-        return (int)Id ;
+        return (int)Id;
     }
     public Sprite GetBuildingSprite()
     {

@@ -128,7 +128,7 @@ public class RTSController : MonoBehaviour
 
 
     // Send workers to construct the building.
-    private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
+    private async void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
     {
         foreach (Unit unit in selectedUnits)
         {

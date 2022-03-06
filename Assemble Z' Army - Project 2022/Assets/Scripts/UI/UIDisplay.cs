@@ -36,14 +36,24 @@ public class UIDisplay : MonoBehaviour
 
     private void Update()
     {
-        woodSlider.value = resourcesPlayer.GetWood();
-        woodText.text = resourcesPlayer.GetWood().ToString();
-
-        metalSlider.value = resourcesPlayer.GetMetal();
-        metalText.text = resourcesPlayer.GetMetal().ToString();
-        goldSlider.value = resourcesPlayer.GetGold();
-        goldText.text = resourcesPlayer.GetGold().ToString();
-        diamondsSlider.value = resourcesPlayer.GetDiamonds();
-        diamondsText.text = resourcesPlayer.GetDiamonds().ToString();
+        woodSlider.value = resourcesPlayer.getResource(Macros.Resources.WOOD);
+        woodText.text = resourcesPlayer.getResource(Macros.Resources.WOOD).ToString();
+        metalSlider.value = resourcesPlayer.getResource(Macros.Resources.METAL);
+        metalText.text = resourcesPlayer.getResource(Macros.Resources.METAL).ToString();
+        goldSlider.value = resourcesPlayer.getResource(Macros.Resources.GOLD);
+        goldText.text = resourcesPlayer.getResource(Macros.Resources.GOLD).ToString();
+        diamondsSlider.value = resourcesPlayer.getResource(Macros.Resources.DIAMONDS);
+        diamondsText.text = resourcesPlayer.getResource(Macros.Resources.DIAMONDS).ToString();
     }
 }
+
+
+    // woodSlider.value = resourcesPlayer.GetWood();
+        // woodText.text = resourcesPlayer.GetWood().ToString();
+
+        // metalSlider.value = resourcesPlayer.GetMetal();
+        // metalText.text = resourcesPlayer.GetMetal().ToString();
+        // goldSlider.value = resourcesPlayer.GetGold();
+        // goldText.text = resourcesPlayer.GetGold().ToString();
+        // diamondsSlider.value = resourcesPlayer.GetDiamonds();
+        // diamondsText.text = resourcesPlayer.GetDiamonds().ToString();
