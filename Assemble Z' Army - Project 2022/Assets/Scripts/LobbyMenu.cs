@@ -19,7 +19,7 @@ public class LobbyMenu : MonoBehaviour
 
     public void StartGame()
     {
-        // NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
+        NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
     }
 
 

@@ -4,30 +4,21 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class Health : MonoBehaviour // NetworkBehavior
+public class Health : NetworkBehaviour // NetworkBehavior
 {
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] ParticleSystem hitEffect;
-    [SerializeField] GameObject hitPoint;
+
+    private int maxHealth = 100;
 
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
-    public float currHealth;
+    [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdated))] private int currHealth;
 
     // public event Action ServerOnDie;
 
     public event Action<int, int> ClientOnHealthUpdate;
-    Unit unit;
 
-    AudioPlayer audioPlayer;
-
-    private void Awake()
-    {
-        audioPlayer = FindObjectOfType<AudioPlayer>();
-    }
 
     void Start()
     {
-        unit = GetComponent<Unit>();
         currHealth = maxHealth;
     }
 
@@ -35,52 +26,32 @@ public class Health : MonoBehaviour // NetworkBehavior
     {
         if (currHealth <= 0)
         {
-            unit.StopMove();
-            unit.SetDead();
+            GetComponent<Unit>().SetDead();
+            GetComponent<Unit>().StopMove();
+            Destroy(gameObject);
         }
+
     }
 
-    void Dead()
+    public void DealDamage(int damageAmount)
     {
-        Destroy(gameObject);
-        audioPlayer.PlayDeathClip();
-    }
 
-    public void DealDamage(float damageAmount)
-    {
         if (currHealth == 0)
             return;
 
-        if (damageAmount > unit.Defense.BaseValue)
-        {
-            currHealth = Mathf.Max(currHealth - damageAmount + unit.Defense.BaseValue, 0);
-            PlayHitEffect();
-            GetComponent<Animator>().SetBool("gotHit", true);
-            if (currHealth > 0)
-               audioPlayer.PlayDamageClip();
-        }
+        currHealth = Mathf.Max(currHealth - damageAmount, 0);
 
-        ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
-
+        ClientOnHealthUpdate?.Invoke(currHealth, maxHealth);
 
         if (currHealth != 0)
             return;
 
     }
 
-    public void PlayHitEffect()
-    {
-       // Vector3 position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
-        if (hitEffect != null)
-        {
-            ParticleSystem instance = Instantiate(hitEffect, hitPoint.transform.position , Quaternion.identity);
-            Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
-        }
+   
+     private void HandleHealthUpdated(int oldHealth, int newHealth)
+     {
+        Debug.Log("Health updated");
+         ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
     }
-
-    // client
-    // private void HandleHealthUpdated(int oldHealth, int newHealth)
-    // {
-    //     ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
-    // }
 }

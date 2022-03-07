@@ -77,7 +77,7 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
 
        Debug.Log(building);
-    //    player.CmdTryPlaceBuilding(building.GetBuildingId(),pos);
+       player.CmdTryPlaceBuilding(building.GetBuildingId(),pos);
 
     }
 

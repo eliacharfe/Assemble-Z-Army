@@ -7,13 +7,44 @@ using UnityEngine.Events;
 using Utilities;
 
 using Cinemachine;
+using Mirror;
 
-
-public class UnitMovement : MonoBehaviour
+public class UnitMovement:NetworkBehaviour
 {
-    public void Move(NavMeshAgent agent, Vector3 dest)
+    private NavMeshAgent agent = null;
+
+    private Unit unit = null;
+
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+
+        unit = GetComponent<Unit>();
+    }
+
+    [Command]
+    public void CmdMove(Vector3 dest)
     {
         dest.z = 0;
+
+        GetComponent<Animator>().SetBool("isRunning", true);
+
+        //RpcMoveAnime();
+
+        agent.SetDestination(dest);
+
+        FlipSideSprite(dest);
+    }
+
+
+    public void Move(Vector3 dest)
+    {
+        dest.z = 0;
+
+        GetComponent<Animator>().SetBool("isRunning", true);
+
+        //RpcMoveAnime();
+
         agent.SetDestination(dest);
 
         FlipSideSprite(dest);
