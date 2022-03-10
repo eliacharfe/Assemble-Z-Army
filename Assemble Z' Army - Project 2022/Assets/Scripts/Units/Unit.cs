@@ -41,7 +41,7 @@ public class Unit : NetworkBehaviour
 
     private BoxCollider2D myBoxCollider = null;
 
-    private bool isDead;
+    [SyncVar]public bool isDead;
 
     public CharacterStat Speed;
     public CharacterStat Attack;
@@ -71,13 +71,6 @@ public class Unit : NetworkBehaviour
 
         myBoxCollider = GetComponent<BoxCollider2D>();
 
-        // Debug.Log(id);
-        // Speed.BaseValue = agent.speed = GetSpeed(id);
-        // Attack.BaseValue = GetAttack(id);
-        // Defense.BaseValue = GetDefense(id);
-        // ReachDistance.BaseValue = GetReachedDistance(id);
-        // SpeedAttack.BaseValue = GetSpeedAttack(id);
-
         InitStats(id);
 
         if (selectionCircle)
@@ -96,8 +89,6 @@ public class Unit : NetworkBehaviour
     public override void OnStartServer()
     {
         ServerOnUnitSpawned?.Invoke(this);
-
-        DontDestroyOnLoad(gameObject);
     }
 
     public override void OnStopServer()
@@ -116,14 +107,13 @@ public class Unit : NetworkBehaviour
 
     public override void OnStopAuthority()
     {
-        AuthortyOnUnitDeSpawned?.Invoke(this);
+       AuthortyOnUnitDeSpawned?.Invoke(this);
     }
     #endregion
 
     #region client
     public override void OnStartClient()
     {
-        DontDestroyOnLoad(gameObject);
     }
 
     #endregion

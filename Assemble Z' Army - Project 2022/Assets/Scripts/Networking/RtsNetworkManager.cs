@@ -66,17 +66,16 @@ public class RtsNetworkManager : NetworkManager
 
             var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
 
-            player.ShowUnits(false);
-
-            player.SetUnitsPositions(startPos);
-
             player.phaseThreePos = pos;
+
+            player.SpawnRecruitedUnit();
 
             GameObject baseInstance = Instantiate(spawnerPrefab,
              startPos, Quaternion.identity);
 
             // Spawn the player on server.
             NetworkServer.Spawn(baseInstance, player.connectionToClient);
+
         }
 
     }
@@ -109,7 +108,6 @@ public class RtsNetworkManager : NetworkManager
 
     public void ShowBattleField()
     {
-        print("Changed to battlefield");
         NetworkManager.singleton.ServerChangeScene("Battlefield");
     }
 

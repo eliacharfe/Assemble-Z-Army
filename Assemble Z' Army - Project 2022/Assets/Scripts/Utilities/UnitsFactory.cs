@@ -26,6 +26,8 @@ public class UnitsFactory : MonoBehaviour
         scout;
 
 
+
+
     public Unit GetBuildingOutputUnit(Buildings buildingId, Units unitId)
     {
         switch(buildingId)
@@ -59,6 +61,23 @@ public class UnitsFactory : MonoBehaviour
         }
         return null;
     }
+
+
+    public Unit GetUnitPrefab(Units unitId)
+    {
+
+        print("Unit id recived "+unitId);
+        switch (unitId)
+        {
+            case Units.ARCHER:
+                return archer;
+            case Units.SWORDMAN:
+                return swordman;
+        }
+
+        return null;
+    }
+
 
     private bool IsRecruit(Units unitId){
         return unitId == Units.RECRUIT;
