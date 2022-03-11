@@ -102,11 +102,15 @@ public class Unit : NetworkBehaviour
     #region Authority
     public override void OnStartAuthority()
     {
+        print("Unit spawned");
+        if (!hasAuthority) return;
         AuthortyOnUnitSpawned?.Invoke(this);
     }
 
     public override void OnStopAuthority()
     {
+       print("Unit died");
+        if (!hasAuthority) return;
        AuthortyOnUnitDeSpawned?.Invoke(this);
     }
     #endregion
@@ -116,9 +120,13 @@ public class Unit : NetworkBehaviour
     {
     }
 
+    public override void OnStopClient()
+    {
+        
+    }
     #endregion
 
-    //--------------------------
+    //--------------------------------------
     private void Update()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
@@ -149,8 +157,6 @@ public class Unit : NetworkBehaviour
     {
         agent.speed = Speed.BaseValue; // exit from trigger
     }
-
-
     //----------------------------
     public void SetPostion(Vector3 pos)
     {
@@ -176,7 +182,7 @@ public class Unit : NetworkBehaviour
             return false;
         }
 
-        if (!agent.enabled)
+        if (agent && !agent.enabled)
         {
             agent.enabled = true;
             return false;
@@ -202,26 +208,31 @@ public class Unit : NetworkBehaviour
     {
         myAnimator.SetBool("isRunning", false);
     }
+
     //----------------------------
     public void SetColorSelcted()
     {
         spriteRenderer.color = new Color(1f, 0f, 0f, 1f);
     }
+
     //----------------------------
     public void ResetColor()
     {
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
     }
+
     //----------------------------
     public bool isSelectable()
     {
         return selectable;
     }
+
     //----------------------------
     public void Select()
     {
         onSelected?.Invoke();
     }
+
     //----------------------------
     public void Deselect()
     {

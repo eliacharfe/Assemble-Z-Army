@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using UnityEngine.SceneManagement;
+using System;
 
 public class RTSPlayer : NetworkBehaviour
 {
@@ -22,6 +23,9 @@ public class RTSPlayer : NetworkBehaviour
     private BuildingsFactory buildingsFactory = null;
 
     private bool isPartyOwner = false;
+
+    // Server Unit despawned event.
+    public static event Action<int> PlayerLostAllUnits;
 
     // Start is called before the first frame update
     void Start()
@@ -77,14 +81,8 @@ public class RTSPlayer : NetworkBehaviour
     public override void OnStopServer()
     {
 
-        Debug.Log("Stop player server");
-
         Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
         Unit.ServerOnUnitDeSpawned -= ServerHandleUnitDeSpawned;
-
-        Camera.main.transform.position = cameraTransform.position;
-
-        //SceneManager.LoadScene("Playground");
     }
 
     // Add new unit to the server 'myUnits' list.
@@ -100,14 +98,17 @@ public class RTSPlayer : NetworkBehaviour
     // Remove unit from the server 'myUnits' list
     private void ServerHandleUnitDeSpawned(Unit unit)
     {
-        Debug.Log("Units removed on server");
-        if (isUnitBelongToClient(unit))
-            if(unit.isDead)
+
+        if (!isUnitBelongToClient(unit)) return;
+
+        print("client " + connectionToClient + " has lost a unit, now he has " + m_unitsId.Count);
+
+        if(unit.isDead)
              m_unitsId.Remove((int)unit.id);
 
         if(m_unitsId.Count <= 0)
         {
-
+            PlayerLostAllUnits?.Invoke(connectionToClient.connectionId);
         }
     }
 
@@ -153,12 +154,10 @@ public class RTSPlayer : NetworkBehaviour
 
 
     // TODO Delete later.
-    [Command]
-    public void CmdPlayerLostMsg()
+    [ClientRpc]
+    public void RpcPlayerLostMsg()
     {
         print("Player has lost");
-
-        RpcPlayerHasLost();
     }
     #endregion
 
@@ -214,26 +213,28 @@ public class RTSPlayer : NetworkBehaviour
 
 
     [ClientRpc]
-    public void RpcPlayerHasLost()
+    public void RpcPlayerHasLost(string playerLost)
     {
-        print("Client player , you lost");
+        print("Client player with number" + playerLost +" has lost");
     }
     #endregion
 
     // Add unit to authorty 'list'.
     private void AuthortyHandleUnitDeSpawned(Unit unit)
     {
-
         print("Unit removed in authorty");
 
         if (!hasAuthority) return;
 
-        if(unit.isDead)
+        print("has authorty");
+
+        if (unit.isDead)
             m_unitsId.Remove((int)unit.id);
 
-        if (m_unitsId.Count <= 0 && connectionToClient.isReady)
+        if (m_unitsId.Count <= 0)
         {
-            CmdPlayerLostMsg();
+            print("No units left");
+            RpcPlayerLostMsg();
         }
     }
 
@@ -242,8 +243,6 @@ public class RTSPlayer : NetworkBehaviour
     private void AuthortyHandleUnitSpawned(Unit unit)
     {
         if (!hasAuthority) return;
-
-        //m_unitsId.Add((int)unit.id);
     }
 
 

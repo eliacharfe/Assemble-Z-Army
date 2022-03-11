@@ -10,6 +10,8 @@ public class RtsNetworkManager : NetworkManager
 {
     [SerializeField] GameObject spawnerPrefab = null;
 
+    [SerializeField] GameObject gameOverHandler = null;
+
     public List<RTSPlayer> players = new List<RTSPlayer>();
 
     // Client connections events
@@ -27,6 +29,11 @@ public class RtsNetworkManager : NetworkManager
 
         GameObject baseInstance = Instantiate(spawnerPrefab,
               player.transform.position, Quaternion.identity);
+
+        NetworkServer.Spawn(baseInstance, player.connectionToClient);
+
+        GameObject gameOverHandler = Instantiate(spawnerPrefab,
+      player.transform.position, Quaternion.identity);
 
         NetworkServer.Spawn(baseInstance, player.connectionToClient);
 
@@ -58,6 +65,11 @@ public class RtsNetworkManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
+
+        GameObject  EndGameHandler = Instantiate(gameOverHandler);
+
+        // Spawn the player on server.
+        NetworkServer.Spawn(EndGameHandler);
 
         foreach (RTSPlayer player in players)
         {

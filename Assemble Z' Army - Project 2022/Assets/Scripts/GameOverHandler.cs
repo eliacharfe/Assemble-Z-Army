@@ -13,14 +13,15 @@ public class GameOverHandler : NetworkBehaviour
     #region Server
     public override void OnStartServer()
     {
-        //UnitBase.ServerOnBaseSpawned += ServerHandleBaseSpawned;
-        //UnitBase.ServerOnBaseDeSpawned += ServerHandleBaseDeSpawned;
+        Unit.ServerOnUnitDeSpawned += ServerHandleUnitDeSpawned;
+        RTSPlayer.PlayerLostAllUnits += ServerHandlePlayerLost;
     }
 
 
     public override void OnStopServer()
     {
-        //UnitBase.ServerOnBaseSpawned -= ServerHandleBaseSpawned;
+        Unit.ServerOnUnitDeSpawned -= ServerHandleUnitDeSpawned;
+        RTSPlayer.PlayerLostAllUnits -= ServerHandlePlayerLost;
         //UnitBase.ServerOnBaseDeSpawned -= ServerHandleBaseDeSpawned;
     }
 
@@ -28,23 +29,26 @@ public class GameOverHandler : NetworkBehaviour
     private void ServerHandleBaseSpawned(GameObject unitBase)
     {
         Debug.Log("Base Added ");
-       // bases.Add(unitBase);
+        // bases.Add(unitBase);
 
     }
 
 
-    private void ServerHandleBaseDeSpawned(GameObject unitBase)
+    private void ServerHandleUnitDeSpawned(Unit unit)
     {
-        //bases.Remove(unitBase);
-
-        //if(bases.Count != 1) { return; }
-
-        //int playerId = bases[0].connectionToClient.connectionId;
-
-        //RpcGameOver($"Player {playerId}");
-
         ServerOnGameOver?.Invoke();
     }
+
+
+    private void ServerHandlePlayerLost(int playerId)
+    {
+
+        print("The player with connection:" + playerId + "has lost the game");
+        //ClientOnGameOver?.Invoke("The playr won is:" + playerId);
+
+        RpcGameOver("The playr won is:" + playerId);
+    }
+
     #endregion
 
 
@@ -54,6 +58,9 @@ public class GameOverHandler : NetworkBehaviour
     [ClientRpc]
     private void RpcGameOver(string winner)
     {
+
+        print(winner);
+
         ClientOnGameOver?.Invoke(winner);
     }
 
