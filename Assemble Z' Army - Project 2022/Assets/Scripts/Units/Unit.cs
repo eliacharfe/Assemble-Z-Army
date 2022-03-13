@@ -94,7 +94,9 @@ public class Unit : NetworkBehaviour
     public override void OnStopServer()
     {
         Debug.Log("Stop Units server");
-        ServerOnUnitDeSpawned.Invoke(this);
+        ServerOnUnitDeSpawned?.Invoke(this);
+
+        Destroy(this);
     }
     #endregion
 
@@ -105,6 +107,7 @@ public class Unit : NetworkBehaviour
         print("Unit spawned");
         if (!hasAuthority) return;
         AuthortyOnUnitSpawned?.Invoke(this);
+
     }
 
     public override void OnStopAuthority()
@@ -112,6 +115,7 @@ public class Unit : NetworkBehaviour
        print("Unit died");
         if (!hasAuthority) return;
        AuthortyOnUnitDeSpawned?.Invoke(this);
+       Destroy(this);
     }
     #endregion
 
@@ -122,7 +126,7 @@ public class Unit : NetworkBehaviour
 
     public override void OnStopClient()
     {
-        
+        Destroy(this);
     }
     #endregion
 

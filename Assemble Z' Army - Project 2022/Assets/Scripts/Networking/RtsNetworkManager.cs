@@ -24,7 +24,7 @@ public class RtsNetworkManager : NetworkManager
         base.OnServerAddPlayer(conn);
 
         RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
-
+        print("Player have been added");
         players.Add(player);
 
         GameObject baseInstance = Instantiate(spawnerPrefab,
@@ -32,10 +32,7 @@ public class RtsNetworkManager : NetworkManager
 
         NetworkServer.Spawn(baseInstance, player.connectionToClient);
 
-        GameObject gameOverHandler = Instantiate(spawnerPrefab,
-      player.transform.position, Quaternion.identity);
-
-        NetworkServer.Spawn(baseInstance, player.connectionToClient);
+        player.unitSpawner = baseInstance;
 
         player.SetPartyOwner(players.Count == 1);
 
@@ -46,20 +43,15 @@ public class RtsNetworkManager : NetworkManager
            FindObjectOfType<PhaseManager>().SetTimer(true);
         }
     }
-    public override void OnServerChangeScene(string newSceneName)
+
+    
+    public override void OnServerDisconnect(NetworkConnection conn)
     {
+        players.Remove(conn.identity.GetComponent<RTSPlayer>());
+        base.OnServerDisconnect(conn);
 
-        if (newSceneName == "Battlefield")
-        {
-            foreach (RTSPlayer player in players)
-            {
-                //player.ShowUnits(false);
-
-                //print("New pos given is:" + pos.position);
-            }
-
-        }
-
+        // Client is not destroyed by
+       // Destroy(conn.identity.gameObject);
     }
 
 
@@ -91,6 +83,7 @@ public class RtsNetworkManager : NetworkManager
         }
 
     }
+
     #endregion
 
 

@@ -14,7 +14,7 @@ public class RTSPlayer : NetworkBehaviour
     // The phase three pos update the camera position for the player.
     [SyncVar(hook = nameof(SetPhaseThreeCamera))] public Vector3 phaseThreePos = new Vector3(0,0,0);
 
-    [SyncVar] bool playerLost = false;
+    public GameObject unitSpawner = null;
 
     public List<Unit> m_units = new List<Unit>();
 
@@ -73,14 +73,18 @@ public class RTSPlayer : NetworkBehaviour
         Unit.ServerOnUnitSpawned += ServerHandleUnitSpawned;
         Unit.ServerOnUnitDeSpawned += ServerHandleUnitDeSpawned;
 
-        Debug.Log(transform.position);
-
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        print("Destroy this client");
+
+        Destroy(unitSpawner);
     }
 
     public override void OnStopServer()
     {
-
         Unit.ServerOnUnitSpawned -= ServerHandleUnitSpawned;
         Unit.ServerOnUnitDeSpawned -= ServerHandleUnitDeSpawned;
     }
@@ -132,12 +136,8 @@ public class RTSPlayer : NetworkBehaviour
     public void SpawnRecruitedUnit()
     {
         var factory = FindObjectOfType<UnitsFactory>();
-    
-        print(m_unitsId.Count);
 
         List<int> copy = new List<int>(m_unitsId);
-
-        print("Spawning units");
 
         foreach(int id in copy)
         {
@@ -166,9 +166,9 @@ public class RTSPlayer : NetworkBehaviour
     {
         if (NetworkServer.active) return;
 
-        ((RtsNetworkManager)NetworkManager.singleton).players.Add(this);
-
         DontDestroyOnLoad(gameObject);
+
+        ((RtsNetworkManager)NetworkManager.singleton).players.Add(this);
     }
 
 
@@ -184,11 +184,9 @@ public class RTSPlayer : NetworkBehaviour
 
         Unit.AuthortyOnUnitSpawned -= AuthortyHandleUnitSpawned;
         Unit.AuthortyOnUnitDeSpawned -= AuthortyHandleUnitDeSpawned;
-
-        SceneManager.LoadScene("Playground");
     }
 
-
+    
     public override void OnStartAuthority()
     {
         Unit.AuthortyOnUnitSpawned += AuthortyHandleUnitSpawned;
@@ -222,11 +220,7 @@ public class RTSPlayer : NetworkBehaviour
     // Add unit to authorty 'list'.
     private void AuthortyHandleUnitDeSpawned(Unit unit)
     {
-        print("Unit removed in authorty");
-
         if (!hasAuthority) return;
-
-        print("has authorty");
 
         if (unit.isDead)
             m_unitsId.Remove((int)unit.id);
@@ -253,8 +247,6 @@ public class RTSPlayer : NetworkBehaviour
             unit.ReintilizeNavMesh();
 
             unit.gameObject.SetActive(value);
-
-            Debug.Log("Unit is now hidden");
         }
     }
 
@@ -266,8 +258,6 @@ public class RTSPlayer : NetworkBehaviour
             unit.SetPostion(pos);
 
             unit.ReintilizeNavMesh();
-
-            Debug.Log("Unit new position:" + pos);
         }
     }
 
