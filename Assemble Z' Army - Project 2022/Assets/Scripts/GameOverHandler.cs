@@ -22,13 +22,11 @@ public class GameOverHandler : NetworkBehaviour
     {
         Unit.ServerOnUnitDeSpawned -= ServerHandleUnitDeSpawned;
         RTSPlayer.PlayerLostAllUnits -= ServerHandlePlayerLost;
-        //UnitBase.ServerOnBaseDeSpawned -= ServerHandleBaseDeSpawned;
     }
 
 
     private void ServerHandleBaseSpawned(GameObject unitBase)
     {
-        Debug.Log("Base Added ");
         // bases.Add(unitBase);
 
     }
@@ -46,7 +44,7 @@ public class GameOverHandler : NetworkBehaviour
         print("The player with connection:" + playerId + "has lost the game");
         //ClientOnGameOver?.Invoke("The playr won is:" + playerId);
 
-        RpcGameOver("The playr won is:" + playerId);
+        RpcGameOver("The Winner is:" + playerId);
     }
 
     #endregion

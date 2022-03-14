@@ -38,7 +38,7 @@ public class GameOverDisplay : MonoBehaviour
     {
         Debug.Log("Game Over Command");
 
-        winnerNameText.text = $"{winner} Has Won";
+        winnerNameText.text = $"{winner}";
 
         gameOverDisplayParent.SetActive(true);
 

@@ -918,10 +918,10 @@ RectTransform:
   m_Father: {fileID: 40475420}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.54, y: -51.967}
-  m_SizeDelta: {x: 358.961, y: 103.934}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 1.54, y: -838}
+  m_SizeDelta: {x: 358.961, y: 103.93396}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1807041744
 MonoBehaviour:
@@ -1110,10 +1110,10 @@ RectTransform:
   m_Father: {fileID: 40475420}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -684.12, y: -155.82}
-  m_SizeDelta: {x: 551.76807, y: 311.64502}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 649.78, y: -152.91998}
+  m_SizeDelta: {x: 1299.563, y: 305.848}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2001161360
 MonoBehaviour:
@@ -1135,7 +1135,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Over
+  m_text: The winner is:{0}
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

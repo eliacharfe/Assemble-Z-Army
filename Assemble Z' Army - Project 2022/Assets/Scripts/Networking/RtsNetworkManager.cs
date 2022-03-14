@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Macros;
 using UnityEngine.SceneManagement;
 using Utilities;
 using System;
@@ -19,6 +20,7 @@ public class RtsNetworkManager : NetworkManager
     public static event Action ClientOnDisConnected;
 
     # region Server 
+
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
@@ -38,7 +40,7 @@ public class RtsNetworkManager : NetworkManager
 
         //player.SetCameraPosition(position);
 
-        if(players.Count >= 1)
+        if(players.Count >= 2)
         {
            FindObjectOfType<PhaseManager>().SetTimer(true);
         }
@@ -84,6 +86,38 @@ public class RtsNetworkManager : NetworkManager
 
     }
 
+
+
+    // Set wokers units which suppose to build with given resources avaible.
+    public void SetPhaseOne()
+    {
+
+        UnitsFactory factory = new UnitsFactory();
+
+        Vector3 startinPoint = GetStartPosition().position;
+
+        foreach (RTSPlayer player in players)
+        {
+            for(int i = 0; i < Constents.INITIAL_WORKERS_SIZE; i++)
+            {
+                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Units.WORKER), startinPoint, Quaternion.identity).gameObject;
+
+                // Spawn the player on server.
+                NetworkServer.Spawn(workerInstance, player.connectionToClient);
+            }
+        }
+
+    }
+
+
+
+    public void ShowBattleField()
+    {
+        NetworkManager.singleton.ServerChangeScene("Battlefield");
+    }
+
+
+
     #endregion
 
 
@@ -109,11 +143,5 @@ public class RtsNetworkManager : NetworkManager
     #endregion
 
 
-
-
-    public void ShowBattleField()
-    {
-        NetworkManager.singleton.ServerChangeScene("Battlefield");
-    }
 
 }

@@ -52,8 +52,9 @@ public class CameraInputSystem : NetworkBehaviour
         startCameraPos = playerCameraTransform.position;
 
         print("Start position given is: " + startCameraPos);
-        screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
-        screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
+        confinerBound = 125;
+        screenXLimits = new Vector3(0 - confinerBound, 0 + confinerBound, transform.position.z);
+        screenZLimits = new Vector3(0 - confinerBound, 0 + confinerBound, transform.position.z);
     }
 
     public override void OnStopAuthority()

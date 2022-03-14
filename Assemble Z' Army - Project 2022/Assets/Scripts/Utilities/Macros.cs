@@ -1,5 +1,21 @@
 namespace Macros
 {
+    class Constents
+    {
+        // Phases
+        public const int PHASE_ONE = 1;
+        public const int PHASE_TWO = 2;
+        public const int PHASE_THREE = 3;
+        public const int PHASE_FOUR = 3;
+
+        // Workers
+        public const int INITIAL_WORKERS_SIZE = 10;
+
+        // Recruits
+        public const int INITIAL_RECRUITS_SIZE = 30;
+
+    }
+
 
     public enum Buildings{
         NONE,
@@ -35,6 +51,9 @@ namespace Macros
         CATAPULT,
         SCOUT
     }
+
+
+    
 }
 
 /*

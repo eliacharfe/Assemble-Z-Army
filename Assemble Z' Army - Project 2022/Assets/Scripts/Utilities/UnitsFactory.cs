@@ -13,6 +13,7 @@ public class UnitsFactory : MonoBehaviour
         swordman,
         spearman,
         archer,
+        simpleHorse,
         swordKnight,
         spearKnight,
         swordHorse,
@@ -23,7 +24,9 @@ public class UnitsFactory : MonoBehaviour
         crossbow,
         healer,
         catapult,
-        scout;
+        scout,
+        worker,
+        recruit;
 
 
 
@@ -69,10 +72,44 @@ public class UnitsFactory : MonoBehaviour
         print("Unit id recived "+unitId);
         switch (unitId)
         {
+            case Units.WORKER:
+                return worker;
+           
+            case Units.RECRUIT:
+                return recruit;
+
             case Units.ARCHER:
                 return archer;
+            case Units.CROSSBOW:
+                return crossbow;
+
             case Units.SWORDMAN:
                 return swordman;
+            case Units.SWORD_KNIGHT:
+                return swordKnight;
+
+            case Units.SPEARMAN:
+                return spearman;
+            case Units.SPEAR_KNIGHT:
+                return spearKnight;
+
+            case Units.SIMPLE_HORSE:
+                return simpleHorse;
+            case Units.SWORD_HORSE:
+                return swordHorse;
+            case Units.SWORD_HORSE_KNIGHT:
+                return swordHorseKnight;
+            case Units.SPEAR_HORSE:
+                return spearHorse;
+            case Units.SPEAR_HORSE_KNIGHT:
+                return spearHorseKnight;
+            case Units.ARCHER_HORSE:
+                return archerHorse;
+
+            case Units.SCOUT:
+                return scout;
+            case Units.HEALER:
+                return healer;
         }
 
         return null;

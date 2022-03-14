@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Macros;
 using UnityEngine;
 using TMPro;
 using Mirror;
@@ -7,22 +8,19 @@ using Mirror;
 public class PhaseManager : NetworkBehaviour
 {
     [SyncVar] public float timer = 1f;
-    [SyncVar]bool startTimer = false;
+    [SyncVar] public int currentPhase = 1;
     public TextMeshProUGUI timerText;
     [SerializeField] RtsNetworkManager rtsNetworkManager;
-   
-
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-        Debug.Log("Loaded the phases manager");
     }
         
 
     public void SetTimer(bool value)
     {
-        startTimer = value;
+        //startTimer = value;
     }
 
     // Start is called before the first frame update
@@ -33,32 +31,65 @@ public class PhaseManager : NetworkBehaviour
        // Update is called once per frame
     void Update()
     {
-
-        if (hasAuthority && startTimer)
+        if (isServer)
         {
-            if (timer > 0)
+            if (timer > 1)
             {
                 timer -= Time.deltaTime;
             }
             else
             {
                 print("Time is up, show battlefield");
-                startTimer = false;
-                //ChangePhase();
+                ChangePhase();
             }
 
         }
 
-        //timerText.text = Mathf.Floor(timer) + "";
+        timerText.text = Mathf.Floor(timer) + "";
 
     }
 
     public void ChangePhase()
     {
-        rtsNetworkManager.ShowBattleField();
 
-        testingClientRPC();
+        switch (currentPhase)
+        {
+            case Constents.PHASE_ONE:
+                currentPhase = Constents.PHASE_TWO;
+                SetPhaseTwo();
+                break;
+            case Constents.PHASE_TWO:
+                currentPhase = Constents.PHASE_THREE;
+                SetPhaseThree();
+                break;
+            case Constents.PHASE_THREE:
+                currentPhase = Constents.PHASE_FOUR;
+                SetPhaseFour();
+                break;
+
+
+            default:
+                break;
+        }
     }
+
+
+    public void SetPhaseTwo()
+    {
+        timer = 5f;
+        Debug.Log("Phase two started");
+    }
+
+    public void SetPhaseThree()
+    { 
+        ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
+    }
+
+    public void SetPhaseFour()
+    {
+
+    }
+
 
     [ClientRpc]
     public void testingClientRPC()
