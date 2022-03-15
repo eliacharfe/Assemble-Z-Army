@@ -25,7 +25,7 @@ TagManager:
   - FogOfWarMain
   - FogOfWarSecondary
   - W
-  - 
+  - Mountain
   - 
   - 
   - 
@@ -58,6 +58,9 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 745030041
+    locked: 0
+  - name: Mountain
+    uniqueID: 3054914297
     locked: 0
   - name: Buildings
     uniqueID: 1174373771

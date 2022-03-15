@@ -102,13 +102,25 @@ public class Unit : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+        {
             agent.speed = Speed.BaseValue / 3; // when collide with water
+        }
+        if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Mountain")))
+        {
+            agent.speed = Speed.BaseValue / 4; // when collide with mountain
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+        {
             agent.speed = Speed.BaseValue / 3; // inside water
+        }
+        if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Mountain")))
+        {
+            agent.speed = Speed.BaseValue / 4; // on a mountain
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
