@@ -8,7 +8,7 @@ public class RTSPlayer : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // buildingsFactory = FindObjectOfType<BuildingsFactory>();
     }
 
     // Update is called once per frame

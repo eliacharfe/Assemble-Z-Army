@@ -2393,7 +2393,6 @@ GameObject:
   - component: {fileID: 4050596254463708164}
   - component: {fileID: 4050596254463708166}
   - component: {fileID: 5267659290997407398}
-  - component: {fileID: 5267659290997407397}
   - component: {fileID: 5267659290997407399}
   - component: {fileID: 5267659290997407416}
   - component: {fileID: 5267659290997407419}
@@ -2401,6 +2400,7 @@ GameObject:
   - component: {fileID: 6479335012518545268}
   - component: {fileID: 7862770495059864508}
   - component: {fileID: 4050596255498891463}
+  - component: {fileID: 215582069}
   m_Layer: 9
   m_Name: HorseRoot ArcherHorse
   m_TagString: Untagged
@@ -2506,32 +2506,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &5267659290997407397
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050596254463708160}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.10294142, y: 0.57810336}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 2.53125}
-    newSize: {x: 5.75, y: 4.28125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.239835, y: 1.3175875}
-  m_EdgeRadius: 0
 --- !u!114 &5267659290997407399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2683,6 +2657,22 @@ MonoBehaviour:
   damage: 5
   arrowPrefab: {fileID: 4631532840544127888, guid: a6f22b08044b9624fb22948ad5f1cab8, type: 3}
   shootStartPoint: {fileID: 5267659290449378178}
+--- !u!70 &215582069
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4050596254463708160}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.023567228, y: 0.55960697}
+  m_Size: {x: 0.8770541, y: 1.1060303}
+  m_Direction: 0
 --- !u!1 &4050596254586091433
 GameObject:
   m_ObjectHideFlags: 0

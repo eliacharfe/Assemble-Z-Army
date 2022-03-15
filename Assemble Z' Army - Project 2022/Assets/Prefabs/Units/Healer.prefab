@@ -3272,7 +3272,6 @@ GameObject:
   - component: {fileID: 8686401416948622320}
   - component: {fileID: 5376451382570898738}
   - component: {fileID: 1495240759}
-  - component: {fileID: 1495240758}
   - component: {fileID: 1495240757}
   - component: {fileID: 3941107258277545204}
   - component: {fileID: 282371936367487678}
@@ -3282,6 +3281,7 @@ GameObject:
   - component: {fileID: 1495240763}
   - component: {fileID: 1495240764}
   - component: {fileID: 1495240765}
+  - component: {fileID: 1067299689}
   m_Layer: 9
   m_Name: UnitRoot Healer
   m_TagString: Untagged
@@ -3361,32 +3361,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1495240758
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6451427273342978360}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.10983458, y: 0.48162264}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 2.53125}
-    newSize: {x: 5.75, y: 4.28125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8676359, y: 1.124626}
-  m_EdgeRadius: 0
 --- !u!114 &1495240757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3568,6 +3542,22 @@ MonoBehaviour:
   attackTime: 0
   range: 0
   damage: 0
+--- !u!70 &1067299689
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6451427273342978360}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.020042928, y: 0.38578594}
+  m_Size: {x: 0.6403074, y: 0.78956914}
+  m_Direction: 0
 --- !u!1 &6462326373711975410
 GameObject:
   m_ObjectHideFlags: 0

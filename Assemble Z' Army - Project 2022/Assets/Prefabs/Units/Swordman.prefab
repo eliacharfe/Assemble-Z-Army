@@ -2007,7 +2007,6 @@ GameObject:
   - component: {fileID: 8255931771205816883}
   - component: {fileID: 567005033245984198}
   - component: {fileID: 937995127}
-  - component: {fileID: 937995128}
   - component: {fileID: 937995119}
   - component: {fileID: 937995120}
   - component: {fileID: 937995121}
@@ -2016,6 +2015,7 @@ GameObject:
   - component: {fileID: 937995124}
   - component: {fileID: 937995125}
   - component: {fileID: 937995126}
+  - component: {fileID: 1871744246}
   m_Layer: 9
   m_Name: UnitRoot Swordman
   m_TagString: Untagged
@@ -2093,32 +2093,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &937995128
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4064524038272786330}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.10983458, y: 0.48162264}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 2.53125}
-    newSize: {x: 5.75, y: 4.28125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8676359, y: 1.124626}
-  m_EdgeRadius: 0
 --- !u!114 &937995119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2290,6 +2264,22 @@ NavMeshAgent:
   m_BaseOffset: 0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!70 &1871744246
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064524038272786330}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.028504506, y: 0.4139136}
+  m_Size: {x: 0.55700856, y: 0.82767415}
+  m_Direction: 0
 --- !u!1 &4167875734060558604
 GameObject:
   m_ObjectHideFlags: 0

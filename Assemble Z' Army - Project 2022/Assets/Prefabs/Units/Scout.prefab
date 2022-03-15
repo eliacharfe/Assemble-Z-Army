@@ -1658,7 +1658,6 @@ GameObject:
   - component: {fileID: 9218264926214484323}
   - component: {fileID: 4651594133503375204}
   - component: {fileID: 3825313102693849529}
-  - component: {fileID: 3825313102693849528}
   - component: {fileID: 3825313102693849522}
   - component: {fileID: 3825313102693849523}
   - component: {fileID: 3825313102693849524}
@@ -1666,6 +1665,7 @@ GameObject:
   - component: {fileID: 3825313102693849526}
   - component: {fileID: 3825313102693849527}
   - component: {fileID: 3825313102693849530}
+  - component: {fileID: 544193672}
   m_Layer: 9
   m_Name: UnitRoot Scout
   m_TagString: Untagged
@@ -1743,32 +1743,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &3825313102693849528
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3248051142847750133}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.033194795, y: 0.44878018}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.375, y: 2.53125}
-    newSize: {x: 5.75, y: 4.28125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8457383, y: 1.0589411}
-  m_EdgeRadius: 0
 --- !u!195 &3825313102693849522
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1918,6 +1892,22 @@ MonoBehaviour:
   attackTime: 1
   range: 10
   damage: 10
+--- !u!70 &544193672
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3248051142847750133}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.34570417}
+  m_Size: {x: 0.49999976, y: 0.82965297}
+  m_Direction: 0
 --- !u!1 &3256316139674199564
 GameObject:
   m_ObjectHideFlags: 0

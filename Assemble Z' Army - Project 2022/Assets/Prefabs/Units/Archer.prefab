@@ -1063,7 +1063,6 @@ GameObject:
   - component: {fileID: 700749319411839056}
   - component: {fileID: 4625389183031783069}
   - component: {fileID: 7460541332405204801}
-  - component: {fileID: 5817802744255445666}
   - component: {fileID: 7297698494887315082}
   - component: {fileID: 7297698494887315081}
   - component: {fileID: 7297698494887315083}
@@ -1073,6 +1072,7 @@ GameObject:
   - component: {fileID: 4318553057515879647}
   - component: {fileID: 2567698320729567831}
   - component: {fileID: 8573507665877398024}
+  - component: {fileID: 9170647688917714891}
   m_Layer: 9
   m_Name: UnitRoot Archer
   m_TagString: Untagged
@@ -1130,32 +1130,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &5817802744255445666
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501954856113418542}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.033634186, y: 0.42867634}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
-    newSize: {x: 5.75, y: 4.28125}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.897262, y: 1.1403568}
-  m_EdgeRadius: 0
 --- !u!50 &7297698494887315082
 Rigidbody2D:
   serializedVersion: 4
@@ -1352,6 +1326,22 @@ MonoBehaviour:
     BaseValue: 0.5
   Speed:
     BaseValue: 0
+--- !u!70 &9170647688917714891
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501954856113418542}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.33731386}
+  m_Size: {x: 0.49999976, y: 0.77512413}
+  m_Direction: 0
 --- !u!1 &1653506800946793722
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,6 +67,9 @@ public class Projectile : MonoBehaviour
         posX = rotationCenter.x + Mathf.Cos(angle) * radius;
         posY = rotationCenter.y + Mathf.Sin(angle) * radius;
 
+        //loat angleArrow = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
+        // transform.rotation = Quaternion.Euler(new Vector3(0, 0, angleArrow));
+
         if (archerPosition.x < targetPosition.x)
         {
             if (angle >= angleEnd)
@@ -75,6 +78,7 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
 
             angle -= 0.05f + Time.deltaTime * AngularSpeed;
+            // transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         else
         {
@@ -84,6 +88,11 @@ public class Projectile : MonoBehaviour
                 Destroy(gameObject);
 
             angle += 0.05f + Time.deltaTime * AngularSpeed;
+            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Rad2Deg * (angle)));
+           // Debug.Log(angle);
+            //float angle2 = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
+            //   transform.rotation = Quaternion.Euler(new Vector3(0, 0, (angle)  * Mathf.Rad2Deg));
+         
         }
     }
     //----------------------------------------

@@ -30,7 +30,7 @@ public class Unit : MonoBehaviour
     private Vector3 destination;
     UnitMovement move;
 
-    private BoxCollider2D myBoxCollider = null;
+    private CapsuleCollider2D myCapsuleCollider = null;
 
     private bool isDead;
 
@@ -66,7 +66,7 @@ public class Unit : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         move = GetComponent<UnitMovement>();
 
-        myBoxCollider = GetComponent<BoxCollider2D>();
+        myCapsuleCollider = GetComponent<CapsuleCollider2D>();
 
         InitStats(id);
 
@@ -101,13 +101,13 @@ public class Unit : MonoBehaviour
     //-------------------------------------
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+        if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
             agent.speed = Speed.BaseValue / 3; // when collide with water
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+        if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
             agent.speed = Speed.BaseValue / 3; // inside water
     }
 
@@ -283,7 +283,7 @@ public class Unit : MonoBehaviour
             case Units.ARCHER:
                 {
                     Speed.BaseValue = agent.speed = 30f;
-                    Attack.BaseValue = 13f;
+                    Attack.BaseValue = 18f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 50f;
                     SpeedAttack.BaseValue = 1.4f;
