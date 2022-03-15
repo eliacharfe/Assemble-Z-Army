@@ -6462,6 +6462,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 8753041854152823009, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
+      propertyPath: btnClickErrorClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c16e2b74e892b4c4aa5721926046f3bb, type: 3}
+    - target: {fileID: 8753041854152823009, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
+      propertyPath: btnClickErrorVolume
+      value: 0.426
+      objectReference: {fileID: 0}
     - target: {fileID: 8753041854152823014, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
       propertyPath: m_RootOrder
       value: 8

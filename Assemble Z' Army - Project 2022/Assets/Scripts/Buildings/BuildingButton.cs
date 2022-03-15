@@ -21,6 +21,13 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     ResourcesPlayer resourcesPlayer = null;
 
+    AudioPlayer audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
     private void Start()
     {
         resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
@@ -42,6 +49,12 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             // Debug.Log("Player set");
             // player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
 
+        }
+
+        if (!resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
+        {
+            audioPlayer.PlayBtnClickErrorClip();
+            return;
         }
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

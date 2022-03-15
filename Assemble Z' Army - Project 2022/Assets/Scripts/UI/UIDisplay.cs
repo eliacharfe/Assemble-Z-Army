@@ -44,16 +44,38 @@ public class UIDisplay : MonoBehaviour
         goldText.text = resourcesPlayer.getResource(Macros.Resources.GOLD).ToString();
         diamondsSlider.value = resourcesPlayer.getResource(Macros.Resources.DIAMONDS);
         diamondsText.text = resourcesPlayer.getResource(Macros.Resources.DIAMONDS).ToString();
+
+        if (woodSlider.value <= 0)
+        {
+            setSliderColorEmpty(woodSlider);
+        }
+        if (metalSlider.value <= 0)
+        {
+            setSliderColorEmpty(metalSlider);
+        }
+        if (goldSlider.value <= 0)
+        {
+            setSliderColorEmpty(goldSlider);
+        }
+        if (diamondsSlider.value <= 0)
+        {
+            setSliderColorEmpty(woodSlider);
+        }
+    }
+
+    private void setSliderColorEmpty(Slider slider)
+    {
+        slider.transform.Find("Background").GetComponent<Image>().color = Color.red;
     }
 }
 
 
-    // woodSlider.value = resourcesPlayer.GetWood();
-        // woodText.text = resourcesPlayer.GetWood().ToString();
+// woodSlider.value = resourcesPlayer.GetWood();
+// woodText.text = resourcesPlayer.GetWood().ToString();
 
-        // metalSlider.value = resourcesPlayer.GetMetal();
-        // metalText.text = resourcesPlayer.GetMetal().ToString();
-        // goldSlider.value = resourcesPlayer.GetGold();
-        // goldText.text = resourcesPlayer.GetGold().ToString();
-        // diamondsSlider.value = resourcesPlayer.GetDiamonds();
-        // diamondsText.text = resourcesPlayer.GetDiamonds().ToString();
+// metalSlider.value = resourcesPlayer.GetMetal();
+// metalText.text = resourcesPlayer.GetMetal().ToString();
+// goldSlider.value = resourcesPlayer.GetGold();
+// goldText.text = resourcesPlayer.GetGold().ToString();
+// diamondsSlider.value = resourcesPlayer.GetDiamonds();
+// diamondsText.text = resourcesPlayer.GetDiamonds().ToString();

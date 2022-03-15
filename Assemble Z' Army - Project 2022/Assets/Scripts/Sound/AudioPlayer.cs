@@ -24,14 +24,9 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip horseGallopClip;
     [SerializeField] [Range(0f, 1f)] float horseGallopVolume = 1f;
 
-    // [SerializeField]
-    // AudioSource myAudioSource;
-
-    //   void Start()
-    // {
-    //     myAudioSource = GetComponent<AudioSource>();
-     
-    // }
+    [Header("ButtonClick Error")]
+    [SerializeField] AudioClip btnClickErrorClip;
+    [SerializeField] [Range(0f, 1f)] float btnClickErrorVolume = 1f;
 
 
     public void PlayShootingClip()
@@ -57,6 +52,11 @@ public class AudioPlayer : MonoBehaviour
     public void PlayHorseGallopClip()
     {
         PlayClip(horseGallopClip, horseGallopVolume);
+    }
+
+    public void PlayBtnClickErrorClip()
+    {
+        PlayClip(btnClickErrorClip, btnClickErrorVolume);
     }
 
     public void StopHorseGallopClip()

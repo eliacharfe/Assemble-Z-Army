@@ -8,9 +8,7 @@ using System;
 
 public class Building : NetworkBehaviour
 {
-
     // Type of solider building recived and create.
-
 
     [Header("Spawning Settings")]
     [SerializeField] private float spawnTime = 5f;
@@ -49,6 +47,8 @@ public class Building : NetworkBehaviour
     public static event Action<Building> AuthortyOnBuildingSpawned;
     public static event Action<Building> AuthortyOnBuildingDeSpawned;
 
+    Building building = null;
+
     void Start()
     {
         //Set the building accoridng to the existed navmesh z position.
@@ -67,6 +67,8 @@ public class Building : NetworkBehaviour
     //-------------------
     public void InitiateCosts()
     {
+        building = this;
+
         costResourcesBuilding = new List<int>();
 
         costResourcesBuilding.Add(woodCost);
@@ -106,7 +108,6 @@ public class Building : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (!this.enabled)
         {
             return;
