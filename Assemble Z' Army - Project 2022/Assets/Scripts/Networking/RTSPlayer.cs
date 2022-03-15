@@ -16,7 +16,7 @@ public class RTSPlayer : NetworkBehaviour
 
     public GameObject unitSpawner = null;
 
-    public List<Unit> m_units = new List<Unit>();
+    public List<GameObject> m_workers = new List<GameObject>();
 
     public List<int> m_unitsId = new List<int>();
 
@@ -131,8 +131,6 @@ public class RTSPlayer : NetworkBehaviour
         ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
     }
 
-
-
     public void SpawnRecruitedUnit()
     {
         var factory = FindObjectOfType<UnitsFactory>();
@@ -141,7 +139,7 @@ public class RTSPlayer : NetworkBehaviour
 
         foreach(int id in copy)
         {
-            GameObject unit = FindObjectOfType<UnitsFactory>().GetUnitPrefab((Macros.Units)id).gameObject;
+            GameObject unit = factory.GetUnitPrefab((Macros.Units)id).gameObject;
             
             GameObject unitInstance = Instantiate(unit, phaseThreePos, Quaternion.identity);
 
@@ -153,12 +151,18 @@ public class RTSPlayer : NetworkBehaviour
     }
 
 
-    // TODO Delete later.
-    [ClientRpc]
-    public void RpcPlayerLostMsg()
+    [Server]
+    public void removeWorkers()
     {
-        print("Player has lost");
+        m_unitsId.Clear();
+
+        foreach(GameObject worker in m_workers)
+        {
+            Destroy(worker);
+        }
     }
+
+
     #endregion
 
     #region Client
@@ -228,7 +232,7 @@ public class RTSPlayer : NetworkBehaviour
         if (m_unitsId.Count <= 0)
         {
             print("No units left");
-            RpcPlayerLostMsg();
+
         }
     }
 
@@ -237,28 +241,6 @@ public class RTSPlayer : NetworkBehaviour
     private void AuthortyHandleUnitSpawned(Unit unit)
     {
         if (!hasAuthority) return;
-    }
-
-
-    public void ShowUnits(bool value)
-    {
-        foreach (Unit unit in m_units)
-        {
-            unit.ReintilizeNavMesh();
-
-            unit.gameObject.SetActive(value);
-        }
-    }
-
-
-    public void SetUnitsPositions(Vector3 pos)
-    {
-        foreach (Unit unit in m_units)
-        {
-            unit.SetPostion(pos);
-
-            unit.ReintilizeNavMesh();
-        }
     }
 
 }

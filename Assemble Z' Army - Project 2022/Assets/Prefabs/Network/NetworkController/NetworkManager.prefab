@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6408644673840889567}
   - component: {fileID: 6408644673840889552}
+  - component: {fileID: 6351800558604142752}
   - component: {fileID: 6408644673840889553}
   - component: {fileID: 6408644673840889566}
   m_Layer: 0
@@ -68,9 +69,39 @@ MonoBehaviour:
   - {fileID: 4631532840544127888, guid: a6f22b08044b9624fb22948ad5f1cab8, type: 3}
   - {fileID: 5795000933874785539, guid: b3052b1841e0369428b853b7bdfb18d9, type: 3}
   - {fileID: 2115192308945591727, guid: e9daf5199837e4b49b0d27b951db7ca6, type: 3}
-  spawnerPrefab: {fileID: 7092840229608560825, guid: a5970b718cb29c043bd49836e66663d0, type: 3}
+  workerPrefab: {fileID: 6384757247955166901, guid: cc20b7703a12e6d4daf27e5b4a481ff7, type: 3}
+  recruitPrefab: {fileID: 6384757247955166901, guid: cc20b7703a12e6d4daf27e5b4a481ff7, type: 3}
   gameOverHandler: {fileID: 2115192308945591727, guid: e9daf5199837e4b49b0d27b951db7ca6, type: 3}
   players: []
+--- !u!114 &6351800558604142752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6408644673840889564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7215fc9ce6fc549b64f1cc02167f09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordman: {fileID: 6311636292392085665, guid: e396909d42917004388cd3988ffcfd9e, type: 3}
+  spearman: {fileID: 0}
+  archer: {fileID: 2540240371280817609, guid: 44910acd60a28e04aac40c60b52d54cd, type: 3}
+  simpleHorse: {fileID: 0}
+  swordKnight: {fileID: 5975238431581766621, guid: db0eacf87adf3744295bc08017aaba96, type: 3}
+  spearKnight: {fileID: 0}
+  swordHorse: {fileID: 0}
+  spearHorse: {fileID: 0}
+  archerHorse: {fileID: 0}
+  swordHorseKnight: {fileID: 0}
+  spearHorseKnight: {fileID: 0}
+  crossbow: {fileID: 0}
+  healer: {fileID: 0}
+  catapult: {fileID: 0}
+  scout: {fileID: 0}
+  worker: {fileID: 6384757247955166907, guid: cc20b7703a12e6d4daf27e5b4a481ff7, type: 3}
+  recruit: {fileID: 0}
 --- !u!114 &6408644673840889553
 MonoBehaviour:
   m_ObjectHideFlags: 0

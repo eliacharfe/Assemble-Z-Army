@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4930170893203616275}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -11.019562, y: -8.710083, z: 4.323309}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -46,6 +46,7 @@ MonoBehaviour:
   swordman: {fileID: 6311636292392085665, guid: e396909d42917004388cd3988ffcfd9e, type: 3}
   spearman: {fileID: 0}
   archer: {fileID: 2540240371280817609, guid: 44910acd60a28e04aac40c60b52d54cd, type: 3}
+  simpleHorse: {fileID: 0}
   swordKnight: {fileID: 5975238431581766621, guid: db0eacf87adf3744295bc08017aaba96, type: 3}
   spearKnight: {fileID: 0}
   swordHorse: {fileID: 0}
@@ -57,3 +58,5 @@ MonoBehaviour:
   healer: {fileID: 0}
   catapult: {fileID: 0}
   scout: {fileID: 0}
+  worker: {fileID: 6384757247955166907, guid: cc20b7703a12e6d4daf27e5b4a481ff7, type: 3}
+  recruit: {fileID: 0}

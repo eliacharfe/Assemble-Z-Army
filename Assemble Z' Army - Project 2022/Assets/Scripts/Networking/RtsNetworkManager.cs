@@ -9,7 +9,8 @@ using System;
 
 public class RtsNetworkManager : NetworkManager
 {
-    [SerializeField] GameObject spawnerPrefab = null;
+    [SerializeField] GameObject workerPrefab = null;
+    [SerializeField] GameObject recruitPrefab = null;
 
     [SerializeField] GameObject gameOverHandler = null;
 
@@ -29,12 +30,12 @@ public class RtsNetworkManager : NetworkManager
         print("Player have been added");
         players.Add(player);
 
-        GameObject baseInstance = Instantiate(spawnerPrefab,
-              player.transform.position, Quaternion.identity);
+        //GameObject baseInstance = Instantiate(spawnerPrefab,
+              //player.transform.position, Quaternion.identity);
 
-        NetworkServer.Spawn(baseInstance, player.connectionToClient);
+        //NetworkServer.Spawn(baseInstance, player.connectionToClient);
 
-        player.unitSpawner = baseInstance;
+        //player.unitSpawner = baseInstance;
 
         player.SetPartyOwner(players.Count == 1);
 
@@ -43,6 +44,8 @@ public class RtsNetworkManager : NetworkManager
         if(players.Count >= 2)
         {
            FindObjectOfType<PhaseManager>().SetTimer(true);
+
+           SetPhaseOne();
         }
     }
 
@@ -74,13 +77,13 @@ public class RtsNetworkManager : NetworkManager
 
             player.phaseThreePos = pos;
 
-            player.SpawnRecruitedUnit();
+            //player.SpawnRecruitedUnit();
 
-            GameObject baseInstance = Instantiate(spawnerPrefab,
-             startPos, Quaternion.identity);
+            //GameObject baseInstance = Instantiate(spawnerPrefab,
+            // startPos, Quaternion.identity);
 
             // Spawn the player on server.
-            NetworkServer.Spawn(baseInstance, player.connectionToClient);
+            //NetworkServer.Spawn(baseInstance, player.connectionToClient);
 
         }
 
@@ -91,23 +94,51 @@ public class RtsNetworkManager : NetworkManager
     // Set wokers units which suppose to build with given resources avaible.
     public void SetPhaseOne()
     {
-
-        UnitsFactory factory = new UnitsFactory();
-
-        Vector3 startinPoint = GetStartPosition().position;
+        UnitsFactory factory = gameObject.GetComponent<UnitsFactory>();
 
         foreach (RTSPlayer player in players)
         {
-            for(int i = 0; i < Constents.INITIAL_WORKERS_SIZE; i++)
+
+            Vector3 startinPoint = player.transform.position;
+
+            for (int i = 0; i < Constents.INITIAL_WORKERS_SIZE; i++)
             {
-                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Units.WORKER), startinPoint, Quaternion.identity).gameObject;
+                print("Befor init player");
+                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.WORKER).gameObject, startinPoint, Quaternion.identity);
+                print("After init player");
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);
+
+                player.m_workers.Add(workerInstance);
             }
         }
 
     }
+
+    // Set wokers units which suppose to build with given resources avaible.
+    public void SetPhaseTwo()
+    {
+        UnitsFactory factory = gameObject.GetComponent<UnitsFactory>();
+
+        foreach (RTSPlayer player in players)
+        {
+
+            Vector3 startinPoint = player.transform.position;
+
+            player.removeWorkers();
+
+            for (int i = 0; i < Constents.INITIAL_WORKERS_SIZE; i++)
+            {
+                print("Spawn recruit");
+            }
+        }
+
+    }
+
+
+
+
 
 
 

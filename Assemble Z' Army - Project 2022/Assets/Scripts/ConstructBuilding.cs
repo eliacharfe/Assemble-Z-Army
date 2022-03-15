@@ -5,10 +5,12 @@ using UnityEngine;
 // Script for worker allowing to build required building.
 public class ConstructBuilding : MonoBehaviour
 {
-    public BuilidingConstruction building;
+    public BuilidingConstruction buildingTarget;
     public float time = 0;
 
     private Unit unit = null;
+
+    bool isBuilding = false;
 
     private void Start()
     {
@@ -19,20 +21,32 @@ public class ConstructBuilding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!building) { return; }
+        if (!buildingTarget) { return; }
 
-        if (!TryToBuild()) { return; }
+        if(!isBuilding) { return; }
 
         IncreaseTimeBuilding();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        BuilidingConstruction tempBuild = collision.GetComponent<BuilidingConstruction>();
+
+        if (tempBuild && this.buildingTarget == tempBuild)
+        {
+            isBuilding = true;
+
+            unit.StopMove();
+        }
+
     }
 
 
     // Increase the building time left.
     private void IncreaseTimeBuilding()
     {
-        unit.StopMove(); // Stop when reached the building needed to be constructed.
-
-        if (!building.enabled)
+        // Stop when reached the building needed to be constructed.
+        if (!buildingTarget.enabled)
         {
             ResetBuildingTarget();
             return;
@@ -44,7 +58,7 @@ public class ConstructBuilding : MonoBehaviour
         }
         else
         {
-            building.CmdIncreasingBuildingTime(0.1f);
+            buildingTarget.CmdIncreasingBuildingTime(0.1f);
             time = 0;
         }
     }
@@ -53,14 +67,15 @@ public class ConstructBuilding : MonoBehaviour
     // Check worker and building at minimum distance.
     private bool TryToBuild()
     {
-        return Vector2.Distance(building.transform.position, transform.position) < 25f;
+        return Vector2.Distance(buildingTarget.transform.position, transform.position) < 50f;
     }
 
 
     // Intlize target building and allowing worker to move.
     public void ResetBuildingTarget()
     {
-        building = null;
+        buildingTarget = null;
+        isBuilding = false;
         time = 0;
         Unit unit = gameObject.GetComponent<Unit>() as Unit;
         unit.ContinutMove();
@@ -70,6 +85,6 @@ public class ConstructBuilding : MonoBehaviour
     // Set building needed to be constructed.
     public void SetBuildingTarget(BuilidingConstruction building)
     {
-        this.building = building;
+        this.buildingTarget = building;
     }
 }

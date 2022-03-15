@@ -9,6 +9,7 @@ public class PhaseManager : NetworkBehaviour
 {
     [SyncVar] public float timer = 1f;
     [SyncVar] public int currentPhase = 1;
+    [SyncVar] private bool startTimer = false;
     public TextMeshProUGUI timerText;
     [SerializeField] RtsNetworkManager rtsNetworkManager;
 
@@ -20,7 +21,7 @@ public class PhaseManager : NetworkBehaviour
 
     public void SetTimer(bool value)
     {
-        //startTimer = value;
+        startTimer = value;
     }
 
     // Start is called before the first frame update
@@ -31,7 +32,7 @@ public class PhaseManager : NetworkBehaviour
        // Update is called once per frame
     void Update()
     {
-        if (isServer)
+        if (isServer && startTimer)
         {
             if (timer > 1)
             {
@@ -40,6 +41,7 @@ public class PhaseManager : NetworkBehaviour
             else
             {
                 print("Time is up, show battlefield");
+                startTimer = false;
                 ChangePhase();
             }
 
@@ -76,12 +78,15 @@ public class PhaseManager : NetworkBehaviour
 
     public void SetPhaseTwo()
     {
-        timer = 5f;
-        Debug.Log("Phase two started");
+        timer = 35f;
+        ((RtsNetworkManager)NetworkManager.singleton).SetPhaseTwo();
+        startTimer = true;
     }
 
     public void SetPhaseThree()
-    { 
+    {
+        startTimer = false;
+
         ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
     }
 
