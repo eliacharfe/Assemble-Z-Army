@@ -108,6 +108,11 @@ public class Unit : MonoBehaviour
         if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Mountain")))
         {
             agent.speed = Speed.BaseValue / 4; // when collide with mountain
+
+            if (id == Units.ARCHER)
+            {
+                ReachDistance.BaseValue = 100f;
+            }
         }
     }
 
@@ -121,11 +126,21 @@ public class Unit : MonoBehaviour
         {
             agent.speed = Speed.BaseValue / 4; // on a mountain
         }
+
+        if (id == Units.ARCHER)
+        {
+            ReachDistance.BaseValue = 100f;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         agent.speed = Speed.BaseValue; // exit from trigger
+
+        if (id == Units.ARCHER)
+        {
+            ReachDistance.BaseValue = 50f;
+        }
     }
 
 

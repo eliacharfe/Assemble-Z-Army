@@ -89,17 +89,21 @@ public class Projectile : MonoBehaviour
 
             angle += 0.05f + Time.deltaTime * AngularSpeed;
             //transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Rad2Deg * (angle)));
-           // Debug.Log(angle);
+            // Debug.Log(angle);
             //float angle2 = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
             //   transform.rotation = Quaternion.Euler(new Vector3(0, 0, (angle)  * Mathf.Rad2Deg));
-         
+
         }
     }
     //----------------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // arrowPos = transform.position;
-        Health target = collision.GetComponent<Health>();
+         Health target = collision.GetComponent<Health>();
+        if (!target)
+        {
+            return;
+        }
+
         int collisionTeamNumber = collision.gameObject.GetComponent<Targetable>().teamNumber;
 
         if (target && collisionTeamNumber != teamNumber)

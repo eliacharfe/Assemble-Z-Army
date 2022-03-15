@@ -38,6 +38,8 @@ public abstract class Attacker : MonoBehaviour
             }
             return;
         }
+
+        range = GetComponent<Unit>().ReachDistance.BaseValue;
         
         if (Vector2.Distance(gameObject.transform.position, this.target.transform.position) < range)
         {
