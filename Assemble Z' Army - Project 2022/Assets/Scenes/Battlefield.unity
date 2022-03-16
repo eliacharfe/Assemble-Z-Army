@@ -1028,6 +1028,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitsFactory
       objectReference: {fileID: 0}
+    - target: {fileID: 4930170893203616275, guid: ef642ca909db16b40b8995db389b6244, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4930170893203616284, guid: ef642ca909db16b40b8995db389b6244, type: 3}
       propertyPath: archer
       value: 

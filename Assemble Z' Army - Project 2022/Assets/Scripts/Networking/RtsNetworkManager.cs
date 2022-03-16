@@ -9,8 +9,11 @@ using System;
 
 public class RtsNetworkManager : NetworkManager
 {
-    [SerializeField] GameObject workerPrefab = null;
-    [SerializeField] GameObject recruitPrefab = null;
+    [Header ("Workers")]
+    [SerializeField] int amountOfWorkers = 10;
+
+    [Header("Recruits")]
+    [SerializeField] int amountOfRecruits = 10;
 
     [SerializeField] GameObject gameOverHandler = null;
 
@@ -77,7 +80,7 @@ public class RtsNetworkManager : NetworkManager
 
             player.phaseThreePos = pos;
 
-            //player.SpawnRecruitedUnit();
+            player.SpawnRecruitedUnit();
 
             //GameObject baseInstance = Instantiate(spawnerPrefab,
             // startPos, Quaternion.identity);
@@ -101,11 +104,10 @@ public class RtsNetworkManager : NetworkManager
 
             Vector3 startinPoint = player.transform.position;
 
-            for (int i = 0; i < Constents.INITIAL_WORKERS_SIZE; i++)
+            for (int i = 0; i < amountOfWorkers; i++)
             {
-                print("Befor init player");
+
                 GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.WORKER).gameObject, startinPoint, Quaternion.identity);
-                print("After init player");
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);
@@ -128,9 +130,12 @@ public class RtsNetworkManager : NetworkManager
 
             player.removeWorkers();
 
-            for (int i = 0; i < Constents.INITIAL_WORKERS_SIZE; i++)
+            for (int i = 0; i < amountOfRecruits; i++)
             {
-                print("Spawn recruit");
+                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.RECRUIT).gameObject, startinPoint, Quaternion.identity);
+
+                // Spawn the player on server.
+                NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);
             }
         }
 

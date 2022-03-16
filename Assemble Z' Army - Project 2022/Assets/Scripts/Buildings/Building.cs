@@ -15,6 +15,7 @@ public class Building : NetworkBehaviour
     [Header("Spawning Settings")]
     [SerializeField] private float spawnTime = 5f;
     [SerializeField] private float spawnDistancePoint = 1.5f;
+    [SerializeField] [SyncVar(hook = nameof(HandleRecruitmentTimeUpdated))] float timePassed = 0;
     [SerializeField] private Transform spawnPoint = null;
     [SerializeField] private Transform enterPoint = null;
 
@@ -38,7 +39,6 @@ public class Building : NetworkBehaviour
     private Unit spawnUnitPrefab = null;
 
     private bool inProgess = false;
-    private float timeLeft = 0;
 
     private UnitsFactory unitsFactory = null;
 
@@ -72,6 +72,11 @@ public class Building : NetworkBehaviour
     public override void OnStopAuthority()
     {
         AuthortyOnBuildingDeSpawned?.Invoke(this);
+    }
+
+    public void HandleRecruitmentTimeUpdated(float oldTime,float newTime)
+    {
+        timeSlider.setValue(newTime/spawnTime);
     }
     #endregion
 
@@ -151,31 +156,41 @@ public class Building : NetworkBehaviour
 
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.Id, unit.id);
 
+        print(spawnUnitPrefab);
+
         RemoveUnitFromWaitingList(unit);
 
         if (spawnUnitPrefab)
         {
             inProgess = true;
 
+            unit.SetDead();
+
             Destroy(unit.gameObject);
+
         }
 
     }
 
 
     //Spawn new unit.
-    private void SpawnNewUnit()
+    [Command]
+    private void CmdSpawnNewUnit()
     {
+        print("Unit to spawn" +spawnUnitPrefab);
+
         Unit unit = Instantiate(spawnUnitPrefab, spawnPoint.position, Quaternion.identity) as Unit;
 
-        unit.MoveTo(spawnPoint.position + new Vector3(10f, 0, 0));
+        NetworkServer.Spawn(unit.gameObject, connectionToClient);
+
+        //unit.MoveTo(spawnPoint.position + new Vector3(10f, 0, 0));
     }
 
 
     // Intilize recruitment data time and allow recruit other unit.
     private void FreeBuildingSpace()
     {
-        timeLeft = 0f;
+        timePassed = 0f;
         inProgess = false;
         timeSlider.resetSlider();
     }
@@ -197,29 +212,27 @@ public class Building : NetworkBehaviour
     // Deal with unit spawing time.
     private void SpawningProgession()
     {
+
         if (!inProgess)
         {
             TryToRecruitUnit();
         }
         else
         {
-            if (timeLeft < 0.1f)
+            if (timePassed < spawnTime)
             {
-                timeLeft += Time.deltaTime;
+                timePassed += Time.deltaTime;
             }
             else
             {
-                timeSlider.IncreaseSlider(0.1f / spawnTime);
-                timeLeft = 0;
+                CmdSpawnNewUnit();
+
+                FreeBuildingSpace();
+
+                timePassed = 0;
             }
         }
 
-        if (timeSlider.SliderFinished())
-        {
-            SpawnNewUnit();
-
-            FreeBuildingSpace();
-        }
     }
 
 

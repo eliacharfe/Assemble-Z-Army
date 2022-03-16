@@ -78,7 +78,7 @@ public class PhaseManager : NetworkBehaviour
 
     public void SetPhaseTwo()
     {
-        timer = 35f;
+        timer = 100f;
         ((RtsNetworkManager)NetworkManager.singleton).SetPhaseTwo();
         startTimer = true;
     }

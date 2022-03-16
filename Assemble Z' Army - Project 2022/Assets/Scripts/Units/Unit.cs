@@ -371,6 +371,15 @@ public class Unit : NetworkBehaviour
                     SpeedAttack.BaseValue = 2f;
                     break;
                 };
+            case Units.RECRUIT:
+                {
+                    Speed.BaseValue = agent.speed = 25f;
+                    Attack.BaseValue = 5f;
+                    Defense.BaseValue = 0f;
+                    ReachDistance.BaseValue = 5f;
+                    SpeedAttack.BaseValue = 2f;
+                    break;
+                };
             case Units.SPEARMAN:
                 {
                     Speed.BaseValue = agent.speed = 20f;

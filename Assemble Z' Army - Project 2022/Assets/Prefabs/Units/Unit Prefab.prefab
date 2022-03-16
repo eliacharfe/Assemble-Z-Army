@@ -86,10 +86,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 74712451
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 2833043080597125133, guid: 19f2f91e3fdfd8740b7c57578eee70ed, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.3726415, b: 0.3726415, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -234,6 +234,17 @@ MonoBehaviour:
         m_CallState: 2
   selectionCircle: {fileID: 4032915065206257494}
   id: 3
+  isDead: 0
+  Speed:
+    BaseValue: 0
+  Attack:
+    BaseValue: 0
+  Defense:
+    BaseValue: 0
+  ReachDistance:
+    BaseValue: 0
+  SpeedAttack:
+    BaseValue: 0
 --- !u!114 &3721467680191171369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +343,8 @@ MonoBehaviour:
   ReachDistance:
     BaseValue: 0
   SpeedAttack:
+    BaseValue: 0
+  Speed:
     BaseValue: 0
 --- !u!114 &-9165225028707571605
 MonoBehaviour:
@@ -448,7 +461,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1174373771
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.04277907, g: 0.9716981, b: 0.042891577, a: 1}
