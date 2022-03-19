@@ -734,6 +734,8 @@ MonoBehaviour:
     BaseValue: 0
   SpeedAttack:
     BaseValue: 0
+  halo: {fileID: 0}
+  haloBack: {fileID: 0}
 --- !u!114 &2644113536506946191
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,8 +20,7 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-
-    [SerializeField] private SpriteRenderer selectionCircle = null;
+    [SerializeField] private GameObject selectionAreaCircle = null;
 
     public static event Action<Unit> OnUnitSpawned;
     public static event Action<Unit> OnDeUnitSpawned;
@@ -43,6 +42,9 @@ public class Unit : MonoBehaviour
     // StatModifier mod1, mod2;
 
     AudioPlayer audioPlayer;
+
+    [SerializeField] private GameObject halo;
+    [SerializeField] private GameObject haloBack;
 
     private void Awake()
     {
@@ -70,11 +72,11 @@ public class Unit : MonoBehaviour
 
         InitStats(id);
 
+        InitColor();
 
-        if (selectionCircle)
-        {
-            selectionCircle.color = getTeamColor();
-        }
+
+
+        selectionAreaCircle.GetComponent<SpriteRenderer>().color = getTeamColor();
 
         if (gameObject.GetComponent<Targetable>() && gameObject.GetComponent<Targetable>().teamNumber == 1)
         {
@@ -201,6 +203,7 @@ public class Unit : MonoBehaviour
     //----------------------------
     public void Select()
     {
+
         onSelected?.Invoke();
     }
     //----------------------------
@@ -266,7 +269,16 @@ public class Unit : MonoBehaviour
     {
         if (gameObject.GetComponent<Targetable>())
         {
-            return gameObject.GetComponent<Targetable>().teamNumber == 0 ? Color.red : Color.green;
+            switch (gameObject.GetComponent<Targetable>().teamNumber)
+            {
+                case 0: return Color.green;
+                case 1: return Color.red;
+                case 2: return Color.blue;
+                case 3: return Color.cyan;
+            }
+
+
+            // return gameObject.GetComponent<Targetable>().teamNumber == 0 ? Color.red : Color.green;
         }
         return Color.green;
     }
@@ -291,6 +303,18 @@ public class Unit : MonoBehaviour
     public void StopHorseGallop()
     {
         audioPlayer.StopHorseGallopClip();
+    }
+    //-------------------
+    private void InitColor()
+    {
+        if (gameObject.GetComponent<Targetable>())
+        {
+            Color tempColor = getTeamColor();
+            tempColor.a = 0.2f;
+            halo.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
+            tempColor.a = 0.1f;
+            haloBack.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
+        }
     }
 
     //-------------------
