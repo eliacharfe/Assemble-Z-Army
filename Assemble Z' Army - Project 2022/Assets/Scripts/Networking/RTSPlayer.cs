@@ -12,18 +12,15 @@ public class RTSPlayer : NetworkBehaviour
 
     public event Action<int> ClientOnResourcesUpdated;
 
+  public static event Action ClientOnInfoUpdated;
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // buildingsFactory = FindObjectOfType<BuildingsFactory>();
-    }
+    [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
+    private string displayName;
 
-    // Update is called once per frame
-    void Update()
+    public string GetDisplayName()
     {
-
+        return displayName;
     }
 
     public bool GetIsPartyOwner()
@@ -41,12 +38,26 @@ public class RTSPlayer : NetworkBehaviour
 
 
     #region Server
+
+    [Server]
+    public void SetDisplayName(string displayName)
+    {
+        this.displayName = displayName;
+    }
+
+
     [Server]
     public void SetPartyOwner(bool state)
     {
         isPartyOwner = state;
     }
 
+    public override void OnStartServer()
+    {
+
+
+        DontDestroyOnLoad(gameObject);
+    }
 
 
     #endregion
@@ -59,11 +70,15 @@ public class RTSPlayer : NetworkBehaviour
     {
         if (NetworkServer.active) { return; }
 
-           ((RtsNetworkManager)NetworkManager.singleton).Players.Add(this);
+        DontDestroyOnLoad(gameObject);
+
+        ((RtsNetworkManager)NetworkManager.singleton).Players.Add(this);
     }
 
     public override void OnStopClient()
     {
+         ClientOnInfoUpdated?.Invoke();
+
         if (!isClientOnly || !hasAuthority) { return; }
         if (!isClientOnly) { return; }
 
@@ -81,6 +96,10 @@ public class RTSPlayer : NetworkBehaviour
     }
 
 
+    public void ClientHandleDisplayNameUpdated(string oldDisplayName, string newDisplayName)
+    {
+         ClientOnInfoUpdated?.Invoke();
+    }
 
     #endregion
 

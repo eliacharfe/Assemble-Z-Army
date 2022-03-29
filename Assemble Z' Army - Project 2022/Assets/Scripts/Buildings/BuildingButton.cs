@@ -30,6 +30,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private void Start()
     {
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
         resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
         building.InitiateCosts();
 
