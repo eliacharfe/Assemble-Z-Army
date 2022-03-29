@@ -50,7 +50,7 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   serverTickRate: 30
-  offlineScene: 
+  offlineScene: Assets/Scenes/MenuScene.unity
   onlineScene: 
   transport: {fileID: 6408644673840889553}
   networkAddress: localhost
