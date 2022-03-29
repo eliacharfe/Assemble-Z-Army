@@ -24,12 +24,6 @@ public class Health : NetworkBehaviour // NetworkBehavior
 
     void Update()
     {
-        if (currHealth <= 0)
-        {
-            GetComponent<Unit>().SetDead();
-            GetComponent<Unit>().StopMove();
-            Destroy(gameObject);
-        }
 
     }
 
@@ -53,5 +47,13 @@ public class Health : NetworkBehaviour // NetworkBehavior
      {
         Debug.Log("Health updated");
          ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
+
+        if (currHealth <= 0)
+        {
+            GetComponent<Unit>().SetDead();
+            GetComponent<Unit>().isDead = true;
+            GetComponent<Unit>().StopMove();
+            Destroy(gameObject);
+        }
     }
 }

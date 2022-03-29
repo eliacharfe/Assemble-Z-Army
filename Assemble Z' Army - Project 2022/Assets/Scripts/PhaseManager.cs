@@ -10,8 +10,12 @@ public class PhaseManager : NetworkBehaviour
     [SyncVar] public float timer = 1f;
     [SyncVar] public int currentPhase = 1;
     [SyncVar] private bool startTimer = false;
-    public TextMeshProUGUI timerText;
+
+    [SerializeField] GameObject BuildingCanvasPanel = null;
     [SerializeField] RtsNetworkManager rtsNetworkManager;
+
+    public TextMeshProUGUI timerText;
+
 
     public override void OnStartServer()
     {
@@ -81,6 +85,7 @@ public class PhaseManager : NetworkBehaviour
         timer = 100f;
         ((RtsNetworkManager)NetworkManager.singleton).SetPhaseTwo();
         startTimer = true;
+        RemoveBuildinPanelRPC();
     }
 
     public void SetPhaseThree()
@@ -95,10 +100,9 @@ public class PhaseManager : NetworkBehaviour
 
     }
 
-
     [ClientRpc]
-    public void testingClientRPC()
+    public void RemoveBuildinPanelRPC()
     {
-        print("Client recived this rpc");
+        BuildingCanvasPanel.SetActive(false);
     }
 }

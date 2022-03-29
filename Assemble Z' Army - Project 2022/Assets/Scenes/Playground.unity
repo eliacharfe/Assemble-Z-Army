@@ -680,8 +680,9 @@ MonoBehaviour:
   syncInterval: 0.1
   timer: 10
   currentPhase: 1
-  timerText: {fileID: 181949781}
+  BuildingCanvasPanel: {fileID: 826518342}
   rtsNetworkManager: {fileID: 672169879}
+  timerText: {fileID: 181949781}
 --- !u!114 &786270579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,6 +847,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2352b2bd8a6204c44b89960af4113bd2, type: 3}
+--- !u!1 &826518342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6960961989229720827, guid: 2352b2bd8a6204c44b89960af4113bd2, type: 3}
+  m_PrefabInstance: {fileID: 796955038}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &891948462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 358020558710242300, guid: 0ecdb0a04346a4b4d9ed76cc089ea972, type: 3}
@@ -991,6 +997,14 @@ PrefabInstance:
       propertyPath: swordman
       value: 
       objectReference: {fileID: 4032915064396438831, guid: 454b27e6d7f6a7446b6a4e4f3c8206cc, type: 3}
+    - target: {fileID: 6408644673840889552, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
+      propertyPath: BuildingCanvas
+      value: 
+      objectReference: {fileID: 826518342}
+    - target: {fileID: 6408644673840889552, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
+      propertyPath: BuildingCanvasPanel
+      value: 
+      objectReference: {fileID: 826518342}
     - target: {fileID: 6408644673840889552, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 9

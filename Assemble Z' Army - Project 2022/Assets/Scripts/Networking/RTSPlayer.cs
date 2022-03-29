@@ -22,6 +22,8 @@ public class RTSPlayer : NetworkBehaviour
 
     private BuildingsFactory buildingsFactory = null;
 
+    private UnitsFactory unitsFactory = null;
+
     private bool isPartyOwner = false;
 
     // Server Unit despawned event.
@@ -35,10 +37,7 @@ public class RTSPlayer : NetworkBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update(){}
 
     #region Setters
     public void SetPartyOwner(bool state) { isPartyOwner = state; }
@@ -107,6 +106,7 @@ public class RTSPlayer : NetworkBehaviour
 
         print("client " + connectionToClient + " has lost a unit, now he has " + m_unitsId.Count);
 
+        print("is unit is dead " + unit.isDead);
         if(unit.isDead)
              m_unitsId.Remove((int)unit.id);
 

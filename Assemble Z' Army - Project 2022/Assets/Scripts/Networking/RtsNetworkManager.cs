@@ -97,7 +97,7 @@ public class RtsNetworkManager : NetworkManager
     // Set wokers units which suppose to build with given resources avaible.
     public void SetPhaseOne()
     {
-        UnitsFactory factory = gameObject.GetComponent<UnitsFactory>();
+        UnitsFactory factory = FindObjectOfType<UnitsFactory>();
 
         foreach (RTSPlayer player in players)
         {
@@ -121,7 +121,7 @@ public class RtsNetworkManager : NetworkManager
     // Set wokers units which suppose to build with given resources avaible.
     public void SetPhaseTwo()
     {
-        UnitsFactory factory = gameObject.GetComponent<UnitsFactory>();
+        UnitsFactory factory = FindObjectOfType<UnitsFactory>();
 
         foreach (RTSPlayer player in players)
         {

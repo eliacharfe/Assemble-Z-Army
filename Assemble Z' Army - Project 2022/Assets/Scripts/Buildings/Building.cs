@@ -90,6 +90,8 @@ public class Building : NetworkBehaviour
             (gameObject.transform.position.x, gameObject.transform.position.y, pos.z);
 
         unitsFactory = FindObjectOfType<UnitsFactory>();
+
+        print("Does building has unitsFactory?" + unitsFactory);
     }
 
 
@@ -175,11 +177,13 @@ public class Building : NetworkBehaviour
 
     //Spawn new unit.
     [Command]
-    private void CmdSpawnNewUnit()
+    private void CmdSpawnNewUnit(Macros.Units id)
     {
         print("Unit to spawn" +spawnUnitPrefab);
 
-        Unit unit = Instantiate(spawnUnitPrefab, spawnPoint.position, Quaternion.identity) as Unit;
+        print("Current unit factory" + unitsFactory);
+
+        Unit unit = Instantiate(unitsFactory.GetUnitPrefab(id), spawnPoint.position, Quaternion.identity) as Unit;
 
         NetworkServer.Spawn(unit.gameObject, connectionToClient);
 
@@ -225,7 +229,7 @@ public class Building : NetworkBehaviour
             }
             else
             {
-                CmdSpawnNewUnit();
+                CmdSpawnNewUnit(spawnUnitPrefab.id);
 
                 FreeBuildingSpace();
 

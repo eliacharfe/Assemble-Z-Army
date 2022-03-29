@@ -250,8 +250,10 @@ public class Unit : NetworkBehaviour
         agent.ResetPath();
     }
     //---------------------------
+    [Command]
     public void SetDead()
     {
+        print("Unit " + id + " belong to " + connectionToClient + " is dead");
         isDead = true;
     }
     //----------------------------
