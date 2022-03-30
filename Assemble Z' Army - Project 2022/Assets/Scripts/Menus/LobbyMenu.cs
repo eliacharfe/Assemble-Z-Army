@@ -12,8 +12,17 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] private Button startGameButton = null;
     [SerializeField] private TMP_Text[] playersNamesText = new TMP_Text[4];
 
+    AudioPlayer audioPlayer;
+
+    // private void Awake()
+    // {
+    //     audioPlayer = FindObjectOfType<AudioPlayer>();
+    // }
+
+
     private void Start()
     {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
         RtsNetworkManager.ClientOnConnected += HandleClientConnected;
         RTSPlayer.AuthorityOnPartyOwnerStateUpdated += AuthorityHandlePartyOwnerStateUpdated;
         RTSPlayer.ClientOnInfoUpdated += ClientHandleInfoUpdated;
@@ -28,6 +37,7 @@ public class LobbyMenu : MonoBehaviour
 
     private void HandleClientConnected()
     {
+         audioPlayer.PlayBtnClickClip();
         lobbyUI.SetActive(true);
     }
 
@@ -45,21 +55,24 @@ public class LobbyMenu : MonoBehaviour
             playersNamesText[i].text = players[i].GetDisplayName();
         }
 
-        for (int i = players.Count; i < playersNamesText.Length ; i++)
+        for (int i = players.Count; i < playersNamesText.Length; i++)
         {
             playersNamesText[i].text = "Waiting For Player...";
         }
 
-       startGameButton.interactable = players.Count >= 2;
+        startGameButton.interactable = players.Count >= 2;
     }
 
     public void StartGame()
     {
+        audioPlayer.PlayBtnClickClip();
         NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
     }
 
     public void LeaveLobby()
     {
+         audioPlayer.PlayBtnClickClip();
+
         if (NetworkServer.active && NetworkClient.isConnected)
         {
             NetworkManager.singleton.StopHost();

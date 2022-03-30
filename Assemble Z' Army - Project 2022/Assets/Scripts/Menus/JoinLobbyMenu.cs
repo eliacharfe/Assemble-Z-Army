@@ -10,22 +10,28 @@ public class JoinLobbyMenu : MonoBehaviour
     [SerializeField] private GameObject landingPagePanel = null;
     [SerializeField] private TMP_InputField addressInput = null;
     [SerializeField] private Button joinButton = null;
- 
+
+    AudioPlayer audioPlayer;
+
     private void OnEnable()
     {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
         RtsNetworkManager.ClientOnConnected += HandleClientConnected;
         RtsNetworkManager.ClientOnDisconnected += HandleClientDisconnected;
     }
 
     private void OnDisble()
     {
+        audioPlayer.PlayBtnClickClip();
         RtsNetworkManager.ClientOnConnected -= HandleClientConnected;
         RtsNetworkManager.ClientOnDisconnected -= HandleClientDisconnected;
     }
- 
+
 
     public void Join()
     {
+        audioPlayer.PlayBtnClickClip();
+
         string address = addressInput.text;
 
         NetworkManager.singleton.networkAddress = address;
@@ -37,6 +43,8 @@ public class JoinLobbyMenu : MonoBehaviour
 
     private void HandleClientConnected()
     {
+        audioPlayer.PlayBtnClickClip();
+
         joinButton.interactable = true;
 
         gameObject.SetActive(false);
@@ -46,5 +54,10 @@ public class JoinLobbyMenu : MonoBehaviour
     private void HandleClientDisconnected()
     {
         joinButton.interactable = true;
+    }
+
+    public void PlaySoundClick()
+    {
+        audioPlayer.PlayBtnClickClip();
     }
 }
