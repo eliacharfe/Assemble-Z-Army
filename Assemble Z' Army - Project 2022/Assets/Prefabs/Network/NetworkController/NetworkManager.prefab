@@ -69,8 +69,9 @@ MonoBehaviour:
   - {fileID: 4631532840544127888, guid: a6f22b08044b9624fb22948ad5f1cab8, type: 3}
   - {fileID: 5795000933874785539, guid: b3052b1841e0369428b853b7bdfb18d9, type: 3}
   - {fileID: 2115192308945591727, guid: e9daf5199837e4b49b0d27b951db7ca6, type: 3}
-  workerPrefab: {fileID: 6384757247955166901, guid: cc20b7703a12e6d4daf27e5b4a481ff7, type: 3}
-  recruitPrefab: {fileID: 6384757247955166901, guid: cc20b7703a12e6d4daf27e5b4a481ff7, type: 3}
+  - {fileID: 1005334076202706618, guid: e559f09ac2875594c9b80a845c1b14e3, type: 3}
+  amountOfWorkers: 10
+  amountOfRecruits: 10
   gameOverHandler: {fileID: 2115192308945591727, guid: e9daf5199837e4b49b0d27b951db7ca6, type: 3}
   players: []
 --- !u!114 &6351800558604142752

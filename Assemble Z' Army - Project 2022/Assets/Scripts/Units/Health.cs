@@ -45,7 +45,6 @@ public class Health : NetworkBehaviour // NetworkBehavior
    
      private void HandleHealthUpdated(int oldHealth, int newHealth)
      {
-        Debug.Log("Health updated");
          ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
 
         if (currHealth <= 0)

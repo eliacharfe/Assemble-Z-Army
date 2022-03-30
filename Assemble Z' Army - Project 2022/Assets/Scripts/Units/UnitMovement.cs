@@ -55,12 +55,12 @@ public class UnitMovement:NetworkBehaviour
     {
         Transform tr = gameObject.transform;
 
-        if (dest.x < tr.position.x && tr.localScale.x > Mathf.Epsilon)
+        if (dest.x < tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
                                         tr.localScale.z);
         }
-        else if (dest.x > tr.position.x && tr.localScale.x < Mathf.Epsilon)
+        else if (dest.x > tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
                                          tr.localScale.z);

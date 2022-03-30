@@ -19,11 +19,10 @@ public abstract class Attacker : NetworkBehaviour
 
     private float time = 0;
 
-    private void Awake()
+    private void Start()
     {
         movement = GetComponent<UnitMovement>();
     }
-
 
     [ServerCallback]
     private void Update()
@@ -54,7 +53,11 @@ public abstract class Attacker : NetworkBehaviour
         {
             isAttacking = false;
             StopAttackAnime();
-            movement.Move(this.target.transform.position);
+            if (target && movement)
+            {
+                movement.Move(this.target.transform.position);
+
+            }
         }
     }
 

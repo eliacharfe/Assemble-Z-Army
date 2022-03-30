@@ -13,7 +13,7 @@ using Macros;
 public class Unit : NetworkBehaviour
 {
     private bool selectable;
-    public Building recrutingBuilding = null;
+    private Building recrutingBuilding = null;
 
     private NavMeshAgent agent;
     private Animator myAnimator;
@@ -39,7 +39,7 @@ public class Unit : NetworkBehaviour
     private Vector3 destination;
     UnitMovement move;
 
-    private BoxCollider2D myBoxCollider = null;
+    private CapsuleCollider2D myBoxCollider = null;
 
     [SyncVar]public bool isDead;
 
@@ -69,7 +69,7 @@ public class Unit : NetworkBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         move = GetComponent<UnitMovement>();
 
-        myBoxCollider = GetComponent<BoxCollider2D>();
+        myBoxCollider = GetComponent<CapsuleCollider2D>();
 
         InitStats(id);
 
@@ -78,7 +78,7 @@ public class Unit : NetworkBehaviour
             selectionCircle.color = getTeamColor();
         }
 
-        if (gameObject.GetComponent<Targetable>() && gameObject.GetComponent<Targetable>().teamNumber == 1)
+        if (gameObject.GetComponent<Targetable>())
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
             transform.localScale.z);
@@ -246,6 +246,8 @@ public class Unit : NetworkBehaviour
     public void StopMove()
     {
         agent.velocity = Vector3.zero;
+
+        StopAnimation();
 
         agent.ResetPath();
     }
