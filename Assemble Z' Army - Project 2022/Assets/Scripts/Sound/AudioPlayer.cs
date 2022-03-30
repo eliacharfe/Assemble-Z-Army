@@ -81,4 +81,9 @@ public class AudioPlayer : MonoBehaviour
             AudioSource.PlayClipAtPoint(clip, cameraPos, volume);
         }
     }
+
+    public void StopMusic()
+    {
+       GetComponent<AudioSource>().Pause();
+    }
 }

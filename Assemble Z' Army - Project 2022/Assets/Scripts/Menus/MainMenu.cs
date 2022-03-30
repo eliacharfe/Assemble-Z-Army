@@ -9,16 +9,9 @@ public class MainMenu : MonoBehaviour
 
       AudioPlayer audioPlayer;
 
-    // private void Awake()
-    // {
-    //     audioPlayer = FindObjectOfType<AudioPlayer>();
-    // }
- 
-
      public void HostLobby()
      {
-         audioPlayer = FindObjectOfType<AudioPlayer>();
-        audioPlayer.PlayBtnClickClip();
+         FindObjectOfType<AudioPlayer>().PlayBtnClickClip();
 
          landingPagePanel.SetActive(false);
 
