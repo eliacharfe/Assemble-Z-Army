@@ -24,6 +24,10 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip horseGallopClip;
     [SerializeField] [Range(0f, 1f)] float horseGallopVolume = 1f;
 
+    [Header("Step")]
+    [SerializeField] AudioClip stepClip;
+    [SerializeField] [Range(0f, 1f)] float stepVolume = 1f;
+
     [Header("ButtonClick")]
     [SerializeField] AudioClip btnClickClip;
     [SerializeField] [Range(0f, 1f)] float btnClickVolume = 1f;
@@ -71,6 +75,11 @@ public class AudioPlayer : MonoBehaviour
     public void StopHorseGallopClip()
     {
       //GetComponent<AudioSource>().Stop();
+    }
+
+    public void PlayStepClip()
+    {
+         PlayClip(stepClip, stepVolume);
     }
 
     private void PlayClip(AudioClip clip, float volume)

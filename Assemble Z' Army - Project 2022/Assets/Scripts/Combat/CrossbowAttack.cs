@@ -6,7 +6,7 @@ public class CrossbowAttack : Attacker
 {
     [Header("CB Projectile Settings")]
     [SerializeField] private GameObject arrowPrefab = null;
-    [SerializeField] private float arrowSpeed = 30f;
+    [SerializeField] private float arrowSpeed;
 
     [SerializeField] GameObject shootStartPoint;
 

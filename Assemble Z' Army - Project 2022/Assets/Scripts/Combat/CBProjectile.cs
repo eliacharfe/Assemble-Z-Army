@@ -5,31 +5,47 @@ using UnityEngine.AI;
 
 public class CBProjectile : MonoBehaviour
 {
-     [Header("CB Projectile Settings")]
-    //[SerializeField] private float destroyAfterSeconds = 5;
- 
-     public int teamNum;
-     public float damage;
+    [Header("CB Projectile Settings")]
+    [SerializeField] private float destroyAfterSeconds;
 
-     private void Start()
-     {
-     }
+    public int teamNum;
+    public float damage;
 
-     private void Update()
-     {
-     }
+    private float time;
 
-     private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        //arrowPos = transform.position;
-        Health target = collision.GetComponent<Health>();
-        int collisionTeamNumber = collision.gameObject.GetComponent<Targetable>().teamNumber;
+        time = 0;
+        destroyAfterSeconds = 0.5f;
+    }
 
-        if (target && collisionTeamNumber != teamNum)
+    private void Update()
+    {
+        if (time < destroyAfterSeconds)
         {
-            target.DealDamage(damage);
+            time += Time.deltaTime;
+        }
+        else
+        {
+            Debug.Log("destroy");
             Destroy(gameObject);
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Health target = collision.GetComponent<Health>();
+        int collisionTeamNumber = GetComponent<RtsNetworkManager>().Players.Count ;
+        if (target)
+        {  // check case collides with a world object thet is static object (like water) that dont have Targetable
+            collisionTeamNumber  = collision.gameObject.GetComponent<Targetable>().teamNumber;
+        }        
+      
+        if (target && collisionTeamNumber != teamNum)
+        {
+            target.DealDamage(damage);
+        }
+        Destroy(gameObject);
     }
 }

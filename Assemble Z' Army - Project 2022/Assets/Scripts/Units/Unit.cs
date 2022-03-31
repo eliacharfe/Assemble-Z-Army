@@ -78,7 +78,7 @@ public class Unit : MonoBehaviour
 
         selectionAreaCircle.GetComponent<SpriteRenderer>().color = getTeamColor();
 
-        if (gameObject.GetComponent<Targetable>() && gameObject.GetComponent<Targetable>().teamNumber == 1)
+        if (gameObject.GetComponent<Targetable>() && gameObject.GetComponent<Targetable>().teamNumber != 0)
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
             transform.localScale.z);
@@ -303,6 +303,12 @@ public class Unit : MonoBehaviour
     {
         audioPlayer.StopHorseGallopClip();
     }
+    //--------------------------
+    public void Step()
+    {
+        audioPlayer.PlayStepClip();
+    }
+
     //-------------------
     private void InitColor()
     {
