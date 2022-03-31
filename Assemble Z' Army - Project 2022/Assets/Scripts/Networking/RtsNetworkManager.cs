@@ -44,7 +44,7 @@ public class RtsNetworkManager : NetworkManager
 
         //player.SetCameraPosition(position);
 
-        if(players.Count >= 2)
+        if(players.Count >= 1)
         {
            FindObjectOfType<PhaseManager>().SetTimer(true);
 
@@ -107,7 +107,7 @@ public class RtsNetworkManager : NetworkManager
             for (int i = 0; i < amountOfWorkers; i++)
             {
 
-                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.WORKER).gameObject, startinPoint, Quaternion.identity);
+                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORD_HORSE).gameObject, startinPoint, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);

@@ -302,7 +302,7 @@ public class Unit : NetworkBehaviour
     {
         if (gameObject.GetComponent<Targetable>())
         {
-            return gameObject.GetComponent<Targetable>().teamNumber == 0 ? Color.red : Color.green;
+            //return gameObject.GetComponent<Targetable>().teamNumber == 0 ? Color.red : Color.green;
         }
         return Color.green;
     }
