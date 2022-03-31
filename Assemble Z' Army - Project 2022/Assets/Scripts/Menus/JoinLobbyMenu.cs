@@ -20,9 +20,9 @@ public class JoinLobbyMenu : MonoBehaviour
         RtsNetworkManager.ClientOnDisconnected += HandleClientDisconnected;
     }
 
-    private void OnDisble()
+    private void OnDisable()
     {
-        audioPlayer.PlayBtnClickClip();
+        //audioPlayer.PlayBtnClickClip();
         RtsNetworkManager.ClientOnConnected -= HandleClientConnected;
         RtsNetworkManager.ClientOnDisconnected -= HandleClientDisconnected;
     }

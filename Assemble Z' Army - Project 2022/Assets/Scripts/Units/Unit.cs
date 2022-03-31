@@ -203,7 +203,6 @@ public class Unit : MonoBehaviour
     //----------------------------
     public void Select()
     {
-
         onSelected?.Invoke();
     }
     //----------------------------
@@ -215,7 +214,7 @@ public class Unit : MonoBehaviour
     public void StopMove()
     {
         agent.velocity = Vector3.zero;
-        //gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        StopAnimation();
         agent.ResetPath();
     }
     //---------------------------

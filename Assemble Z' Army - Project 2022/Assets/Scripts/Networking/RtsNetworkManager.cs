@@ -28,10 +28,6 @@ public class RtsNetworkManager : NetworkManager
 
     public override void OnServerConnect(NetworkConnection conn)
     {
-
-        audioPlayer = FindObjectOfType<AudioPlayer>();
-        audioPlayer.PlayBtnClickClip();
-
         if (!isGameInProgress) { return; }
 
         conn.Disconnect();
@@ -39,9 +35,6 @@ public class RtsNetworkManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnection conn)
     {
-
-              audioPlayer = FindObjectOfType<AudioPlayer>();
-        audioPlayer.PlayBtnClickClip();
 
         RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
 
@@ -59,7 +52,6 @@ public class RtsNetworkManager : NetworkManager
 
     public void StartGame()
     {
-       // audioPlayer.PlayBtnClickClip();
         if (Players.Count < 2) { return; }
 
         isGameInProgress = true;
@@ -69,9 +61,6 @@ public class RtsNetworkManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
-    
-      //  audioPlayer.PlayBtnClickClip();
-    
  
         base.OnServerAddPlayer(conn);
 
@@ -115,9 +104,6 @@ public class RtsNetworkManager : NetworkManager
 
     public override void OnClientConnect(NetworkConnection conn)
     {
-      audioPlayer = FindObjectOfType<AudioPlayer>();
-        audioPlayer.PlayBtnClickClip();
-
         base.OnClientConnect(conn);
 
         ClientOnConnected?.Invoke();

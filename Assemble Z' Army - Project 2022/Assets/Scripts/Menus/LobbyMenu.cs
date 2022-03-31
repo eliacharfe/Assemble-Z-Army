@@ -14,11 +14,6 @@ public class LobbyMenu : MonoBehaviour
 
     AudioPlayer audioPlayer;
 
-    // private void Awake()
-    // {
-    //     audioPlayer = FindObjectOfType<AudioPlayer>();
-    // }
-
 
     private void Start()
     {
@@ -37,7 +32,6 @@ public class LobbyMenu : MonoBehaviour
 
     private void HandleClientConnected()
     {
-         audioPlayer.PlayBtnClickClip();
         lobbyUI.SetActive(true);
     }
 
@@ -65,7 +59,7 @@ public class LobbyMenu : MonoBehaviour
 
     public void StartGame()
     {
-        audioPlayer.PlayBtnClickClip();
+      //  audioPlayer.PlayBtnClickClip();
         NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
     }
 
