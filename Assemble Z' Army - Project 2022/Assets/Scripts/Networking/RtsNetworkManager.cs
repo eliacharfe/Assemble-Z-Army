@@ -21,7 +21,7 @@ public class RtsNetworkManager : NetworkManager
 
     public List<RTSPlayer> Players { get; } = new List<RTSPlayer>();
 
-     AudioPlayer audioPlayer;
+    // AudioPlayer audioPlayer;
 
 
     #region Server

@@ -72,11 +72,11 @@ public class BowAttack : Attacker
     {
         Transform tr = gameObject.transform;
 
-        if (target.x < tr.position.x && tr.localScale.x > Mathf.Epsilon)
+        if (target.x > tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
         }
-        else if (target.x > tr.position.x && tr.localScale.x < Mathf.Epsilon)
+        else if (target.x < tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
         }

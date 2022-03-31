@@ -27,7 +27,6 @@ public class CBProjectile : MonoBehaviour
         }
         else
         {
-            Debug.Log("destroy");
             Destroy(gameObject);
         }
 
@@ -36,13 +35,16 @@ public class CBProjectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Health target = collision.GetComponent<Health>();
-        int collisionTeamNumber = GetComponent<RtsNetworkManager>().Players.Count ;
-        if (target)
-        {  // check case collides with a world object thet is static object (like water) that dont have Targetable
-            collisionTeamNumber  = collision.gameObject.GetComponent<Targetable>().teamNumber;
-        }        
+
+        if (!target)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        int collisionTeamNumber  = collision.gameObject.GetComponent<Targetable>().teamNumber;       
       
-        if (target && collisionTeamNumber != teamNum)
+        if (collisionTeamNumber != teamNum)
         {
             target.DealDamage(damage);
         }

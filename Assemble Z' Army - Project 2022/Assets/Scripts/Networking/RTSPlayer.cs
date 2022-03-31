@@ -54,8 +54,6 @@ public class RTSPlayer : NetworkBehaviour
 
     public override void OnStartServer()
     {
-
-
         DontDestroyOnLoad(gameObject);
     }
 

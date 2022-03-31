@@ -27,7 +27,7 @@ public class Unit : MonoBehaviour
 
     public Macros.Units id;
     private Vector3 destination;
-    UnitMovement move;
+    UnitMovement unitMovement;
 
     private CapsuleCollider2D myCapsuleCollider = null;
 
@@ -66,7 +66,7 @@ public class Unit : MonoBehaviour
 
         myAnimator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        move = GetComponent<UnitMovement>();
+        unitMovement = GetComponent<UnitMovement>();
 
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
 
@@ -155,7 +155,7 @@ public class Unit : MonoBehaviour
     public void MoveTo(Vector3 dest)
     {
         myAnimator.SetBool("isRunning", true);
-        move.Move(agent, dest);
+        unitMovement.Move(agent, dest);
     }
     //------------------------------
     public bool ReachedDestination()
@@ -165,17 +165,18 @@ public class Unit : MonoBehaviour
             return false;
         }
 
-        if (!agent.pathPending)
-        {
-            if (agent && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-                {
-                    agent.ResetPath();
-                    return true;
-                }
-            }
-        }
+        // if (!agent.pathPending)
+        // {
+        //     if (agent.remainingDistance <= agent.stoppingDistance ||
+        //     Vector3.Distance(agent.destination, agent.transform.position) <= agent.stoppingDistance)
+        //     {
+        //         if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+        //         {
+        //             agent.ResetPath();
+        //             return true;
+        //         }
+        //     }
+        // }
         return false;
     }
 
