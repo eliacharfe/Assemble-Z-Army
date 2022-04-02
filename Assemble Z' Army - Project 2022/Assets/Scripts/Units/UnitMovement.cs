@@ -11,8 +11,11 @@ using Cinemachine;
 
 public class UnitMovement : MonoBehaviour
 {
+    public bool isMoving = false;
+
     public void Move(NavMeshAgent agent, Vector3 dest)
     {
+        isMoving = true;
         dest.z = 0;
         agent.SetDestination(dest);
 

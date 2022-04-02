@@ -3785,7 +3785,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7987773578132669678}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 1}
   m_Children:
@@ -3806,7 +3806,7 @@ SortingGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7987773578132669678}
-  m_Enabled: 0
+  m_Enabled: 1
   m_SortingLayerID: 74712451
   m_SortingLayer: 8
   m_SortingOrder: 5
@@ -3917,6 +3917,7 @@ MonoBehaviour:
         m_CallState: 2
   selectionAreaCircle: {fileID: 4884471493195136361}
   id: 17
+  myCircleDetectionAttackArea: {fileID: 0}
   Speed:
     BaseValue: 0
   Attack:

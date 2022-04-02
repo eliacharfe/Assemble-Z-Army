@@ -31,6 +31,8 @@ public class Unit : MonoBehaviour
 
     private CapsuleCollider2D myCapsuleCollider = null;
 
+    [SerializeField] private CircleCollider2D myCircleDetectionAttackArea = null;
+
     private bool isDead;
 
     public CharacterStat Speed;
@@ -70,10 +72,14 @@ public class Unit : MonoBehaviour
 
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
 
+        // if (id == Units.SWORDMAN)
+        // {
+        //     myCircleDetectionAttackArea - Get
+        // }
+
         InitStats(id);
 
         InitColor();
-
 
 
         selectionAreaCircle.GetComponent<SpriteRenderer>().color = getTeamColor();
@@ -116,6 +122,7 @@ public class Unit : MonoBehaviour
                 ReachDistance.BaseValue = 100f;
             }
         }
+
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -145,6 +152,21 @@ public class Unit : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+      Debug.Log("collides");
+        CapsuleCollider2D collider = collision.otherCollider as CapsuleCollider2D;
+
+        if (id == Units.SWORDMAN && collider)
+        {
+             Debug.Log("collides sss");
+            // if (collision.gameObject.== CapsuleCollider2D)
+            // {
+
+            // }
+        }
+    }
+
 
     //---------------------
     private void OnDestroy()
@@ -165,18 +187,18 @@ public class Unit : MonoBehaviour
             return false;
         }
 
-        // if (!agent.pathPending)
-        // {
-        //     if (agent.remainingDistance <= agent.stoppingDistance ||
-        //     Vector3.Distance(agent.destination, agent.transform.position) <= agent.stoppingDistance)
-        //     {
-        //         if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-        //         {
-        //             agent.ResetPath();
-        //             return true;
-        //         }
-        //     }
-        // }
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance ||
+            Vector3.Distance(agent.destination, agent.transform.position) <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    agent.ResetPath();
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -184,7 +206,7 @@ public class Unit : MonoBehaviour
     public void StopAnimation()
     {
         myAnimator.SetBool("isRunning", false);
-
+        GetComponent<UnitMovement>().isMoving = false;
     }
     //----------------------------
     public void SetColorSelcted()
@@ -214,6 +236,7 @@ public class Unit : MonoBehaviour
     //----------------------------
     public void StopMove()
     {
+        GetComponent<UnitMovement>().isMoving = false;
         agent.velocity = Vector3.zero;
         StopAnimation();
         agent.ResetPath();
@@ -352,7 +375,7 @@ public class Unit : MonoBehaviour
                     Speed.BaseValue = agent.speed = 30f;
                     Attack.BaseValue = 12f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 40f;
+                    ReachDistance.BaseValue = 150f; // to change
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };

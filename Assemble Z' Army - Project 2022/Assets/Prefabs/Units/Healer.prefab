@@ -3039,7 +3039,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5421714359782324006}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 15, z: 1}
   m_Children:
@@ -3204,6 +3204,7 @@ MonoBehaviour:
         m_CallState: 2
   selectionAreaCircle: {fileID: 1348228377600644838}
   id: 15
+  myCircleDetectionAttackArea: {fileID: 0}
   Speed:
     BaseValue: 0
   Attack:

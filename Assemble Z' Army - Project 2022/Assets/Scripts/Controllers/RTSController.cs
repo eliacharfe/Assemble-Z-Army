@@ -87,6 +87,8 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
+             unit.GetComponent<Attacker>().setAttackMode();
+
             if (unit.id == Macros.Units.HEALER)
             {
                 if (targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
