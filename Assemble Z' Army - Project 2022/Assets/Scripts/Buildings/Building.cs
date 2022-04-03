@@ -67,7 +67,7 @@ public class Building : NetworkBehaviour
     //-------------------
     public void InitiateCosts()
     {
-        building = this;
+       // building = this;
 
         costResourcesBuilding = new List<int>();
 

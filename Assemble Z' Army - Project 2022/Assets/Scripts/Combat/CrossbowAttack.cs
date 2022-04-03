@@ -64,6 +64,7 @@ public class CrossbowAttack : Attacker
     private void FlipSideSprite(Vector3 target)
     {
         Transform tr = gameObject.transform;
+        Transform healthBar = transform.Find("Health Bar Canvas");
 
         if (target.x > tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {

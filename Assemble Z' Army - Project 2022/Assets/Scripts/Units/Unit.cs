@@ -72,15 +72,9 @@ public class Unit : MonoBehaviour
 
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
 
-        // if (id == Units.SWORDMAN)
-        // {
-        //     myCircleDetectionAttackArea - Get
-        // }
-
         InitStats(id);
 
         InitColor();
-
 
         selectionAreaCircle.GetComponent<SpriteRenderer>().color = getTeamColor();
 

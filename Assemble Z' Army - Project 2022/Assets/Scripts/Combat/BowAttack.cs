@@ -71,14 +71,17 @@ public class BowAttack : Attacker
     private void FlipSideSprite(Vector3 target)
     {
         Transform tr = gameObject.transform;
+        Transform healthBar = transform.Find("Health Bar Canvas");
 
         if (target.x > tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
+            healthBar.localScale = new Vector3(-healthBar.localScale.x, healthBar.localScale.y, healthBar.localScale.z);
         }
         else if (target.x < tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
+            healthBar.localScale = new Vector3(-healthBar.localScale.x, healthBar.localScale.y, healthBar.localScale.z);
         }
     }
 
