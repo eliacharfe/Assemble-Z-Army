@@ -3237,7 +3237,6 @@ GameObject:
   - component: {fileID: 8865192997941710317}
   - component: {fileID: 6550927017302437758}
   - component: {fileID: -5509603339999633780}
-  - component: {fileID: -7405105196888018244}
   - component: {fileID: 4411456382968719258}
   m_Layer: 9
   m_Name: UnitRoot Worker
@@ -3558,22 +3557,6 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &-7405105196888018244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6775394402555733303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  clientAuthority: 0
-  animator: {fileID: 9125000035071287509, guid: e559f09ac2875594c9b80a845c1b14e3, type: 3}
 --- !u!114 &4411456382968719258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3589,7 +3572,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 0
-  animator: {fileID: 0}
+  animator: {fileID: 1441977760935636203}
 --- !u!1 &6797204438691568749
 GameObject:
   m_ObjectHideFlags: 0

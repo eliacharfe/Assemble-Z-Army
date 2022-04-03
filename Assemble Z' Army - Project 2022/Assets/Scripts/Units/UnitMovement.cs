@@ -12,6 +12,7 @@ using Mirror;
 public class UnitMovement:NetworkBehaviour
 {
     private NavMeshAgent agent = null;
+    public bool isMoving = false;
 
     private Unit unit = null;
 
@@ -29,11 +30,11 @@ public class UnitMovement:NetworkBehaviour
 
         GetComponent<Animator>().SetBool("isRunning", true);
 
-        //RpcMoveAnime();
-
         agent.SetDestination(dest);
 
         FlipSideSprite(dest);
+
+        isMoving = true;
     }
 
 
@@ -65,6 +66,11 @@ public class UnitMovement:NetworkBehaviour
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
                                          tr.localScale.z);
         }
+    }
+
+    public bool IsMoving()
+    {
+        return agent.hasPath;
     }
 }
 

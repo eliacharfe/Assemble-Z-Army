@@ -68,7 +68,8 @@ public class RTSPlayer : NetworkBehaviour
     {
         SetCameraPosition(newPos);
 
-        GetComponent<CameraInputSystem>().OnChangePhaseThreeMap();
+        GetComponent<CameraInputSystem>().OnStartingGame();
+        //GetComponent<CameraInputSystem>().OnChangePhaseThreeMap();
     }
     #endregion
 

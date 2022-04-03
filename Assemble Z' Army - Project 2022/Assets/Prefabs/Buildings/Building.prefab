@@ -75,13 +75,15 @@ MonoBehaviour:
   syncInterval: 0.1
   spawnTime: 5
   spawnDistancePoint: 1.5
+  timePassed: 0
   spawnPoint: {fileID: 7687285496895391796}
   enterPoint: {fileID: 9021328820710509342}
   Id: 4
-  treeCost: 0
-  metalCost: 0
-  goldCost: 0
-  jewelsCost: 0
+  costResourcesBuilding: 2c010000c8000000c8000000c8000000
+  woodCost: 300
+  metalCost: 200
+  goldCost: 200
+  diamondsCost: 100
   token: {fileID: 3824360112819498004}
   timeSlider: {fileID: 3050743307702186120}
   waitingUnit: []

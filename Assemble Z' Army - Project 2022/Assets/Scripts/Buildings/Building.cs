@@ -11,7 +11,6 @@ public class Building : NetworkBehaviour
 
     // Type of solider building recived and create.
 
-
     [Header("Spawning Settings")]
     [SerializeField] private float spawnTime = 5f;
     [SerializeField] private float spawnDistancePoint = 1.5f;
@@ -23,10 +22,11 @@ public class Building : NetworkBehaviour
     [SerializeField] private Macros.Buildings Id;
 
     [Header("Costs")]
-    [SerializeField] private float treeCost;
-    [SerializeField] private float metalCost;
-    [SerializeField] private float goldCost;
-    [SerializeField] private float jewelsCost;
+    public List<int> costResourcesBuilding = null;
+    [SerializeField] private int woodCost;
+    [SerializeField] private int metalCost;
+    [SerializeField] private int goldCost;
+    [SerializeField] private int diamondsCost;
 
     [Header("UI")]
     [SerializeField] private GameObject token = null;
@@ -41,6 +41,8 @@ public class Building : NetworkBehaviour
     private bool inProgess = false;
 
     private UnitsFactory unitsFactory = null;
+
+
 
 
     public static event Action<Building> ServerOnBuildingSpawned;
@@ -142,6 +144,11 @@ public class Building : NetworkBehaviour
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
     }
 
+    public List<int> getCostBuilding()
+    {
+        return costResourcesBuilding;
+    }
+
 
     // Try to recruit if there is waiting units.
     void TryToRecruitUnit()
@@ -172,6 +179,17 @@ public class Building : NetworkBehaviour
 
         }
 
+    }
+
+    //-------------------
+    public void InitiateCosts()
+    {
+        costResourcesBuilding = new List<int>();
+
+        costResourcesBuilding.Add(woodCost);
+        costResourcesBuilding.Add(metalCost);
+        costResourcesBuilding.Add(goldCost);
+        costResourcesBuilding.Add(diamondsCost);
     }
 
 

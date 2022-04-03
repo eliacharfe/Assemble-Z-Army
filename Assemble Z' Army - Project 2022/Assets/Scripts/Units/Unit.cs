@@ -250,6 +250,8 @@ public class Unit : NetworkBehaviour
         StopAnimation();
 
         agent.ResetPath();
+
+        GetComponent<UnitMovement>().isMoving = false;
     }
     //---------------------------
     [Command]

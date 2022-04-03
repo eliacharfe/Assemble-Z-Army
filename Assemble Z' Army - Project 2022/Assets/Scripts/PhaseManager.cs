@@ -82,7 +82,7 @@ public class PhaseManager : NetworkBehaviour
 
     public void SetPhaseTwo()
     {
-        timer = 5;
+        timer = 100;
         ((RtsNetworkManager)NetworkManager.singleton).SetPhaseTwo();
         startTimer = true;
         RemoveBuildinPanelRPC();

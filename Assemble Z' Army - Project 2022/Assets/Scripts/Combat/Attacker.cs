@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using System;
 
 // Abstract class for multiple attacks types.
 public abstract class Attacker : NetworkBehaviour
 {
-    protected bool isAttacking = false;
+    protected bool reachedTarget = false;
+    protected bool isInAttackMode = false;
+    private bool isInModeAttackAutomated = false;
 
     protected Targetable target = null;
 
@@ -28,10 +31,12 @@ public abstract class Attacker : NetworkBehaviour
     private void Update()
     {
         if (!target) {
-            if(isAttacking)
+            isInModeAttackAutomated = false;
+            if (reachedTarget)
             {
                 StopAttackAnime();
-                isAttacking = false;
+                reachedTarget = false;
+                isInAttackMode = false;
             }
             return; 
         }
@@ -45,13 +50,13 @@ public abstract class Attacker : NetworkBehaviour
             }else
             {
                 time = 0;
-                isAttacking = true;
+                reachedTarget = true;
                 Attack();
             }
         }
         else
         {
-            isAttacking = false;
+            reachedTarget = false;
             StopAttackAnime();
             if (target && movement)
             {
@@ -61,8 +66,23 @@ public abstract class Attacker : NetworkBehaviour
         }
     }
 
+    public void SetAutomateAttack()
+    {
+        isInModeAttackAutomated = true;
+    }
+
+    public bool isInModeAttackAutomate()
+    {
+        return isInModeAttackAutomated;
+    }
+
     [Command]
     public void CmdSetTargetable(Targetable target)
+    {
+        this.target = target;
+    }
+
+    public void SetTargetable(Targetable target)
     {
         this.target = target;
     }
@@ -71,4 +91,14 @@ public abstract class Attacker : NetworkBehaviour
     public abstract void StopAttackAnime();
 
     public abstract void Attack();
+
+    public bool IsAttacking()
+    {
+        return isInAttackMode;
+    }
+
+    public void setAttackMode()
+    {
+        isInAttackMode = true;
+    }
 }

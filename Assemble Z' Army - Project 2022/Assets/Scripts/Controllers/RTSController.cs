@@ -90,6 +90,8 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
+            unit.GetComponent<Attacker>().setAttackMode();
+
             if (unit.id != Macros.Units.WORKER && !targetable.hasAuthority)
             {
                 unit.GetComponent<Attacker>().CmdSetTargetable(targetable);

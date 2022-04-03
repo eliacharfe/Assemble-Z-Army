@@ -9,7 +9,7 @@ using Mirror;
 
 public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
 {
-    public Building building = null;
+    [SerializeField]private Building building = null;
 
     public GameObject buildingPreview;
 
@@ -19,6 +19,8 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     private float navMeshZAxis;
 
+    ResourcesPlayer resourcesPlayer = null;
+
 
     private void Start()
     {
@@ -27,6 +29,10 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         buildingPreview.GetComponent<SpriteRenderer>().sprite = buildingSprite;
 
         navMeshZAxis = FindObjectOfType<NavMeshScript>().transform.position.z;
+
+        resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
+
+        building.InitiateCosts();
     }
 
     private void Update()
@@ -34,7 +40,6 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         if (spritePreview == null) { return; }
 
         if (!player) {
-            Debug.Log("Player set");
             player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         }
 
@@ -75,9 +80,12 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     public void SpawnBuilding(Vector3 pos)
     {
+        if (resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
+        {
+            resourcesPlayer.DecreaseResource(building.getCostBuilding());
 
-       Debug.Log(building);
-       player.CmdTryPlaceBuilding(building.GetBuildingId(),pos);
+            player.CmdTryPlaceBuilding(building.GetBuildingId(), pos);
+        }
 
     }
 

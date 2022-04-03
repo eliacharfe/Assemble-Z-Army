@@ -118,14 +118,14 @@ public class RtsNetworkManager : NetworkManager
 
             player.transform.position = startPos;
 
-            player.SetCameraPosition(pos);
+            player.phaseThreePos = pos;
 
             print("Setting camera in "+pos);
 
             for (int i = 0; i < amountOfWorkers; i++)
             {
 
-                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORD_HORSE).gameObject, startPos, Quaternion.identity);
+                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.WORKER).gameObject, startPos, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);
@@ -151,7 +151,7 @@ public class RtsNetworkManager : NetworkManager
 
             for (int i = 0; i < amountOfRecruits; i++)
             {
-                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SPEAR_KNIGHT).gameObject, startinPoint, Quaternion.identity);
+                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORDMAN).gameObject, startinPoint, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);
