@@ -6,4 +6,9 @@ using Mirror;
 
 public class Targetable : NetworkBehaviour
 {
+    public void Heal()
+    {
+        GetComponent<Health>().currHealth = 100;
+    }
+
 }

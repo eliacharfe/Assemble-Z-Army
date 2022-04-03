@@ -60,13 +60,15 @@ public class RTSPlayer : NetworkBehaviour
     {
         cameraTransform.position = pos;
 
-        GetComponent<CameraInputSystem>().OnChangeMap();
+        GetComponent<CameraInputSystem>().OnStartingGame();
     }
 
 
     public void SetPhaseThreeCamera(Vector3 oldPos,Vector3 newPos)
     {
         SetCameraPosition(newPos);
+
+        GetComponent<CameraInputSystem>().OnChangePhaseThreeMap();
     }
     #endregion
 
@@ -143,7 +145,9 @@ public class RTSPlayer : NetworkBehaviour
     {
         if (!isPartyOwner) { return; }
 
-        ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
+        print("Showing Phase one");
+
+        ((RtsNetworkManager)NetworkManager.singleton).ShowPreparationPhase();
     }
 
     public void SpawnRecruitedUnit()
@@ -223,6 +227,10 @@ public class RTSPlayer : NetworkBehaviour
     [Command]
     public void CmdTryPlaceBuilding(int buildingId, Vector3 point)
     {
+        print("Player putted building" + buildingId + " from " + buildingsFactory);
+
+        buildingsFactory = FindObjectOfType<BuildingsFactory>();
+
         GameObject buildingInstance = Instantiate(buildingsFactory.GetBuildingById(buildingId), point, Quaternion.identity);
 
         NetworkServer.Spawn(buildingInstance, connectionToClient);

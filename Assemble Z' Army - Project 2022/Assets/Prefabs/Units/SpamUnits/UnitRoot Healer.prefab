@@ -583,6 +583,8 @@ GameObject:
   - component: {fileID: 5346251163243978383}
   - component: {fileID: 5346251163243978382}
   - component: {fileID: 5346251163243978378}
+  - component: {fileID: 6765017116864396302}
+  - component: {fileID: 7914326635774713872}
   - component: {fileID: 5346251161742556638}
   - component: {fileID: 7340133132383490334}
   - component: {fileID: -8630561976985186174}
@@ -822,6 +824,38 @@ MonoBehaviour:
   attackTime: 0
   range: 0
   damage: 0
+--- !u!114 &6765017116864396302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421345242490242959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3df534dae68d544adc8ad36a8e01d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaEffect: {fileID: 5741338418869833594, guid: b143720ba25efeb4abeaa53b25bc480e, type: 3}
+  healingPointStart: {fileID: 5346251162338315384}
+  maxMana: 100
+  currMana: 0
+  canHeal: 0
+--- !u!114 &7914326635774713872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421345242490242959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0c7cbf7feadd94cb35d180722dfd26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mana: {fileID: 6765017116864396302}
+  manaBar: {fileID: 5346251163001620511}
+  manaBarImage: {fileID: 5346251162040131236}
 --- !u!70 &5346251161742556638
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -899,7 +933,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   clientAuthority: 0
-  animator: {fileID: 9125000035071287509, guid: e559f09ac2875594c9b80a845c1b14e3, type: 3}
+  animator: {fileID: 48779905751145349}
 --- !u!1 &1449217196880962282
 GameObject:
   m_ObjectHideFlags: 0

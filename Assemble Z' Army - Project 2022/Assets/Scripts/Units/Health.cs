@@ -10,7 +10,7 @@ public class Health : NetworkBehaviour // NetworkBehavior
     private int maxHealth = 100;
 
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
-    [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdated))] private int currHealth;
+    [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdated))] public int currHealth;
 
     // public event Action ServerOnDie;
 
@@ -25,6 +25,15 @@ public class Health : NetworkBehaviour // NetworkBehavior
     void Update()
     {
 
+    }
+
+
+    [Command]
+    public void CmdHeal(int healAmount)
+    {
+        currHealth = Mathf.Min(currHealth + healAmount, 100);
+
+        ClientOnHealthUpdate?.Invoke(currHealth, maxHealth);
     }
 
     public void DealDamage(int damageAmount)

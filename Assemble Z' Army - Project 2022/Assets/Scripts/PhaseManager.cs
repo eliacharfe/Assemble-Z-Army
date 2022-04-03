@@ -92,7 +92,7 @@ public class PhaseManager : NetworkBehaviour
     {
         startTimer = false;
 
-        ((RtsNetworkManager)NetworkManager.singleton).ShowBattleField();
+        ((RtsNetworkManager)NetworkManager.singleton).ShowBattlefieldPhase();
     }
 
     public void SetPhaseFour()

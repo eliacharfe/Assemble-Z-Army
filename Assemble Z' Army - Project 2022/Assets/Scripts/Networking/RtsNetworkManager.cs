@@ -106,15 +106,26 @@ public class RtsNetworkManager : NetworkManager
     {
         UnitsFactory factory = FindObjectOfType<UnitsFactory>();
 
+        FindObjectOfType<PhaseManager>().SetTimer(true);
+
+        print("Setting phase one");
+
         foreach (RTSPlayer player in players)
         {
+            var startPos = GetStartPosition().position;
 
-            Vector3 startinPoint = player.transform.position;
+            var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
+
+            player.transform.position = startPos;
+
+            player.SetCameraPosition(pos);
+
+            print("Setting camera in "+pos);
 
             for (int i = 0; i < amountOfWorkers; i++)
             {
 
-                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORD_HORSE).gameObject, startinPoint, Quaternion.identity);
+                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORD_HORSE).gameObject, startPos, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);
@@ -123,6 +134,7 @@ public class RtsNetworkManager : NetworkManager
             }
         }
 
+        print("Phase one ready");
     }
 
     // Set wokers units which suppose to build with given resources avaible.
@@ -139,11 +151,16 @@ public class RtsNetworkManager : NetworkManager
 
             for (int i = 0; i < amountOfRecruits; i++)
             {
-                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.ARCHER).gameObject, startinPoint, Quaternion.identity);
+                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SPEAR_KNIGHT).gameObject, startinPoint, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);
             }
+
+            GameObject Healer = Instantiate(factory.GetUnitPrefab(Macros.Units.HEALER).gameObject, startinPoint, Quaternion.identity);
+
+            // Spawn the player on server.
+            NetworkServer.Spawn(Healer, player.connectionToClient);
         }
 
     }
@@ -154,18 +171,16 @@ public class RtsNetworkManager : NetworkManager
 
 
 
-    public void ShowBattleField()
+    public void ShowPreparationPhase()
     {
-        //NetworkManager.singleton.ServerChangeScene("Battlefield");
+        print("Changing server");
 
-        NetworkManager.singleton.ServerChangeScene("Playground");
+        NetworkManager.singleton.ServerChangeScene("Playground");   
+    }
 
-        if (players.Count >= 2)
-        {
-            FindObjectOfType<PhaseManager>().SetTimer(true);
-
-            SetPhaseOne();
-        }
+    public void ShowBattlefieldPhase()
+    {
+        NetworkManager.singleton.ServerChangeScene("Battlefield");
     }
 
 

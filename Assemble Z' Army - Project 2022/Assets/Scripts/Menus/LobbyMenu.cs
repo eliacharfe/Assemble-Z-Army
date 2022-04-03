@@ -60,7 +60,8 @@ public class LobbyMenu : MonoBehaviour
 
     public void StartGame()
     {
-      //  audioPlayer.PlayBtnClickClip();
+        //  audioPlayer.PlayBtnClickClip();
+        print("Is player null?" + NetworkClient.connection.identity.GetComponent<RTSPlayer>());
         NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
     }
 

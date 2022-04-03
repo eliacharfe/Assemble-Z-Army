@@ -31,7 +31,6 @@ public class CameraInputSystem : NetworkBehaviour
 
     public override void OnStartAuthority()
     {
-
         startCameraPos = playerCameraTransform.position;
         screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
         screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
@@ -46,8 +45,15 @@ public class CameraInputSystem : NetworkBehaviour
         controls.Enable();
     }
 
- 
-   public void OnChangeMap()
+
+    public void OnStartingGame()
+    {
+        startCameraPos = playerCameraTransform.position;
+        screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
+        screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
+    }
+
+   public void OnChangePhaseThreeMap()
     {
         startCameraPos = playerCameraTransform.position;
 

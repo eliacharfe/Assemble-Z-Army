@@ -73,7 +73,7 @@ public class RTSController : MonoBehaviour
         else if (building && building.enabled && building.hasAuthority)
             SendToRecruit(building, hit);
 
-        else if (targetable && !targetable.hasAuthority)
+        else if (targetable)
         {
             Debug.Log("Attack unit");
             AttackUnit(targetable, hit);
@@ -84,6 +84,7 @@ public class RTSController : MonoBehaviour
     }
 
     //--------------------------------------
+    //Todo - Seperate to different function.
     private void AttackUnit(Targetable targetable, RaycastHit2D hit)
     {
 
@@ -93,6 +94,23 @@ public class RTSController : MonoBehaviour
             {
                 unit.GetComponent<Attacker>().CmdSetTargetable(targetable);
             }
+
+            if (unit.id == Macros.Units.HEALER && targetable.hasAuthority)
+            {
+                print("Selected healer");
+                if (unit.GetComponent<Mana>().canHeal)
+                {
+                    print("Should heal");
+                    //audioPlayer.PlayHealingClip();
+                    unit.GetComponent<Mana>().CmdUseHeal();
+                    targetable.GetComponent<Health>().CmdHeal(100);
+                    //unit.GetComponent<ManaDisplay>().HandleManaUpdated((int)unit.GetComponent<Mana>().currMana, 100);
+                    unit.GetComponent<Mana>().PlayManaEffect();
+                }
+            
+            }
+
+
         }
     }
 
