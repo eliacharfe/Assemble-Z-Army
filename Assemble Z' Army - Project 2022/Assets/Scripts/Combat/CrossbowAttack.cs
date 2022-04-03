@@ -7,6 +7,7 @@ public class CrossbowAttack : Attacker
     [Header("CB Projectile Settings")]
     [SerializeField] private GameObject arrowPrefab = null;
     [SerializeField] private float arrowSpeed;
+
     [SerializeField] GameObject shootStartPoint;
 
     AudioPlayer audioPlayer;
@@ -59,20 +60,18 @@ public class CrossbowAttack : Attacker
     }
 
 
+
     private void FlipSideSprite(Vector3 target)
     {
-        Transform transform = gameObject.transform;
+        Transform tr = gameObject.transform;
 
-        if (target.x > transform.position.x && transform.localScale.x > Mathf.Epsilon) 
+        if (target.x > tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
-                                                transform.localScale.z);
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
         }
-        else if (target.x < transform.position.x && transform.localScale.x < Mathf.Epsilon)
+        else if (target.x < tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
-                                                transform.localScale.z);
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
         }
     }
-    
 }

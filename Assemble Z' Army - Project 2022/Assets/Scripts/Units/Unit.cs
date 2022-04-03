@@ -119,7 +119,7 @@ public class Unit : MonoBehaviour
 
             if (id == Units.ARCHER)
             {
-                ReachDistance.BaseValue = 100f;
+                ReachDistance.BaseValue = 200f;
             }
         }
 
@@ -134,11 +134,11 @@ public class Unit : MonoBehaviour
         if (myCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Mountain")))
         {
             agent.speed = Speed.BaseValue / 4; // on a mountain
-        }
 
-        if (id == Units.ARCHER)
-        {
-            ReachDistance.BaseValue = 100f;
+            if (id == Units.ARCHER)
+            {
+                ReachDistance.BaseValue = 200f;
+            }
         }
     }
 
@@ -148,22 +148,7 @@ public class Unit : MonoBehaviour
 
         if (id == Units.ARCHER)
         {
-            ReachDistance.BaseValue = 50f;
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-      Debug.Log("collides");
-        CapsuleCollider2D collider = collision.otherCollider as CapsuleCollider2D;
-
-        if (id == Units.SWORDMAN && collider)
-        {
-             Debug.Log("collides sss");
-            // if (collision.gameObject.== CapsuleCollider2D)
-            // {
-
-            // }
+            ReachDistance.BaseValue = 100f;
         }
     }
 
@@ -365,7 +350,7 @@ public class Unit : MonoBehaviour
                     Speed.BaseValue = agent.speed = 30f;
                     Attack.BaseValue = 18f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 50f;
+                    ReachDistance.BaseValue = 100f;
                     SpeedAttack.BaseValue = 1.4f;
                     break;
                 };
@@ -375,7 +360,7 @@ public class Unit : MonoBehaviour
                     Speed.BaseValue = agent.speed = 30f;
                     Attack.BaseValue = 12f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 150f; // to change
+                    ReachDistance.BaseValue = 80f;
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
