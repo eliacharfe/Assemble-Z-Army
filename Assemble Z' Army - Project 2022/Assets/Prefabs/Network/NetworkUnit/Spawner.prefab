@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7843241501414682972}
   - component: {fileID: 8247173898379423616}
   - component: {fileID: 2658841954800241434}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7092840229608560825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 3570150141282198360}
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  unitPrefab: {fileID: 6384757247955166901, guid: cc20b7703a12e6d4daf27e5b4a481ff7, type: 3}
+  unitPrefab: {fileID: 2540240371280817607, guid: 44910acd60a28e04aac40c60b52d54cd, type: 3}
 --- !u!114 &2658841954800241434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3570150141282198360}
   - component: {fileID: 5469166239367630791}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -26,8 +26,16 @@ public class RTSPlayer : NetworkBehaviour
 
     private bool isPartyOwner = false;
 
+    private Color teamColor = new Color();
+
+    [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
+    private string displayName;
+
     // Server Unit despawned event.
     public static event Action<int> PlayerLostAllUnits;
+
+    public static event Action ClientOnInfoUpdated;
+    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +50,12 @@ public class RTSPlayer : NetworkBehaviour
     #region Setters
     public void SetPartyOwner(bool state) { isPartyOwner = state; }
 
+    [Server]
+    public void SetDisplayName(string displayName) { this.displayName = displayName; }
 
+    [Server]
+    public void SetTeamColor(Color newTeamColor) { teamColor = newTeamColor; }
+   
     public void SetCameraPosition(Vector3 pos)
     {
         cameraTransform.position = pos;
@@ -59,6 +72,8 @@ public class RTSPlayer : NetworkBehaviour
 
 
     #region Getters
+    public string GetDisplayName() { return displayName; }
+
     public Vector3 GetCameraPosition()
     {
         return cameraTransform.position;
@@ -243,4 +258,9 @@ public class RTSPlayer : NetworkBehaviour
         if (!hasAuthority) return;
     }
 
+
+    private void ClientHandleDisplayNameUpdated(string oldName, string newName)
+    {
+        ClientOnInfoUpdated?.Invoke();
+    }
 }

@@ -23,6 +23,9 @@ public class RtsNetworkManager : NetworkManager
     public static event Action ClientOnConnected;
     public static event Action ClientOnDisConnected;
 
+    // The progession of the game.
+    private bool isGameInProgess = false;
+
     # region Server 
 
     public override void OnServerAddPlayer(NetworkConnection conn)
@@ -30,65 +33,69 @@ public class RtsNetworkManager : NetworkManager
         base.OnServerAddPlayer(conn);
 
         RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
-        print("Player have been added");
+
         players.Add(player);
 
-        //GameObject baseInstance = Instantiate(spawnerPrefab,
-              //player.transform.position, Quaternion.identity);
+        player.SetDisplayName($"Player {players.Count}");
 
-        //NetworkServer.Spawn(baseInstance, player.connectionToClient);
-
-        //player.unitSpawner = baseInstance;
+        player.SetTeamColor(UnityEngine.Random.ColorHSV());
 
         player.SetPartyOwner(players.Count == 1);
 
-        //player.SetCameraPosition(position);
-
-        if(players.Count >= 1)
-        {
-           FindObjectOfType<PhaseManager>().SetTimer(true);
-
-           SetPhaseOne();
-        }
+        /*
+        }*/
     }
 
-    
+
+    public override void OnServerConnect(NetworkConnection conn)
+    {
+        if (isGameInProgess)
+            conn.Disconnect();
+    }
+
     public override void OnServerDisconnect(NetworkConnection conn)
     {
         players.Remove(conn.identity.GetComponent<RTSPlayer>());
         base.OnServerDisconnect(conn);
-
-        // Client is not destroyed by
-       // Destroy(conn.identity.gameObject);
     }
 
 
     public override void OnServerSceneChanged(string sceneName)
     {
-
-        GameObject  EndGameHandler = Instantiate(gameOverHandler);
-
-        // Spawn the player on server.
-        NetworkServer.Spawn(EndGameHandler);
-
-        foreach (RTSPlayer player in players)
+        if(sceneName == "Playground")
         {
+            SetPhaseOne();
+        }
 
-            var startPos = GetStartPosition().position;
 
-            var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
-
-            player.phaseThreePos = pos;
-
-            player.SpawnRecruitedUnit();
-
-            //GameObject baseInstance = Instantiate(spawnerPrefab,
-            // startPos, Quaternion.identity);
+        if (sceneName == "Battlefield")
+        {
+            GameObject EndGameHandler = Instantiate(gameOverHandler);
 
             // Spawn the player on server.
-            //NetworkServer.Spawn(baseInstance, player.connectionToClient);
+            NetworkServer.Spawn(EndGameHandler);
 
+            foreach (RTSPlayer player in players)
+            {
+
+                var startPos = GetStartPosition().position;
+
+                var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
+
+                player.phaseThreePos = pos;
+
+                player.SpawnRecruitedUnit();
+
+                //GameObject baseInstance = Instantiate(spawnerPrefab,
+                // startPos, Quaternion.identity);
+
+                // Spawn the player on server.
+                //NetworkServer.Spawn(baseInstance, player.connectionToClient);
+
+            }
         }
+
+
 
     }
 
@@ -149,7 +156,16 @@ public class RtsNetworkManager : NetworkManager
 
     public void ShowBattleField()
     {
-        NetworkManager.singleton.ServerChangeScene("Battlefield");
+        //NetworkManager.singleton.ServerChangeScene("Battlefield");
+
+        NetworkManager.singleton.ServerChangeScene("Playground");
+
+        if (players.Count >= 2)
+        {
+            FindObjectOfType<PhaseManager>().SetTimer(true);
+
+            SetPhaseOne();
+        }
     }
 
 
