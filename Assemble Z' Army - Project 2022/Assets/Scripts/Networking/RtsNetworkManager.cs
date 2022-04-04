@@ -28,7 +28,7 @@ public class RtsNetworkManager : NetworkManager
 
     # region Server 
 
-    public override void OnServerAddPlayer(NetworkConnection conn)
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         base.OnServerAddPlayer(conn);
 
@@ -41,19 +41,15 @@ public class RtsNetworkManager : NetworkManager
         player.SetTeamColor(UnityEngine.Random.ColorHSV());
 
         player.SetPartyOwner(players.Count == 1);
-
-        /*
-        }*/
     }
 
-
-    public override void OnServerConnect(NetworkConnection conn)
+    public override void OnServerConnect(NetworkConnectionToClient conn)
     {
         if (isGameInProgess)
             conn.Disconnect();
     }
 
-    public override void OnServerDisconnect(NetworkConnection conn)
+    public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
         players.Remove(conn.identity.GetComponent<RTSPlayer>());
         base.OnServerDisconnect(conn);
