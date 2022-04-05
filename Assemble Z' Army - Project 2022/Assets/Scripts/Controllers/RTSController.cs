@@ -15,6 +15,8 @@ public class RTSController : MonoBehaviour
 
     AudioPlayer audioPlayer;
 
+    private int LayerMaskDetectionArea;
+
     private void Awake()
     {
         selectedUnits = new List<Unit>();
@@ -22,6 +24,8 @@ public class RTSController : MonoBehaviour
         mainCamera = Camera.main;
         Unit.OnDeUnitSpawned += HandleDeSpawnUnit;
         audioPlayer = FindObjectOfType<AudioPlayer>();
+
+        LayerMaskDetectionArea = LayerMask.GetMask("DetectionAttackArea");
     }
     //------------------------
     private void Update()
@@ -61,13 +65,14 @@ public class RTSController : MonoBehaviour
         Building building = null;
         Targetable targetable = null;
 
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                                             Vector2.zero, 0, ~LayerMaskDetectionArea);
 
         if (hit.collider)
         {
             buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
             building = hit.collider.gameObject.GetComponent<Building>();
-            targetable = hit.collider.gameObject.GetComponent<Targetable>();
+            targetable = hit.collider.gameObject.GetComponent<Targetable>();    
         }
 
         if (buildingToConstruct && buildingToConstruct.enabled)
@@ -87,7 +92,7 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
-             unit.GetComponent<Attacker>().setAttackMode();
+            unit.GetComponent<Attacker>().setAttackMode();
 
             if (unit.id == Macros.Units.HEALER)
             {

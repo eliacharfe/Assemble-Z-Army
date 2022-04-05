@@ -7,6 +7,7 @@ TagManager:
   - UnitMove
   - sword_knight
   - swordman
+  - DetectionAttackArea
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Background
+  - DetectionAttackArea
   - Ground
-  - Walls
   - Unit
   - Projectile
   - WaterWater
@@ -26,7 +27,7 @@ TagManager:
   - FogOfWarSecondary
   - W
   - Mountain
-  - 
+  - Walls
   - 
   - 
   - 
@@ -61,6 +62,9 @@ TagManager:
     locked: 0
   - name: Mountain
     uniqueID: 3054914297
+    locked: 0
+  - name: DetectionAttackArea
+    uniqueID: 1606829551
     locked: 0
   - name: Buildings
     uniqueID: 1174373771
