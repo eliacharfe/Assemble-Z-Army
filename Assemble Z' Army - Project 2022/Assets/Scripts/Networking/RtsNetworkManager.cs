@@ -104,8 +104,6 @@ public class RtsNetworkManager : NetworkManager
 
         FindObjectOfType<PhaseManager>().SetTimer(true);
 
-        print("Setting phase one");
-
         foreach (RTSPlayer player in players)
         {
             var startPos = GetStartPosition().position;
@@ -116,12 +114,10 @@ public class RtsNetworkManager : NetworkManager
 
             player.phaseThreePos = pos;
 
-            print("Setting camera in "+pos);
-
             for (int i = 0; i < amountOfWorkers; i++)
             {
 
-                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.WORKER).gameObject, startPos, Quaternion.identity);
+                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Units.WORKER).gameObject, startPos, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);
@@ -129,8 +125,6 @@ public class RtsNetworkManager : NetworkManager
                 player.m_workers.Add(workerInstance);
             }
         }
-
-        print("Phase one ready");
     }
 
     // Set wokers units which suppose to build with given resources avaible.
@@ -147,7 +141,7 @@ public class RtsNetworkManager : NetworkManager
 
             for (int i = 0; i < amountOfRecruits; i++)
             {
-                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORDMAN).gameObject, startinPoint, Quaternion.identity);
+                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.RECRUIT).gameObject, startinPoint, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);

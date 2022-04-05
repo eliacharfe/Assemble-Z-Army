@@ -35,6 +35,7 @@ public class CostumeSlider : MonoBehaviour
         timeLeft.GetComponent<Image>().fillAmount = value;
     }
 
+
     // Intilize slider to 0.
     public void resetSlider()
     {

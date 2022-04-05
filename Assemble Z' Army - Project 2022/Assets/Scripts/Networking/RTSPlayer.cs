@@ -12,7 +12,7 @@ public class RTSPlayer : NetworkBehaviour
 
     // TODO - set access modifier
     // The phase three pos update the camera position for the player.
-    [SyncVar(hook = nameof(SetPhaseThreeCamera))] public Vector3 phaseThreePos = new Vector3(0,0,0);
+    [SyncVar(hook = nameof(HandleCameraChange))] public Vector3 phaseThreePos = new Vector3(0,0,0);
 
     public GameObject unitSpawner = null;
 
@@ -36,6 +36,8 @@ public class RTSPlayer : NetworkBehaviour
 
     public static event Action ClientOnInfoUpdated;
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
+
+    const String PHASE_ONE_SCENE = "Playground",PHASE_TWO_SCENE = "Battlefield";
 
     // Start is called before the first frame update
     void Start()
@@ -64,12 +66,25 @@ public class RTSPlayer : NetworkBehaviour
     }
 
 
-    public void SetPhaseThreeCamera(Vector3 oldPos,Vector3 newPos)
+    public void HandleCameraChange(Vector3 oldPos,Vector3 newPos)
     {
-        SetCameraPosition(newPos);
 
-        GetComponent<CameraInputSystem>().OnStartingGame();
-        //GetComponent<CameraInputSystem>().OnChangePhaseThreeMap();
+        String sceneName = NetworkManager.networkSceneName;
+
+        SetCameraPosition(newPos);
+        if (sceneName == PHASE_ONE_SCENE)
+        {
+            GetComponent<CameraInputSystem>().OnStartingGame();
+            print("Phase one camera set!!!");
+        }
+        else if (sceneName == PHASE_TWO_SCENE)
+        {
+            GetComponent<CameraInputSystem>().OnChangePhaseThreeMap();
+            print("Phase three camera set!!!");
+        }
+
+
+        //
     }
     #endregion
 

@@ -68,7 +68,7 @@ public abstract class Attacker : NetworkBehaviour
 
     public void SetAutomateAttack()
     {
-        isInModeAttackAutomated = true;
+        //isInModeAttackAutomated = true;
     }
 
     public bool isInModeAttackAutomate()
@@ -99,6 +99,6 @@ public abstract class Attacker : NetworkBehaviour
 
     public void setAttackMode()
     {
-        isInAttackMode = true;
+        //isInAttackMode = true;
     }
 }

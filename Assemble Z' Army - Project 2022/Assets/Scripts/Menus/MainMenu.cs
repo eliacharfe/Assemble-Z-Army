@@ -40,11 +40,17 @@ public class MainMenu : MonoBehaviour
      {
          FindObjectOfType<AudioPlayer>().PlayBtnClickClip();
 
-         landingPagePanel.SetActive(false);
+        landingPagePanel.SetActive(false);
 
-         NetworkManager.singleton.StartHost();
+        if (useSteam)
+        {
+            SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
+            return;
+        }
 
-     }
+        NetworkManager.singleton.StartHost();
+
+    }
 
 
     // When lobby is created , start hosting the game.

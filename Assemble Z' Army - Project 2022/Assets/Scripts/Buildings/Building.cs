@@ -78,7 +78,8 @@ public class Building : NetworkBehaviour
 
     public void HandleRecruitmentTimeUpdated(float oldTime,float newTime)
     {
-        timeSlider.setValue(newTime/spawnTime);
+        //timeSlider.setValue(newTime/spawnTime);
+
     }
     #endregion
 
@@ -99,6 +100,7 @@ public class Building : NetworkBehaviour
 
 
     // Update is called once per frame
+    [ClientCallback]
     void Update()
     {
 
@@ -254,7 +256,7 @@ public class Building : NetworkBehaviour
                 timePassed = 0;
             }
         }
-
+        timeSlider.setValue(timePassed / spawnTime);
     }
 
 
