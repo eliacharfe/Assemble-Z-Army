@@ -186,11 +186,6 @@ public class RtsNetworkManager : NetworkManager
         ClientOnConnected?.Invoke();
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 100, 100), "SOME");
-    }
-
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientDisconnect(conn);

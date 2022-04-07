@@ -38,12 +38,13 @@ public class MainMenu : MonoBehaviour
 
     public void HostLobby()
      {
-         FindObjectOfType<AudioPlayer>().PlayBtnClickClip();
+        // FindObjectOfType<AudioPlayer>().PlayBtnClickClip();
 
         landingPagePanel.SetActive(false);
 
         if (useSteam)
         {
+            print("Use steam lobby");
             SteamMatchmaking.CreateLobby(ELobbyType.k_ELobbyTypeFriendsOnly, 4);
             return;
         }
@@ -56,8 +57,10 @@ public class MainMenu : MonoBehaviour
     // When lobby is created , start hosting the game.
     private void OnLobbyCreated(LobbyCreated_t callback)
     {
+        print(callback.m_eResult);
         if (callback.m_eResult != EResult.k_EResultOK)
         {
+            print("Didnt recived ok from steam");
             landingPagePanel.SetActive(true);
             return;
         }
