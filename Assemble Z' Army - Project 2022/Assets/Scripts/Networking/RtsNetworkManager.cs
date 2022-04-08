@@ -81,21 +81,12 @@ public class RtsNetworkManager : NetworkManager
                 player.phaseThreePos = pos;
 
                 player.SpawnRecruitedUnit();
-
-                //GameObject baseInstance = Instantiate(spawnerPrefab,
-                // startPos, Quaternion.identity);
-
-                // Spawn the player on server.
-                //NetworkServer.Spawn(baseInstance, player.connectionToClient);
-
             }
         }
 
 
 
     }
-
-
 
     // Set wokers units which suppose to build with given resources avaible.
     public void SetPhaseOne()
@@ -155,12 +146,6 @@ public class RtsNetworkManager : NetworkManager
 
     }
 
-
-
-
-
-
-
     public void ShowPreparationPhase()
     {
         print("Changing server");
@@ -172,11 +157,7 @@ public class RtsNetworkManager : NetworkManager
     {
         NetworkManager.singleton.ServerChangeScene("Battlefield");
     }
-
-
-
     #endregion
-
 
     #region Client
     public override void OnClientConnect(NetworkConnection conn)

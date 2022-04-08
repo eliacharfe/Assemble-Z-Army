@@ -54,7 +54,7 @@ MonoBehaviour:
   serverTickRate: 30
   offlineScene: Assets/Scenes/MenuScene.unity
   onlineScene: 
-  transport: {fileID: 5978139463743156408}
+  transport: {fileID: 6408644673840889553}
   networkAddress: localhost
   maxConnections: 100
   authenticator: {fileID: 0}
@@ -80,6 +80,7 @@ MonoBehaviour:
   - {fileID: 4631532840544127888, guid: a6f22b08044b9624fb22948ad5f1cab8, type: 3}
   - {fileID: 2554254635777691023, guid: 5d0d180497c22b54b9b913b983fd99bf, type: 3}
   - {fileID: 594850713533669745, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+  - {fileID: 2115192308945591727, guid: e9daf5199837e4b49b0d27b951db7ca6, type: 3}
   amountOfWorkers: 10
   amountOfRecruits: 10
   gameOverHandler: {fileID: 2115192308945591727, guid: e9daf5199837e4b49b0d27b951db7ca6, type: 3}
@@ -120,7 +121,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6408644673840889564}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
   m_Name: 
