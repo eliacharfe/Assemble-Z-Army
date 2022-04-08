@@ -5,8 +5,8 @@ using Macros;
 
 public class ResourcesPlayer : MonoBehaviour
 {
-    private static readonly Dictionary<Macros.Resources, int> dictionary = new Dictionary<Macros.Resources, int>();
-    public Dictionary<Macros.Resources, int> resources = dictionary;
+    //private static readonly Dictionary<Macros.Resources, int> dictionary = ;
+    public Dictionary<Macros.Resources, int> resources = new Dictionary<Macros.Resources, int>();
 
     private void Start()
     {
@@ -14,6 +14,8 @@ public class ResourcesPlayer : MonoBehaviour
         resources.Add(Macros.Resources.METAL, (int)Macros.Resources.METAL);
         resources.Add(Macros.Resources.GOLD, (int)Macros.Resources.GOLD);
         resources.Add(Macros.Resources.DIAMONDS, (int)Macros.Resources.DIAMONDS);
+
+        print("Resource should be intialized");
     }
 
     //--------------------

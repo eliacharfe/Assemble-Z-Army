@@ -14,6 +14,8 @@ public class RTSPlayer : NetworkBehaviour
     // The phase three pos update the camera position for the player.
     [SyncVar(hook = nameof(HandleCameraChange))] public Vector3 phaseThreePos = new Vector3(0,0,0);
 
+    [SyncVar]public bool isPlayerLost = false;
+
     public GameObject unitSpawner = null;
 
     public List<GameObject> m_workers = new List<GameObject>();
@@ -145,6 +147,8 @@ public class RTSPlayer : NetworkBehaviour
 
         if(m_unitsId.Count <= 0)
         {
+            isPlayerLost = true;
+
             PlayerLostAllUnits?.Invoke(connectionToClient.connectionId);
         }
     }

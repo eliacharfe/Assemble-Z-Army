@@ -73,7 +73,6 @@ public class UnitsFactory : MonoBehaviour
         switch (unitId)
         {
             case Units.WORKER:
-                print(worker);
                 return worker;
            
             case Units.RECRUIT:

@@ -25,11 +25,7 @@ public class GameOverHandler : NetworkBehaviour
     }
 
 
-    private void ServerHandleBaseSpawned(GameObject unitBase)
-    {
-        // bases.Add(unitBase);
-
-    }
+    private void ServerHandleBaseSpawned(GameObject unitBase){}
 
 
     private void ServerHandleUnitDeSpawned(Unit unit)
@@ -40,11 +36,17 @@ public class GameOverHandler : NetworkBehaviour
 
     private void ServerHandlePlayerLost(int playerId)
     {
+        var players = ((RtsNetworkManager)NetworkManager.singleton).players;
 
-        print("The player with connection:" + playerId + "has lost the game");
-        //ClientOnGameOver?.Invoke("The playr won is:" + playerId);
+        print("Players lost amount " + players.FindAll(player => player.isPlayerLost).Count);
 
-        RpcGameOver("The Winner is:" + playerId);
+        if (players.FindAll(player => player.isPlayerLost).Count == players.Count-1)
+        {
+            var winnerId = players.Find(player => !player.isPlayerLost).connectionToClient;
+
+            RpcGameOver("The Winner is:" + winnerId);
+        }
+
     }
 
     #endregion

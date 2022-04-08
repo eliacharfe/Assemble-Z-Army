@@ -12,13 +12,14 @@ public class RTSController : MonoBehaviour
     private Vector2 startPosition;
 
     [SerializeField] private Transform selectionAreaTransform;
-
+    private int LayerMaskDetectionArea;
     private void Awake()
     {
         selectedUnits = new List<Unit>();
         selectionAreaTransform.gameObject.SetActive(false);
         mainCamera = Camera.main;
         Unit.AuthortyOnUnitDeSpawned += HandleDeSpawnUnit;
+        LayerMaskDetectionArea = LayerMask.GetMask("DetectionAttackArea");
     }
 
     
@@ -58,9 +59,9 @@ public class RTSController : MonoBehaviour
         Building building = null;
         Targetable targetable = null;
 
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-        if(hit.collider)
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                                       Vector2.zero, 0, ~LayerMaskDetectionArea);
+        if (hit.collider)
         {
             hit.collider.gameObject.TryGetComponent<BuilidingConstruction>(out buildingToConstruct);
             hit.collider.gameObject.TryGetComponent<Building>(out building);

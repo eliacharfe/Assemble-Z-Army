@@ -21,9 +21,14 @@ public class ConstructBuilding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!buildingTarget) { return; }
+        if (!buildingTarget) {
+            return; 
+        }
 
-        if(!isBuilding) { return; }
+        if(!isBuilding) {
+            GetComponent<Animator>().SetBool("isAttacking", false);
+            return; 
+        }
 
         IncreaseTimeBuilding();
     }
@@ -37,6 +42,8 @@ public class ConstructBuilding : MonoBehaviour
             isBuilding = true;
 
             unit.StopMove();
+
+            GetComponent<Animator>().SetBool("isAttacking", true);
         }
 
     }
@@ -79,6 +86,8 @@ public class ConstructBuilding : MonoBehaviour
         time = 0;
         Unit unit = gameObject.GetComponent<Unit>() as Unit;
         unit.ContinutMove();
+        GetComponent<Animator>().SetBool("isAttacking", false);
+        print("Building target is not enabled");
     }
 
 

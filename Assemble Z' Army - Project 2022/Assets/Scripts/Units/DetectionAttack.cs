@@ -28,7 +28,8 @@ public class DetectionAttack : MonoBehaviour
             return;
         }
 
-        if (other.TryGetComponent<Unit>(out Unit targetUnit) && targetUnit.hasAuthority)
+        if (other.TryGetComponent<Unit>(out Unit targetUnit) && 
+            targetUnit.connectionToClient == gameObject.GetComponentInParent<Unit>().connectionToClient)
         {
             return;
         }
