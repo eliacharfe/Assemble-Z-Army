@@ -42,7 +42,7 @@ public class GameOverHandler : NetworkBehaviour
 
         if (players.FindAll(player => player.isPlayerLost).Count == players.Count-1)
         {
-            var winnerId = players.Find(player => !player.isPlayerLost).connectionToClient;
+            var winnerId = players.Find(player => !player.isPlayerLost).GetDisplayName();
 
             RpcGameOver("The Winner is:" + winnerId);
         }

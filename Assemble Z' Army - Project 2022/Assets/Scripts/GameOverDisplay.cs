@@ -34,11 +34,11 @@ public class GameOverDisplay : MonoBehaviour
         }
     }
 
-    private void ClientHandleGameOver(string winner)
+    private void ClientHandleGameOver(string WinnerStr)
     {
         Debug.Log("Game Over Command");
 
-        winnerNameText.text = $"{winner}";
+        winnerNameText.text = $"{WinnerStr}";
 
         gameOverDisplayParent.SetActive(true);
 
