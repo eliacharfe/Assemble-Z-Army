@@ -91,15 +91,16 @@ public class Mana : NetworkBehaviour
             currMana = 0;
         }
 
-        //ClientOnManaUpdate?.Invoke((int)currMana, 100);
-
-        GetComponent<Animator>().SetBool("isHealing", false);
-
         GetComponent<Mana>().PlayManaEffect();
     }
 
     private void HandleManaValueUpdated(int oldMana, int newMana)
     {
         ClientOnManaUpdate?.Invoke(newMana, maxMana);
+    }
+
+    public void StopAnimation()
+    { 
+        GetComponent<Animator>().SetBool("isHealing", false);
     }
 }

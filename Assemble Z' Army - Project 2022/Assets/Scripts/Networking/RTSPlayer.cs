@@ -112,8 +112,6 @@ public class RTSPlayer : NetworkBehaviour
 
     private void OnDestroy()
     {
-        print("Destroy this client");
-
         Destroy(unitSpawner);
     }
 

@@ -271,7 +271,7 @@ public class Building : NetworkBehaviour
             return enterPoint.position + new Vector3(-20 * (waitingUnit.Count - 1), 0, 0);
         }
 
-        return Vector3.zero;
+        return unit.transform.position;
     }
 
 
@@ -297,5 +297,10 @@ public class Building : NetworkBehaviour
     public Sprite GetBuildingSprite()
     {
         return GetComponent<Sprite>();
+    }
+
+    public bool isMatchedUnit(Unit unit)
+    {
+        return unitsFactory.GetBuildingOutputUnit(this.Id, unit.id);
     }
 }

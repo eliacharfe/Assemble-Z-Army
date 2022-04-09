@@ -87,7 +87,6 @@ public class ConstructBuilding : MonoBehaviour
         Unit unit = gameObject.GetComponent<Unit>() as Unit;
         unit.ContinutMove();
         GetComponent<Animator>().SetBool("isAttacking", false);
-        print("Building target is not enabled");
     }
 
 

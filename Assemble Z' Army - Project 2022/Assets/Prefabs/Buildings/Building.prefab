@@ -79,7 +79,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 7687285496895391796}
   enterPoint: {fileID: 9021328820710509342}
   Id: 4
-  costResourcesBuilding: 2c010000c8000000c8000000c8000000
+  costResourcesBuilding: 2c010000c8000000c800000064000000
   woodCost: 300
   metalCost: 200
   goldCost: 200
@@ -155,6 +155,11 @@ MonoBehaviour:
   bufferSizeLimit: 64
   catchupThreshold: 4
   catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}

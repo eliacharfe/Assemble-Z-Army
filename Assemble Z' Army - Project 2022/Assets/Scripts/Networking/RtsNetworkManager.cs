@@ -26,6 +26,12 @@ public class RtsNetworkManager : NetworkManager
     // The progession of the game.
     private bool isGameInProgess = false;
 
+    private void OnLevelWasLoaded(int level)
+    {
+        GetComponent<SteamManager>().enabled = true;    
+    }
+
+
     # region Server 
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
@@ -148,8 +154,6 @@ public class RtsNetworkManager : NetworkManager
 
     public void ShowPreparationPhase()
     {
-        print("Changing server");
-
         NetworkManager.singleton.ServerChangeScene("Playground");   
     }
 

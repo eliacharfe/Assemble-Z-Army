@@ -76,7 +76,6 @@ public class RTSController : MonoBehaviour
 
         else if (targetable)
         {
-            Debug.Log("Attack unit");
             AttackUnit(targetable, hit);
 
         }
@@ -100,14 +99,11 @@ public class RTSController : MonoBehaviour
 
             if (unit.id == Macros.Units.HEALER && targetable.hasAuthority)
             {
-                print("Selected healer");
                 if (unit.GetComponent<Mana>().canHeal)
                 {
-                    print("Should heal");
                     //audioPlayer.PlayHealingClip();
                     unit.GetComponent<Mana>().CmdUseHeal();
                     targetable.GetComponent<Health>().CmdHeal(100);
-                    //unit.GetComponent<ManaDisplay>().HandleManaUpdated((int)unit.GetComponent<Mana>().currMana, 100);
                     unit.GetComponent<Mana>().PlayManaEffect();
                 }
             
@@ -122,7 +118,7 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.id != Macros.Units.WORKER)
+            if (unit.id != Macros.Units.WORKER && building.isMatchedUnit(unit))
             {
                 unit.SetBuildingRecruiting(building);
 
@@ -173,9 +169,9 @@ public class RTSController : MonoBehaviour
     // Clear previous commands such as attack target or recruit.
     private void ClearPreviousCommands(Unit unit)
     {
-        unit.RemoveBuildingRecruiting();
+        unit?.RemoveBuildingRecruiting();
 
-        if (unit.GetComponent<Attacker>())
+        if (unit && unit.GetComponent<Attacker>())
             unit.GetComponent<Attacker>().CmdSetTargetable(null);
     }
 

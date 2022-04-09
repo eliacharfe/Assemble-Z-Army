@@ -104,7 +104,6 @@ public class Unit : NetworkBehaviour
     #region Authority
     public override void OnStartAuthority()
     {
-        print("Unit spawned");
         if (!hasAuthority) return;
         AuthortyOnUnitSpawned?.Invoke(this);
 
