@@ -45,15 +45,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingClip: {fileID: 8300000, guid: b6dfcced79f19f4409fa9ed5eea62b26, type: 3}
-  shootingVolume: 0.1
+  shootingVolume: 0.7
   damageClip: {fileID: 8300000, guid: 284670607ed6a22439cee88502099c16, type: 3}
   damageVolume: 0.2
   healingClip: {fileID: 8300000, guid: f2dafc799894de54e8c2e5c010e0c875, type: 3}
-  healingVolume: 0.2
+  healingVolume: 0.8
   deadClip: {fileID: 8300000, guid: d73a42b25b320dd4dbad5d1630d577d5, type: 3}
   deadVolume: 0.139
   horseGallopClip: {fileID: 8300000, guid: ef20bffccae80b74e9a42c2f3dc233ba, type: 3}
-  horseGallopVolume: 1
+  horseGallopVolume: 0.64
+  stepClip: {fileID: 8300000, guid: 671c8b16694cf9142a4f9b0cee6a453d, type: 3}
+  stepVolume: 0.655
+  btnClickClip: {fileID: 0}
+  btnClickVolume: 1
+  btnClickErrorClip: {fileID: 8300000, guid: c16e2b74e892b4c4aa5721926046f3bb, type: 3}
+  btnClickErrorVolume: 0.426
 --- !u!82 &8753041854152823015
 AudioSource:
   m_ObjectHideFlags: 0
@@ -66,7 +72,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e70bb17954127454caed45ee33562824, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
