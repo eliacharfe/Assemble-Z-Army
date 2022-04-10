@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 50
+    OrthographicSize: 100
     NearClipPlane: 0.1
     FarClipPlane: 200
     Dutch: 0
@@ -139,6 +139,7 @@ MonoBehaviour:
   syncInterval: 0.1
   cameraTransform: {fileID: 1564134395254397668}
   phaseThreePos: {x: 0, y: 0, z: 0}
+  isPlayerLost: 0
   unitSpawner: {fileID: 0}
   m_workers: []
   m_unitsId: 
