@@ -30,8 +30,14 @@ public abstract class Attacker : NetworkBehaviour
     [ServerCallback]
     private void Update()
     {
-        if (!target) {
+        if (GetComponent<Unit>().isDead)
+        {
+            return;
+        }
+
+        if (!target || target.IsDead()) {
             isInModeAttackAutomated = false;
+            target = null;
             if (reachedTarget)
             {
                 StopAttackAnime();

@@ -72,6 +72,18 @@ public class UnitMovement:NetworkBehaviour
     {
         return agent.hasPath;
     }
+
+
+    public void PlayFootStepsSound()
+    {
+        FindObjectOfType<AudioPlayer>().PlayStepClip();
+    }
+
+
+    public void PlayHorseStepsSound()
+    {
+        FindObjectOfType<AudioPlayer>().PlayHorseGallopClip();
+    }
 }
 
 

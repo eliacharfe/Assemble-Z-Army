@@ -575,14 +575,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 8753041854152823009, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
-      propertyPath: btnClickClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 1c6787785bf6c6b4dac18489d312a575, type: 3}
-    - target: {fileID: 8753041854152823009, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
-      propertyPath: btnClickVolume
-      value: 0.596
-      objectReference: {fileID: 0}
     - target: {fileID: 8753041854152823014, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -627,14 +619,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8753041854152823015, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
-      propertyPath: m_Volume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8753041854152823015, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: bbfd9414cbeeb984f94e6f9188f894b3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
 --- !u!1 &74297160

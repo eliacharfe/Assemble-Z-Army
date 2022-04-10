@@ -61,7 +61,8 @@ public class Health : NetworkBehaviour // NetworkBehavior
             GetComponent<Unit>().SetDead();
             GetComponent<Unit>().isDead = true;
             GetComponent<Unit>().StopMove();
-            Destroy(gameObject);
+            GetComponent<Animator>().SetBool("isDead", true);
+            Destroy(gameObject,2f);
         }
     }
 }

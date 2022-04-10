@@ -150,6 +150,7 @@ public class RTSController : MonoBehaviour
         List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {10, 20, 30}, new int[] {5, 10, 20});
 
         int targetPosIndex = 0;
+
         foreach (Unit unit in selectedUnits)
         {
             ClearPreviousCommands(unit);

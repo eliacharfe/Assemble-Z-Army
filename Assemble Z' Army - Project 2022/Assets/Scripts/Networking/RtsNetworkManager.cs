@@ -138,7 +138,7 @@ public class RtsNetworkManager : NetworkManager
 
             for (int i = 0; i < amountOfRecruits; i++)
             {
-                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.RECRUIT).gameObject, startinPoint, Quaternion.identity);
+                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.ARCHER).gameObject, startinPoint, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);

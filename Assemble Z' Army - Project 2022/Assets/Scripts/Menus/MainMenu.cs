@@ -38,7 +38,7 @@ public class MainMenu : MonoBehaviour
 
     public void HostLobby()
      {
-        // FindObjectOfType<AudioPlayer>().PlayBtnClickClip();
+        FindObjectOfType<AudioPlayer>().PlayBtnClickClip();
 
         landingPagePanel.SetActive(false);
 

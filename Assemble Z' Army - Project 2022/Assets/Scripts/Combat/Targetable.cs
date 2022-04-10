@@ -11,4 +11,9 @@ public class Targetable : NetworkBehaviour
         GetComponent<Health>().currHealth = 100;
     }
 
+
+    public bool IsDead()
+    {
+        return GetComponent<Unit>().isDead;
+    }
 }

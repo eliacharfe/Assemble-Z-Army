@@ -12,11 +12,11 @@ public class BowAttack : Attacker
 
     [SerializeField] GameObject shootStartPoint;
 
-    //AudioPlayer audioPlayer;
+    AudioPlayer audioPlayer;
 
     private void Awake()
     {
-        //audioPlayer = FindObjectOfType<AudioPlayer>();
+        audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
     public override void StopAttackAnime()
@@ -35,6 +35,8 @@ public class BowAttack : Attacker
     {
         if (!target)
             return;
+
+        //RpcPlayBowSound();
 
         Vector3 targetPos = target.transform.position;
         Vector3 targPos = target.transform.position;
@@ -72,6 +74,12 @@ public class BowAttack : Attacker
 
     }
 
+
+    [ClientRpc]
+    void RpcPlayBowSound()
+    {
+        audioPlayer.PlayShootingClip();
+    }
 
     private void FlipSideSprite(Vector3 target)
     {

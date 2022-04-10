@@ -53,7 +53,13 @@ MonoBehaviour:
   deadClip: {fileID: 8300000, guid: d73a42b25b320dd4dbad5d1630d577d5, type: 3}
   deadVolume: 0.139
   horseGallopClip: {fileID: 8300000, guid: ef20bffccae80b74e9a42c2f3dc233ba, type: 3}
-  horseGallopVolume: 1
+  horseGallopVolume: 0.2
+  stepClip: {fileID: 8300000, guid: c6066fee38ce40044910c423d2a88833, type: 3}
+  stepVolume: 0.1
+  btnClickClip: {fileID: 8300000, guid: 1c6787785bf6c6b4dac18489d312a575, type: 3}
+  btnClickVolume: 0.4
+  btnClickErrorClip: {fileID: 8300000, guid: c16e2b74e892b4c4aa5721926046f3bb, type: 3}
+  btnClickErrorVolume: 0.5
 --- !u!82 &8753041854152823015
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64,7 +70,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e70bb17954127454caed45ee33562824, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 53e56396bbf1f4b4cbaa8cb4cd1fef01, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
