@@ -1752,6 +1752,7 @@ GameObject:
   - component: {fileID: 7343430735477095859}
   - component: {fileID: -2564192370585396867}
   - component: {fileID: 8990977863532611970}
+  - component: {fileID: -239469744693092203}
   m_Layer: 9
   m_Name: UnitRoot Scout
   m_TagString: Untagged
@@ -1938,6 +1939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  isMoving: 0
 --- !u!114 &3628513008358045819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2044,6 +2046,11 @@ MonoBehaviour:
   bufferSizeLimit: 64
   catchupThreshold: 4
   catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
@@ -2063,6 +2070,21 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 5170383734115145385}
+--- !u!114 &-239469744693092203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052958870719413816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772e111d064637948ad7b036c1d1afd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRendereres: []
 --- !u!1 &3061865977772804033
 GameObject:
   m_ObjectHideFlags: 0

@@ -121,7 +121,17 @@ public class RtsNetworkManager : NetworkManager
 
                 player.m_workers.Add(workerInstance);
             }
+            spawnTemp(Units.SPEAR_HORSE_KNIGHT, factory, player, startPos);
+
         }
+    }
+
+    void spawnTemp(Macros.Units name,UnitsFactory factory, RTSPlayer player,Vector3 pos)
+    {
+        GameObject workerInstance = Instantiate(factory.GetUnitPrefab(name).gameObject, pos, Quaternion.identity);
+
+        // Spawn the player on server.
+        NetworkServer.Spawn(workerInstance, player.connectionToClient);
     }
 
     // Set wokers units which suppose to build with given resources avaible.

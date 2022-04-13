@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 680814506050407800}
   - component: {fileID: 4916679435308990722}
   - component: {fileID: -6405376924780405706}
+  - component: {fileID: -6322515938518501161}
   m_Layer: 9
   m_Name: UnitRoot Spearman
   m_TagString: Untagged
@@ -471,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  isMoving: 0
 --- !u!114 &3737167431127027222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,6 +641,11 @@ MonoBehaviour:
   bufferSizeLimit: 64
   catchupThreshold: 4
   catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
@@ -658,6 +665,23 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 3747977752467775652}
+--- !u!114 &-6322515938518501161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843583707701705464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772e111d064637948ad7b036c1d1afd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRendereres:
+  - {fileID: 3162815220435727561}
+  - {fileID: 979105278811046602}
 --- !u!1 &937546678103356964
 GameObject:
   m_ObjectHideFlags: 0

@@ -4757,14 +4757,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6408644673840889552, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
-      propertyPath: transport
-      value: 
-      objectReference: {fileID: 1816445978}
-    - target: {fileID: 6408644673840889553, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6408644673840889564, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
       propertyPath: m_Name
       value: NetworkManager
@@ -5395,17 +5387,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1799233195}
   m_CullTransparentMesh: 1
---- !u!114 &1816445978 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6408644673840889553, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
-  m_PrefabInstance: {fileID: 1366648091}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1830411083 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6118037880016921251, guid: 59e93bfccc015074f941e3671b51f331, type: 3}

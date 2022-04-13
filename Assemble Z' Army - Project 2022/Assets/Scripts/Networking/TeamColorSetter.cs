@@ -1,18 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class TeamColorSetter : MonoBehaviour
+public class TeamColorSetter : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Store the renderes which need to be colored.
+    [SerializeField] private SpriteRenderer[] colorRendereres = new SpriteRenderer[0];
+
+    // Update the team color.
+    [SyncVar(hook = nameof(HandleTeamColorUpdated))]
+    private Color teamColor = new Color();
+
+
+    #region Server 
+    public override void OnStartServer()
     {
-        
+        RTSPlayer player = connectionToClient.identity.GetComponent<RTSPlayer>();
+
+        teamColor = player.GetTeamColor();
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+
+
+    #region Client
+    // Update the color.
+    private void HandleTeamColorUpdated(Color oldColor, Color newColor)
     {
-        
+        foreach (SpriteRenderer renderer in colorRendereres)
+        {
+            renderer.color = newColor;
+        }
+
     }
+
+    #endregion
 }

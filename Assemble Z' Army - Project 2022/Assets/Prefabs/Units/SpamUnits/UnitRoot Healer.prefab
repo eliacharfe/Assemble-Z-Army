@@ -554,7 +554,7 @@ SpriteRenderer:
   m_SortingLayer: 7
   m_SortingOrder: -100
   m_Sprite: {fileID: 21300000, guid: 6f171eaff53459d42bfc1279ae2b56c1, type: 3}
-  m_Color: {r: 0.8235294, g: 0.49411765, b: 0.65882355, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -589,6 +589,7 @@ GameObject:
   - component: {fileID: 7340133132383490334}
   - component: {fileID: -8630561976985186174}
   - component: {fileID: 3035294026920832418}
+  - component: {fileID: 1701731355175812324}
   m_Layer: 9
   m_Name: UnitRoot Healer
   m_TagString: Untagged
@@ -807,6 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  isMoving: 0
 --- !u!114 &5346251163243978378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,9 +838,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb3df534dae68d544adc8ad36a8e01d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   manaEffect: {fileID: 5741338418869833594, guid: b143720ba25efeb4abeaa53b25bc480e, type: 3}
   healingPointStart: {fileID: 5346251162338315384}
-  maxMana: 100
   currMana: 0
   canHeal: 0
 --- !u!114 &7914326635774713872
@@ -915,6 +918,11 @@ MonoBehaviour:
   bufferSizeLimit: 64
   catchupThreshold: 4
   catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
@@ -934,6 +942,24 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 48779905751145349}
+--- !u!114 &1701731355175812324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421345242490242959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772e111d064637948ad7b036c1d1afd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRendereres:
+  - {fileID: 8968012258625408638}
+  - {fileID: 7819116965961207288}
+  - {fileID: 7539946289150681165}
 --- !u!1 &1449217196880962282
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,7 +62,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 1
   spawnPrefabs:
-  - {fileID: 3650929890183891028, guid: 148538e855ce2cc48bb84ea4a4862dce, type: 3}
+  - {fileID: 6084219504695422600, guid: 148538e855ce2cc48bb84ea4a4862dce, type: 3}
   - {fileID: 8821020436024725637, guid: f98f688852748ca408e11cb273573276, type: 3}
   - {fileID: 3712606424244515607, guid: 03805a7e4c2ae0b4a9870d75bc225f05, type: 3}
   - {fileID: 7675357207386853784, guid: 767e11c7ad6bb954ca7719e0e9a1dbeb, type: 3}
@@ -107,7 +107,7 @@ MonoBehaviour:
   spearHorse: {fileID: 7675357207386853778, guid: 767e11c7ad6bb954ca7719e0e9a1dbeb, type: 3}
   archerHorse: {fileID: 3405346491887679289, guid: f98f688852748ca408e11cb273573276, type: 3}
   swordHorseKnight: {fileID: 6573939784272452280, guid: 877651dca818413498234b0de9f973d0, type: 3}
-  spearHorseKnight: {fileID: 1919011932471176566, guid: 148538e855ce2cc48bb84ea4a4862dce, type: 3}
+  spearHorseKnight: {fileID: 8963424588460837802, guid: 148538e855ce2cc48bb84ea4a4862dce, type: 3}
   crossbow: {fileID: 4729503558473531330, guid: 534d7e2976a77694ab2894fb15785b51, type: 3}
   healer: {fileID: 4612749528752123963, guid: 909f428bfe8b19742af0fc3eb7ade633, type: 3}
   catapult: {fileID: 0}

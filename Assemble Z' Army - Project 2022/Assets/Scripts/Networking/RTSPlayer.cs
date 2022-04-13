@@ -100,7 +100,10 @@ public class RTSPlayer : NetworkBehaviour
     }
     #endregion
 
-
+    public Color GetTeamColor()
+    {
+        return teamColor;
+    }
     #region Server
     public override void OnStartServer()
     {

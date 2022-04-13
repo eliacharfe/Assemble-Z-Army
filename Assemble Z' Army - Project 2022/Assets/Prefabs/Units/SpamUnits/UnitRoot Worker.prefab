@@ -3238,6 +3238,7 @@ GameObject:
   - component: {fileID: 6550927017302437758}
   - component: {fileID: -5509603339999633780}
   - component: {fileID: 4411456382968719258}
+  - component: {fileID: 4749151069764492621}
   m_Layer: 9
   m_Name: UnitRoot Worker
   m_TagString: Untagged
@@ -3410,6 +3411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  isMoving: 0
 --- !u!114 &4890029368471612244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3554,6 +3556,11 @@ MonoBehaviour:
   bufferSizeLimit: 64
   catchupThreshold: 4
   catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
@@ -3573,6 +3580,24 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 0
   animator: {fileID: 1441977760935636203}
+--- !u!114 &4749151069764492621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6775394402555733303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772e111d064637948ad7b036c1d1afd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRendereres:
+  - {fileID: 1918429878710729181}
+  - {fileID: 8801681211041634377}
+  - {fileID: 2668284255147499583}
 --- !u!1 &6797204438691568749
 GameObject:
   m_ObjectHideFlags: 0

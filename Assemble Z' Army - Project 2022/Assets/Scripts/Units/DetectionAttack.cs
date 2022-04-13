@@ -13,7 +13,7 @@ public class DetectionAttack : MonoBehaviour
     void OnTriggerStay2D(Collider2D other)
     {
 
-        if (unit.GetComponent<UnitMovement>().IsMoving())
+        if (!unit && unit.GetComponent<UnitMovement>().IsMoving())
         {
             return;
         }

@@ -1457,6 +1457,7 @@ GameObject:
   - component: {fileID: 358757435778540981}
   - component: {fileID: 2177653940244639249}
   - component: {fileID: 5892795261857998017}
+  - component: {fileID: -958623933619327924}
   m_Layer: 9
   m_Name: Sword_Knight
   m_TagString: Untagged
@@ -1813,6 +1814,23 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &-958623933619327924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554254635777691023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772e111d064637948ad7b036c1d1afd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRendereres:
+  - {fileID: 2689195396190664125}
+  - {fileID: 9097445851790901894}
 --- !u!1 &2721685297971839315
 GameObject:
   m_ObjectHideFlags: 0
