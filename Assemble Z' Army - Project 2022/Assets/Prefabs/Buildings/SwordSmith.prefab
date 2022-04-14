@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1881105501863861248
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: goldCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: woodCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: metalCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: diamondsCost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 594850713533669745, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_Name
+      value: SwordSmith
+      objectReference: {fileID: 0}
+    - target: {fileID: 2148565589696975590, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_AssetId
+      value: 66ee21e4550aa934fb7c5fe937f5d1ce
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235861411601053865, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_Color.b
+      value: 0.4339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235861411601053865, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235861411601053865, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6912373976665505981, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
