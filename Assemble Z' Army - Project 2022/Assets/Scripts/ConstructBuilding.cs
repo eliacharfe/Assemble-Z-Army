@@ -41,7 +41,7 @@ public class ConstructBuilding : MonoBehaviour
         {
             isBuilding = true;
 
-            unit.StopMove();
+            unit.CmdStopMove();
 
             GetComponent<Animator>().SetBool("isAttacking", true);
         }

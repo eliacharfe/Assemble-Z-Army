@@ -199,9 +199,6 @@ public class Building : NetworkBehaviour
     [Command]
     private void CmdSpawnNewUnit(Macros.Units id)
     {
-        print("Unit to spawn" +spawnUnitPrefab);
-
-        print("Current unit factory" + unitsFactory);
 
         Unit unit = Instantiate(unitsFactory.GetUnitPrefab(id), spawnPoint.position, Quaternion.identity) as Unit;
 

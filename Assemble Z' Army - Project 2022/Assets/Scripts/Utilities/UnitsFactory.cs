@@ -194,6 +194,8 @@ public class UnitsFactory : MonoBehaviour
     private Unit GetStableUnit(Units unitId){
         switch (unitId)
         {
+            case Units.RECRUIT:
+                return simpleHorse;
             case Units.SWORDMAN:
                 return swordHorse;
             case Units.SPEARMAN:

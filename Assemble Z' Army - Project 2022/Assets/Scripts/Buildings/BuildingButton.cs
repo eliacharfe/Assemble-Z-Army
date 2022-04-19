@@ -43,6 +43,13 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
             player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         }
 
+        if (Input.GetMouseButtonDown(1))
+        {
+            Destroy(spritePreview);
+            spritePreview = null;
+            return;
+        }
+
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         mousePos.z = navMeshZAxis;
@@ -57,7 +64,6 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         }
     }
 
-
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) { return; }
@@ -70,13 +76,14 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!spritePreview){return;}
+
         if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>())) {
             SpawnBuilding(spritePreview.transform.position);
         }
 
         Destroy(spritePreview);
     }
-
 
     public void SpawnBuilding(Vector3 pos)
     {

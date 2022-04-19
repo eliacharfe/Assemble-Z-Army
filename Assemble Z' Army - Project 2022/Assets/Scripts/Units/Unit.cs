@@ -250,6 +250,20 @@ public class Unit : NetworkBehaviour
 
         GetComponent<UnitMovement>().isMoving = false;
     }
+
+
+    [Command]
+    public void CmdStopMove()
+    {
+        agent.velocity = Vector3.zero;
+
+        StopAnimation();
+
+        agent.ResetPath();
+
+        GetComponent<UnitMovement>().isMoving = false;
+    }
+
     //---------------------------
     [Command]
     public void SetDead()

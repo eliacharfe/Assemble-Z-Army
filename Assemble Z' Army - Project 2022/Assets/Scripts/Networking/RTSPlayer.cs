@@ -140,9 +140,6 @@ public class RTSPlayer : NetworkBehaviour
 
         if (!isUnitBelongToClient(unit)) return;
 
-        print("client " + connectionToClient + " has lost a unit, now he has " + m_unitsId.Count);
-
-        print("is unit is dead " + unit.isDead);
         if(unit.isDead)
              m_unitsId.Remove((int)unit.id);
 
@@ -165,8 +162,6 @@ public class RTSPlayer : NetworkBehaviour
     public void CmdStartGame()
     {
         if (!isPartyOwner) { return; }
-
-        print("Showing Phase one");
 
         ((RtsNetworkManager)NetworkManager.singleton).ShowPreparationPhase();
     }
@@ -272,12 +267,6 @@ public class RTSPlayer : NetworkBehaviour
 
         if (unit.isDead)
             m_unitsId.Remove((int)unit.id);
-
-        if (m_unitsId.Count <= 0)
-        {
-            print("No units left");
-
-        }
     }
 
 
