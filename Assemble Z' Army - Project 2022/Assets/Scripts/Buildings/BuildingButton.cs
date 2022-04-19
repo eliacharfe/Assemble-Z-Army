@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
 using Mirror;
+using Macros;
 
 public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -26,6 +27,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [SerializeField] private Transform buildingPopup;
 
     string popupCostBuilding;
+
+    public Macros.Buildings id;
 
     private void Awake()
     {
@@ -93,7 +96,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
         {
-            Tooltip.ShowTooltip_Static(popupCostBuilding);
+            Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
             
             BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
         }
@@ -102,25 +105,25 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("onMouseEnter");
-        Tooltip.ShowTooltip_Static(popupCostBuilding);
+        Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
     }
 
     public void OnPointerOver(PointerEventData eventData)
     {
         Debug.Log("onMouseOver");
-        Tooltip.ShowTooltip_Static(popupCostBuilding);
+        Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
     }
 
     private void OnMouseEnter()
     {
         Debug.Log("onMouseEnter");
-        Tooltip.ShowTooltip_Static(popupCostBuilding);
+        Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
     }
 
     private void OnMouseOver()
     {
         Debug.Log("onMouseOverrr");
-        Tooltip.ShowTooltip_Static(popupCostBuilding);
+        Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
     }
 
     // private void OnMouseExit()
