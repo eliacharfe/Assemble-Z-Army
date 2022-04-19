@@ -15,8 +15,6 @@ public class Tooltip : MonoBehaviour
     private Text tooltipTextName;
     private RectTransform backgroundNameRectTransform;
 
-    RectTransform canvas;
-
     private void Awake()
     {
         instance = this;
@@ -25,11 +23,9 @@ public class Tooltip : MonoBehaviour
         tooltipText = transform.Find("text").GetComponent<Text>();
 
         backgroundNameRectTransform = transform.Find("backgroundNameBuilding").GetComponent<RectTransform>();
-        tooltipTextName = transform.Find("textNameBuilding").GetComponent<Text>();
-
+        tooltipTextName = backgroundNameRectTransform.transform.Find("textNameBuilding").GetComponent<Text>();
 
         HideTooltip();
-        //ShowTooltip("some text...");
     }
 
     private void Update()
@@ -51,11 +47,14 @@ public class Tooltip : MonoBehaviour
          tooltipText.preferredHeight + textPaddingSize * 5f);
 
         tooltipTextName.text = nameBuilding;
+       // textPaddingSize = 4f;
         Vector2 backgroundSizeName = new Vector2(tooltipTextName.preferredWidth + textPaddingSize * 5f,
          tooltipTextName.preferredHeight + textPaddingSize * 5f);
 
         backgroundRectTransform.sizeDelta = backgroundSize;
         backgroundNameRectTransform.sizeDelta = backgroundSizeName;
+        backgroundNameRectTransform.position = new Vector3(tooltipText.GetComponent<RectTransform>().position.x + 40f,
+        backgroundNameRectTransform.position.y, backgroundNameRectTransform.position.z);
     }
 
     private void HideTooltip()
@@ -68,7 +67,7 @@ public class Tooltip : MonoBehaviour
         instance.ShowTooltip(tooltipString, nameBuilding);
     }
 
-     public static void HideTooltip_Static()
+    public static void HideTooltip_Static()
     {
         instance.HideTooltip();
     }
