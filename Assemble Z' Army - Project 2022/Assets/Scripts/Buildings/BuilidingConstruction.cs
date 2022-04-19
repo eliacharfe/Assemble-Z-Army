@@ -13,6 +13,9 @@ public class BuilidingConstruction : NetworkBehaviour
 
     public event Action<float, float> ClientOnConstructionUpdated;
 
+    public Texture2D hammerCursor;
+    public Texture2D regularCursor;
+
     private void Start()
     {
         buldingConstructionSlider.resetSlider();
@@ -24,6 +27,16 @@ public class BuilidingConstruction : NetworkBehaviour
         if(buldingConstructionSlider.FillAmount() >= 1f) {
             FinishConstruction();
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        //Cursor.SetCursor(hammerCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    private void OnMouseExit()
+    {
+        //Cursor.SetCursor(regularCursor, Vector2.zero, CursorMode.Auto);
     }
 
     #region Server

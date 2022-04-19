@@ -64,6 +64,11 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         }
     }
 
+    private void OnMouseOver()
+    {
+        //print("Mouse over");
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) { return; }

@@ -90,6 +90,8 @@ MonoBehaviour:
   buldingConstructionSlider: {fileID: 465014552052168490}
   constructionTime: 10
   timePassed: 0
+  hammerCursor: {fileID: 2800000, guid: d5e8ff0a465709543aa36f930bf42906, type: 3}
+  regularCursor: {fileID: 2800000, guid: 1f43fc025a1c11340b0422feb60a2d9e, type: 3}
 --- !u!114 &1801245389
 MonoBehaviour:
   m_ObjectHideFlags: 0
