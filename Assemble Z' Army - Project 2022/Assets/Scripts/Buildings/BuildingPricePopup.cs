@@ -27,9 +27,9 @@ public class BuildingPricePopup : MonoBehaviour
     public void Setup(List<int> prices)
     {
         textMesh.SetText("Wood: " + prices[0].ToString() + '\n' +
-        "Metal: " + prices[1].ToString() + '\n' +
-        "Gold: " + prices[2].ToString() + '\n' +
-        "Diamonds: " + prices[3].ToString() + '\n');
+                         "Metal: " + prices[1].ToString() + '\n' +
+                         "Gold: " + prices[2].ToString() + '\n' +
+                         "Diamonds: " + prices[3].ToString() + '\n');
 
         textColor = textMesh.color;
         disappearTimer = 4f;

@@ -25,6 +25,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     [SerializeField] private Transform buildingPopup;
 
+    string popupCostBuilding;
+
     private void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>();
@@ -32,8 +34,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private void Start()
     {
-        if (player)
-        {
+        if (player) {
             player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         }
 
@@ -45,17 +46,19 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         buildingPreview.GetComponent<SpriteRenderer>().sprite = buildingSprite;
 
         navMeshZAxis = FindObjectOfType<NavMeshScript>().transform.position.z;
+
+        popupCostBuilding = "Wood: " + building.getCostBuilding()[0].ToString() + '\n' +
+                            "Metal: " + building.getCostBuilding()[1].ToString() + '\n' +
+                            "Gold: " + building.getCostBuilding()[2].ToString() + '\n' +
+                            "Diamonds: " + building.getCostBuilding()[3].ToString() + '\n';
     }
 
     private void Update()
     {
         if (spritePreview == null) { return; }
 
-        if (!player)
-        {
-            // Debug.Log("Player set");
+        if (!player) {
             // player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
-
         }
 
         if (!resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
@@ -65,9 +68,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         }
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         mousePos.z = navMeshZAxis;
-
         spritePreview.transform.position = mousePos;
 
         spritePreview.GetComponent<SpriteRenderer>().color = Color.green;
@@ -92,14 +93,46 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
         if (resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
         {
+            Tooltip.ShowTooltip_Static(popupCostBuilding);
+            
             BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
         }
-
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("onMouseEnter");
+        Tooltip.ShowTooltip_Static(popupCostBuilding);
+    }
+
+    public void OnPointerOver(PointerEventData eventData)
+    {
+        Debug.Log("onMouseOver");
+        Tooltip.ShowTooltip_Static(popupCostBuilding);
+    }
+
+    private void OnMouseEnter()
+    {
+        Debug.Log("onMouseEnter");
+        Tooltip.ShowTooltip_Static(popupCostBuilding);
+    }
+
+    private void OnMouseOver()
+    {
+        Debug.Log("onMouseOverrr");
+        Tooltip.ShowTooltip_Static(popupCostBuilding);
+    }
+
+    // private void OnMouseExit()
+    // {
+    //     Tooltip.HideTooltip_Static();
+    // }
 
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        Tooltip.HideTooltip_Static();
+
         if (CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>()))
         {
             SpawnBuilding(spritePreview.transform.position);
