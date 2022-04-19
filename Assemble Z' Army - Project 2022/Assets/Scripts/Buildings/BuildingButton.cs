@@ -23,6 +23,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     AudioPlayer audioPlayer;
 
+     [SerializeField] private Transform buildingPopup;
+
     private void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>();
@@ -84,6 +86,11 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         spritePreview = Instantiate(buildingPreview,
             Camera.main.ScreenToWorldPoint(Input.mousePosition),
             Quaternion.identity);
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = navMeshZAxis;
+
+        BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
     }
 
 

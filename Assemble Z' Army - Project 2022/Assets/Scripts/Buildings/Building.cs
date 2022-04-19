@@ -67,8 +67,6 @@ public class Building : NetworkBehaviour
     //-------------------
     public void InitiateCosts()
     {
-       // building = this;
-
         costResourcesBuilding = new List<int>();
 
         costResourcesBuilding.Add(woodCost);
