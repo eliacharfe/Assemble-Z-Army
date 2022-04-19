@@ -373,50 +373,6 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 8753041854152823015, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
   m_PrefabInstance: {fileID: 1260663638}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &126966024
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 126966026}
-  - component: {fileID: 126966025}
-  m_Layer: 0
-  m_Name: TestPopup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &126966025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126966024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1042c079ef1c0458c3b94ede16a5ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingPopup: {fileID: 5384996929146514452, guid: 4cebb58a2a0b919478ca5757196f7e8f, type: 3}
---- !u!4 &126966026
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126966024}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -77.08909, y: 120.27975, z: -79.153496}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172703718
 GameObject:
   m_ObjectHideFlags: 0
@@ -20859,7 +20815,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1675346935 stripped
 Transform:

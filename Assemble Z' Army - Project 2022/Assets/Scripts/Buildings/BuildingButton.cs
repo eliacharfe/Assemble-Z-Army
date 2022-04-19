@@ -23,7 +23,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     AudioPlayer audioPlayer;
 
-     [SerializeField] private Transform buildingPopup;
+    [SerializeField] private Transform buildingPopup;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         if (player)
         {
-           player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+            player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         }
 
         resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
@@ -90,7 +90,11 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = navMeshZAxis;
 
-        BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
+        if (resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
+        {
+            BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
+        }
+
     }
 
 
