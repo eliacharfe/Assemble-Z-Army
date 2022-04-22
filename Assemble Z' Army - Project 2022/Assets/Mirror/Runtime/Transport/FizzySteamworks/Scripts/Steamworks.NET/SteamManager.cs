@@ -63,6 +63,7 @@ public class SteamManager : MonoBehaviour {
 	protected virtual void Awake() {
 		// Only one instance of SteamManager at a time!
 		if (s_instance != null) {
+			print("Steam destroyed");
 			Destroy(gameObject);
 			return;
 		}

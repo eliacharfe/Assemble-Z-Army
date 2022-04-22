@@ -26,6 +26,11 @@ public class UnitMovement:NetworkBehaviour
     [Command]
     public void CmdMove(Vector3 dest)
     {
+        if (!unit || unit.isDead)
+        {
+            return;
+        }
+
         dest.z = 0;
 
         GetComponent<Animator>().SetBool("isRunning", true);
@@ -70,7 +75,7 @@ public class UnitMovement:NetworkBehaviour
 
     public bool IsMoving()
     {
-        return agent.hasPath;
+        return agent.hasPath || isMoving;
     }
 
 
@@ -85,45 +90,3 @@ public class UnitMovement:NetworkBehaviour
         FindObjectOfType<AudioPlayer>().PlayHorseGallopClip();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-// namespace UnitMove{
-//     public static class Movement{
-
-//    // [SerializeField] private static NavMeshAgent agent = null;
-
-//     private static void Update()
-//     {
-//         Debug.Log("upd unitMove");
-
-//     }
-
-//     public static void MoveUnit(Unit unit)
-//     {
-//         NavMeshAgent agent = unit.GetComponent<NavMeshAgent>();
-//          if (!agent.hasPath){
-//             return;
-//         }
-
-//         if (agent.remainingDistance > agent.stoppingDistance){
-//             return;
-//         }
-
-//         agent.ResetPath();
-
-//             unit.MoveTo(Utils.GetMouseWorldPosition());
-//             // Camera.main.ScreenToWorldPoint(
-//             //     new Vector2(Utils.GetMouseWorldPosition().x, 
-//             //                 Utils.GetMouseWorldPosition().y));
-//     }
-// }
-// }

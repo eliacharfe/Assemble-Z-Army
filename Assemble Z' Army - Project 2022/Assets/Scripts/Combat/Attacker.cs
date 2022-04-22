@@ -37,17 +37,14 @@ public abstract class Attacker : NetworkBehaviour
 
         if (!target || target.IsDead()) {
             isInModeAttackAutomated = false;
+            StopAttackAnime();
             target = null;
-            if (reachedTarget)
-            {
-                StopAttackAnime();
-                reachedTarget = false;
-                isInAttackMode = false;
-            }
+            reachedTarget = false;
+            isInAttackMode = false;
             return; 
         }
 
-        if(Vector2.Distance(gameObject.transform.position,this.target.transform.position) < range)
+        if (Vector2.Distance(gameObject.transform.position,this.target.transform.position) < range)
         {
             GetComponent<Unit>().StopMove();
             if (time < attackTime)

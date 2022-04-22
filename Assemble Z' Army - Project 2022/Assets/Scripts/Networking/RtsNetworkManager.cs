@@ -31,7 +31,6 @@ public class RtsNetworkManager : NetworkManager
         GetComponent<SteamManager>().enabled = true;    
     }
 
-
     # region Server 
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)

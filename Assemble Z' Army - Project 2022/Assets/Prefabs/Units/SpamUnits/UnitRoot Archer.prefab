@@ -4687,6 +4687,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194058860212250564}
     m_Modifications:
+    - target: {fileID: 1501880076490198181, guid: f58853cb5e3a48649823886bfbdcbcd1, type: 3}
+      propertyPath: m_Radius
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501880076490198181, guid: f58853cb5e3a48649823886bfbdcbcd1, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1501880076490198202, guid: f58853cb5e3a48649823886bfbdcbcd1, type: 3}
       propertyPath: m_Name
       value: DetectionAttackArea

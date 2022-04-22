@@ -834,7 +834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  timer: 300
+  timer: 100
   currentPhase: 1
   BuildingCanvasPanel: {fileID: 826518342}
   rtsNetworkManager: {fileID: 0}
