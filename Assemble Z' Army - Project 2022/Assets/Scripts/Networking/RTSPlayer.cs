@@ -243,7 +243,6 @@ public class RTSPlayer : NetworkBehaviour
     [Command]
     public void CmdTryPlaceBuilding(int buildingId, Vector3 point)
     {
-        print("Player putted building" + buildingId + " from " + buildingsFactory);
 
         buildingsFactory = FindObjectOfType<BuildingsFactory>();
 

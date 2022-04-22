@@ -37,6 +37,7 @@ public abstract class Attacker : NetworkBehaviour
 
         if (!target || target.IsDead()) {
             isInModeAttackAutomated = false;
+            
             StopAttackAnime();
             target = null;
             reachedTarget = false;

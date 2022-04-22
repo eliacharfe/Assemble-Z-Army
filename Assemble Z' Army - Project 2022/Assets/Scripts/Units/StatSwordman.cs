@@ -14,11 +14,6 @@ public class StatSwordman : MonoBehaviour
 
     void Start()
     {
-        HP.BaseValue = 100;
-        Attack.BaseValue = 10;
-        Defense.BaseValue = 5;
-        ReachDistance.BaseValue = 10;
-        SpeedAttack.BaseValue = 1;
     }
 
     // Update is called once per frame

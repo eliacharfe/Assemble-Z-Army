@@ -90,6 +90,10 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
+            if(!unit)
+            {
+                continue;
+            }
             unit.GetComponent<Attacker>().setAttackMode();
 
             if (unit.id != Macros.Units.WORKER && !targetable.hasAuthority)
@@ -118,7 +122,7 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.id != Macros.Units.WORKER && building.isMatchedUnit(unit))
+            if (unit && unit.id != Macros.Units.WORKER && building.isMatchedUnit(unit))
             {
                 unit.SetBuildingRecruiting(building);
 
@@ -133,7 +137,7 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
-            if (unit.id == Macros.Units.WORKER)
+            if (unit && unit.id == Macros.Units.WORKER)
             {
                 (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).SetBuildingTarget(building);
                 unit.MoveTo(hit.point);
@@ -147,12 +151,17 @@ public class RTSController : MonoBehaviour
     private void MoveUnits()
       {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
-        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {10, 20, 30}, new int[] {5, 10, 20});
+        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {5, 10, 15}, new int[] {5, 10, 20});
 
         int targetPosIndex = 0;
 
         foreach (Unit unit in selectedUnits)
         {
+            if (!unit)
+            {
+                continue;
+            }
+
             ClearPreviousCommands(unit);
 
             unit.MoveTo(targetPosList[targetPosIndex]);

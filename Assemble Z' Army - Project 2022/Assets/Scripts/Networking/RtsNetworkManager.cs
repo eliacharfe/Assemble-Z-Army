@@ -28,7 +28,7 @@ public class RtsNetworkManager : NetworkManager
 
     private void OnLevelWasLoaded(int level)
     {
-        GetComponent<SteamManager>().enabled = true;    
+        //GetComponent<SteamManager>().enabled = true;    
     }
 
     # region Server 
@@ -156,7 +156,7 @@ public class RtsNetworkManager : NetworkManager
 
             for (int i = 0; i < amountOfRecruits; i++)
             {
-                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.ARCHER).gameObject, startinPoint, Quaternion.identity);
+                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORDMAN).gameObject, startinPoint, Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);

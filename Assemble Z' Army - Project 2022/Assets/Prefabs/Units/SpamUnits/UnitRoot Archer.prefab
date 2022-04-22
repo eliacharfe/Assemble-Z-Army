@@ -456,7 +456,7 @@ Transform:
   m_GameObject: {fileID: 1005334076202706618}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 7493156081474391182}
   - {fileID: 7053734735996226284}
@@ -531,7 +531,7 @@ NavMeshAgent:
   m_Height: 1
   m_BaseOffset: 0.2
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &8965835499232104735
 MonoBehaviour:
   m_ObjectHideFlags: 0

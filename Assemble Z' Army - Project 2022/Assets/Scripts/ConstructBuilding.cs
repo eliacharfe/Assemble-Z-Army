@@ -26,7 +26,7 @@ public class ConstructBuilding : MonoBehaviour
         }
 
         if(!isBuilding) {
-            GetComponent<Animator>().SetBool("isAttacking", false);
+            //GetComponent<Animator>().SetBool("isAttacking", false);
             return; 
         }
 
@@ -35,13 +35,21 @@ public class ConstructBuilding : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         BuilidingConstruction tempBuild = collision.GetComponent<BuilidingConstruction>();
 
         if (tempBuild && this.buildingTarget == tempBuild)
         {
+            //unit.CmdBuildAnimation();
+
+
+            print("Start build animation");
+
             isBuilding = true;
 
             unit.CmdStopMove();
+
+            unit.CmdBuildAnimation();
 
             GetComponent<Animator>().SetBool("isAttacking", true);
         }
@@ -95,4 +103,5 @@ public class ConstructBuilding : MonoBehaviour
     {
         this.buildingTarget = building;
     }
+
 }
