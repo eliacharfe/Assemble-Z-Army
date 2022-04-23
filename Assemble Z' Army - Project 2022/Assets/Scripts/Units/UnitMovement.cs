@@ -60,17 +60,32 @@ public class UnitMovement:NetworkBehaviour
     private void FlipSideSprite(Vector3 dest)
     {
         Transform tr = gameObject.transform;
+        Transform healthBar = transform.Find("Health Bar Canvas");
+        Transform manaBar = transform.Find("Mana Bar Canvas");
 
         if (dest.x < tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
                                         tr.localScale.z);
+
+            healthBar.localScale = new Vector3(-healthBar.localScale.x, healthBar.localScale.y, healthBar.localScale.z);
+            if (manaBar)
+            {
+                manaBar.localScale = new Vector3(-manaBar.localScale.x, manaBar.localScale.y, manaBar.localScale.z);
+            }
         }
         else if (dest.x > tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
             tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
                                          tr.localScale.z);
+
+            healthBar.localScale = new Vector3(-healthBar.localScale.x, healthBar.localScale.y, healthBar.localScale.z);
+            if (manaBar)
+            {
+                manaBar.localScale = new Vector3(-manaBar.localScale.x, manaBar.localScale.y, manaBar.localScale.z);
+            }
         }
+
     }
 
     public bool IsMoving()
