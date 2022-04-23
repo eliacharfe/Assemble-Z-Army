@@ -48,14 +48,14 @@ public class RTSController : MonoBehaviour
             GiveMovmentCommand();
         }
 
-        foreach (Unit unit in selectedUnits)
-        {
-            if (unit.ReachedDestination())
-            {
-                unit.StopMove();
-                // unit.StopAnimation();
-            }
-        }
+        // foreach (Unit unit in selectedUnits)
+        // {
+        //     if (unit.ReachedDestination())
+        //     {
+        //         unit.StopMove();
+        //         // unit.StopAnimation();
+        //     }
+        // }
     }
 
     //--------------------------------- 
