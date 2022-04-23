@@ -275,7 +275,6 @@ public class Unit : NetworkBehaviour
     [Command]
     public void SetDead()
     {
-        print("Unit " + id + " belong to " + connectionToClient + " is dead");
         isDead = true;
     }
     //----------------------------
@@ -337,7 +336,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 2f;
+                    ReachDistance.BaseValue = 4f;
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
@@ -346,7 +345,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 18f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 50f;
+                    ReachDistance.BaseValue = 20f;
                     SpeedAttack.BaseValue = 1.4f;
                     break;
                 };
@@ -356,7 +355,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 12f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 150f; // to change
+                    ReachDistance.BaseValue = 10f; 
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
@@ -365,7 +364,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 5f;
                     Attack.BaseValue = 20f;
                     Defense.BaseValue = 11f;
-                    ReachDistance.BaseValue = 15f;
+                    ReachDistance.BaseValue = 6f;
                     SpeedAttack.BaseValue = 1.4f;
                     break;
                 };

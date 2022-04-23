@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Macros
 {
     class Constents
@@ -14,8 +16,9 @@ namespace Macros
         // Recruits
         public const int INITIAL_RECRUITS_SIZE = 30;
 
-    }
+        public static Color[] teamColors = { Color.gray, Color.yellow, Color.blue, Color.red };
 
+    }
 
     public enum Buildings{
         NONE,
@@ -60,6 +63,8 @@ namespace Macros
         GOLD = 400,
         DIAMONDS = 100
     }
+
+
 
 
 

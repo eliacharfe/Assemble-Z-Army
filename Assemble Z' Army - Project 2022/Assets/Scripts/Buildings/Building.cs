@@ -291,7 +291,15 @@ public class Building : NetworkBehaviour
     {
         return (int)Id ;
     }
-    public Sprite GetBuildingSprite()
+
+    public string GetBuildingText()
+    {
+        string buildingTxt = Id.ToString().Replace('_',' ');
+
+        return buildingTxt;
+    }
+
+        public Sprite GetBuildingSprite()
     {
         return GetComponent<Sprite>();
     }

@@ -18,13 +18,16 @@ public abstract class Attacker : NetworkBehaviour
     [Header("Attack Settings")]
     [SerializeField] private float attackTime = 1f;
     [SerializeField] private float range = 1f;
-    [SerializeField] protected int damage = 5;
+    [SerializeField] protected float damage = 5;
 
     private float time = 0;
 
     private void Start()
     {
         movement = GetComponent<UnitMovement>();
+        attackTime = GetComponent<Unit>().SpeedAttack.BaseValue;
+        damage = GetComponent<Unit>().Attack.BaseValue;
+        range = GetComponent<Unit>().ReachDistance.BaseValue;
     }
 
     [ServerCallback]

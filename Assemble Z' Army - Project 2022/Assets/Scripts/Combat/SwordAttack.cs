@@ -17,7 +17,7 @@ public class SwordAttack : Attacker
     {
         GetComponent<Animator>().SetBool("isRunning", false);
         GetComponent<Animator>().SetBool("isAttacking", true);
-        target.GetComponent<Health>().DealDamage(damage);
+        target.GetComponent<Health>().DealDamage((int)damage);
         print("Recruit should attack");
     }
 

@@ -45,11 +45,10 @@ public class RTSController : MonoBehaviour
             GiveMovmentCommand();
         }
 
-        foreach (Unit unit in selectedUnits)
+        /*foreach (Unit unit in selectedUnits)
         {
             if (unit.ReachedDestination()) { }
-               //unit.StopAnimation();
-        }
+        }*/
     }
 
     //--------------------------------- 
@@ -90,7 +89,7 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
-            if(!unit)
+            if(!unit || !unit.GetComponent<Attacker>())
             {
                 continue;
             }
@@ -151,7 +150,7 @@ public class RTSController : MonoBehaviour
     private void MoveUnits()
       {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
-        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {5, 10, 15}, new int[] {5, 10, 20});
+        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {5, 10, 15}, new int[] {5, 10, 15});
 
         int targetPosIndex = 0;
 

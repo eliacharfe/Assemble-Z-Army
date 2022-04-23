@@ -26,16 +26,20 @@ public class UnitMovement:NetworkBehaviour
     [Command]
     public void CmdMove(Vector3 dest)
     {
-        if (!unit || unit.isDead)
+        dest.z = 0;
+
+        if (!unit || unit.isDead || Vector3.Distance(unit.transform.position, dest) <= 4f)
         {
             return;
         }
 
-        dest.z = 0;
+        print(Vector3.Distance(unit.transform.position, dest));
 
         GetComponent<Animator>().SetBool("isRunning", true);
 
         agent.SetDestination(dest);
+
+        print(agent.hasPath);
 
         FlipSideSprite(dest);
 

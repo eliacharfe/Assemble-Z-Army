@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.AI;
 using Mirror;
 
-public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler
+public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,IPointerExitHandler
 {
     [SerializeField]private Building building = null;
 
@@ -21,6 +21,7 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     ResourcesPlayer resourcesPlayer = null;
 
+    string popupCostBuilding;
 
     private void Start()
     {
@@ -33,6 +34,12 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
 
         building.InitiateCosts();
+
+        popupCostBuilding = "Wood: " + building.getCostBuilding()[0].ToString() + '\n' +
+                            "Metal: " + building.getCostBuilding()[1].ToString() + '\n' +
+                            "Gold: " + building.getCostBuilding()[2].ToString() + '\n' +
+                            "Diam's: " + building.getCostBuilding()[3].ToString() + '\n';
+
     }
 
     private void Update()
@@ -66,7 +73,12 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     private void OnMouseOver()
     {
-        //print("Mouse over");
+        print("Mouse over");
+    }
+
+    private void OnMouseEnter()
+    {
+        print("Mouse enter");
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -114,6 +126,16 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
             }
         }
         return true;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Tooltip.ShowTooltip_Static(popupCostBuilding, building.GetBuildingText());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Tooltip.HideTooltip_Static();
     }
 
 }

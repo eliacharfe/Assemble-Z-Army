@@ -43,7 +43,7 @@ public class RtsNetworkManager : NetworkManager
 
         player.SetDisplayName($"Player {players.Count}");
 
-        player.SetTeamColor(UnityEngine.Random.ColorHSV());
+        player.SetTeamColor(Constents.teamColors[players.Count-1]);
 
         player.SetPartyOwner(players.Count == 1);
     }
