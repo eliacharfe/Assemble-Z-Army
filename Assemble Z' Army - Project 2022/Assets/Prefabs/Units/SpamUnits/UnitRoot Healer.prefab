@@ -590,6 +590,7 @@ GameObject:
   - component: {fileID: -8630561976985186174}
   - component: {fileID: 3035294026920832418}
   - component: {fileID: 1701731355175812324}
+  - component: {fileID: 460630696232543571}
   m_Layer: 9
   m_Name: UnitRoot Healer
   m_TagString: Untagged
@@ -958,6 +959,41 @@ MonoBehaviour:
   - {fileID: 8968012258625408638}
   - {fileID: 7819116965961207288}
   - {fileID: 7539946289150681165}
+--- !u!114 &460630696232543571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421345242490242959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 0
+  bufferTimeMultiplier: 1
+  bufferSizeLimit: 64
+  catchupThreshold: 4
+  catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 5346251163297942582}
 --- !u!1 &1449217196880962282
 GameObject:
   m_ObjectHideFlags: 0

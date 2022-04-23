@@ -174,7 +174,8 @@ MonoBehaviour:
   screenBorderThikeness: 10
   screenXLimits: {x: -100, y: 100}
   screenZLimits: {x: -100, y: 100}
-  confinerBound: 100
+  confinerBoundY: 60
+  confinerBoundX: 33
   gameObj: {fileID: 0}
   light: {fileID: 0}
 --- !u!1 &1762680851740912117

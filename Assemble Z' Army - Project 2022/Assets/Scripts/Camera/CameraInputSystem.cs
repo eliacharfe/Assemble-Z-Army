@@ -14,7 +14,8 @@ public class CameraInputSystem : NetworkBehaviour
     [SerializeField] private float screenBorderThikeness = 10f;
     [SerializeField] private Vector2 screenXLimits = Vector2.zero;
     [SerializeField] private Vector2 screenZLimits = Vector2.zero;
-    [SerializeField] private float confinerBound = 100;
+    [SerializeField] private float confinerBoundY= 60;
+    [SerializeField] private float confinerBoundX = 60;
 
     private Controls controls;
     private Vector2 prevInput;
@@ -32,8 +33,8 @@ public class CameraInputSystem : NetworkBehaviour
     public override void OnStartAuthority()
     {
         startCameraPos = playerCameraTransform.position;
-        screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
-        screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
+        screenXLimits = new Vector3(startCameraPos.x - confinerBoundX, startCameraPos.x + confinerBoundX, transform.position.z);
+        screenZLimits = new Vector3(startCameraPos.y - confinerBoundY, startCameraPos.y + confinerBoundY, transform.position.z);
 
         playerCameraTransform.gameObject.SetActive(true);
 
@@ -49,18 +50,18 @@ public class CameraInputSystem : NetworkBehaviour
     public void OnStartingGame()
     {
         startCameraPos = playerCameraTransform.position;
-        screenXLimits = new Vector3(startCameraPos.x - confinerBound, startCameraPos.x + confinerBound, transform.position.z);
-        screenZLimits = new Vector3(startCameraPos.y - confinerBound, startCameraPos.y + confinerBound, transform.position.z);
+        screenXLimits = new Vector3(startCameraPos.x - confinerBoundX, startCameraPos.x + confinerBoundX, transform.position.z);
+        screenZLimits = new Vector3(startCameraPos.y - confinerBoundY, startCameraPos.y + confinerBoundY, transform.position.z);
     }
 
-   public void OnChangePhaseThreeMap()
+    public void OnChangePhaseThreeMap()
     {
         startCameraPos = playerCameraTransform.position;
 
-        print("Start position given is: " + startCameraPos);
-        confinerBound = 125;
-        screenXLimits = new Vector3(0 - confinerBound, 0 + confinerBound, transform.position.z);
-        screenZLimits = new Vector3(0 - confinerBound, 0 + confinerBound, transform.position.z);
+        confinerBoundX = 125;
+        confinerBoundY = 125;
+        screenXLimits = new Vector3(0 - confinerBoundX, 0 + confinerBoundX, transform.position.z);
+        screenZLimits = new Vector3(0 - confinerBoundY, 0 + confinerBoundY, transform.position.z);
     }
 
     public override void OnStopAuthority()

@@ -77,12 +77,10 @@ public class RTSPlayer : NetworkBehaviour
         if (sceneName == PHASE_ONE_SCENE)
         {
             GetComponent<CameraInputSystem>().OnStartingGame();
-            print("Phase one camera set!!!");
         }
         else if (sceneName == PHASE_TWO_SCENE)
         {
             GetComponent<CameraInputSystem>().OnChangePhaseThreeMap();
-            print("Phase three camera set!!!");
         }
 
 

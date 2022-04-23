@@ -33,13 +33,9 @@ public class UnitMovement:NetworkBehaviour
             return;
         }
 
-        print(Vector3.Distance(unit.transform.position, dest));
-
         GetComponent<Animator>().SetBool("isRunning", true);
 
         agent.SetDestination(dest);
-
-        print(agent.hasPath);
 
         FlipSideSprite(dest);
 

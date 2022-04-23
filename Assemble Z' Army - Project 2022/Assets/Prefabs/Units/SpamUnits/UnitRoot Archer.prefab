@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 8728369937849427758}
   - component: {fileID: 1824306195853912620}
   - component: {fileID: 7411773945188106040}
+  - component: {fileID: 1657129140451685046}
   m_Layer: 9
   m_Name: UnitRoot Archer
   m_TagString: Untagged
@@ -791,6 +792,41 @@ MonoBehaviour:
   - {fileID: 3289203894142659670}
   - {fileID: 2097394956820403341}
   - {fileID: 5892900886522570573}
+--- !u!114 &1657129140451685046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005334076202706618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 0
+  bufferTimeMultiplier: 1
+  bufferSizeLimit: 64
+  catchupThreshold: 4
+  catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 1813730190407525656}
 --- !u!1 &1142162041102408558
 GameObject:
   m_ObjectHideFlags: 0

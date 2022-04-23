@@ -131,6 +131,7 @@ public class RtsNetworkManager : NetworkManager
             spawnTemp(Units.SPEAR_KNIGHT, factory, player, startPos);
             spawnTemp(Units.SIMPLE_HORSE, factory, player, startPos);
             spawnTemp(Units.RECRUIT, factory, player, startPos);
+            spawnTemp(Units.CROSSBOW, factory, player, startPos);
         }
     }
 

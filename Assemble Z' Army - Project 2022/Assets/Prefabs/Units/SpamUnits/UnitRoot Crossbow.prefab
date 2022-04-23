@@ -519,7 +519,7 @@ SortingGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137091903335708169}
-  m_Enabled: 0
+  m_Enabled: 1
   m_SortingLayerID: 74712451
   m_SortingLayer: 7
   m_SortingOrder: 5
@@ -1803,6 +1803,7 @@ GameObject:
   - component: {fileID: 4729503558473531331}
   - component: {fileID: 4729503558473531328}
   - component: {fileID: 4729503558473531330}
+  - component: {fileID: 8996393759498589696}
   - component: {fileID: 4720331953643687787}
   - component: {fileID: 6795396545176578063}
   - component: {fileID: 2236781929695462806}
@@ -1813,6 +1814,7 @@ GameObject:
   - component: {fileID: -7223456872709593612}
   - component: {fileID: -38137312823455921}
   - component: {fileID: -1125657920924720348}
+  - component: {fileID: -5697793910330364018}
   m_Layer: 9
   m_Name: UnitRoot Crossbow
   m_TagString: Untagged
@@ -1961,6 +1963,26 @@ MonoBehaviour:
     BaseValue: 0
   SpeedAttack:
     BaseValue: 0
+--- !u!114 &8996393759498589696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475709686869379175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78942532d73ec5d47a32793964d40a84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  attackTime: 1
+  range: 1
+  damage: 5
+  arrowPrefab: {fileID: 5890560936853567077, guid: b7dd46dbf38c643f09e206f9fa4be008, type: 3}
+  arrowSpeed: 10
+  shootStartPoint: {fileID: 6652640064997882008}
 --- !u!114 &4720331953643687787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2145,6 +2167,41 @@ MonoBehaviour:
   - {fileID: 1182757904896737931}
   - {fileID: 7784563962251610512}
   - {fileID: 2365770886711769680}
+--- !u!114 &-5697793910330364018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475709686869379175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 0
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 0
+  bufferTimeMultiplier: 1
+  bufferSizeLimit: 64
+  catchupThreshold: 4
+  catchupMultiplier: 0.1
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 2658302938274319301}
 --- !u!1 &3609177552822449587
 GameObject:
   m_ObjectHideFlags: 0
