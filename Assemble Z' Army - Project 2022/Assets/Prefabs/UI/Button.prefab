@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6692825141730717425}
   - component: {fileID: 6692825141730717198}
   - component: {fileID: 6692825141730717199}
-  - component: {fileID: 4809735265308184689}
   - component: {fileID: 6692825141730717424}
   m_Layer: 5
   m_Name: Button
@@ -92,19 +91,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   building: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
   buildingPreview: {fileID: 6278040493143683074, guid: c6e0d6b23d5416a4280f69f947b7cfaa, type: 3}
---- !u!114 &4809735265308184689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6692825141730717197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1042c079ef1c0458c3b94ede16a5ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingPopup: {fileID: 5384996929146514452, guid: 4cebb58a2a0b919478ca5757196f7e8f, type: 3}
 --- !u!61 &6692825141730717424
 BoxCollider2D:
   m_ObjectHideFlags: 0
