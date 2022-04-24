@@ -110,7 +110,7 @@ public class RTSController : MonoBehaviour
                 }
             }
 
-            if (unit.id != Macros.Units.WORKER)
+            if (unit.id != Macros.Units.WORKER && targetable && unit.GetComponent<Targetable>())
             {
                 if (targetable.teamNumber == unit.GetComponent<Targetable>().teamNumber)
                 {

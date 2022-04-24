@@ -47,7 +47,6 @@ public class Tooltip : MonoBehaviour
          tooltipText.preferredHeight + textPaddingSize * 5f);
 
         tooltipTextName.text = nameBuilding;
-       // textPaddingSize = 4f;
         Vector2 backgroundSizeName = new Vector2(tooltipTextName.preferredWidth + textPaddingSize * 5f,
          tooltipTextName.preferredHeight + textPaddingSize * 5f);
 

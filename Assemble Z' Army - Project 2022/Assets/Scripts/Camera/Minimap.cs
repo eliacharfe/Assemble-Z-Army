@@ -56,8 +56,6 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
             (localPoint.x - minimapRect.rect.x) / minimapRect.rect.width,
             (localPoint.y - minimapRect.rect.y) / minimapRect.rect.height);
 
-       // Debug.Log("lerp: " + lerp);
-
         Vector3 newCameraPos = new Vector3(
             // Mathf.Lerp(-mapScale, mapScale, lerp.x),
             // playerCameraTransform.position.y,
@@ -67,8 +65,6 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
             Mathf.Lerp(-mapScale, mapScale, lerp.y),
             -10f
         );
-
-       // Debug.Log(" Mathf.Lerp(-10, 10, lerp.x)" + )
 
       //  playerCameraTransform.position = newCameraPos + new Vector3(0f, 0f, offset);
          playerCameraTransform.position = newCameraPos ;
