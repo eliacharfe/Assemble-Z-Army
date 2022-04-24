@@ -10,6 +10,8 @@ public class Health : MonoBehaviour // NetworkBehavior
     [SerializeField] ParticleSystem hitEffect;
     [SerializeField] GameObject hitPoint;
 
+    [SerializeField] private Transform damagePopup;
+
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
     public float currHealth;
 
@@ -48,8 +50,22 @@ public class Health : MonoBehaviour // NetworkBehavior
 
     public void DealDamage(float damageAmount)
     {
+        if (currHealth <= 10)
+        {
+            DamagePopup.Create(damagePopup,
+                          new Vector3(transform.position.x, transform.position.y + 10f, 0f),
+                          (int)currHealth, true);
+        }
+        else
+        {
+            DamagePopup.Create(damagePopup,
+                                      new Vector3(transform.position.x, transform.position.y + 10f, 0f),
+                                      (int)currHealth, false);
+        }
+
         if (currHealth == 0)
             return;
+
 
         if (damageAmount > unit.Defense.BaseValue)
         {
@@ -57,23 +73,19 @@ public class Health : MonoBehaviour // NetworkBehavior
             PlayHitEffect();
             GetComponent<Animator>().SetBool("gotHit", true);
             if (currHealth > 0)
-               audioPlayer.PlayDamageClip();
+                audioPlayer.PlayDamageClip();
         }
 
         ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
-
-
-        if (currHealth != 0)
-            return;
 
     }
 
     public void PlayHitEffect()
     {
-       // Vector3 position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
+        // Vector3 position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
         if (hitEffect != null)
         {
-            ParticleSystem instance = Instantiate(hitEffect, hitPoint.transform.position , Quaternion.identity);
+            ParticleSystem instance = Instantiate(hitEffect, hitPoint.transform.position, Quaternion.identity);
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
     }
