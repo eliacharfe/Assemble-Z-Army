@@ -48,6 +48,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private GameObject halo;
     [SerializeField] private GameObject haloBack;
 
+    [SerializeField] private GameObject circleMinimapIcon;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -309,6 +311,8 @@ public class Unit : MonoBehaviour
             tempColor.a = 0.1f;
             haloBack.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
         }
+
+        circleMinimapIcon.gameObject.GetComponent<SpriteRenderer>().color = getTeamColor();
     }
 
     //-------------------

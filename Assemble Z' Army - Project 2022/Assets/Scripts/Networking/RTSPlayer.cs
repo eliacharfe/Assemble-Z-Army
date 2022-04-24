@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class RTSPlayer : NetworkBehaviour
 {
+
+    [SerializeField] private Transform cameraTransform = null;
+
     [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
     private bool isPartyOwner = false;
 
@@ -17,6 +20,11 @@ public class RTSPlayer : NetworkBehaviour
 
     [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
     private string displayName;
+
+    public Transform GetCameraTransform()
+    {
+        return cameraTransform;
+    }
 
     public string GetDisplayName()
     {
