@@ -11,6 +11,7 @@ public class Health : NetworkBehaviour // NetworkBehavior
 
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
     [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdated))] public int currHealth;
+    [SerializeField] private Transform damagePopup;
 
     // public event Action ServerOnDie;
 
@@ -40,21 +41,37 @@ public class Health : NetworkBehaviour // NetworkBehavior
     {
 
         if (currHealth == 0)
+        {
+            createDamagePopup(true);
             return;
+        }      
 
         currHealth = Mathf.Max(currHealth - damageAmount, 0);
 
-        ClientOnHealthUpdate?.Invoke(currHealth, maxHealth);
+        if (currHealth <= 10)
+        {
+            createDamagePopup(true);
+        }
+        else
+        {
+            createDamagePopup(false);
+        }
 
-        if (currHealth != 0)
-            return;
-
+        ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
     }
 
-   
-     private void HandleHealthUpdated(int oldHealth, int newHealth)
-     {
-         ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
+    private void createDamagePopup(bool isCriticalHit)
+    {
+        DamagePopup.Create(damagePopup,
+                           new Vector3(transform.position.x, transform.position.y + 3f, 0f),
+                           (int)currHealth,
+                           isCriticalHit);
+    }
+
+
+    private void HandleHealthUpdated(int oldHealth, int newHealth)
+    {
+        ClientOnHealthUpdate?.Invoke(newHealth, maxHealth);
 
         if (currHealth <= 0)
         {
@@ -62,7 +79,10 @@ public class Health : NetworkBehaviour // NetworkBehavior
             GetComponent<Unit>().isDead = true;
             GetComponent<Unit>().CmdStopMove();
             GetComponent<Animator>().SetBool("isDead", true);
-            Destroy(gameObject,2f);
+            Destroy(gameObject, 2f);
         }
     }
 }
+
+
+

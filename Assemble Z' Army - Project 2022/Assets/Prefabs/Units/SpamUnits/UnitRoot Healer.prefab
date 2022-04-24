@@ -700,6 +700,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   currHealth: 0
+  damagePopup: {fileID: 2169474042914318888, guid: 25003cda7b05eaa4d8a2050be1440ddb, type: 3}
 --- !u!195 &5321738380840248329
 NavMeshAgent:
   m_ObjectHideFlags: 0

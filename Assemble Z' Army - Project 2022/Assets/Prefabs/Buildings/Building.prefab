@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5574364566112281083}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 2869317554764529570}
   - component: {fileID: 8307833347673991249}
   - component: {fileID: 2148565589696975590}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 8758061408641966750}
   - component: {fileID: 7628013785876620968}
   - component: {fileID: 4522352582455932770}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: TimeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 6304426820985763750}
   - component: {fileID: 9173541082177629945}
   - component: {fileID: 465014552052168490}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: TimeBuilidingSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 8248220699070889287}
   - component: {fileID: 2235861411601053865}
   - component: {fileID: 5396314199738852730}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BuildingImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 465060183780409457}
   - component: {fileID: 5755189623419106680}
   - component: {fileID: 5761731802781758702}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: HamerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,7 +586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742098452151941914}
   - component: {fileID: 5741285899297118006}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Token
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 5454551450568272577}
   - component: {fileID: 5572452178156753486}
   - component: {fileID: 3050743307702186120}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: TimeRecruitSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 3647078627217055921}
   - component: {fileID: 5085862700653141449}
   - component: {fileID: 8837460932937544872}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: TimeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -858,7 +858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7687285496895391796}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -888,7 +888,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9021328820710509342}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnterPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -920,7 +920,7 @@ GameObject:
   - component: {fileID: 6729645794111851200}
   - component: {fileID: 1897578981771393561}
   - component: {fileID: 5489686281655034073}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: TimeRecruitBackgeound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 6054879314407272613}
   - component: {fileID: 3240369512992056351}
   - component: {fileID: 867412330886675927}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: TimeRecruitBackgeound
   m_TagString: Untagged
   m_Icon: {fileID: 0}

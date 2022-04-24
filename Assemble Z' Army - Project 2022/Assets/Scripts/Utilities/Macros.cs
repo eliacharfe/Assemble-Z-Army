@@ -16,7 +16,7 @@ namespace Macros
         // Recruits
         public const int INITIAL_RECRUITS_SIZE = 30;
 
-        public static Color[] teamColors = { Color.gray, Color.yellow, Color.blue, Color.red };
+        public static Color[] teamColors = { Color.cyan, Color.yellow, Color.blue, Color.red };
 
     }
 
