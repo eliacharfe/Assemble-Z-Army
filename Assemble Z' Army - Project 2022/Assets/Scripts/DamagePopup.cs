@@ -7,17 +7,19 @@ using CodeMonkey.Utils;
 public class DamagePopup : MonoBehaviour
 {
     public static DamagePopup Create(Transform damagePopup, Vector3 position,
-                                     int damageAmount, bool isCriticalHit)
+                                     int damageAmount, float localScale, bool isCriticalHit)
     {
         Transform damagePopupTransform = Instantiate(damagePopup, position, Quaternion.identity);
         DamagePopup myDamagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        myDamagePopup.Setup(damageAmount, isCriticalHit);
+        myDamagePopup.Setup(damageAmount, localScale, isCriticalHit);
 
         return myDamagePopup;
     }
 
     private const float DISAPPEAR_TIMER_MAX = 0.5f;
     private const float DISAPPEAR_TIMER_CRITICAL_MAX = 1f;
+    private const float REGULAR_FONT_SIZE = 60f;
+    private const float CRITICAL_FONT_SIZE = 90f;
 
     private static int sortingOrder = 0;
 
@@ -36,7 +38,7 @@ public class DamagePopup : MonoBehaviour
         defaultColor = textMesh.color;
     }
 
-    public void Setup(int damageAmount, bool isCriticalHit)
+    public void Setup(int damageAmount, float localScale, bool isCriticalHit)
     {
         if (damageAmount != 0)
         {
@@ -49,13 +51,13 @@ public class DamagePopup : MonoBehaviour
 
         if (!isCriticalHit)
         {
-            textMesh.fontSize = 60f;
+            textMesh.fontSize = REGULAR_FONT_SIZE;
             textColor = defaultColor;
             disappearTimer = DISAPPEAR_TIMER_MAX;
         }
         else
         {
-            textMesh.fontSize = 90f;
+            textMesh.fontSize = CRITICAL_FONT_SIZE;
             textColor = Color.red;
             disappearTimer = DISAPPEAR_TIMER_CRITICAL_MAX;
         }
@@ -63,7 +65,14 @@ public class DamagePopup : MonoBehaviour
         textMesh.color = textColor;
         disappearSpeed = 4f;
 
-        moveVector = new Vector3(0.7f, 1) * 60f;
+        if (localScale > Mathf.Epsilon)
+        {
+            moveVector = new Vector3(0.7f, 1) * 60f;
+        }
+        else
+        {
+            moveVector = new Vector3(-0.7f, 1) * 60f;
+        }
 
         sortingOrder++;
         textMesh.sortingOrder = sortingOrder;
@@ -72,19 +81,16 @@ public class DamagePopup : MonoBehaviour
 
     private void Update()
     {
-        // float moveYspeed = 20f;
-        //transform.position += new Vector3(0, moveYspeed) * Time.deltaTime;
         transform.position += moveVector * Time.deltaTime;
         moveVector -= moveVector * 8f * Time.deltaTime;
+        float increaseScaleAmount = 1f;
 
         if (disappearTimer > DISAPPEAR_TIMER_MAX * 0.5)
         {
-            float increaseScaleAmount = 1f;
             transform.localScale += Vector3.one * increaseScaleAmount * Time.deltaTime;
         }
         else
         {
-            float increaseScaleAmount = 1f;
             transform.localScale -= Vector3.one * increaseScaleAmount * Time.deltaTime;
         }
 

@@ -67,7 +67,7 @@ public class Health : MonoBehaviour // NetworkBehavior
 
         if (currHealth <= 10)
         {
-           createDamagePopup(true);
+            createDamagePopup(true);
         }
         else
         {
@@ -80,15 +80,15 @@ public class Health : MonoBehaviour // NetworkBehavior
 
     private void createDamagePopup(bool isCriticalHit)
     {
-         DamagePopup.Create(damagePopup,
-                            new Vector3(transform.position.x, transform.position.y + 10f, 0f),
-                            (int)currHealth, 
-                            isCriticalHit);
+        DamagePopup.Create(damagePopup,
+                           new Vector3(transform.position.x, transform.position.y + 10f, 0f),
+                           (int)currHealth,
+                           gameObject.transform.localScale.x,
+                           isCriticalHit);
     }
 
     public void PlayHitEffect()
     {
-        // Vector3 position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
         if (hitEffect != null)
         {
             ParticleSystem instance = Instantiate(hitEffect, hitPoint.transform.position, Quaternion.identity);
