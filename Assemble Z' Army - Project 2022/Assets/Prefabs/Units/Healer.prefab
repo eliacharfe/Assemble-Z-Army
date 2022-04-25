@@ -3220,6 +3220,7 @@ MonoBehaviour:
   maxHealth: 100
   hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
   hitPoint: {fileID: 1348228376500936507}
+  damagePopup: {fileID: 2169474042914318888, guid: 25003cda7b05eaa4d8a2050be1440ddb, type: 3}
   currHealth: 0
 --- !u!195 &1251703102959817888
 NavMeshAgent:

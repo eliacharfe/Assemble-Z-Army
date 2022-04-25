@@ -50,22 +50,11 @@ public class Health : MonoBehaviour // NetworkBehavior
 
     public void DealDamage(float damageAmount)
     {
-        if (currHealth <= 10)
-        {
-            DamagePopup.Create(damagePopup,
-                          new Vector3(transform.position.x, transform.position.y + 10f, 0f),
-                          (int)currHealth, true);
-        }
-        else
-        {
-            DamagePopup.Create(damagePopup,
-                                      new Vector3(transform.position.x, transform.position.y + 10f, 0f),
-                                      (int)currHealth, false);
-        }
-
         if (currHealth == 0)
+        {
+            createDamagePopup(true);
             return;
-
+        }
 
         if (damageAmount > unit.Defense.BaseValue)
         {
@@ -76,8 +65,25 @@ public class Health : MonoBehaviour // NetworkBehavior
                 audioPlayer.PlayDamageClip();
         }
 
+        if (currHealth <= 10)
+        {
+           createDamagePopup(true);
+        }
+        else
+        {
+            createDamagePopup(false);
+        }
+
         ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
 
+    }
+
+    private void createDamagePopup(bool isCriticalHit)
+    {
+         DamagePopup.Create(damagePopup,
+                            new Vector3(transform.position.x, transform.position.y + 10f, 0f),
+                            (int)currHealth, 
+                            isCriticalHit);
     }
 
     public void PlayHitEffect()

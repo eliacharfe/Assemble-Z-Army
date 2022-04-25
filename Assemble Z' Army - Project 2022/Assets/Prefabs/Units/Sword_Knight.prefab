@@ -1453,7 +1453,6 @@ GameObject:
   - component: {fileID: 1953047236527864160}
   - component: {fileID: 1953047236527864163}
   - component: {fileID: 1953047237734244067}
-  - component: {fileID: 7859017407031136303}
   m_Layer: 9
   m_Name: Sword_Knight
   m_TagString: Untagged
@@ -1565,6 +1564,7 @@ MonoBehaviour:
   maxHealth: 100
   hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
   hitPoint: {fileID: 5175301407365720402}
+  damagePopup: {fileID: 2169474042914318888, guid: 25003cda7b05eaa4d8a2050be1440ddb, type: 3}
   currHealth: 0
 --- !u!114 &1953047236527864164
 MonoBehaviour:
@@ -1727,22 +1727,6 @@ CapsuleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.028504506, y: 0.4139136}
   m_Size: {x: 0.55700856, y: 0.82767415}
-  m_Direction: 0
---- !u!70 &7859017407031136303
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2554254635777691023}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.01767418, y: 0.41234234}
-  m_Size: {x: 0.53534806, y: 0.88218796}
   m_Direction: 0
 --- !u!1 &2721685297971839315
 GameObject:

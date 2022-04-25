@@ -16,6 +16,10 @@ public class DamagePopup : MonoBehaviour
         return myDamagePopup;
     }
 
+    private const float DISAPPEAR_TIMER_MAX = 0.5f;
+    private const float DISAPPEAR_TIMER_CRITICAL_MAX = 1f;
+
+    private static int sortingOrder = 0;
 
     private TextMeshPro textMesh;
     private Color textColor;
@@ -24,42 +28,65 @@ public class DamagePopup : MonoBehaviour
     private Color defaultColor;
     float disappearSpeed;
 
+    private Vector3 moveVector;
+
     private void Awake()
     {
-        //defaultColor = new Color(243, 97, 0, 255);
-        
         textMesh = transform.GetComponent<TextMeshPro>();
-          defaultColor = textMesh.color;
+        defaultColor = textMesh.color;
     }
 
     public void Setup(int damageAmount, bool isCriticalHit)
     {
-        textMesh.SetText(damageAmount.ToString());
+        if (damageAmount != 0)
+        {
+            textMesh.SetText(damageAmount.ToString());
+        }
+        else
+        {
+            textMesh.SetText("Dead");
+        }
 
         if (!isCriticalHit)
         {
             textMesh.fontSize = 60f;
             textColor = defaultColor;
-             disappearTimer = 0.5f;
+            disappearTimer = DISAPPEAR_TIMER_MAX;
         }
         else
         {
             textMesh.fontSize = 90f;
             textColor = Color.red;
-             disappearTimer = 1.5f;
+            disappearTimer = DISAPPEAR_TIMER_CRITICAL_MAX;
         }
 
         textMesh.color = textColor;
         disappearSpeed = 4f;
+
+        moveVector = new Vector3(0.7f, 1) * 60f;
+
+        sortingOrder++;
+        textMesh.sortingOrder = sortingOrder;
     }
 
 
     private void Update()
     {
-        float moveYspeed = 20f;
-        transform.position += new Vector3(0, moveYspeed) * Time.deltaTime;
+        // float moveYspeed = 20f;
+        //transform.position += new Vector3(0, moveYspeed) * Time.deltaTime;
+        transform.position += moveVector * Time.deltaTime;
+        moveVector -= moveVector * 8f * Time.deltaTime;
 
-        Debug.Log(disappearTimer);
+        if (disappearTimer > DISAPPEAR_TIMER_MAX * 0.5)
+        {
+            float increaseScaleAmount = 1f;
+            transform.localScale += Vector3.one * increaseScaleAmount * Time.deltaTime;
+        }
+        else
+        {
+            float increaseScaleAmount = 1f;
+            transform.localScale -= Vector3.one * increaseScaleAmount * Time.deltaTime;
+        }
 
         disappearTimer -= Time.deltaTime;
         if (disappearTimer < 0)

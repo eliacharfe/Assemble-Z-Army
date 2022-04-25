@@ -3803,8 +3803,6 @@ GameObject:
   - component: {fileID: 5899761552639902225}
   - component: {fileID: 5899761552639902226}
   - component: {fileID: 5899761553584154002}
-  - component: {fileID: 8968268356844183041}
-  - component: {fileID: 8387367404895421107}
   m_Layer: 9
   m_Name: SpearmanKnight
   m_TagString: Untagged
@@ -3918,6 +3916,7 @@ MonoBehaviour:
   maxHealth: 100
   hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
   hitPoint: {fileID: 5634511554327718514}
+  damagePopup: {fileID: 2169474042914318888, guid: 25003cda7b05eaa4d8a2050be1440ddb, type: 3}
   currHealth: 0
 --- !u!114 &5899761552639902229
 MonoBehaviour:
@@ -4080,38 +4079,6 @@ CapsuleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.028504506, y: 0.4139136}
   m_Size: {x: 0.55700856, y: 0.82767415}
-  m_Direction: 0
---- !u!70 &8968268356844183041
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7604397018743207678}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.41118369}
-  m_Size: {x: 0.49999976, y: 0.84185386}
-  m_Direction: 0
---- !u!70 &8387367404895421107
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7604397018743207678}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3953688}
-  m_Size: {x: 0.49999976, y: 0.7153348}
   m_Direction: 0
 --- !u!1 &7799347135700942195
 GameObject:
