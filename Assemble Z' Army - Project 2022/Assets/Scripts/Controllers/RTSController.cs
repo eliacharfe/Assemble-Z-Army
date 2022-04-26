@@ -134,6 +134,7 @@ public class RTSController : MonoBehaviour
     // Send workers to construct the building.
     private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
     {
+        print("Sent to build");
         foreach (Unit unit in selectedUnits)
         {
             if (unit && unit.id == Macros.Units.WORKER)

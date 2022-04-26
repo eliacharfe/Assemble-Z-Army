@@ -37,7 +37,7 @@ public class ConstructBuilding : MonoBehaviour
     {
 
         BuilidingConstruction tempBuild = collision.GetComponent<BuilidingConstruction>();
-
+        print("Collided whith building" + tempBuild  +" building target " + buildingTarget);
         if (tempBuild && this.buildingTarget == tempBuild)
         {
             //unit.CmdBuildAnimation();

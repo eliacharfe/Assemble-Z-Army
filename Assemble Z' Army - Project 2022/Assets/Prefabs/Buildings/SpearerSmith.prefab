@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3270616488199963947, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 345bee31d3a3bbe4ebf2e0592445444d, type: 3}
     - target: {fileID: 5005265896654497167, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: m_SizeDelta.x
       value: 40
