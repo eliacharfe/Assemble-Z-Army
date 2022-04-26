@@ -87,6 +87,7 @@ public abstract class Attacker : NetworkBehaviour
     [Command]
     public void CmdSetTargetable(Targetable target)
     {
+        GetComponent<Unit>().moveToDir = false;
         this.target = target;
     }
 

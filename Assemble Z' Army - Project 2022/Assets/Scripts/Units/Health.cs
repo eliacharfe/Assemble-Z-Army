@@ -62,12 +62,18 @@ public class Health : NetworkBehaviour // NetworkBehavior
 
     private void createDamagePopup(bool isCriticalHit)
     {
-        DamagePopup.Create(damagePopup,
-                           new Vector3(transform.position.x, transform.position.y + 3f, 0f),
-                           (int)currHealth,
-                           isCriticalHit);
+        InstantiatePopupDamage(isCriticalHit);   
     }
 
+    [ClientRpc]
+    void InstantiatePopupDamage(bool isCriticalHit)
+    {
+        DamagePopup popUp = DamagePopup.Create(damagePopup,
+                   new Vector3(transform.position.x, transform.position.y + 3f, 0f),
+                   (int)currHealth,
+                   isCriticalHit);
+        NetworkServer.Spawn(popUp.gameObject);
+    }
 
     private void HandleHealthUpdated(int oldHealth, int newHealth)
     {

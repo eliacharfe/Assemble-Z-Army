@@ -120,6 +120,12 @@ public class CameraInputSystem : NetworkBehaviour
         Mathf.Clamp(playerCameraTransform.position.z, minCam.z, maxCam.z)); // boundies to camera
         */
     }
+
+    public void setPlayerCameraTransform(Transform cameraTransform)
+    {
+        print(playerCameraTransform.position);
+        playerCameraTransform.position = cameraTransform.position;
+    }
 }
 
 

@@ -10,7 +10,7 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
     [SerializeField] private Transform cameraTransform = null;
 
     [SerializeField] private RectTransform minimapRect = null;
-    [SerializeField] private float mapScale = 150f;
+    [SerializeField] private float mapScale = 300f;
     [SerializeField] private float offset = -6f;
 
     private Transform playerCameraTransform;
@@ -63,7 +63,11 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
             -10f
         );
 
-        playerCameraTransform.position = newCameraPos ;
+        playerCameraTransform.position = newCameraPos;
+
+        print(Camera.main.ScreenToWorldPoint(mousPos));
+        print(playerCameraTransform.position);
+        FindObjectOfType<CameraInputSystem>().setPlayerCameraTransform(playerCameraTransform);
     }
 
 

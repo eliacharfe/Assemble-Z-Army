@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Mirror;
 
-public class DamagePopup : MonoBehaviour
+public class DamagePopup : NetworkBehaviour
 {
     public static DamagePopup Create(Transform damagePopup, Vector3 position,
                                      int damageAmount, bool isCriticalHit)
     {
-        Transform damagePopupTransform = Instantiate(damagePopup, position, Quaternion.identity);
+        GameObject damagePopupTransform = Instantiate(damagePopup.gameObject, position, Quaternion.identity) ;
+
         DamagePopup myDamagePopup = damagePopupTransform.GetComponent<DamagePopup>();
+
         myDamagePopup.Setup(damageAmount, isCriticalHit);
 
         return myDamagePopup;

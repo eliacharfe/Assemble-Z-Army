@@ -11,6 +11,8 @@ public class PhaseManager : NetworkBehaviour
     [SyncVar] public float timer = 1f;
     [SyncVar] public int currentPhase = 1;
     [SyncVar] private bool startTimer = false;
+    [SerializeField] private float phaseOneTime = 5f;
+    [SerializeField] private float phaseTwoTime = 5f;
 
     //Canvas
     [SerializeField] GameObject BuildingCanvasPanel = null;
@@ -25,6 +27,7 @@ public class PhaseManager : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
+        timer = phaseOneTime;
     }
         
 
@@ -115,7 +118,7 @@ public class PhaseManager : NetworkBehaviour
 
     public void SetPhaseTwo()
     {
-        timer = 100;
+        timer = phaseTwoTime;
         ((RtsNetworkManager)NetworkManager.singleton).SetPhaseTwo();
         startTimer = true;
         RpcRemovePhaseOneEndCanvas();

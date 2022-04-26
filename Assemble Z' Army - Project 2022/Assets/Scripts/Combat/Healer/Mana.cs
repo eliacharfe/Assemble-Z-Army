@@ -68,11 +68,14 @@ public class Mana : NetworkBehaviour
         }
     }
 
-    public void PlayManaEffect()
+    [ClientRpc]
+    public void RpcPlayManaEffect()
     {
         if (manaEffect != null)
         {
             ParticleSystem instance = Instantiate(manaEffect, healingPointStart.transform.position, Quaternion.identity);
+            
+            //NetworkServer.Spawn(instance.gameObject);
 
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
@@ -91,7 +94,7 @@ public class Mana : NetworkBehaviour
             currMana = 0;
         }
 
-        GetComponent<Mana>().PlayManaEffect();
+        GetComponent<Mana>().RpcPlayManaEffect();
     }
 
     private void HandleManaValueUpdated(int oldMana, int newMana)

@@ -107,7 +107,7 @@ public class RTSController : MonoBehaviour
                     //audioPlayer.PlayHealingClip();
                     unit.GetComponent<Mana>().CmdUseHeal();
                     targetable.GetComponent<Health>().CmdHeal(100);
-                    unit.GetComponent<Mana>().PlayManaEffect();
+                    //unit.GetComponent<Mana>().RpcPlayManaEffect();
                 }
             
             }
