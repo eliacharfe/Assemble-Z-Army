@@ -42,6 +42,7 @@ public class Unit : NetworkBehaviour
     private CapsuleCollider2D myBoxCollider = null;
 
     [SyncVar]public bool isDead;
+    [SyncVar]public bool moveToDir;
 
     public CharacterStat Speed;
     public CharacterStat Attack;
@@ -135,6 +136,7 @@ public class Unit : NetworkBehaviour
     #endregion
 
     //--------------------------------------
+    [ServerCallback]
     private void Update()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
@@ -147,6 +149,7 @@ public class Unit : NetworkBehaviour
 
         agent.ResetPath();
         StopAnimation();
+        moveToDir = false;
     }
     //-------------------------------------
     void OnTriggerEnter2D(Collider2D other)
@@ -180,8 +183,16 @@ public class Unit : NetworkBehaviour
     //----------------------------
     public void MoveTo(Vector3 dest)
     {
+        CmdOrderToMove();
         move.CmdMove(dest);
     }
+
+    [Command]
+    void CmdOrderToMove()
+    {
+        moveToDir = true;
+    }
+
     //------------------------------
     public bool ReachedDestination()
     {
@@ -269,6 +280,8 @@ public class Unit : NetworkBehaviour
         agent.ResetPath();
 
         GetComponent<UnitMovement>().isMoving = false;
+
+        moveToDir = false;
     }
 
     //---------------------------

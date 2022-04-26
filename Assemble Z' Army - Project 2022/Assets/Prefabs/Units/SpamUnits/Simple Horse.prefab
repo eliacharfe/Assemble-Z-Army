@@ -1332,6 +1332,7 @@ MonoBehaviour:
   selectionCircle: {fileID: 4803427915753492989}
   id: 8
   isDead: 0
+  moveToDir: 0
   Speed:
     BaseValue: 0
   Attack:
@@ -1377,7 +1378,7 @@ MonoBehaviour:
   sendInterval: 0.05
   syncPosition: 1
   syncRotation: 1
-  syncScale: 0
+  syncScale: 1
   interpolatePosition: 1
   interpolateRotation: 1
   interpolateScale: 0

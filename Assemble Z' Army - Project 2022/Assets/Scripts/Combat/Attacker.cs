@@ -11,7 +11,7 @@ public abstract class Attacker : NetworkBehaviour
     protected bool isInAttackMode = false;
     private bool isInModeAttackAutomated = false;
 
-    protected Targetable target = null;
+    public Targetable target = null;
 
     protected UnitMovement movement = null;
 
@@ -38,7 +38,7 @@ public abstract class Attacker : NetworkBehaviour
             return;
         }
 
-        if (!target || target.IsDead()) {
+        if (!target || target.IsDead() || GetComponent<Unit>().moveToDir) {
             isInModeAttackAutomated = false;
             
             StopAttackAnime();
@@ -50,6 +50,7 @@ public abstract class Attacker : NetworkBehaviour
 
         if (Vector2.Distance(gameObject.transform.position,this.target.transform.position) < range)
         {
+            GetComponent<Unit>().moveToDir = false;
             GetComponent<Unit>().StopMove();
             if (time < attackTime)
             {
