@@ -58,8 +58,8 @@ public class CameraInputSystem : NetworkBehaviour
     {
         startCameraPos = playerCameraTransform.position;
 
-        confinerBoundX = 125;
-        confinerBoundY = 125;
+        confinerBoundX = 120;
+        confinerBoundY = 120;
         screenXLimits = new Vector3(0 - confinerBoundX, 0 + confinerBoundX, transform.position.z);
         screenZLimits = new Vector3(0 - confinerBoundY, 0 + confinerBoundY, transform.position.z);
     }
