@@ -40,10 +40,6 @@ public class ConstructBuilding : MonoBehaviour
         print("Collided whith building" + tempBuild  +" building target " + buildingTarget);
         if (tempBuild && this.buildingTarget == tempBuild)
         {
-            //unit.CmdBuildAnimation();
-
-
-            print("Start build animation");
 
             isBuilding = true;
 

@@ -170,15 +170,21 @@ public class RTSPlayer : NetworkBehaviour
 
         List<int> copy = new List<int>(m_unitsId);
 
-        foreach(int id in copy)
+        List<Vector3> posList = Utilities.Utils.GetPosListAround(phaseThreePos, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
+
+        int posIndex = 0;
+
+        foreach (int id in copy)
         {
             GameObject unit = factory.GetUnitPrefab((Macros.Units)id).gameObject;
             
-            GameObject unitInstance = Instantiate(unit, phaseThreePos, Quaternion.identity);
+            GameObject unitInstance = Instantiate(unit, posList[posIndex], Quaternion.identity);
 
             NetworkServer.Spawn(unitInstance, connectionToClient);
 
             m_unitsId.Remove(id);
+
+            posIndex = (posIndex + 1) % posList.Count;
         }
 
     }

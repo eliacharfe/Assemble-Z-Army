@@ -25,5 +25,38 @@ namespace Utilities{
         {
             return new Vector3(pos.x, pos.y, z);
         }
+
+
+        // Get positions around the point given.
+        public static List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
+        {
+            List<Vector3> posList = new List<Vector3>();
+            posList.Add(startPos);
+            for (int i = 0; i < ringPosCountArr.Length; i++)
+            {
+                posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
+            }
+            return posList;
+        }
+
+        //---------------------------------------------
+        private static List<Vector3> GetPosListAround(Vector3 startPostion, float distance, int posCount)
+        {
+            List<Vector3> posList = new List<Vector3>();
+            for (int i = 0; i < posCount; i++)
+            {
+                float angle = i * (360f / posCount);
+                Vector3 direction = ApplyRotationToVec(new Vector3(1, 0), angle);
+                Vector3 position = startPostion + direction * distance;
+                posList.Add(position);
+            }
+            return posList;
+        }
+
+        //-------------------------------------------
+        private static Vector3 ApplyRotationToVec(Vector3 vec, float angle)
+        {
+            return Quaternion.Euler(0, 0, angle) * vec;
+        }
     }
 }

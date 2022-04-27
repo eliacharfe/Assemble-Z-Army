@@ -286,6 +286,11 @@ public class Unit : NetworkBehaviour
 
     //---------------------------
     [Command]
+    public void CmdSetDead()
+    {
+        isDead = true;
+    }
+
     public void SetDead()
     {
         isDead = true;
@@ -349,16 +354,16 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 4f;
+                    ReachDistance.BaseValue = 5f;
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
             case Units.ARCHER:
                 {
                     Speed.BaseValue = agent.speed = 10f;
-                    Attack.BaseValue = 18f;
+                    Attack.BaseValue = 5f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 20f;
+                    ReachDistance.BaseValue = 18f;
                     SpeedAttack.BaseValue = 1.4f;
                     break;
                 };
@@ -374,7 +379,7 @@ public class Unit : NetworkBehaviour
                 };
             case Units.SWORD_KNIGHT:
                 {
-                    Speed.BaseValue = agent.speed = 5f;
+                    Speed.BaseValue = agent.speed = 7f;
                     Attack.BaseValue = 20f;
                     Defense.BaseValue = 11f;
                     ReachDistance.BaseValue = 6f;
@@ -383,7 +388,7 @@ public class Unit : NetworkBehaviour
                 };
             case Units.SIMPLE_HORSE:
                 {
-                    Speed.BaseValue = agent.speed = 20f;
+                    Speed.BaseValue = agent.speed = 15f;
                     Attack.BaseValue = 10f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 4f;
@@ -392,8 +397,8 @@ public class Unit : NetworkBehaviour
                 };
             case Units.SWORD_HORSE:
                 {
-                    Speed.BaseValue = agent.speed = 20f;
-                    Attack.BaseValue = 25f;
+                    Speed.BaseValue = agent.speed = 15f;
+                    Attack.BaseValue = 15f;
                     Defense.BaseValue = 9f;
                     ReachDistance.BaseValue = 5f;
                     SpeedAttack.BaseValue = 1.5f;
@@ -401,8 +406,8 @@ public class Unit : NetworkBehaviour
                 };
             case Units.SWORD_HORSE_KNIGHT:
                 {
-                    Speed.BaseValue = agent.speed = 10f;
-                    Attack.BaseValue = 30f;
+                    Speed.BaseValue = agent.speed = 12f;
+                    Attack.BaseValue = 20f;
                     Defense.BaseValue = 12f;
                     ReachDistance.BaseValue = 7f;
                     SpeedAttack.BaseValue = 1.7f;
@@ -411,9 +416,9 @@ public class Unit : NetworkBehaviour
             case Units.ARCHER_HORSE:
                 {
                     Speed.BaseValue = agent.speed = 20f;
-                    Attack.BaseValue = 15f;
+                    Attack.BaseValue = 7f;
                     Defense.BaseValue = 10f;
-                    ReachDistance.BaseValue = 44f;
+                    ReachDistance.BaseValue = 20f;
                     SpeedAttack.BaseValue = 1.4f;
                     break;
                 };
@@ -437,16 +442,16 @@ public class Unit : NetworkBehaviour
                 };
             case Units.SPEARMAN:
                 {
-                    Speed.BaseValue = agent.speed = 5f;
+                    Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 10f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 7f;
+                    ReachDistance.BaseValue = 10f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 }
             case Units.SPEAR_KNIGHT:
                 {
-                    Speed.BaseValue = agent.speed = 5f;
+                    Speed.BaseValue = agent.speed = 7f;
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 10f;
                     ReachDistance.BaseValue = 12f;
@@ -455,8 +460,8 @@ public class Unit : NetworkBehaviour
                 }
             case Units.SPEAR_HORSE:
                 {
-                    Speed.BaseValue = agent.speed = 20f;
-                    Attack.BaseValue = 20f;
+                    Speed.BaseValue = agent.speed = 15f;
+                    Attack.BaseValue = 15f;
                     Defense.BaseValue = 5f;
                     ReachDistance.BaseValue = 12f;
                     SpeedAttack.BaseValue = 1.8f;

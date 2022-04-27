@@ -30,13 +30,13 @@ public class BowAttack : Attacker
 
     }
 
-    [Command]
+
     public void realeseArrow()
     {
         if (!target)
             return;
 
-        //RpcPlayBowSound();
+        RpcPlayBowSound();
 
         Vector3 targetPos = target.transform.position;
         Vector3 targPos = target.transform.position;

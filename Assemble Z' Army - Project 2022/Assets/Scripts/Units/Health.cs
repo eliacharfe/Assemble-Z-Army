@@ -12,11 +12,17 @@ public class Health : NetworkBehaviour // NetworkBehavior
     // [SyncVar (hook = nameof(HandleHealthUpdated))]
     [SerializeField] [SyncVar(hook = nameof(HandleHealthUpdated))] public int currHealth;
     [SerializeField] private Transform damagePopup;
+    [SerializeField] ParticleSystem hitEffect;
+    AudioPlayer audioPlayer;
 
     // public event Action ServerOnDie;
 
     public event Action<int, int> ClientOnHealthUpdate;
 
+    private void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
 
     void Start()
     {
@@ -57,8 +63,13 @@ public class Health : NetworkBehaviour // NetworkBehavior
             createDamagePopup(false);
         }
 
+        GetComponent<Animator>().SetBool("gotHit", true);
+        if (currHealth > 0)
+            audioPlayer.PlayDamageClip();
+
         ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
     }
+
 
     private void createDamagePopup(bool isCriticalHit)
     {
@@ -73,6 +84,9 @@ public class Health : NetworkBehaviour // NetworkBehavior
                    (int)currHealth,
                    isCriticalHit);
         NetworkServer.Spawn(popUp.gameObject);
+
+        var effectPos = Utilities.Utils.ChangeYAxis(transform.position,transform.position.y+2);
+        Instantiate(hitEffect, effectPos, Quaternion.identity);
     }
 
     private void HandleHealthUpdated(int oldHealth, int newHealth)
@@ -81,12 +95,17 @@ public class Health : NetworkBehaviour // NetworkBehavior
 
         if (currHealth <= 0)
         {
+            StopHitAnimation();
             GetComponent<Unit>().SetDead();
-            GetComponent<Unit>().isDead = true;
-            GetComponent<Unit>().CmdStopMove();
+            GetComponent<Unit>().StopMove();
             GetComponent<Animator>().SetBool("isDead", true);
             Destroy(gameObject, 2f);
         }
+    }
+
+    public void StopHitAnimation()
+    {
+        GetComponent<Animator>().SetBool("gotHit", false);
     }
 }
 

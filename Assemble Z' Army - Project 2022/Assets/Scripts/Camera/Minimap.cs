@@ -67,7 +67,7 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
 
         print(Camera.main.ScreenToWorldPoint(mousPos));
         print(playerCameraTransform.position);
-        FindObjectOfType<CameraInputSystem>().setPlayerCameraTransform(playerCameraTransform);
+        //FindObjectOfType<CameraInputSystem>().setPlayerCameraTransform(playerCameraTransform);
     }
 
 

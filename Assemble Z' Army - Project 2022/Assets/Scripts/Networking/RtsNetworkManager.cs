@@ -68,7 +68,6 @@ public class RtsNetworkManager : NetworkManager
             SetPhaseOne();
         }
 
-
         if (sceneName == "Battlefield")
         {
             GameObject EndGameHandler = Instantiate(gameOverHandler);
@@ -102,7 +101,12 @@ public class RtsNetworkManager : NetworkManager
 
         foreach (RTSPlayer player in players)
         {
+
             var startPos = GetStartPosition().position;
+
+            List<Vector3> posList = Utilities.Utils.GetPosListAround(startPos, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
+
+            int posIndex = 0;
 
             var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
 
@@ -113,14 +117,15 @@ public class RtsNetworkManager : NetworkManager
             for (int i = 0; i < amountOfWorkers; i++)
             {
 
-                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Units.WORKER).gameObject, startPos, Quaternion.identity);
+                GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Units.WORKER).gameObject, posList[posIndex], Quaternion.identity);
 
+                posIndex = (posIndex +1) % posList.Count;
                 // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);
 
                 player.m_workers.Add(workerInstance);
             }
-            spawnTemp(Units.SPEAR_HORSE_KNIGHT, factory, player, startPos);
+        /*    spawnTemp(Units.SPEAR_HORSE_KNIGHT, factory, player, startPos);
             spawnTemp(Units.SWORD_HORSE_KNIGHT, factory, player, startPos);
             spawnTemp(Units.SPEAR_HORSE, factory, player, startPos);
             spawnTemp(Units.SWORD_HORSE, factory, player, startPos);
@@ -131,7 +136,7 @@ public class RtsNetworkManager : NetworkManager
             spawnTemp(Units.SPEAR_KNIGHT, factory, player, startPos);
             spawnTemp(Units.SIMPLE_HORSE, factory, player, startPos);
             spawnTemp(Units.RECRUIT, factory, player, startPos);
-            spawnTemp(Units.CROSSBOW, factory, player, startPos);
+            spawnTemp(Units.CROSSBOW, factory, player, startPos);*/
         }
     }
 
@@ -155,12 +160,18 @@ public class RtsNetworkManager : NetworkManager
 
             player.removeWorkers();
 
+            List<Vector3> posList = Utilities.Utils.GetPosListAround(startinPoint, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
+
+            int posIndex = 0;
+
             for (int i = 0; i < amountOfRecruits; i++)
             {
-                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.SWORDMAN).gameObject, startinPoint, Quaternion.identity);
+                GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.RECRUIT).gameObject, posList[posIndex], Quaternion.identity);
 
                 // Spawn the player on server.
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);
+
+                posIndex = (posIndex + 1) % posList.Count;
             }
 
             GameObject Healer = Instantiate(factory.GetUnitPrefab(Macros.Units.HEALER).gameObject, startinPoint, Quaternion.identity);

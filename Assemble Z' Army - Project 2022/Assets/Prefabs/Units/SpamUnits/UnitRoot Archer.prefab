@@ -441,6 +441,7 @@ GameObject:
   - component: {fileID: 1824306195853912620}
   - component: {fileID: 7411773945188106040}
   - component: {fileID: 1657129140451685046}
+  - component: {fileID: 6340840075642986739}
   m_Layer: 9
   m_Name: UnitRoot Archer
   m_TagString: Untagged
@@ -465,8 +466,8 @@ Transform:
   - {fileID: 1813730190407525656}
   - {fileID: 6890455035961233638}
   - {fileID: 3741327362330135111}
-  - {fileID: 3440912654976558269}
   - {fileID: 8804648649766560922}
+  - {fileID: 3440912654976558269}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -579,6 +580,7 @@ MonoBehaviour:
   selectionCircle: {fileID: 1813730191466944967}
   id: 4
   isDead: 0
+  moveToDir: 0
   Speed:
     BaseValue: 0
   Attack:
@@ -617,6 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  target: {fileID: 0}
   attackTime: 2
   range: 50
   damage: 5
@@ -654,6 +657,7 @@ MonoBehaviour:
   syncInterval: 0.1
   currHealth: 0
   damagePopup: {fileID: 2169474042914318888, guid: 25003cda7b05eaa4d8a2050be1440ddb, type: 3}
+  hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
 --- !u!114 &4218155393660724675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,6 +834,17 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 1813730190407525656}
+--- !u!210 &6340840075642986739
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005334076202706618}
+  m_Enabled: 1
+  m_SortingLayerID: 74712451
+  m_SortingLayer: 7
+  m_SortingOrder: 5
 --- !u!1 &1142162041102408558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,7 +2324,7 @@ SortingGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3605231008584014036}
-  m_Enabled: 1
+  m_Enabled: 0
   m_SortingLayerID: 74712451
   m_SortingLayer: 7
   m_SortingOrder: 5
@@ -4564,7 +4579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7361715914408009600, guid: b4a7d6096ad710247a4e90e0f8d26ec9, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7361715914408009600, guid: b4a7d6096ad710247a4e90e0f8d26ec9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4606,6 +4621,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9152780993323629210, guid: b4a7d6096ad710247a4e90e0f8d26ec9, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4a7d6096ad710247a4e90e0f8d26ec9, type: 3}
 --- !u!4 &8804648649766560922 stripped
@@ -4639,7 +4658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1501880076490198203, guid: f58853cb5e3a48649823886bfbdcbcd1, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1501880076490198203, guid: f58853cb5e3a48649823886bfbdcbcd1, type: 3}
       propertyPath: m_LocalPosition.x

@@ -175,7 +175,7 @@ public class Building : NetworkBehaviour
         {
             inProgess = true;
 
-            unit.SetDead();
+            unit.CmdSetDead();
 
             Destroy(unit.gameObject);
 

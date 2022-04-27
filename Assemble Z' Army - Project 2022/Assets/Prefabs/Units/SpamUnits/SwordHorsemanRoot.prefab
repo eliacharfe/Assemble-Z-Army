@@ -5348,6 +5348,7 @@ MonoBehaviour:
   syncInterval: 0.1
   currHealth: 0
   damagePopup: {fileID: 2169474042914318888, guid: 25003cda7b05eaa4d8a2050be1440ddb, type: 3}
+  hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
 --- !u!114 &1080620239685737633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5362,6 +5363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  target: {fileID: 0}
   attackTime: 1
   range: 10
   damage: 10
@@ -5463,6 +5465,7 @@ MonoBehaviour:
   selectionCircle: {fileID: 1080620238932766742}
   id: 11
   isDead: 0
+  moveToDir: 0
   Speed:
     BaseValue: 0
   Attack:

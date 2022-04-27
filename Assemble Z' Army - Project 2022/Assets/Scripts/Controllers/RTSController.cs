@@ -151,7 +151,7 @@ public class RTSController : MonoBehaviour
     private void MoveUnits()
       {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
-        List<Vector3> targetPosList = GetPosListAround(moveToPos, new float[] {5, 10, 15}, new int[] {5, 10, 15});
+        List<Vector3> targetPosList = Utils.GetPosListAround(moveToPos, new float[] {5, 10, 15}, new int[] {5, 10, 15});
 
         int targetPosIndex = 0;
 
@@ -185,7 +185,7 @@ public class RTSController : MonoBehaviour
             unit.GetComponent<Attacker>().CmdSetTargetable(null);
     }
 
-
+/*
     // Get positions around the point given.
     private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
     {
@@ -215,7 +215,7 @@ public class RTSController : MonoBehaviour
     private Vector3 ApplyRotationToVec(Vector3 vec, float angle)
     {
         return Quaternion.Euler(0, 0, angle) * vec;
-    }
+    }*/
 
     //-------------------------------------
     private void StartSelectionArea()

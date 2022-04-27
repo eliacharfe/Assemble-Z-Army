@@ -396,7 +396,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6499415880995529299}
   - component: {fileID: 956464869328700729}
-  - component: {fileID: 2658302939343141943}
   m_Layer: 9
   m_Name: Root
   m_TagString: Untagged
@@ -512,17 +511,6 @@ MonoBehaviour:
   - 
   _backListString:
   - Assets/Resources/SPUM/SPUM_Sprites/Packages/Ver300/7_Back/New_Back_02.Png
---- !u!210 &2658302939343141943
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137091903335708169}
-  m_Enabled: 1
-  m_SortingLayerID: 74712451
-  m_SortingLayer: 7
-  m_SortingOrder: 5
 --- !u!1 &1323141273797491373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,6 +1803,7 @@ GameObject:
   - component: {fileID: -38137312823455921}
   - component: {fileID: -1125657920924720348}
   - component: {fileID: -5697793910330364018}
+  - component: {fileID: 8232189166047076123}
   m_Layer: 9
   m_Name: UnitRoot Crossbow
   m_TagString: Untagged
@@ -1954,6 +1943,7 @@ MonoBehaviour:
   selectionCircle: {fileID: 2658302939333555994}
   id: 14
   isDead: 0
+  moveToDir: 0
   Speed:
     BaseValue: 0
   Attack:
@@ -1978,10 +1968,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  target: {fileID: 0}
   attackTime: 1
   range: 1
   damage: 5
-  arrowPrefab: {fileID: 5890560936853567077, guid: b7dd46dbf38c643f09e206f9fa4be008, type: 3}
+  arrowPrefab: {fileID: 4631532840544127888, guid: a6f22b08044b9624fb22948ad5f1cab8, type: 3}
   arrowSpeed: 10
   shootStartPoint: {fileID: 6652640064997882008}
 --- !u!114 &4720331953643687787
@@ -2029,6 +2020,7 @@ MonoBehaviour:
   syncInterval: 0.1
   currHealth: 0
   damagePopup: {fileID: 2169474042914318888, guid: 25003cda7b05eaa4d8a2050be1440ddb, type: 3}
+  hitEffect: {fileID: 692400155226430164, guid: afc1cd1d103039b4cb46016e2594a798, type: 3}
 --- !u!114 &524243247885191966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2205,6 +2197,17 @@ MonoBehaviour:
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   target: {fileID: 2658302938274319301}
+--- !u!210 &8232189166047076123
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475709686869379175}
+  m_Enabled: 1
+  m_SortingLayerID: 74712451
+  m_SortingLayer: 7
+  m_SortingOrder: 5
 --- !u!1 &3609177552822449587
 GameObject:
   m_ObjectHideFlags: 0
