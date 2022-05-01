@@ -176,8 +176,11 @@ MonoBehaviour:
   screenZLimits: {x: -100, y: 100}
   confinerBoundY: 60
   confinerBoundX: 33
+  MAX_ZOOM_IN: 20
+  MAX_ZOOM_OUT: 35
   gameObj: {fileID: 0}
   light: {fileID: 0}
+  zoomSize: 30
 --- !u!1 &1762680851740912117
 GameObject:
   m_ObjectHideFlags: 0

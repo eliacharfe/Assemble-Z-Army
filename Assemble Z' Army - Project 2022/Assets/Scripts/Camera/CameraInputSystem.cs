@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using Mirror;
 using UnityEngine.Experimental.Rendering.LWRP;
 using UnityEngine.Experimental.Rendering.Universal;
+using Cinemachine;
 
 public class CameraInputSystem : NetworkBehaviour
 {
@@ -16,6 +17,9 @@ public class CameraInputSystem : NetworkBehaviour
     [SerializeField] private Vector2 screenZLimits = Vector2.zero;
     [SerializeField] private float confinerBoundY= 60;
     [SerializeField] private float confinerBoundX = 60;
+    [SerializeField] private float MAX_ZOOM_IN = 25f;
+    [SerializeField] private float MAX_ZOOM_OUT = 35;
+    CinemachineVirtualCamera virtualCamera = null;
 
     private Controls controls;
     private Vector2 prevInput;
@@ -69,12 +73,20 @@ public class CameraInputSystem : NetworkBehaviour
         Camera.main.transform.position = new Vector3(0, 0, 0);
     }
 
+    private void Start()
+    {
+        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+    }
+
     [ClientCallback]
     void Update()
     {
         if (!hasAuthority || !Application.isFocused) { return; }
 
         MoveCamera();
+
+        if(virtualCamera)
+            ZoomInOutCamera();
     }
 
     private void SetPrevInput(InputAction.CallbackContext ctx)
@@ -125,6 +137,34 @@ public class CameraInputSystem : NetworkBehaviour
     {
         print(playerCameraTransform.position);
         playerCameraTransform.position = cameraTransform.position;
+    }
+
+        [SerializeField] private float zoomSize = 100f;
+
+
+
+
+
+    void ZoomInOutCamera()
+    {
+        if (Mouse.current.scroll.ReadValue().y > 0)
+        {
+            if (zoomSize >= MAX_ZOOM_IN)
+            {
+                zoomSize -= 1f;
+            }
+        }
+
+        if (Mouse.current.scroll.ReadValue().y < 0)
+        {
+            if (zoomSize <= MAX_ZOOM_OUT)
+            {
+                zoomSize += 1f;
+            }
+        }
+
+        virtualCamera.m_Lens.OrthographicSize = zoomSize;
+
     }
 }
 
