@@ -7,7 +7,7 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.785D90A9" = "ScrollV"
+	"last_search.785D90A9" = "help"
 	"InspectorPreview.785D90A9" = "0"
 	"currentGroup.785D90A9" = "all"
 	"last_search.5A5D90A9" = ""
@@ -52,6 +52,8 @@ providers = {
 	}
 }
 recentSearches = [
+	"help"
+	"ScrollV"
 	"canvas"
 	"prefab bru"
 	"PlayM"
