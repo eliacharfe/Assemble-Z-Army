@@ -10,6 +10,8 @@ public class BuilidingConstruction : NetworkBehaviour
     [SerializeField] private CostumeSlider buldingConstructionSlider = null;
     public float constructionTime = 5f;
     [SerializeField] [SyncVar(hook =nameof(HandleConstructionUpdated))] float timePassed = 0;
+    [SerializeField] private Transform[] constructionPositions = null;
+    private List<Unit> unitsBuilding; 
 
     public event Action<float, float> ClientOnConstructionUpdated;
 
@@ -18,6 +20,7 @@ public class BuilidingConstruction : NetworkBehaviour
 
     private void Start()
     {
+        unitsBuilding = new List<Unit>(constructionPositions.Length);
         buldingConstructionSlider.resetSlider();
     }
 
@@ -68,6 +71,19 @@ public class BuilidingConstruction : NetworkBehaviour
         return buldingConstructionSlider.FillAmount();
     }
 
+    public Vector3 GetConstructionPoint()
+    {
+        int freePointIndex = GetFreePointIndex();
+        if ()
+        {
+
+        }
+    }
+
+    private int GetFreePointIndex()
+    {
+        //return unitsBuilding.Find(;
+    }
 
     private void HandleConstructionUpdated(float oldTime,float newTime)
     {

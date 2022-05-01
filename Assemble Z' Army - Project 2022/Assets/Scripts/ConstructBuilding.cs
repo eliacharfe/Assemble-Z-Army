@@ -81,7 +81,6 @@ public class ConstructBuilding : MonoBehaviour
         return Vector2.Distance(buildingTarget.transform.position, transform.position) < 50f;
     }
 
-
     // Intlize target building and allowing worker to move.
     public void ResetBuildingTarget()
     {

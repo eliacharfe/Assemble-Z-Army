@@ -140,7 +140,7 @@ public class RTSController : MonoBehaviour
             if (unit && unit.id == Macros.Units.WORKER)
             {
                 (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).SetBuildingTarget(building);
-                unit.MoveTo(hit.point);
+                unit.MoveTo(building.point);
             }
         }
         
