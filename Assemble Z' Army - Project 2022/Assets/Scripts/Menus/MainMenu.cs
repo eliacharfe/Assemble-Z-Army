@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject landingPagePanel = null;
 
+        [SerializeField] private GameObject logo = null;
+
       AudioPlayer audioPlayer;
 
      public void HostLobby()
@@ -14,6 +16,8 @@ public class MainMenu : MonoBehaviour
          FindObjectOfType<AudioPlayer>().PlayBtnClickClip();
 
          landingPagePanel.SetActive(false);
+
+         logo.SetActive(false);
 
          NetworkManager.singleton.StartHost();
 

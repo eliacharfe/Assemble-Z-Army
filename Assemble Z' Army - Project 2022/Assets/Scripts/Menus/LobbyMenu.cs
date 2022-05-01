@@ -11,6 +11,7 @@ public class LobbyMenu : MonoBehaviour
     [SerializeField] private GameObject lobbyUI = null;
     [SerializeField] private Button startGameButton = null;
     [SerializeField] private TMP_Text[] playersNamesText = new TMP_Text[4];
+    [SerializeField] private GameObject logo = null;
 
     AudioPlayer audioPlayer;
 
@@ -67,6 +68,8 @@ public class LobbyMenu : MonoBehaviour
     {
          audioPlayer.PlayBtnClickClip();
 
+         logo.SetActive(true);
+
         if (NetworkServer.active && NetworkClient.isConnected)
         {
             NetworkManager.singleton.StopHost();
@@ -77,5 +80,10 @@ public class LobbyMenu : MonoBehaviour
 
             SceneManager.LoadScene(0);
         }
+    }
+
+    void DeactivateLogo()
+    {
+        logo.SetActive(false);
     }
 }
