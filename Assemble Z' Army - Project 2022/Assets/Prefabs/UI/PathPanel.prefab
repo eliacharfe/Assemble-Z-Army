@@ -465,8 +465,9 @@ GameObject:
   - component: {fileID: 3196441174298492739}
   - component: {fileID: 3196441174298492741}
   - component: {fileID: 3196441174298492738}
+  - component: {fileID: 1987562622}
   m_Layer: 0
-  m_Name: ImageTemple
+  m_Name: TempleRecruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -529,6 +530,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1987562622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441174298492736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 18
 --- !u!1 &3196441174332156772
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,8 +629,9 @@ GameObject:
   - component: {fileID: 3196441174363392792}
   - component: {fileID: 3196441174363392794}
   - component: {fileID: 3196441174363392795}
+  - component: {fileID: 1643780072}
   m_Layer: 0
-  m_Name: ImageSpearery (1)
+  m_Name: SpearerySimpleHorse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,6 +694,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1643780072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441174363392793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 9
 --- !u!1 &3196441174388691853
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,8 +793,9 @@ GameObject:
   - component: {fileID: 3196441174405550358}
   - component: {fileID: 3196441174405550360}
   - component: {fileID: 3196441174405550361}
+  - component: {fileID: 1607933972}
   m_Layer: 0
-  m_Name: ImageArchery
+  m_Name: ArcheryRecruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,6 +858,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1607933972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441174405550359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
 --- !u!1 &3196441174411429036
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,8 +957,9 @@ GameObject:
   - component: {fileID: 3196441174441880851}
   - component: {fileID: 3196441174441880853}
   - component: {fileID: 3196441174441880850}
+  - component: {fileID: 1292562117}
   m_Layer: 0
-  m_Name: ImageSwordSmith (1)
+  m_Name: SwordSmithRecruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -979,6 +1022,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1292562117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441174441880848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 16
 --- !u!1 &3196441174459800788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,8 +1121,9 @@ GameObject:
   - component: {fileID: 3196441174483619250}
   - component: {fileID: 3196441174483619252}
   - component: {fileID: 3196441174483619253}
+  - component: {fileID: 1961455878}
   m_Layer: 0
-  m_Name: ImageCrossbow
+  m_Name: CrossbowRecruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1129,6 +1186,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1961455878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441174483619251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 7
 --- !u!1 &3196441174485028634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1290,8 +1360,9 @@ GameObject:
   - component: {fileID: 3196441174584408759}
   - component: {fileID: 3196441174584408761}
   - component: {fileID: 3196441174584408758}
+  - component: {fileID: 1916258216}
   m_Layer: 0
-  m_Name: ImageArmory
+  m_Name: ArmorySpearHorse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,6 +1425,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1916258216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441174584408756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 6
 --- !u!1 &3196441174619290565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,8 +1858,9 @@ GameObject:
   - component: {fileID: 3196441174787126586}
   - component: {fileID: 3196441174787126588}
   - component: {fileID: 3196441174787126589}
+  - component: {fileID: 702336143}
   m_Layer: 0
-  m_Name: ImageStable
+  m_Name: StableRecruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1838,6 +1923,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &702336143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441174787126587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 10
 --- !u!1 &3196441174812641612
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,6 +2368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   landingPagePanel: {fileID: 0}
   pathsTrainingPanel: {fileID: 2218105073418777163}
+  building: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
 --- !u!1 &3196441175025373391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2305,6 +2404,7 @@ RectTransform:
   - {fileID: 3196441175543349322}
   - {fileID: 3196441175728856619}
   - {fileID: 2218105071551687570}
+  - {fileID: 3207768671145587869}
   m_Father: {fileID: 2218105073418777160}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2542,8 +2642,9 @@ GameObject:
   - component: {fileID: 3196441175061267463}
   - component: {fileID: 3196441175061267465}
   - component: {fileID: 3196441175061267462}
+  - component: {fileID: 2087757090}
   m_Layer: 0
-  m_Name: ImageSpearery
+  m_Name: SpeareryRecruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2606,6 +2707,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2087757090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441175061267460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 8
 --- !u!1 &3196441175076413917
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,8 +2881,9 @@ GameObject:
   - component: {fileID: 3196441175213085926}
   - component: {fileID: 3196441175213085928}
   - component: {fileID: 3196441175213085929}
+  - component: {fileID: 1232267219}
   m_Layer: 0
-  m_Name: ImageStable (3)
+  m_Name: StableArcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2831,6 +2946,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1232267219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441175213085927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 13
 --- !u!1 &3196441175241946290
 GameObject:
   m_ObjectHideFlags: 0
@@ -4099,8 +4227,9 @@ GameObject:
   - component: {fileID: 3196441175571506709}
   - component: {fileID: 3196441175571506711}
   - component: {fileID: 3196441175571506708}
+  - component: {fileID: 1697969083}
   m_Layer: 0
-  m_Name: ImageStable (2)
+  m_Name: StableSwordman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4163,6 +4292,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1697969083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441175571506706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 11
 --- !u!1 &3196441175599969621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4249,8 +4391,9 @@ GameObject:
   - component: {fileID: 3196441175725626460}
   - component: {fileID: 3196441175725626462}
   - component: {fileID: 3196441175725626463}
+  - component: {fileID: 1156587626}
   m_Layer: 0
-  m_Name: ImageArchery (1)
+  m_Name: ArcherySimpleHorse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4313,6 +4456,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1156587626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441175725626461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 2
 --- !u!1 &3196441175728856616
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,8 +4606,9 @@ GameObject:
   - component: {fileID: 3196441175825010280}
   - component: {fileID: 3196441175825010282}
   - component: {fileID: 3196441175825010283}
+  - component: {fileID: 37422677}
   m_Layer: 0
-  m_Name: ImageArmory (5)
+  m_Name: ArmorySwordHorse2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4514,6 +4671,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &37422677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441175825010281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 5
 --- !u!1 &3196441175832121645
 GameObject:
   m_ObjectHideFlags: 0
@@ -4525,8 +4695,9 @@ GameObject:
   - component: {fileID: 3196441175832121644}
   - component: {fileID: 3196441175832121646}
   - component: {fileID: 3196441175832121647}
+  - component: {fileID: 947148189}
   m_Layer: 0
-  m_Name: ImageStable (1)
+  m_Name: StableSpearman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4589,6 +4760,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &947148189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441175832121645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 12
 --- !u!1 &3196441175849090776
 GameObject:
   m_ObjectHideFlags: 0
@@ -4600,8 +4784,9 @@ GameObject:
   - component: {fileID: 3196441175849090779}
   - component: {fileID: 3196441175849090781}
   - component: {fileID: 3196441175849090778}
+  - component: {fileID: 1751264775}
   m_Layer: 0
-  m_Name: ImageArmory (1)
+  m_Name: ArmorySwordHorse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4664,6 +4849,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1751264775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441175849090776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 5
 --- !u!1 &3196441175861107280
 GameObject:
   m_ObjectHideFlags: 0
@@ -5050,8 +5248,9 @@ GameObject:
   - component: {fileID: 3196441176109064184}
   - component: {fileID: 3196441176109064186}
   - component: {fileID: 3196441176109064187}
+  - component: {fileID: 277761658}
   m_Layer: 0
-  m_Name: ImageArmory (4)
+  m_Name: ArmorySpearHorse2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5114,6 +5313,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &277761658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441176109064185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 6
 --- !u!1 &3196441176122272356
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,8 +5337,9 @@ GameObject:
   - component: {fileID: 3196441176122272359}
   - component: {fileID: 3196441176122272361}
   - component: {fileID: 3196441176122272358}
+  - component: {fileID: 1627496519}
   m_Layer: 0
-  m_Name: ImageStable (4)
+  m_Name: StableSwordKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5189,6 +5402,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1627496519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441176122272356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 14
 --- !u!1 &3196441176127090176
 GameObject:
   m_ObjectHideFlags: 0
@@ -5650,8 +5876,9 @@ GameObject:
   - component: {fileID: 3196441176313625295}
   - component: {fileID: 3196441176313625329}
   - component: {fileID: 3196441176313625294}
+  - component: {fileID: 217605827}
   m_Layer: 0
-  m_Name: ImageStable (5)
+  m_Name: StableSpearKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5714,6 +5941,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &217605827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441176313625292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 15
 --- !u!1 &3196441176318915011
 GameObject:
   m_ObjectHideFlags: 0
@@ -5725,8 +5965,9 @@ GameObject:
   - component: {fileID: 3196441176318915010}
   - component: {fileID: 3196441176318915012}
   - component: {fileID: 3196441176318915013}
+  - component: {fileID: 2123655926}
   m_Layer: 0
-  m_Name: ImageSwordSmith
+  m_Name: SwordSmithSimpleHorse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5789,6 +6030,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2123655926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441176318915011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 17
 --- !u!1 &3196441176334290413
 GameObject:
   m_ObjectHideFlags: 0
@@ -5875,8 +6129,9 @@ GameObject:
   - component: {fileID: 3196441176337226827}
   - component: {fileID: 3196441176337226829}
   - component: {fileID: 3196441176337226826}
+  - component: {fileID: 787612434}
   m_Layer: 0
-  m_Name: ImageArmory (2)
+  m_Name: ArmorySwordman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5939,6 +6194,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &787612434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441176337226824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
 --- !u!1 &3196441176352376016
 GameObject:
   m_ObjectHideFlags: 0
@@ -6076,8 +6344,9 @@ GameObject:
   - component: {fileID: 3196441176356962209}
   - component: {fileID: 3196441176356962211}
   - component: {fileID: 3196441176356962208}
+  - component: {fileID: 1632610818}
   m_Layer: 0
-  m_Name: ImageArmory (3)
+  m_Name: ArmorySpearman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6140,6 +6409,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1632610818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196441176356962238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb77a6b6f4eb1da4798de96a1cc8dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 4
 --- !u!1 &3818784272482530469
 GameObject:
   m_ObjectHideFlags: 0
@@ -6215,3 +6497,109 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &1877117955
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3196441175025373390}
+    m_Modifications:
+    - target: {fileID: 3207768669593586818, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669593586818, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055361, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_Name
+      value: Tooltip
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055361, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.26041666
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -671.377
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -529.5856
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768669625055391, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768671028096698, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768671028096698, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768671509190986, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3207768671509190986, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+--- !u!4 &3207768671145587869 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3207768669625055390, guid: 14447024f42f40544a9b45f87443f7bb, type: 3}
+  m_PrefabInstance: {fileID: 1877117955}
+  m_PrefabAsset: {fileID: 0}

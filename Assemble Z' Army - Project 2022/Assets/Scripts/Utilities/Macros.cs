@@ -64,7 +64,36 @@ namespace Macros
         DIAMONDS = 100
     }
 
+    public enum TrainingUnitsInBuildings
+    {
+        NONE,
 
+        ARCHERY_RECRUIT,
+        ARCHERY_SIMPLE_HORSE,
+
+        ARMORY_SWORDMAN,
+        ARMORY_SPEARMAN,
+        ARMORY_SWORD_HORSE,
+        ARMORY_SPEAR_HORSE,
+
+        CROSSBOWERY_RECRUIT,
+
+        SPEARERY_RECRUIT,
+        SPEARERY_SIMPLE_HORSE,
+
+        STABLE_RECRUIT,
+        STABLE_SWORDMAN,
+        STABLE_SPEARMAN,
+        STABLE_ARCHER,
+        STABLE_SWORD_KNIGHT,
+        STABLE_SPEAR_KNIGHT,
+
+        SWORD_SMITH_RECRUIT,
+        SWORD_SMITH_SIMPLE_HORSE,
+
+        TEMPLE_RECRUIT
+
+    }
 
 
 

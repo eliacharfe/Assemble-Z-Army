@@ -380,6 +380,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4188947452048003122, guid: 5e77728ad2e30bf41b70b2d5a2f7e54a, type: 3}
+      propertyPath: posX
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 4188947452048003123, guid: 5e77728ad2e30bf41b70b2d5a2f7e54a, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -39627,8 +39631,8 @@ MonoBehaviour:
   syncInterval: 0.1
   timer: 200
   currentPhase: 1
-  phaseOneTime: 30
-  phaseTwoTime: 30
+  phaseOneTime: 50
+  phaseTwoTime: 60
   BuildingCanvasPanel: {fileID: 826518342}
   phaseOneEndedCanvas: {fileID: 796955040}
   phaseTwoEndedCanvas: {fileID: 796955039}

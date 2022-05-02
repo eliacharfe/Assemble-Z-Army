@@ -8,6 +8,9 @@ public class Tooltip : MonoBehaviour
      private static Tooltip instance;
 
     [SerializeField] private Camera uiCamera;
+    [SerializeField] private float posX;
+    [SerializeField] private float posY;
+
 
     private Text tooltipText;
     private RectTransform backgroundRectTransform;
@@ -32,7 +35,7 @@ public class Tooltip : MonoBehaviour
     {
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(),
-         new Vector2(Input.mousePosition.x - 120f,Input.mousePosition.y) , uiCamera , out localPoint);
+         new Vector2(Input.mousePosition.x - posX,Input.mousePosition.y - posY) , uiCamera , out localPoint);
 
          transform.localPosition = localPoint;
     }

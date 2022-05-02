@@ -19,6 +19,7 @@ public abstract class Attacker : NetworkBehaviour
     [SerializeField] private float attackTime = 1f;
     [SerializeField] private float range = 1f;
     [SerializeField] protected float damage = 5;
+    [SerializeField] protected float defense = 5;
 
     private float time = 0;
 
@@ -28,6 +29,7 @@ public abstract class Attacker : NetworkBehaviour
         attackTime = GetComponent<Unit>().SpeedAttack.BaseValue;
         damage = GetComponent<Unit>().Attack.BaseValue;
         range = GetComponent<Unit>().ReachDistance.BaseValue;
+        defense = GetComponent<Unit>().Defense.BaseValue;
     }
 
     [ServerCallback]
@@ -55,7 +57,8 @@ public abstract class Attacker : NetworkBehaviour
             if (time < attackTime)
             {
                 time += Time.deltaTime;
-            }else
+            }
+            else
             {
                 time = 0;
                 reachedTarget = true;

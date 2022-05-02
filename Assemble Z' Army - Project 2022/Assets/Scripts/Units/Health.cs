@@ -50,24 +50,29 @@ public class Health : NetworkBehaviour // NetworkBehavior
         {
             createDamagePopup(true);
             return;
-        }      
-
-        currHealth = Mathf.Max(currHealth - damageAmount, 0);
-
-        if (currHealth <= 10)
-        {
-            createDamagePopup(true);
-        }
-        else
-        {
-            createDamagePopup(false);
         }
 
-        GetComponent<Animator>().SetBool("gotHit", true);
-        if (currHealth > 0)
-            audioPlayer.PlayDamageClip();
+            int def = (int)GetComponent<Unit>().Defense.BaseValue;
 
-        ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
+        if (damageAmount > def)
+        {
+            currHealth = Mathf.Max(currHealth - damageAmount + def, 0);
+
+            if (currHealth <= 10)
+            {
+                createDamagePopup(true);
+            }
+            else
+            {
+                createDamagePopup(false);
+            }
+
+            GetComponent<Animator>().SetBool("gotHit", true);
+            if (currHealth > 0)
+                audioPlayer.PlayDamageClip();
+
+            ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
+        }
     }
 
 
@@ -80,8 +85,9 @@ public class Health : NetworkBehaviour // NetworkBehavior
     void InstantiatePopupDamage(bool isCriticalHit)
     {
         DamagePopup popUp = DamagePopup.Create(damagePopup,
-                   new Vector3(transform.position.x, transform.position.y + 3f, 0f),
+                   new Vector3(transform.position.x-2, transform.position.y + 3f, 0f),
                    (int)currHealth,
+                   gameObject.transform.localScale.x,
                    isCriticalHit);
         NetworkServer.Spawn(popUp.gameObject);
 
