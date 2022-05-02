@@ -24,8 +24,6 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     AudioPlayer audioPlayer;
 
-    [SerializeField] private Transform buildingPopup;
-
     string popupCostBuilding;
 
     public Macros.Buildings id;
@@ -98,19 +96,19 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
             
-            BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
+            // BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("onMouseEnter");
+        Debug.Log("onPointerEnter");
         Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
     }
 
     public void OnPointerOver(PointerEventData eventData)
     {
-        Debug.Log("onMouseOver");
+        Debug.Log("onPointerOver");
         Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
     }
 
