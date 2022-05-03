@@ -60,6 +60,8 @@ MonoBehaviour:
   btnClickVolume: 0.4
   btnClickErrorClip: {fileID: 8300000, guid: c16e2b74e892b4c4aa5721926046f3bb, type: 3}
   btnClickErrorVolume: 0.5
+  constructionClip: {fileID: 8300000, guid: 5f9fe29e32e4c0b4bb1385fd0d80705e, type: 3}
+  constructionVolume: 0.2
 --- !u!82 &8753041854152823015
 AudioSource:
   m_ObjectHideFlags: 0

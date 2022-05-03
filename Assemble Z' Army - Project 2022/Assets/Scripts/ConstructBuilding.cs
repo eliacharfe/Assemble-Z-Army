@@ -26,7 +26,7 @@ public class ConstructBuilding : MonoBehaviour
         }
 
         if(!isBuilding) {
-            //GetComponent<Animator>().SetBool("isAttacking", false);
+            GetComponent<Animator>().SetBool("isAttacking", false);
             return; 
         }
 
@@ -45,9 +45,9 @@ public class ConstructBuilding : MonoBehaviour
 
             unit.CmdStopMove();
 
-            //unit.CmdBuildAnimation();
+            unit.CmdBuildAnimation();
 
-            //GetComponent<Animator>().SetBool("isAttacking", true);
+            GetComponent<Animator>().SetBool("isAttacking", true);
         }
 
     }
@@ -90,7 +90,7 @@ public class ConstructBuilding : MonoBehaviour
         time = 0;
         Unit unit = gameObject.GetComponent<Unit>() as Unit;
         unit.ContinutMove();
-        //GetComponent<Animator>().SetBool("isAttacking", false);
+        GetComponent<Animator>().SetBool("isAttacking", false);
     }
 
 
@@ -98,6 +98,11 @@ public class ConstructBuilding : MonoBehaviour
     public void SetBuildingTarget(BuilidingConstruction building)
     {
         this.buildingTarget = building;
+    }
+
+    public void BuildingClip()
+    {
+        FindObjectOfType<AudioPlayer>().PlayBuildingClip();
     }
 
 }

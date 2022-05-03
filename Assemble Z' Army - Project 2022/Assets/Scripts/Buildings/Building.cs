@@ -265,7 +265,7 @@ public class Building : NetworkBehaviour
         {
             waitingUnit.Add(unit);
 
-            return enterPoint.position + new Vector3(-20 * (waitingUnit.Count - 1), 0, 0);
+            return enterPoint.position + new Vector3(-5 * (waitingUnit.Count - 1), 0, 0);
         }
 
         return unit.transform.position;
@@ -282,7 +282,7 @@ public class Building : NetworkBehaviour
 
             for (int i = 0; i < waitingUnit.Count; i++)
             {
-                waitingUnit[i].MoveTo(enterPoint.position + new Vector3(-20 * i, 0, 0));
+                waitingUnit[i].MoveTo(enterPoint.position + new Vector3(-5 * i, 0, 0));
             }
         }
     }

@@ -36,6 +36,10 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip btnClickErrorClip;
     [SerializeField] [Range(0f, 1f)] float btnClickErrorVolume = 1f;
 
+    [Header("Builder Hit")]
+    [SerializeField] AudioClip constructionClip;
+    [SerializeField] [Range(0f, 1f)] float constructionVolume = 1f;
+
 
     public void PlayShootingClip()
     {
@@ -71,6 +75,11 @@ public class AudioPlayer : MonoBehaviour
     {
         PlayClip(btnClickErrorClip, btnClickErrorVolume);
     }
+
+    public void PlayBuildingClip()
+    {
+        PlayClip(constructionClip, constructionVolume);
+    }    
 
     public void StopHorseGallopClip()
     {
