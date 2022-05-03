@@ -13,18 +13,18 @@ public class CostTraining : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     private Dictionary<Macros.TrainingUnitsInBuildings, List<int>> costsTrainingUnitsInBuildings =
      new Dictionary<Macros.TrainingUnitsInBuildings, List<int>>();
 
-   //  ResourcesCostTraining costs = null;
+    //  ResourcesCostTraining costs = null;
 
     void Start()
     {
         InitCostsTrainingUnitInBuilding();
 
-      //  costs = FindObjectOfType<ResourcesCostTraining>();
+        //  costs = FindObjectOfType<ResourcesCostTraining>();
 
-          popupCostBuilding = "Wood: " + GetCostsTrainingUnitInBuilding(id)[0].ToString() + '\n' +
+        popupCostBuilding = "Wood: " + GetCostsTrainingUnitInBuilding(id)[0].ToString() + '\n' +
                             "Metal: " + GetCostsTrainingUnitInBuilding(id)[1].ToString() + '\n' +
                             "Gold: " + GetCostsTrainingUnitInBuilding(id)[2].ToString() + '\n' +
-                            "Diamonds: " + GetCostsTrainingUnitInBuilding(id)[3].ToString() + '\n';
+                            "Diam's: " + GetCostsTrainingUnitInBuilding(id)[3].ToString() + '\n';
 
         // popupCostBuilding = "Wood: " + costs.getCostsTrainingUnitInBuilding(id)[0].ToString() + '\n' +
         //                     "Metal: " + costs.getCostsTrainingUnitInBuilding(id)[1].ToString() + '\n' +
@@ -32,10 +32,8 @@ public class CostTraining : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         //                     "Diamonds: " + costs.getCostsTrainingUnitInBuilding(id)[3].ToString() + '\n';
     }
 
-    // Update is called once per frame
     void Update()
     {
-
     }
 
     public void OnPointerEnter(PointerEventData eventData)

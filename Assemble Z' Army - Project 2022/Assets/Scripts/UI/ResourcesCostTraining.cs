@@ -6,10 +6,10 @@ public class ResourcesCostTraining : MonoBehaviour
 {
     private static ResourcesCostTraining instance;
 
-     private Dictionary<Macros.TrainingUnitsInBuildings, List<int>> costsTrainingUnitsInBuildings =
-     new Dictionary<Macros.TrainingUnitsInBuildings, List<int>>();
+    private Dictionary<Macros.TrainingUnitsInBuildings, List<int>> costsTrainingUnitsInBuildings =
+    new Dictionary<Macros.TrainingUnitsInBuildings, List<int>>();
 
-     private void Awake()
+    private void Awake()
     {
         instance = this;
         InitCostsTrainingUnitInBuilding();
@@ -18,12 +18,12 @@ public class ResourcesCostTraining : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public static List<int> getCostsTrainingUnitInBuilding_Static(Macros.TrainingUnitsInBuildings id)
     {
-       return instance.getCostsTrainingUnitInBuilding(id);
+        return instance.getCostsTrainingUnitInBuilding(id);
     }
 
     public List<int> getCostsTrainingUnitInBuilding(Macros.TrainingUnitsInBuildings id)
@@ -33,7 +33,7 @@ public class ResourcesCostTraining : MonoBehaviour
     }
 
 
-     private void InitCostsTrainingUnitInBuilding()
+    private void InitCostsTrainingUnitInBuilding()
     {
         costsTrainingUnitsInBuildings.Add(Macros.TrainingUnitsInBuildings.ARCHERY_RECRUIT, new List<int>());
         costsTrainingUnitsInBuildings[Macros.TrainingUnitsInBuildings.ARCHERY_RECRUIT].Add(15);

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Tooltip : MonoBehaviour
 {
-     private static Tooltip instance;
+    private static Tooltip instance;
 
     [SerializeField] private Camera uiCamera;
 
@@ -32,9 +32,9 @@ public class Tooltip : MonoBehaviour
     {
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(),
-         new Vector2(Input.mousePosition.x ,Input.mousePosition.y + 105f) , uiCamera , out localPoint);
+         new Vector2(Input.mousePosition.x, Input.mousePosition.y + 105f), uiCamera, out localPoint);
 
-         transform.localPosition = localPoint;
+        transform.localPosition = localPoint;
     }
 
     private void ShowTooltip(string tooltipString, string nameBuilding)
