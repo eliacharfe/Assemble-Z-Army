@@ -62,8 +62,8 @@ public class CameraInputSystem : NetworkBehaviour
     {
         startCameraPos = playerCameraTransform.position;
 
-        confinerBoundX = 120;
-        confinerBoundY = 120;
+        confinerBoundX = 118;
+        confinerBoundY = 118;
         screenXLimits = new Vector3(0 - confinerBoundX, 0 + confinerBoundX, transform.position.z);
         screenZLimits = new Vector3(0 - confinerBoundY, 0 + confinerBoundY, transform.position.z);
     }
@@ -152,6 +152,11 @@ public class CameraInputSystem : NetworkBehaviour
             if (zoomSize >= MAX_ZOOM_IN)
             {
                 zoomSize -= 1f;
+                screenXLimits.x -= 1.8f;
+                screenXLimits.y += 1.8f;
+
+                screenZLimits.x -= 0.8f;
+                screenZLimits.y += 0.8f;
             }
         }
 
@@ -160,6 +165,11 @@ public class CameraInputSystem : NetworkBehaviour
             if (zoomSize <= MAX_ZOOM_OUT)
             {
                 zoomSize += 1f;
+                screenXLimits.x += 1.8f;
+                screenXLimits.y -= 1.8f;
+
+                screenZLimits.x += 0.8f;
+                screenZLimits.y -= 0.8f;
             }
         }
 
