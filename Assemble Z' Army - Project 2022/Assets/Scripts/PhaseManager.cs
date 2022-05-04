@@ -19,17 +19,21 @@ public class PhaseManager : NetworkBehaviour
     [SerializeField] GameObject phaseOneEndedCanvas = null;
     [SerializeField] GameObject phaseTwoEndedCanvas = null;
 
-    [SerializeField] RtsNetworkManager rtsNetworkManager;
-
     public TextMeshProUGUI timerText;
-
+    public TextMeshProUGUI currentPhaseDisplay;
 
     public override void OnStartServer()
     {
         base.OnStartServer();
         timer = phaseOneTime;
     }
-        
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        Destroy(this);
+    }
+
 
     public void SetTimer(bool value)
     {
@@ -39,8 +43,17 @@ public class PhaseManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        phaseOneEndedCanvas.SetActive(false);
-        phaseTwoEndedCanvas.SetActive(false);
+        if(phaseOneEndedCanvas)
+            phaseOneEndedCanvas.SetActive(false);
+
+        if (phaseTwoEndedCanvas)
+            phaseTwoEndedCanvas.SetActive(false);
+
+        if(currentPhase == Constents.PHASE_THREE)
+        {
+            currentPhaseDisplay.SetText("Battle Phase");
+            startTimer = false;
+        }
     }
 
        // Update is called once per frame
@@ -66,7 +79,8 @@ public class PhaseManager : NetworkBehaviour
 
         }
 
-        timerText.text = Mathf.Floor(Mathf.Max(timer - 5,0)) + "";
+        if(timerText)
+            timerText.text = Mathf.Floor(Mathf.Max(timer - 5,0)) + "";
 
     }
 
@@ -82,8 +96,6 @@ public class PhaseManager : NetworkBehaviour
                 break;
             case Constents.PHASE_THREE:
                 break;
-
-
             default:
                 break;
         }
@@ -123,6 +135,7 @@ public class PhaseManager : NetworkBehaviour
         startTimer = true;
         RpcRemovePhaseOneEndCanvas();
         RpcRemoveBuildinPanel();
+
     }
 
     public void SetPhaseThree()
@@ -150,6 +163,7 @@ public class PhaseManager : NetworkBehaviour
     public void RpcRemovePhaseOneEndCanvas()
     {
         phaseOneEndedCanvas.SetActive(false);
+        currentPhaseDisplay.SetText("Preperation Phase");
     }
 
     [ClientRpc]
