@@ -322,9 +322,9 @@ public class Unit : MonoBehaviour
         {
             Color tempColor = getTeamColor();
             tempColor.a = 0.2f;
-            halo.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
+//            halo.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
             tempColor.a = 0.1f;
-            haloBack.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
+            //haloBack.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
         }
 
         circleMinimapIcon.gameObject.GetComponent<SpriteRenderer>().color = getTeamColor();

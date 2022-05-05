@@ -20,16 +20,13 @@ public class CostTraining : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         InitCostsTrainingUnitInBuilding();
 
         //  costs = FindObjectOfType<ResourcesCostTraining>();
-
-        popupCostBuilding = "Wood: " + GetCostsTrainingUnitInBuilding(id)[0].ToString() + '\n' +
-                            "Metal: " + GetCostsTrainingUnitInBuilding(id)[1].ToString() + '\n' +
-                            "Gold: " + GetCostsTrainingUnitInBuilding(id)[2].ToString() + '\n' +
-                            "Diam's: " + GetCostsTrainingUnitInBuilding(id)[3].ToString() + '\n';
-
-        // popupCostBuilding = "Wood: " + costs.getCostsTrainingUnitInBuilding(id)[0].ToString() + '\n' +
-        //                     "Metal: " + costs.getCostsTrainingUnitInBuilding(id)[1].ToString() + '\n' +
-        //                     "Gold: " + costs.getCostsTrainingUnitInBuilding(id)[2].ToString() + '\n' +
-        //                     "Diamonds: " + costs.getCostsTrainingUnitInBuilding(id)[3].ToString() + '\n';
+        if (id != TrainingUnitsInBuildings.NONE)
+        {
+            popupCostBuilding = "Wood: " + GetCostsTrainingUnitInBuilding(id)[0].ToString() + '\n' +
+                                "Metal: " + GetCostsTrainingUnitInBuilding(id)[1].ToString() + '\n' +
+                                "Gold: " + GetCostsTrainingUnitInBuilding(id)[2].ToString() + '\n' +
+                                "Diam's: " + GetCostsTrainingUnitInBuilding(id)[3].ToString() + '\n';
+        }
     }
 
     void Update()
@@ -62,6 +59,56 @@ public class CostTraining : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public List<int> GetCostsTrainingUnitInBuilding(Macros.TrainingUnitsInBuildings id)
     {
         return costsTrainingUnitsInBuildings[id];
+    }
+
+    public List<int> GetCostsTrainingUnitInBuildingByIds(Macros.Units idUnit, Macros.Buildings idBuilding)
+    {
+        if (idUnit == Units.RECRUIT && idBuilding == Buildings.ARCHERY_FIELD)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.ARCHERY_RECRUIT];
+        else if (idUnit == Units.RECRUIT && idBuilding == Buildings.CROSSBOW_FIELD)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.CROSSBOWERY_RECRUIT];
+        else if (idUnit == Units.RECRUIT && idBuilding == Buildings.TEMPLE)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.TEMPLE_RECRUIT];
+        else if (idUnit == Units.RECRUIT && idBuilding == Buildings.STABLE)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.STABLE_RECRUIT];
+        else if (idUnit == Units.RECRUIT && idBuilding == Buildings.SWORD_SMITH)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.SWORD_SMITH_RECRUIT];
+        else if (idUnit == Units.RECRUIT && idBuilding == Buildings.SPEAR_SMITH)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.SPEARERY_RECRUIT];
+
+        else if (idUnit == Units.SIMPLE_HORSE && idBuilding == Buildings.SWORD_SMITH)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.SWORD_SMITH_SIMPLE_HORSE];
+        else if (idUnit == Units.SIMPLE_HORSE && idBuilding == Buildings.ARCHERY_FIELD)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.ARCHERY_SIMPLE_HORSE];
+        else if (idUnit == Units.SIMPLE_HORSE && idBuilding == Buildings.SPEAR_SMITH)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.SPEARERY_SIMPLE_HORSE];
+
+        else if (idUnit == Units.ARCHER && idBuilding == Buildings.STABLE)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.STABLE_ARCHER];
+
+        else if (idUnit == Units.SWORDMAN && idBuilding == Buildings.STABLE)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.STABLE_SWORDMAN];
+        else if (idUnit == Units.SWORDMAN && idBuilding == Buildings.ARMORY)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.ARMORY_SWORDMAN];
+
+        else if (idUnit == Units.SPEARMAN && idBuilding == Buildings.STABLE)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.STABLE_SPEARMAN];
+        else if (idUnit == Units.SPEARMAN && idBuilding == Buildings.ARMORY)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.ARMORY_SPEARMAN];
+
+        else if (idUnit == Units.SWORD_HORSE && idBuilding == Buildings.ARMORY)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.ARMORY_SWORD_HORSE];
+
+        else if (idUnit == Units.SPEAR_HORSE && idBuilding == Buildings.ARMORY)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.ARMORY_SPEAR_HORSE];
+
+        else if (idUnit == Units.SWORD_KNIGHT && idBuilding == Buildings.STABLE)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.STABLE_SWORD_KNIGHT];
+
+        else if (idUnit == Units.SPEAR_KNIGHT && idBuilding == Buildings.STABLE)
+            return costsTrainingUnitsInBuildings[TrainingUnitsInBuildings.STABLE_SPEAR_KNIGHT];
+            
+        return null;
     }
 
     private void InitCostsTrainingUnitInBuilding()

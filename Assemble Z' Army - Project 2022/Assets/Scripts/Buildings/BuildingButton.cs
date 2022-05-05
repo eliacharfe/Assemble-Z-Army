@@ -8,7 +8,7 @@ using UnityEngine.AI;
 using Mirror;
 using Macros;
 
-public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Building building = null;
 
@@ -21,6 +21,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private float navMeshZAxis;
 
     ResourcesPlayer resourcesPlayer = null;
+
+    RTSController rts = null;
 
     AudioPlayer audioPlayer;
 
@@ -38,6 +40,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (player) {
             player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         }
+
+        rts = FindObjectOfType<RTSController>();
 
         resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
         building.InitiateCosts();
@@ -103,7 +107,16 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("onPointerEnter");
-        Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
+        //Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
+
+        List<Macros.Units> units = rts.GetIdsUnits();
+
+        TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);
+    }
+
+     public void OnPointerExit(PointerEventData eventData)
+    {
+        TooltipInfoUnitBuildingCost.HideTooltip_Static();
     }
 
     public void OnPointerOver(PointerEventData eventData)
@@ -168,4 +181,5 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         return true;
     }
 
+   
 }

@@ -17,6 +17,8 @@ public class RTSController : MonoBehaviour
 
     private int LayerMaskDetectionArea;
 
+    private List<Macros.Units> idsUnits;
+
     private void Awake()
     {
         selectedUnits = new List<Unit>();
@@ -47,15 +49,8 @@ public class RTSController : MonoBehaviour
         {
             GiveMovmentCommand();
         }
-
-        // foreach (Unit unit in selectedUnits)
-        // {
-        //     if (unit.ReachedDestination())
-        //     {
-        //         unit.StopMove();
-        //         // unit.StopAnimation();
-        //     }
-        // }
+        
+       
     }
 
     //--------------------------------- 
@@ -134,6 +129,19 @@ public class RTSController : MonoBehaviour
                 unit.MoveTo(building.EnterWaitingRecruitment(unit));
             }
         }
+        
+    }
+
+    public List<Macros.Units> GetIdsUnits()
+    {
+        idsUnits = new List<Macros.Units>();
+
+        foreach (Unit unit in selectedUnits)
+        {
+            idsUnits.Add(unit.id);
+        }
+
+        return idsUnits;
     }
 
 
