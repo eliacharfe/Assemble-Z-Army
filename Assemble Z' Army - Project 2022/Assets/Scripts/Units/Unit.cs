@@ -50,6 +50,9 @@ public class Unit : MonoBehaviour
 
     [SerializeField] private GameObject circleMinimapIcon;
 
+    private int LayerMaskDetectionArea;
+    private bool isHover = false;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -85,12 +88,23 @@ public class Unit : MonoBehaviour
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
             transform.localScale.z);
         }
+
+        LayerMaskDetectionArea = LayerMask.GetMask("DetectionAttackArea");
     }
 
 
     //--------------------------
     private void Update()
     {
+        if (isHover)
+        {
+            SetSpritesOver();
+        }
+        else
+        {
+            ResetSpritesOver();
+        }
+
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
         if (!agent.hasPath)
@@ -148,20 +162,81 @@ public class Unit : MonoBehaviour
         }
     }
 
-    // void OnMouseOver()
-    // {
-    //     onSelected.Invoke();
-    // }
+    private void OnMouseEnter()
+    {
+        Debug.Log("mouse enter");
+        // gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.grey;
+        //SetSpritesOver();
+        /**/
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                                                      Vector2.zero, 0, ~LayerMaskDetectionArea);
+        // print("hit:" + hit.collider);
+        // print("this=" + GetComponent<CapsuleCollider2D>());
+        bool hasDetection = transform.Find("DetectionAttackArea");
 
-    // // void OnMouseEnter()
-    // // {
-    // //    onSelected.Invoke();
-    // // }
+        if (!hasDetection)
+        {
+            isHover = true;
 
-    // void OnMouseExit()
-    // {
-    //    onDeselected.Invoke();
-    // }
+        }
+        else if (hit.collider && hit.collider == GetComponent<CapsuleCollider2D>())
+        {
+            isHover = true;
+        }
+        else
+        {
+            isHover = false;
+        }
+        /**/
+
+    }
+
+    void OnMouseOver()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
+                                                 Vector2.zero, 0, ~LayerMaskDetectionArea);
+
+        bool hasDetection = transform.Find("DetectionAttackArea");
+
+        if (!hasDetection)
+        {
+            isHover = true;
+
+        }
+        else if (hit.collider && hit.collider == GetComponent<CapsuleCollider2D>())
+        {
+            isHover = true;
+        }
+        else
+        {
+            isHover = false;
+        }
+    }
+
+    void OnMouseExit()
+    {
+        isHover = false;
+    }
+
+    private void SetSpritesOver()
+    {
+        Component[] spritsRenderer = gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer sprite in spritsRenderer)
+        {
+            if (sprite.color == Color.white)
+                sprite.color = Color.grey;
+        }
+    }
+
+    private void ResetSpritesOver()
+    {
+        Component[] spritsRenderer = gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer sprite in spritsRenderer)
+            if (sprite.color == Color.grey)
+                sprite.color = Color.white;
+    }
 
 
     //---------------------
@@ -322,7 +397,7 @@ public class Unit : MonoBehaviour
         {
             Color tempColor = getTeamColor();
             tempColor.a = 0.2f;
-//            halo.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
+            //            halo.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
             tempColor.a = 0.1f;
             //haloBack.gameObject.GetComponent<SpriteRenderer>().color = tempColor;
         }

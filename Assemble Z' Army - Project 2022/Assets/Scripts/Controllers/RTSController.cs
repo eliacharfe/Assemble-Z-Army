@@ -50,8 +50,6 @@ public class RTSController : MonoBehaviour
         {
             GiveMovmentCommand();
         }
-
-
     }
 
     //--------------------------------- 

@@ -38,7 +38,7 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
 
     private Vector3 startPos;
 
-    CostTraining costTraining = null;
+    ResourcesPlayer resourcesPlayer = null;
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
 
         startPos = transform.position;
 
-        costTraining = GetComponent<CostTraining>();
+        resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
 
         HideTooltip();
     }
@@ -58,24 +58,10 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
     {
         gameObject.SetActive(true);
         background.gameObject.SetActive(true);
-        float textPaddingSize = 5f;
 
         Reset();
 
         CreateNewInfoTooltip(units, idBuilding);
-
-        if (textInfo.text == EMPTY)
-        {
-            background.gameObject.SetActive(false);
-            return;
-        }
-
-        Vector2 backgroundSize = new Vector2(textInfo.preferredWidth + textPaddingSize * 10f + SIZE_IMAGE * 7,
-         360f);
-        //  heightSize + textPaddingSize * 10f);
-        background.sizeDelta = backgroundSize;
-
-        textInfo.text = EMPTY;
     }
 
     private void Reset()
@@ -95,12 +81,13 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
     {
         int index = 1;
         float heightSize = 0f;
+        float textPaddingSize = 5f;
         List<Macros.Units> idsUnits = new List<Units>();
 
         foreach (Units unit in units)
         {
             List<int> Costs = new List<int>();
-            Costs = costTraining.GetCostsTrainingUnitInBuildingByIds(unit, idBuilding);
+            Costs = resourcesPlayer.GetCostsTrainingUnitInBuildingByIds(unit, idBuilding);
 
             if (Costs != null && !idsUnits.Contains(unit))
             {
@@ -109,7 +96,7 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
                 string costsTextString =   "W-" + Costs[0].ToString() +
                                          ", M-" + Costs[1].ToString() +
                                          ", G-" + Costs[2].ToString() +
-                                         ", D-" + Costs[3].ToString(); /* ToStringUnit(unit) + ": "*/  
+                                         ", D-" + Costs[3].ToString(); /* ToStringUnit(unit) + ": "*/
 
                 CreateText(costsTextString, new Vector3(startPos.x + SIZE_IMAGE * 4, startPos.y + (index * SIZE_IMAGE) - 10f, 0));
 
@@ -129,6 +116,20 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
                 ++index;
             }
         }
+
+
+        if (textInfo.text == EMPTY)
+        {
+            background.gameObject.SetActive(false);
+            return;
+        }
+
+        Vector2 backgroundSize = new Vector2(textInfo.preferredWidth + textPaddingSize * 10f + SIZE_IMAGE * 7,
+         360f);
+        //  heightSize + textPaddingSize * 10f);
+        background.sizeDelta = backgroundSize;
+
+        textInfo.text = EMPTY;
     }
 
     private void CreateText(string costsTextString, Vector3 position)

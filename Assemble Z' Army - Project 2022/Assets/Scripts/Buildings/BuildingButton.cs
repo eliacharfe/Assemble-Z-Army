@@ -22,7 +22,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     ResourcesPlayer resourcesPlayer = null;
 
-    RTSController rts = null;
+    RTSController rtsController = null;
 
     AudioPlayer audioPlayer;
 
@@ -41,7 +41,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
             player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         }
 
-        rts = FindObjectOfType<RTSController>();
+        rtsController = FindObjectOfType<RTSController>();
 
         resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
         building.InitiateCosts();
@@ -99,8 +99,6 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         if (resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
         {
             Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
-            
-            // BuildingPricePopup.Create(buildingPopup, mousePos, building.getCostBuilding());
         }
     }
 
@@ -109,7 +107,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         Debug.Log("onPointerEnter");
         //Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
 
-        List<Macros.Units> units = rts.GetIdsUnits();
+        List<Macros.Units> units = rtsController.GetIdsUnits();
 
         TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);
     }
