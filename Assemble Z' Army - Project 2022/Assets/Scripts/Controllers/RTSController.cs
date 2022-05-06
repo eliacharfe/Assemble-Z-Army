@@ -12,6 +12,7 @@ public class RTSController : MonoBehaviour
     private Vector2 startPosition;
 
     [SerializeField] private Transform selectionAreaTransform;
+    [SerializeField] ParticleSystem pointerEffect;
 
     AudioPlayer audioPlayer;
 
@@ -49,8 +50,8 @@ public class RTSController : MonoBehaviour
         {
             GiveMovmentCommand();
         }
-        
-       
+
+
     }
 
     //--------------------------------- 
@@ -67,7 +68,7 @@ public class RTSController : MonoBehaviour
         {
             buildingToConstruct = hit.collider.gameObject.GetComponent<BuilidingConstruction>();
             building = hit.collider.gameObject.GetComponent<Building>();
-            targetable = hit.collider.gameObject.GetComponent<Targetable>();    
+            targetable = hit.collider.gameObject.GetComponent<Targetable>();
         }
 
         if (buildingToConstruct && buildingToConstruct.enabled)
@@ -129,7 +130,7 @@ public class RTSController : MonoBehaviour
                 unit.MoveTo(building.EnterWaitingRecruitment(unit));
             }
         }
-        
+
     }
 
     public List<Macros.Units> GetIdsUnits()
@@ -171,6 +172,12 @@ public class RTSController : MonoBehaviour
         {
             ClearPreviousCommands(unit);
             unit.MoveTo(targetPosList[targetPosIndex]);
+
+            if (pointerEffect != null)
+            {
+                ParticleSystem instance = Instantiate(pointerEffect, targetPosList[targetPosIndex], Quaternion.identity);
+                Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
+            }
 
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
 

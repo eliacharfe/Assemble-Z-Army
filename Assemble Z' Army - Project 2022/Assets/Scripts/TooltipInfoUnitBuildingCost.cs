@@ -54,65 +54,15 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
         HideTooltip();
     }
 
-    private void Update()
-    {
-        // background.transform.position = startPos;
-        // textInfo.transform.position = startPos;
-        // textInfoChange.transform.position = startPos;
-    }
-
     private void ShowTooltip(List<Units> units, Macros.Buildings idBuilding)
     {
         gameObject.SetActive(true);
         background.gameObject.SetActive(true);
-        int i = 1;
-        float heightSize = 0f;
         float textPaddingSize = 5f;
 
         Reset();
 
-        foreach (Units unit in units)
-        {
-            List<int> Costs = new List<int>();
-            Costs = costTraining.GetCostsTrainingUnitInBuildingByIds(unit, idBuilding);
-
-            if (Costs != null)
-            {
-                textInfo.text += /* ToStringUnit(unit) + ": "*/
-                               "W-" + Costs[0].ToString()
-                          + ", M-" + Costs[1].ToString()
-                          + ", G-" + Costs[2].ToString()
-                          + ", D-" + Costs[3].ToString() + '\n';
-
-                GameObject newText = Instantiate(textInfo.gameObject);
-                newText.transform.position = new Vector3(startPos.x + SIZE_IMAGE * 4, startPos.y + (i * SIZE_IMAGE) - 10f, 0);
-                newText.transform.parent = transform;
-                newText.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
-                newText.GetComponent<RectTransform>().SetParent(gameObject.transform);
-                newText.name = TEXT;
-
-                newText.GetComponent<Text>().text = /* ToStringUnit(unit) + ": "*/
-                              "W - " + Costs[0].ToString()
-                          + ", M - " + Costs[1].ToString()
-                          + ", G - " + Costs[2].ToString()
-                          + ", D - " + Costs[3].ToString();
-
-                Image imageBefore = CreateImage(new Vector3(startPos.x + SIZE_IMAGE, startPos.y + (i * SIZE_IMAGE), 0),
-                                                SIZE_IMAGE);
-                imageBefore.sprite = GetSpriteImage(unit);
-
-                Image imageArrow = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 2, startPos.y + (i * SIZE_IMAGE)),
-                                               SIZE_IMAGE / 2);
-                imageArrow.sprite = arrowImage;
-
-                Image imageAfter = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 3, startPos.y + (i * SIZE_IMAGE)),
-                                               SIZE_IMAGE);
-                imageAfter.sprite = GetSpriteImprovementUnit(unit, idBuilding);
-
-                heightSize += (i * SIZE_IMAGE);
-                ++i;
-            }
-        }
+        CreateNewInfoTooltip(units, idBuilding);
 
         if (textInfo.text == EMPTY)
         {
@@ -121,7 +71,7 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
         }
 
         Vector2 backgroundSize = new Vector2(textInfo.preferredWidth + textPaddingSize * 10f + SIZE_IMAGE * 7,
-         350f);
+         360f);
         //  heightSize + textPaddingSize * 10f);
         background.sizeDelta = backgroundSize;
 
@@ -139,6 +89,59 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+    }
+
+    private void CreateNewInfoTooltip(List<Units> units, Buildings idBuilding)
+    {
+        int index = 1;
+        float heightSize = 0f;
+        List<Macros.Units> idsUnits = new List<Units>();
+
+        foreach (Units unit in units)
+        {
+            List<int> Costs = new List<int>();
+            Costs = costTraining.GetCostsTrainingUnitInBuildingByIds(unit, idBuilding);
+
+            if (Costs != null && !idsUnits.Contains(unit))
+            {
+                idsUnits.Add(unit);
+
+                string costsTextString =   "W-" + Costs[0].ToString() +
+                                         ", M-" + Costs[1].ToString() +
+                                         ", G-" + Costs[2].ToString() +
+                                         ", D-" + Costs[3].ToString(); /* ToStringUnit(unit) + ": "*/  
+
+                CreateText(costsTextString, new Vector3(startPos.x + SIZE_IMAGE * 4, startPos.y + (index * SIZE_IMAGE) - 10f, 0));
+
+                Image imageBefore = CreateImage(new Vector3(startPos.x + SIZE_IMAGE, startPos.y + (index * SIZE_IMAGE), 0),
+                                                SIZE_IMAGE);
+                imageBefore.sprite = GetSpriteImage(unit);
+
+                Image imageArrow = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 2, startPos.y + (index * SIZE_IMAGE), 0),
+                                               SIZE_IMAGE / 2);
+                imageArrow.sprite = arrowImage;
+
+                Image imageAfter = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 3, startPos.y + (index * SIZE_IMAGE), 0),
+                                               SIZE_IMAGE);
+                imageAfter.sprite = GetSpriteImprovementUnit(unit, idBuilding);
+
+                heightSize += (index * SIZE_IMAGE);
+                ++index;
+            }
+        }
+    }
+
+    private void CreateText(string costsTextString, Vector3 position)
+    {
+        GameObject newText = Instantiate(textInfo.gameObject);
+        newText.transform.position = position;
+        newText.transform.parent = transform;
+        newText.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+        newText.GetComponent<RectTransform>().SetParent(gameObject.transform);
+        newText.name = TEXT;
+
+        newText.GetComponent<Text>().text = costsTextString;
+        textInfo.text += costsTextString + '\n';
     }
 
     private Image CreateImage(Vector3 position, float sizeImage)
