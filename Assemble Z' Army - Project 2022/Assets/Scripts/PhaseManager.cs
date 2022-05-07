@@ -8,6 +8,7 @@ using System;
 
 public class PhaseManager : NetworkBehaviour
 {
+    [SyncVar] public float currentTime = 0f;
     [SyncVar] public float timer = 1f;
     [SyncVar] public int currentPhase = 1;
     [SyncVar] private bool startTimer = false;
@@ -15,6 +16,7 @@ public class PhaseManager : NetworkBehaviour
     [SerializeField] private float phaseTwoTime = 5f;
 
     //Canvas
+    [SerializeField] GameObject phaseOneStartingCanvas = null;
     [SerializeField] GameObject BuildingCanvasPanel = null;
     [SerializeField] GameObject phaseOneEndedCanvas = null;
     [SerializeField] GameObject phaseTwoEndedCanvas = null;
@@ -26,6 +28,7 @@ public class PhaseManager : NetworkBehaviour
     {
         base.OnStartServer();
         timer = phaseOneTime;
+        currentTime = phaseOneTime;
     }
 
     public override void OnStopServer()
@@ -43,7 +46,10 @@ public class PhaseManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(phaseOneEndedCanvas)
+        if (phaseOneStartingCanvas)
+            phaseOneStartingCanvas.SetActive(true);
+
+        if (phaseOneEndedCanvas)
             phaseOneEndedCanvas.SetActive(false);
 
         if (phaseTwoEndedCanvas)
@@ -61,6 +67,11 @@ public class PhaseManager : NetworkBehaviour
     {
         if (isServer && startTimer)
         {
+            if(timer < currentTime - 5)
+            {
+                ShowStartPhaseCanvas();
+            }
+
             if (timer < 5)
             {
                 ShowEndPhaseCanvas();
@@ -82,6 +93,22 @@ public class PhaseManager : NetworkBehaviour
         if(timerText)
             timerText.text = Mathf.Floor(Mathf.Max(timer - 5,0)) + "";
 
+    }
+
+    private void ShowStartPhaseCanvas()
+    {
+        switch (currentPhase)
+        {
+            case Constents.PHASE_ONE:
+                RpcRemovePhaseOneStartCanvas();
+                break;
+            case Constents.PHASE_TWO:
+                break;
+            case Constents.PHASE_THREE:
+                break;
+            default:
+                break;
+        }
     }
 
     private void ShowEndPhaseCanvas()
@@ -131,6 +158,7 @@ public class PhaseManager : NetworkBehaviour
     public void SetPhaseTwo()
     {
         timer = phaseTwoTime;
+        currentTime = phaseTwoTime;
         ((RtsNetworkManager)NetworkManager.singleton).SetPhaseTwo();
         startTimer = true;
         RpcRemovePhaseOneEndCanvas();
@@ -152,6 +180,11 @@ public class PhaseManager : NetworkBehaviour
 
     }
 
+    [ClientRpc]
+    public void RpcRemovePhaseOneStartCanvas()
+    {
+        phaseOneStartingCanvas.SetActive(false);
+    }
 
     [ClientRpc]
     public void RpcShowPhaseOneEndCanvas()

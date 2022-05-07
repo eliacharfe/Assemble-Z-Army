@@ -125,18 +125,6 @@ public class RtsNetworkManager : NetworkManager
 
                 player.m_workers.Add(workerInstance);
             }
-        /*    spawnTemp(Units.SPEAR_HORSE_KNIGHT, factory, player, startPos);
-            spawnTemp(Units.SWORD_HORSE_KNIGHT, factory, player, startPos);
-            spawnTemp(Units.SPEAR_HORSE, factory, player, startPos);
-            spawnTemp(Units.SWORD_HORSE, factory, player, startPos);
-            spawnTemp(Units.SPEARMAN, factory, player, startPos);
-            spawnTemp(Units.ARCHER_HORSE, factory, player, startPos);
-            spawnTemp(Units.SWORDMAN, factory, player, startPos);
-            spawnTemp(Units.SWORD_KNIGHT, factory, player, startPos);
-            spawnTemp(Units.SPEAR_KNIGHT, factory, player, startPos);
-            spawnTemp(Units.SIMPLE_HORSE, factory, player, startPos);
-            spawnTemp(Units.RECRUIT, factory, player, startPos);
-            spawnTemp(Units.CROSSBOW, factory, player, startPos);*/
         }
     }
 
