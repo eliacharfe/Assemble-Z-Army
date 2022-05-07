@@ -164,7 +164,7 @@ public class Unit : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Debug.Log("mouse enter");
+       // Debug.Log("mouse enter");
         // gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.grey;
         //SetSpritesOver();
         /**/
@@ -195,6 +195,21 @@ public class Unit : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition),
                                                  Vector2.zero, 0, ~LayerMaskDetectionArea);
+
+        // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // RaycastHit ObjectHitByMouseRaycast;
+        // //if (Physics.Raycast(ray.origin, ray.direction, out ObjectHitByMouseRaycast, 2000))
+        // // {
+        // if (hit.collider)
+        // {
+
+        //  //   print(hit.collider);
+        //     if (hit.collider == GetComponent<CapsuleCollider2D>())
+        //     {
+        //         Debug.Log("Im over 'This'");
+        //     }
+        // }
+
 
         bool hasDetection = transform.Find("DetectionAttackArea");
 

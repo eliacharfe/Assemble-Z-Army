@@ -79,7 +79,7 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
 
     private void CreateNewInfoTooltip(List<Units> units, Buildings idBuilding)
     {
-        int index = 1;
+        int index = 0;
         float heightSize = 0f;
         float textPaddingSize = 5f;
         List<Macros.Units> idsUnits = new List<Units>();
@@ -96,24 +96,26 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
                 string costsTextString =   "W-" + Costs[0].ToString() +
                                          ", M-" + Costs[1].ToString() +
                                          ", G-" + Costs[2].ToString() +
-                                         ", D-" + Costs[3].ToString(); /* ToStringUnit(unit) + ": "*/
+                                         ", D-" + Costs[3].ToString(); 
 
-                CreateText(costsTextString, new Vector3(startPos.x + SIZE_IMAGE * 4, startPos.y + (index * SIZE_IMAGE) - 10f, 0));
+                CreateText(costsTextString, new Vector3(startPos.x + SIZE_IMAGE * 4, startPos.y + (index * SIZE_IMAGE) + SIZE_IMAGE/2 - 10f, 0));
 
-                Image imageBefore = CreateImage(new Vector3(startPos.x + SIZE_IMAGE, startPos.y + (index * SIZE_IMAGE), 0),
+                Image imageBefore = CreateImage(new Vector3(startPos.x + SIZE_IMAGE, startPos.y + (index * SIZE_IMAGE) + SIZE_IMAGE/2, 0),
                                                 SIZE_IMAGE);
                 imageBefore.sprite = GetSpriteImage(unit);
 
-                Image imageArrow = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 2, startPos.y + (index * SIZE_IMAGE), 0),
+                Image imageArrow = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 2, startPos.y + (index * SIZE_IMAGE)+ SIZE_IMAGE/2, 0),
                                                SIZE_IMAGE / 2);
                 imageArrow.sprite = arrowImage;
 
-                Image imageAfter = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 3, startPos.y + (index * SIZE_IMAGE), 0),
+                Image imageAfter = CreateImage(new Vector3(startPos.x + SIZE_IMAGE * 3, startPos.y + (index * SIZE_IMAGE)+ SIZE_IMAGE/2, 0),
                                                SIZE_IMAGE);
                 imageAfter.sprite = GetSpriteImprovementUnit(unit, idBuilding);
 
-                heightSize += (index * SIZE_IMAGE);
+                heightSize += SIZE_IMAGE + 15f;
+                Debug.Log(index);
                 ++index;
+                
             }
         }
 
@@ -124,9 +126,7 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
             return;
         }
 
-        Vector2 backgroundSize = new Vector2(textInfo.preferredWidth + textPaddingSize * 10f + SIZE_IMAGE * 7,
-         360f);
-        //  heightSize + textPaddingSize * 10f);
+        Vector2 backgroundSize = new Vector2(textInfo.preferredWidth + textPaddingSize * 10f + SIZE_IMAGE * 6, heightSize);
         background.sizeDelta = backgroundSize;
 
         textInfo.text = EMPTY;
@@ -237,30 +237,5 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
 
         return null;
     }
-
-
-    // private string ToStringUnit(Units unit)
-    // {
-    //     switch (unit)
-    //     {
-    //         case Macros.Units.ARCHER: return "Archer";
-    //         case Macros.Units.ARCHER_HORSE: return "Archer Horseman";
-    //         case Macros.Units.CROSSBOW: return "Crossbow";
-    //         case Macros.Units.HEALER: return "Healer";
-    //         case Macros.Units.RECRUIT: return "Recruit";
-    //         case Macros.Units.SIMPLE_HORSE: return "Simple Horse";
-    //         case Macros.Units.SPEAR_HORSE: return "Spear Horsman";
-    //         case Macros.Units.SPEAR_HORSE_KNIGHT: return "Spear Knight Horsman";
-    //         case Macros.Units.SPEAR_KNIGHT: return "Spear Knight";
-    //         case Macros.Units.SPEARMAN: return "Spearman";
-    //         case Macros.Units.SWORD_HORSE: return "Sword Horseman";
-    //         case Macros.Units.SWORD_HORSE_KNIGHT: return "Sword Knight Horseman";
-    //         case Macros.Units.SWORD_KNIGHT: return "Sword Knight";
-    //         case Macros.Units.SWORDMAN: return "Swordman";
-    //         case Macros.Units.WORKER: return "Worker";
-    //     };
-
-    //     return "None";
-    // }
 
 }
