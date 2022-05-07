@@ -5,6 +5,18 @@ using UnityEngine;
 namespace Utilities{
     public static class Utils
     {
+
+        public static Vector3 GetMouseIconPos()
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            mousePos.y += 0.5f;
+            mousePos.x += 0.5f;
+            mousePos.z = 0;
+
+            return mousePos;
+        }
+
         public static Vector3 GetMouseWorldPosition(){
             Vector3 v = Input.mousePosition;
             v.z = 1;

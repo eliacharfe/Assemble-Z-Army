@@ -59,8 +59,7 @@ MonoBehaviour:
   buldingConstructionSlider: {fileID: 465014552052168490}
   constructionTime: 10
   timePassed: 0
-  hammerCursor: {fileID: 0}
-  regularCursor: {fileID: 0}
+  hammerCursor: {fileID: 8405438503750832661, guid: 87a5160df6e0d6d48b9dc8485c675550, type: 3}
 --- !u!114 &1801245389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,12 +80,12 @@ MonoBehaviour:
   spawnPoint: {fileID: 7687285496895391796}
   enterPoint: {fileID: 9021328820710509342}
   id: 0
-  costResourcesBuilding: 960000004d0000000b00000004000000
   woodCost: 150
   metalCost: 77
   goldCost: 11
   diamondsCost: 4
   token: {fileID: 3824360112819498004}
+  recruitCursor: {fileID: 8405438503750832661, guid: 5d7a80c056c03094f931656adc6011d4, type: 3}
   timeSlider: {fileID: 3050743307702186120}
   waitingUnit: []
 --- !u!208 &7784999203533053926

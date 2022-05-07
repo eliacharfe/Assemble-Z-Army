@@ -76,7 +76,7 @@ public class AudioPlayer : MonoBehaviour
         PlayClip(btnClickErrorClip, btnClickErrorVolume);
     }
 
-    public void PlayBuildingClip()
+    public void PlaySpawnBuilding()
     {
         PlayClip(constructionClip, constructionVolume);
     }    

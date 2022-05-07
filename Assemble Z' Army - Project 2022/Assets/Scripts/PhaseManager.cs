@@ -91,8 +91,11 @@ public class PhaseManager : NetworkBehaviour
 
         }
 
-        if(timerText)
-            timerText.text = Mathf.Floor(Mathf.Max(timer - 5,0)) + "";
+        if (timerText)
+        {
+            TimeSpan timeSpan = TimeSpan.FromSeconds(Mathf.Floor(Mathf.Max(timer - 5, 0)));
+            timerText.text = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
+        }
 
     }
 

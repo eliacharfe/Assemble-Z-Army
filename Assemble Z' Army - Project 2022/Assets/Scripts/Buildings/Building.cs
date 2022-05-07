@@ -30,8 +30,10 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
     [Header("UI")]
     [SerializeField] private GameObject token = null;
+    [SerializeField] private GameObject recruitCursor = null;
     [SerializeField] private CostumeSlider timeSlider = null;
 
+    private GameObject recruitImageIcon = null;
     // Units waiting to be recruited.
     public List<Unit> waitingUnit = new List<Unit>();
 
@@ -100,10 +102,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             (gameObject.transform.position.x, gameObject.transform.position.y, pos.z);
 
         unitsFactory = FindObjectOfType<UnitsFactory>();
-
-        print("Does building has unitsFactory?" + unitsFactory);
-
-        //
     }
 
 
@@ -149,9 +147,25 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
         List<Macros.Units> units = rtsController.GetIdsUnits();
 
+        foreach(Macros.Units id in units)
+        {
+            if (unitsFactory.GetBuildingOutputUnit(this.id, id)){
+                recruitImageIcon = Instantiate(recruitCursor, Utilities.Utils.GetMouseIconPos(), Quaternion.identity);
+                break;
+            }
+        }
+  
+
         TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);
     }
 
+    private void OnMouseOver()
+    {
+        if (recruitImageIcon)
+        {
+            recruitImageIcon.transform.position = Utilities.Utils.GetMouseIconPos();
+        }
+    }
 
     // When mouse doesnt hover.
     private void OnMouseExit()
@@ -159,6 +173,9 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
 
         TooltipInfoUnitBuildingCost.HideTooltip_Static();
+
+        if (recruitImageIcon)
+            Destroy(recruitImageIcon);
     }
 
     public List<int> getCostBuilding()

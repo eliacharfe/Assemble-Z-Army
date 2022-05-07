@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using Mirror;
+using Utilities;
 
 public class BuilidingConstruction : NetworkBehaviour
 {
@@ -13,8 +11,9 @@ public class BuilidingConstruction : NetworkBehaviour
 
     public event Action<float, float> ClientOnConstructionUpdated;
 
-    public Texture2D hammerCursor;
-    public Texture2D regularCursor;
+    public GameObject hammerCursor;
+
+    GameObject mouseImage = null;
 
     private void Start()
     {
@@ -31,11 +30,22 @@ public class BuilidingConstruction : NetworkBehaviour
 
     private void OnMouseEnter()
     {
-        //Cursor.SetCursor(hammerCursor, Vector2.zero, CursorMode.Auto);
+        if(FindObjectOfType<RTSController>().HasWorkers())
+        mouseImage = Instantiate(hammerCursor, Utilities.Utils.GetMouseIconPos(), Quaternion.identity);
+    }
+    private void OnMouseOver()
+    {
+
+        if (mouseImage)
+            mouseImage.transform.position = Utilities.Utils.GetMouseIconPos();
     }
 
     private void OnMouseExit()
     {
+        if (mouseImage)
+        {
+            Destroy(mouseImage);
+        }
         //Cursor.SetCursor(regularCursor, Vector2.zero, CursorMode.Auto);
     }
 

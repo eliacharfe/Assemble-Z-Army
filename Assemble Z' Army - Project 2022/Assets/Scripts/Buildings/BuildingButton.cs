@@ -101,6 +101,8 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
         if (resourcesPlayer.isHaveEnoughResources(building.getCostBuilding()))
         {
+            FindObjectOfType<AudioPlayer>().PlaySpawnBuilding();
+
             resourcesPlayer.DecreaseResource(building.getCostBuilding());
 
             player.CmdTryPlaceBuilding(building.GetBuildingId(), pos);

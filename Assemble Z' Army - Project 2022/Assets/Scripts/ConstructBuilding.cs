@@ -102,7 +102,7 @@ public class ConstructBuilding : MonoBehaviour
 
     public void BuildingClip()
     {
-        FindObjectOfType<AudioPlayer>().PlayBuildingClip();
+        FindObjectOfType<AudioPlayer>().PlaySpawnBuilding();
     }
 
 }

@@ -156,6 +156,11 @@ public class RTSController : MonoBehaviour
 
         int targetPosIndex = 0;
 
+        if(selectedUnits.Count > 0)
+        {
+            FindObjectOfType<AudioPlayer>().PlayStepClip();
+        }
+
         foreach (Unit unit in selectedUnits)
         {
             if (!unit)
@@ -258,6 +263,10 @@ public class RTSController : MonoBehaviour
         return idsUnits;
     }
 
+    public bool HasWorkers()
+    {
+        return selectedUnits.Find(unit => unit.id == Macros.Units.WORKER);
+    }
 
 }
 
