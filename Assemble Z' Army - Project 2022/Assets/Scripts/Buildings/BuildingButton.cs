@@ -71,19 +71,14 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         }
     }
 
-    private void OnMouseOver()
-    {
-        print("Mouse over");
-    }
-
-    private void OnMouseEnter()
-    {
-        print("Mouse enter");
-    }
-
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) { return; }
+
+        if(!resourcesPlayer.isHaveEnoughResources(building.getCostBuilding())) { 
+            // Show message if doesnt have enough resources
+            return;
+        }
 
         spritePreview = Instantiate(buildingPreview, 
             Camera.main.ScreenToWorldPoint(Input.mousePosition),

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Mirror;
 using System;
 
-public class Building : NetworkBehaviour
+public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     // Type of solider building recived and create.
@@ -19,10 +19,10 @@ public class Building : NetworkBehaviour
     [SerializeField] private Transform enterPoint = null;
 
     [Header("Building Type")]
-    [SerializeField] private Macros.Buildings Id;
+    [SerializeField] private Macros.Buildings id;
 
     [Header("Costs")]
-    public List<int> costResourcesBuilding = null;
+    private List<int> costResourcesBuilding = null;
     [SerializeField] private int woodCost;
     [SerializeField] private int metalCost;
     [SerializeField] private int goldCost;
@@ -41,9 +41,8 @@ public class Building : NetworkBehaviour
     private bool inProgess = false;
 
     private UnitsFactory unitsFactory = null;
-
-
-
+    private RTSController rtsController = null;
+    ResourcesPlayer resourcesPlayer = null;
 
     public static event Action<Building> ServerOnBuildingSpawned;
     public static event Action<Building> ServerOnBuildingDeSpawned;
@@ -83,6 +82,14 @@ public class Building : NetworkBehaviour
     }
     #endregion
 
+
+    private void Awake()
+    {
+        rtsController = FindObjectOfType<RTSController>();
+
+        resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +102,8 @@ public class Building : NetworkBehaviour
         unitsFactory = FindObjectOfType<UnitsFactory>();
 
         print("Does building has unitsFactory?" + unitsFactory);
+
+        //
     }
 
 
@@ -137,6 +146,10 @@ public class Building : NetworkBehaviour
         {
             gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.grey;
         }
+
+        List<Macros.Units> units = rtsController.GetIdsUnits();
+
+        TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);
     }
 
 
@@ -144,6 +157,8 @@ public class Building : NetworkBehaviour
     private void OnMouseExit()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+
+        TooltipInfoUnitBuildingCost.HideTooltip_Static();
     }
 
     public List<int> getCostBuilding()
@@ -165,27 +180,33 @@ public class Building : NetworkBehaviour
         if (Vector2.Distance(unit.transform.position, enterPoint.position) 
             > spawnDistancePoint){ return; }
 
-        spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.Id, unit.id);
+        spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
 
         print(spawnUnitPrefab);
 
         RemoveUnitFromWaitingList(unit);
 
-        if (spawnUnitPrefab)
+        var prices = resourcesPlayer.GetCostsTrainingUnitInBuildingByIds(unit.id, this.id);
+
+        if (spawnUnitPrefab && resourcesPlayer.isHaveEnoughResources(prices))
         {
             inProgess = true;
+
+            resourcesPlayer.DecreaseResource(prices);
 
             unit.CmdSetDead();
 
             Destroy(unit.gameObject);
-
         }
+
+        // If doesnt have enough resouces show message.
 
     }
 
     //-------------------
     public void InitiateCosts()
     {
+        // Todo use special class for holding resources
         costResourcesBuilding = new List<int>();
 
         costResourcesBuilding.Add(woodCost);
@@ -204,7 +225,7 @@ public class Building : NetworkBehaviour
 
         NetworkServer.Spawn(unit.gameObject, connectionToClient);
 
-        //unit.MoveTo(spawnPoint.position + new Vector3(10f, 0, 0));
+        unit.MoveTo(spawnPoint.position + new Vector3(10f, 0, 0));
     }
 
 
@@ -261,7 +282,7 @@ public class Building : NetworkBehaviour
     public Vector3 EnterWaitingRecruitment(Unit unit)
     {
 
-        if (!waitingUnit.Contains(unit) && unitsFactory.GetBuildingOutputUnit(this.Id, unit.id))
+        if (!waitingUnit.Contains(unit) && unitsFactory.GetBuildingOutputUnit(this.id, unit.id))
         {
             waitingUnit.Add(unit);
 
@@ -289,12 +310,12 @@ public class Building : NetworkBehaviour
 
     public int GetBuildingId()
     {
-        return (int)Id ;
+        return (int)id ;
     }
 
     public string GetBuildingText()
     {
-        string buildingTxt = Id.ToString().Replace('_',' ');
+        string buildingTxt = id.ToString().Replace('_',' ');
 
         return buildingTxt;
     }
@@ -306,6 +327,18 @@ public class Building : NetworkBehaviour
 
     public bool isMatchedUnit(Unit unit)
     {
-        return unitsFactory.GetBuildingOutputUnit(this.Id, unit.id);
+        return unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+/*        List<Macros.Units> units = rtsController.GetIdsUnits();
+
+        TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);*/
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //TooltipInfoUnitBuildingCost.HideTooltip_Static();
     }
 }

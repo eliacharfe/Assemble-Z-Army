@@ -24,6 +24,7 @@ public class PhaseManager : NetworkBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI currentPhaseDisplay;
 
+
     public override void OnStartServer()
     {
         base.OnStartServer();

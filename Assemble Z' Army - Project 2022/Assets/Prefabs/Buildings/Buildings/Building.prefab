@@ -80,7 +80,7 @@ MonoBehaviour:
   timePassed: 0
   spawnPoint: {fileID: 7687285496895391796}
   enterPoint: {fileID: 9021328820710509342}
-  Id: 6
+  id: 0
   costResourcesBuilding: 960000004d0000000b00000004000000
   woodCost: 150
   metalCost: 77
@@ -192,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4135713553893269505}
   - component: {fileID: 4028738002885986387}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: '#1---Transparent-Icons_165'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 8758061408641966750}
   - component: {fileID: 7628013785876620968}
   - component: {fileID: 4522352582455932770}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 6304426820985763750}
   - component: {fileID: 9173541082177629945}
   - component: {fileID: 465014552052168490}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimeBuilidingSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,6 +467,8 @@ GameObject:
   - component: {fileID: 8248220699070889287}
   - component: {fileID: 2235861411601053865}
   - component: {fileID: 5396314199738852730}
+  - component: {fileID: 4654977100645720967}
+  - component: {fileID: 9009539127650595552}
   m_Layer: 0
   m_Name: BuildingImage
   m_TagString: Untagged
@@ -553,6 +555,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3108167449440912815}
   m_CullTransparentMesh: 1
+--- !u!223 &4654977100645720967
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108167449440912815}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &9009539127650595552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108167449440912815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &3824360112819498004
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +689,7 @@ GameObject:
   - component: {fileID: 5454551450568272577}
   - component: {fileID: 5572452178156753486}
   - component: {fileID: 3050743307702186120}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimeRecruitSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -761,7 +801,7 @@ GameObject:
   - component: {fileID: 3647078627217055921}
   - component: {fileID: 5085862700653141449}
   - component: {fileID: 8837460932937544872}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimeLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +906,7 @@ GameObject:
   - component: {fileID: 4557332289182795076}
   - component: {fileID: 5364796726669722145}
   - component: {fileID: 4146051555364379452}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -971,7 +1011,7 @@ GameObject:
   - component: {fileID: 6729645794111851200}
   - component: {fileID: 1897578981771393561}
   - component: {fileID: 5489686281655034073}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimeRecruitBackgeound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,7 +1086,7 @@ GameObject:
   - component: {fileID: 8090146069290047696}
   - component: {fileID: 1711672584773722044}
   - component: {fileID: 8965489550101106363}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,7 +1163,7 @@ GameObject:
   - component: {fileID: 3221177585991537223}
   - component: {fileID: 3087746969061485254}
   - component: {fileID: 931535565971749529}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1198,7 +1238,7 @@ GameObject:
   - component: {fileID: 6054879314407272613}
   - component: {fileID: 3240369512992056351}
   - component: {fileID: 867412330886675927}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimeRecruitBackgeound
   m_TagString: Untagged
   m_Icon: {fileID: 0}

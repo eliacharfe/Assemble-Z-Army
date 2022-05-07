@@ -13,6 +13,8 @@ public class RTSController : MonoBehaviour
 
     [SerializeField] private Transform selectionAreaTransform;
     private int LayerMaskDetectionArea;
+    private List<Macros.Units> idsUnits;
+
     private void Awake()
     {
         selectedUnits = new List<Unit>();
@@ -134,7 +136,6 @@ public class RTSController : MonoBehaviour
     // Send workers to construct the building.
     private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
     {
-        print("Sent to build");
         foreach (Unit unit in selectedUnits)
         {
             if (unit && unit.id == Macros.Units.WORKER)
@@ -184,38 +185,6 @@ public class RTSController : MonoBehaviour
         if (unit && unit.GetComponent<Attacker>())
             unit.GetComponent<Attacker>().CmdSetTargetable(null);
     }
-
-/*
-    // Get positions around the point given.
-    private List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
-    {
-           List<Vector3> posList = new List<Vector3>();
-           posList.Add(startPos);
-           for(int i = 0; i < ringPosCountArr.Length; i++){
-               posList.AddRange(GetPosListAround(startPos, ringDistanceArr[i], ringPosCountArr[i]));
-           }
-           return posList;
-    }
-
-    //---------------------------------------------
-    private List<Vector3> GetPosListAround(Vector3 startPostion, float distance, int posCount)
-    {
-        List<Vector3> posList = new List<Vector3>();
-        for (int i = 0; i < posCount; i++)
-        {
-            float angle = i * (360f / posCount);
-            Vector3 direction = ApplyRotationToVec(new Vector3(1, 0), angle);
-            Vector3 position = startPostion + direction * distance;
-            posList.Add(position);
-        }
-        return posList;
-    }
-
-    //-------------------------------------------
-    private Vector3 ApplyRotationToVec(Vector3 vec, float angle)
-    {
-        return Quaternion.Euler(0, 0, angle) * vec;
-    }*/
 
     //-------------------------------------
     private void StartSelectionArea()
@@ -277,6 +246,19 @@ public class RTSController : MonoBehaviour
     {
         selectedUnits.Remove(unit);
     }
+    public List<Macros.Units> GetIdsUnits()
+    {
+        idsUnits = new List<Macros.Units>();
+
+        foreach (Unit unit in selectedUnits)
+        {
+            idsUnits.Add(unit.id);
+        }
+
+        return idsUnits;
+    }
+
+
 }
 
 
