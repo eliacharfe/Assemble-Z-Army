@@ -100,6 +100,10 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         {
             Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
         }
+        else {
+             TooltipNotEnoughResources.ShowTooltip_Static("Not enough resources to build: ",
+                                                          id.ToString());
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -107,9 +111,10 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         Debug.Log("onPointerEnter");
         //Tooltip.ShowTooltip_Static(popupCostBuilding, id.ToString());
 
-        List<Macros.Units> units = rtsController.GetIdsUnits();
+        TooltipInfoUnitBuildingCost.ShowTooltip_Static(rtsController.GetIdsUnits(), id);
 
-        TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);
+        TooltipNotEnoughResources.ShowTooltip_Static("Not enough resources to build: ",
+                                                          id.ToString());
     }
 
      public void OnPointerExit(PointerEventData eventData)

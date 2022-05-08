@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class RTSController : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class RTSController : MonoBehaviour
     private Vector2 startPosition;
 
     [SerializeField] private Transform selectionAreaTransform;
-    [SerializeField] ParticleSystem pointerEffect;
+   // [SerializeField] ParticleSystem pointerEffect;
+    [SerializeField] GameObject pointerDown = null;
 
     AudioPlayer audioPlayer;
 
@@ -171,11 +173,13 @@ public class RTSController : MonoBehaviour
             ClearPreviousCommands(unit);
             unit.MoveTo(targetPosList[targetPosIndex]);
 
-            if (pointerEffect != null)
-            {
-                ParticleSystem instance = Instantiate(pointerEffect, targetPosList[targetPosIndex], Quaternion.identity);
-                Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
-            }
+            GameObject newObj = Instantiate(pointerDown, targetPosList[targetPosIndex],
+            pointerDown.transform.rotation) as GameObject;
+
+            StartCoroutine(FadeOut(newObj)); // will fade the pointer down ui slowely and destroy it
+
+            //  Destroy((Instantiate(pointerDown, targetPosList[targetPosIndex],
+            // pointerDown.transform.rotation) as Transform).gameObject, 1);
 
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
 
@@ -185,7 +189,6 @@ public class RTSController : MonoBehaviour
             }
         }
     }
-
 
     // Clear previous commands such as attack target or recruit.
     private void ClearPreviousCommands(Unit unit)
@@ -288,6 +291,20 @@ public class RTSController : MonoBehaviour
     private void HandleDeSpawnUnit(Unit unit)
     {
         selectedUnits.Remove(unit);
+    }
+
+    //---------------------------------------------
+    private IEnumerator FadeOut(GameObject gameObj)
+    {
+        SpriteRenderer spRenderer = gameObj.GetComponent<SpriteRenderer>();
+        for (float f = 1f; f >= -0.05; f -= 0.05f)
+        {
+            Color color = spRenderer.material.color;
+            color.a = f;
+            spRenderer.material.color = color;
+            yield return new WaitForSeconds(0.05f);
+        }
+        Destroy(gameObj.gameObject);
     }
 }
 

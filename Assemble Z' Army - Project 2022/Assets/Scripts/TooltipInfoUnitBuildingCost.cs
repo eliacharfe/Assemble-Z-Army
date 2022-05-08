@@ -113,7 +113,6 @@ public class TooltipInfoUnitBuildingCost : MonoBehaviour
                 imageAfter.sprite = GetSpriteImprovementUnit(unit, idBuilding);
 
                 heightSize += SIZE_IMAGE + 15f;
-                Debug.Log(index);
                 ++index;
                 
             }
