@@ -185,6 +185,7 @@ public class UnitsFactory : MonoBehaviour
                 return swordHorseKnight;
             case Units.SPEAR_HORSE:
                 return spearHorseKnight;
+            
         }
 
         return null;
@@ -202,6 +203,10 @@ public class UnitsFactory : MonoBehaviour
                 return spearHorse;
             case Units.ARCHER:
                 return archerHorse;
+            case Units.SWORD_KNIGHT:
+                return swordHorseKnight;
+            case Units.SPEAR_KNIGHT:
+                return spearHorseKnight;
         }
 
         return null;
