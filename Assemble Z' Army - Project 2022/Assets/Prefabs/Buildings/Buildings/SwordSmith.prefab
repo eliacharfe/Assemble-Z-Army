@@ -17,11 +17,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: goldCost
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: woodCost
-      value: 10
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: m_Enabled
@@ -29,11 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: metalCost
-      value: 10
+      value: 340
       objectReference: {fileID: 0}
     - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: diamondsCost
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801245389, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: costResourcesBuilding.Array.data[0]
