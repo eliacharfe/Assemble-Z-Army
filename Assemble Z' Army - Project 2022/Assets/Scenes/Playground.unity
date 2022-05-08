@@ -61028,8 +61028,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1196935263}
     - target: {fileID: 8543692483657339222, guid: 7fcecf008f8d3d144b97565eb1baa158, type: 3}
+      propertyPath: phaseOneTime
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543692483657339222, guid: 7fcecf008f8d3d144b97565eb1baa158, type: 3}
       propertyPath: phaseTwoTime
-      value: 999
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8543692483657339222, guid: 7fcecf008f8d3d144b97565eb1baa158, type: 3}
       propertyPath: BuildingCanvasPanel

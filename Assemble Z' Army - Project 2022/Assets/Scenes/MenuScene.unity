@@ -2373,6 +2373,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1117516561}
     - target: {fileID: 6408644673840889552, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
+      propertyPath: amountOfWorkers
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408644673840889552, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
+      propertyPath: amountOfRecruits
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408644673840889552, guid: 743c16764b6c0c44caf0adde42233398, type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 27
       objectReference: {fileID: 0}
