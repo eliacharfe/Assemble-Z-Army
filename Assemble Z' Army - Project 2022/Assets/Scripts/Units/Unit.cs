@@ -306,10 +306,16 @@ public class Unit : NetworkBehaviour
         return !agent.isStopped;
     }
     //----------------------------
+
+    public Building GetBuildingRecruiting()
+    {
+        return recrutingBuilding;
+    }
     public void SetBuildingRecruiting(Building building)
     {
         recrutingBuilding = building;
     }
+
     //----------------------------
     public void RemoveBuildingRecruiting()
     {
@@ -445,7 +451,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 10f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 10f;
+                    ReachDistance.BaseValue = 7f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 }

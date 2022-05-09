@@ -64,6 +64,7 @@ public class BuilidingConstruction : NetworkBehaviour
     // elements.
     private void FinishConstruction()
     {
+        FindObjectOfType<AudioPlayer>().PlayConstructionCompletedBuilding();
         GetComponent<Building>().enabled = true;
         buldingConstructionSlider.gameObject.SetActive(false);
         this.enabled = false;

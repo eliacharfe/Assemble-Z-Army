@@ -575,6 +575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 8753041854152823009, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
+      propertyPath: stepClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e4d8d51d032887340b91c9ac234e9a62, type: 3}
     - target: {fileID: 8753041854152823014, guid: e18595d9cc7ee974bbb2aef7055a7574, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -149,7 +149,7 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
         foreach(Macros.Units id in units)
         {
-            if (unitsFactory.GetBuildingOutputUnit(this.id, id)){
+            if (unitsFactory && unitsFactory.GetBuildingOutputUnit(this.id, id)){
                 recruitImageIcon = Instantiate(recruitCursor, Utilities.Utils.GetMouseIconPos(), Quaternion.identity);
                 break;
             }

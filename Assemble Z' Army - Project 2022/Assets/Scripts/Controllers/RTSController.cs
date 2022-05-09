@@ -125,6 +125,12 @@ public class RTSController : MonoBehaviour
         {
             if (unit && unit.id != Macros.Units.WORKER && building.isMatchedUnit(unit))
             {
+                var tempBuilding = unit.GetBuildingRecruiting();
+                if(tempBuilding)
+                {
+                    tempBuilding.RemoveUnitFromWaitingList(unit);
+                }
+
                 unit.SetBuildingRecruiting(building);
 
                 unit.MoveTo(building.EnterWaitingRecruitment(unit));

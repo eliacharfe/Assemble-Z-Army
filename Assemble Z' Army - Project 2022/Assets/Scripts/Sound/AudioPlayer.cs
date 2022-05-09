@@ -40,6 +40,10 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip constructionClip;
     [SerializeField] [Range(0f, 1f)] float constructionVolume = 1f;
 
+    [Header("Building Completed")]
+    [SerializeField] AudioClip constructionCompletedClip;
+    [SerializeField] [Range(0f, 1f)] float constructionCompletedVolume = 1f;
+
 
     public void PlayShootingClip()
     {
@@ -79,7 +83,12 @@ public class AudioPlayer : MonoBehaviour
     public void PlaySpawnBuilding()
     {
         PlayClip(constructionClip, constructionVolume);
-    }    
+    }
+
+    public void PlayConstructionCompletedBuilding()
+    {
+        PlayClip(constructionCompletedClip, constructionCompletedVolume);
+    }
 
     public void StopHorseGallopClip()
     {
