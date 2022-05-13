@@ -1,20 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Mirror;
 using System;
 
-public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Building : NetworkBehaviour
 {
-
     // Type of solider building recived and create.
-
     [Header("Spawning Settings")]
     [SerializeField] private float spawnTime = 5f;
     [SerializeField] private float spawnDistancePoint = 1.5f;
-    [SerializeField] [SyncVar(hook = nameof(HandleRecruitmentTimeUpdated))] float timePassed = 0;
+    [SerializeField] [SyncVar] float timePassed = 0;
     [SerializeField] private Transform spawnPoint = null;
     [SerializeField] private Transform enterPoint = null;
 
@@ -35,7 +31,7 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private GameObject recruitImageIcon = null;
     // Units waiting to be recruited.
-    public List<Unit> waitingUnit = new List<Unit>();
+    private List<Unit> waitingUnit = new List<Unit>();
 
     // Prefab of the current unit need to be spawned.
     private Unit spawnUnitPrefab = null;
@@ -53,7 +49,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     public static event Action<Building> AuthortyOnBuildingDeSpawned;
 
     #region Server
-
     public override void OnStartServer()
     {
         ServerOnBuildingSpawned?.Invoke(this);
@@ -62,6 +57,17 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     public override void OnStopServer()
     {
         ServerOnBuildingDeSpawned?.Invoke(this);
+    }
+
+    // Spawn new unit.
+    [Command]
+    private void CmdSpawnNewUnit(Macros.Units id)
+    {
+        Unit unit = Instantiate(unitsFactory.GetUnitPrefab(id), spawnPoint.position, Quaternion.identity) as Unit;
+
+        NetworkServer.Spawn(unit.gameObject, connectionToClient);
+
+        unit.MoveTo(spawnPoint.position + new Vector3(10f, 0, 0));
     }
     #endregion
 
@@ -76,14 +82,7 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         AuthortyOnBuildingDeSpawned?.Invoke(this);
     }
-
-    public void HandleRecruitmentTimeUpdated(float oldTime,float newTime)
-    {
-        //timeSlider.setValue(newTime/spawnTime);
-
-    }
     #endregion
-
 
     private void Awake()
     {
@@ -104,13 +103,10 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         unitsFactory = FindObjectOfType<UnitsFactory>();
     }
 
-
-
     // Update is called once per frame
     [ClientCallback]
     void Update()
     {
-
         if (!this.enabled)
         {
             return;
@@ -127,8 +123,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         SpawningProgession();
     }
 
-
-    // Show building token and panel.
     private void OnMouseUp()
     {
         token.SetActive(true);
@@ -136,8 +130,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         ShowBuildingPanel(true);
     }
 
-
-    // When mouse hover.
     private void OnMouseEnter()
     {
         if (!token.activeSelf)
@@ -155,7 +147,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             }
         }
   
-
         TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);
     }
 
@@ -167,7 +158,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         }
     }
 
-    // When mouse doesnt hover.
     private void OnMouseExit()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
@@ -183,11 +173,9 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         return costResourcesBuilding;
     }
 
-
-    // Try to recruit if there is waiting units.
+    // Try to recruit if there are waiting units.
     void TryToRecruitUnit()
     {
-
         if (waitingUnit.Count <= 0){ return; }
 
         Unit unit = waitingUnit[0];
@@ -198,8 +186,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             > spawnDistancePoint){ return; }
 
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
-
-        print(spawnUnitPrefab);
 
         RemoveUnitFromWaitingList(unit);
 
@@ -216,11 +202,9 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
             Destroy(unit.gameObject);
         }
 
-        // If doesnt have enough resouces show message.
-
     }
 
-    //-------------------
+    // Initiate building costs values
     public void InitiateCosts()
     {
         // Todo use special class for holding resources
@@ -231,20 +215,6 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         costResourcesBuilding.Add(goldCost);
         costResourcesBuilding.Add(diamondsCost);
     }
-
-
-    //Spawn new unit.
-    [Command]
-    private void CmdSpawnNewUnit(Macros.Units id)
-    {
-
-        Unit unit = Instantiate(unitsFactory.GetUnitPrefab(id), spawnPoint.position, Quaternion.identity) as Unit;
-
-        NetworkServer.Spawn(unit.gameObject, connectionToClient);
-
-        unit.MoveTo(spawnPoint.position + new Vector3(10f, 0, 0));
-    }
-
 
     // Intilize recruitment data time and allow recruit other unit.
     private void FreeBuildingSpace()
@@ -271,7 +241,7 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     // Deal with unit spawing time.
     private void SpawningProgession()
     {
-
+        // Building is empty
         if (!inProgess)
         {
             TryToRecruitUnit();
@@ -310,18 +280,15 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
 
-    // Remove the unit from waiting and move the other units whom waiting.
+    // Remove the unit from waiting list and advanced others in line.
     public void RemoveUnitFromWaitingList(Unit unit)
-    {
+    { 
+        if (!waitingUnit.Contains(unit)) { return; }
 
-        if (waitingUnit.Contains(unit))
+        waitingUnit.Remove(unit);
+        for (int i = 0; i < waitingUnit.Count; i++)
         {
-            waitingUnit.Remove(unit);
-
-            for (int i = 0; i < waitingUnit.Count; i++)
-            {
-                waitingUnit[i].MoveTo(enterPoint.position + new Vector3(-5 * i, 0, 0));
-            }
+            waitingUnit[i].MoveTo(enterPoint.position + new Vector3(-5 * i, 0, 0));
         }
     }
 
@@ -337,25 +304,9 @@ public class Building : NetworkBehaviour, IPointerEnterHandler, IPointerExitHand
         return buildingTxt;
     }
 
-        public Sprite GetBuildingSprite()
-    {
-        return GetComponent<Sprite>();
-    }
-
     public bool isMatchedUnit(Unit unit)
     {
         return unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-/*        List<Macros.Units> units = rtsController.GetIdsUnits();
-
-        TooltipInfoUnitBuildingCost.ShowTooltip_Static(units, id);*/
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        //TooltipInfoUnitBuildingCost.HideTooltip_Static();
-    }
 }

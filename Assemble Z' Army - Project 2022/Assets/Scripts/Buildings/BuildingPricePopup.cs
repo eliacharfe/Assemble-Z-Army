@@ -5,6 +5,9 @@ using TMPro;
 
 public class BuildingPricePopup : MonoBehaviour
 {
+    private TextMeshPro textMesh;
+    private Color textColor;
+    private float disappearTimer;
 
     public static BuildingPricePopup Create(Transform buildingPopup, Vector3 position, List<int> prices)
     {
@@ -13,15 +16,6 @@ public class BuildingPricePopup : MonoBehaviour
         buildingPricePopup.Setup(prices);
 
         return buildingPricePopup;
-    }
-
-    private TextMeshPro textMesh;
-    private Color textColor;
-    private float disappearTimer;
-
-    private void Awake()
-    {
-        textMesh = transform.GetComponent<TextMeshPro>();
     }
 
     public void Setup(List<int> prices)
@@ -35,6 +29,10 @@ public class BuildingPricePopup : MonoBehaviour
         disappearTimer = 4f;
     }
 
+    private void Awake()
+    {
+        textMesh = transform.GetComponent<TextMeshPro>();
+    }
 
     private void Update()
     {

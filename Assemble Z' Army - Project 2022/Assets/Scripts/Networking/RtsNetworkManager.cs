@@ -10,14 +10,13 @@ using System;
 public class RtsNetworkManager : NetworkManager
 {
     [Header ("Workers")]
-    [SerializeField] int amountOfWorkers = 10;
+    [SerializeField]private int amountOfWorkers = 10;
 
     [Header("Recruits")]
-    [SerializeField] int amountOfRecruits = 10;
+    [SerializeField]private int amountOfRecruits = 10;
 
-    [SerializeField] GameObject gameOverHandler = null;
-
-    public List<RTSPlayer> players = new List<RTSPlayer>();
+    [SerializeField]private GameObject gameOverHandler = null;
+    [SerializeField]public List<RTSPlayer> players = new List<RTSPlayer>();
 
     // Client connections events
     public static event Action ClientOnConnected;
@@ -25,11 +24,6 @@ public class RtsNetworkManager : NetworkManager
 
     // The progession of the game.
     private bool isGameInProgess = false;
-
-    private void OnLevelWasLoaded(int level)
-    {
-        //GetComponent<SteamManager>().enabled = true;    
-    }
 
     # region Server 
 
@@ -63,121 +57,97 @@ public class RtsNetworkManager : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        if(sceneName == "Playground")
+        if(sceneName == Scenes.PREPERATION_SCENE)
         {
             SetPhaseOne();
         }
 
-        if (sceneName == "Battlefield")
+        if (sceneName == Scenes.BATTLEFIELD_SCENE)
         {
-            GameObject EndGameHandler = Instantiate(gameOverHandler);
-
-            // Spawn the player on server.
-            NetworkServer.Spawn(EndGameHandler);
-
-            foreach (RTSPlayer player in players)
-            {
-
-                var startPos = GetStartPosition().position;
-
-                var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
-
-                player.phaseThreePos = pos;
-
-                player.SpawnRecruitedUnit();
-            }
+            SetPhaseThree();
         }
 
 
 
     }
 
-    // Set wokers units which suppose to build with given resources avaible.
+    // Set wokers units.
     public void SetPhaseOne()
     {
         UnitsFactory factory = FindObjectOfType<UnitsFactory>();
-
         FindObjectOfType<PhaseManager>().SetTimer(true);
 
         foreach (RTSPlayer player in players)
         {
-
             var startPos = GetStartPosition().position;
-
             List<Vector3> posList = Utilities.Utils.GetPosListAround(startPos, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
-
             int posIndex = 0;
-
             var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
 
             player.transform.position = startPos;
-
             player.phaseThreePos = pos;
 
             for (int i = 0; i < amountOfWorkers; i++)
             {
-
                 GameObject workerInstance = Instantiate(factory.GetUnitPrefab(Units.WORKER).gameObject, posList[posIndex], Quaternion.identity);
-
                 posIndex = (posIndex +1) % posList.Count;
-                // Spawn the player on server.
                 NetworkServer.Spawn(workerInstance, player.connectionToClient);
-
                 player.m_workers.Add(workerInstance);
             }
         }
     }
 
-    void spawnTemp(Macros.Units name,UnitsFactory factory, RTSPlayer player,Vector3 pos)
-    {
-        GameObject workerInstance = Instantiate(factory.GetUnitPrefab(name).gameObject, pos, Quaternion.identity);
-
-        // Spawn the player on server.
-        NetworkServer.Spawn(workerInstance, player.connectionToClient);
-    }
-
-    // Set wokers units which suppose to build with given resources avaible.
+    // Set recruits units.
     public void SetPhaseTwo()
     {
         UnitsFactory factory = FindObjectOfType<UnitsFactory>();
 
         foreach (RTSPlayer player in players)
         {
-
             Vector3 startinPoint = player.transform.position;
-
             player.removeWorkers();
-
             List<Vector3> posList = Utilities.Utils.GetPosListAround(startinPoint, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
-
             int posIndex = 0;
 
             for (int i = 0; i < amountOfRecruits; i++)
             {
                 GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.RECRUIT).gameObject, posList[posIndex], Quaternion.identity);
-
-                // Spawn the player on server.
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);
-
                 posIndex = (posIndex + 1) % posList.Count;
             }
 
             GameObject Healer = Instantiate(factory.GetUnitPrefab(Macros.Units.HEALER).gameObject, startinPoint, Quaternion.identity);
-
-            // Spawn the player on server.
             NetworkServer.Spawn(Healer, player.connectionToClient);
         }
 
     }
 
-    public void ShowPreparationPhase()
+    // Spawn gathered units in battlefield.
+    public void SetPhaseThree()
     {
-        NetworkManager.singleton.ServerChangeScene("Playground");   
+        GameObject EndGameHandler = Instantiate(gameOverHandler);
+        NetworkServer.Spawn(EndGameHandler);
+
+        foreach (RTSPlayer player in players)
+        {
+            var startPos = GetStartPosition().position;
+            var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
+            // Update the player camera position.
+            player.phaseThreePos = pos;
+            player.SpawnRecruitedUnit();
+        }
     }
 
+    // Phase One and Two.
+    public void ShowPreparationPhase()
+    {
+        NetworkManager.singleton.ServerChangeScene(Scenes.PREPERATION_SCENE);   
+    }
+
+    // Phase Three.
     public void ShowBattlefieldPhase()
     {
-        NetworkManager.singleton.ServerChangeScene("Battlefield");
+        NetworkManager.singleton.ServerChangeScene(Scenes.BATTLEFIELD_SCENE);
     }
     #endregion
 

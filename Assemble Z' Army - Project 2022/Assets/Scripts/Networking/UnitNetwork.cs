@@ -8,20 +8,13 @@ using System;
 public class UnitNetwork : NetworkBehaviour
 {
     private bool selectable;
-
     private NavMeshAgent agent;
-
     private Animator myAnimator;
     private SpriteRenderer spriteRenderer;
 
-    // Server Unit spawned event.
     public static event Action<UnitNetwork> ServerOnUnitSpawned;
-    // Server Unit despawned event.
     public static event Action<UnitNetwork> ServerOnUnitDeSpawned;
-
-    // Authorty Unit spawned event. 
     public static event Action<UnitNetwork> AuthortyOnUnitSpawned;
-    // Authorty Unit despawned event. 
     public static event Action<UnitNetwork> AuthortyOnUnitDeSpawned;
 
     private void Start()
@@ -39,17 +32,14 @@ public class UnitNetwork : NetworkBehaviour
     public override void OnStartServer()
     {
         base.OnStartServer();
-
         ServerOnUnitSpawned?.Invoke(this);
     }
 
     public override void OnStopServer()
     {
         base.OnStopAuthority();
-
         ServerOnUnitDeSpawned?.Invoke(this);
     }
-
     #endregion
 
 
@@ -57,14 +47,12 @@ public class UnitNetwork : NetworkBehaviour
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-
         AuthortyOnUnitSpawned?.Invoke(this);   
     }
 
     public override void OnStopAuthority()
     {
         base.OnStopAuthority();
-
         AuthortyOnUnitDeSpawned?.Invoke(this);
     }
 
@@ -73,8 +61,6 @@ public class UnitNetwork : NetworkBehaviour
     public void MoveTo(Vector3 dest)
     {
         myAnimator.SetBool("isRunning", true);
-
-       // Debug.Log("dest:" + dest);
         dest.z = 0;
         agent.SetDestination(dest);
     }

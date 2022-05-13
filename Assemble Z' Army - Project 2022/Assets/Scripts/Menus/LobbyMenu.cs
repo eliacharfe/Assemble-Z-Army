@@ -35,11 +35,6 @@ public class LobbyMenu : MonoBehaviour
         lobbyUI.SetActive(true);
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 100, 100), "SOME");
-    }
-
     private void AuthorityHandlePartyOwnerStateUpdated(bool state)
     {
         startGameButton.gameObject.SetActive(state);
@@ -65,8 +60,6 @@ public class LobbyMenu : MonoBehaviour
 
     public void StartGame()
     {
-        //  audioPlayer.PlayBtnClickClip();
-        print("Is player null?" + NetworkClient.connection.identity.GetComponent<RTSPlayer>());
         NetworkClient.connection.identity.GetComponent<RTSPlayer>().CmdStartGame();
     }
 

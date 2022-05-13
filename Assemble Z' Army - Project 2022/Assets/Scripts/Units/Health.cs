@@ -68,8 +68,8 @@ public class Health : NetworkBehaviour // NetworkBehavior
             }
 
             GetComponent<Animator>().SetBool("gotHit", true);
-            if (currHealth > 0)
-                audioPlayer.PlayDamageClip();
+            /*   if (currHealth > 0)
+                audioPlayer.PlayDamageClip();*/
 
             ClientOnHealthUpdate?.Invoke((int)currHealth, maxHealth);
         }

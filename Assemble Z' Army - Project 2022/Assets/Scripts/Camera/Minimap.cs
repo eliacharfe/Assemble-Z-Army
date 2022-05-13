@@ -64,11 +64,5 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
         );
 
         playerCameraTransform.position = newCameraPos;
-
-        print("map scale" + mapScale);
-        print(playerCameraTransform.position);
-        //FindObjectOfType<CameraInputSystem>().setPlayerCameraTransform(playerCameraTransform);
     }
-
-
 }

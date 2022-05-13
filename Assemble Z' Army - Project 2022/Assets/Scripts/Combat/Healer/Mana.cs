@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,6 +33,29 @@ public class Mana : NetworkBehaviour
         BaseColor = manaBarImage.color;
     }
 
+    #region server
+    [Command]
+    public void CmdUseHeal()
+    {
+        GetComponent<Animator>().SetBool("isHealing", true);
+
+        currMana -= 35;
+
+        if (currMana < 0)
+        {
+            currMana = 0;
+        }
+
+        GetComponent<Mana>().RpcPlayManaEffect();
+    }
+
+    private void HandleManaValueUpdated(int oldMana, int newMana)
+    {
+        ClientOnManaUpdate?.Invoke(newMana, maxMana);
+    }
+    #endregion
+
+    #region client
     // To Do: mana timer regeration
     [ClientCallback]
     private void Update()
@@ -74,33 +95,13 @@ public class Mana : NetworkBehaviour
         if (manaEffect != null)
         {
             ParticleSystem instance = Instantiate(manaEffect, healingPointStart.transform.position, Quaternion.identity);
-            
+
             //NetworkServer.Spawn(instance.gameObject);
 
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
     }
-
-
-    [Command]
-    public void CmdUseHeal()
-    {
-        GetComponent<Animator>().SetBool("isHealing", true);
-
-        currMana -= 35;
-
-        if (currMana < 0)
-        {
-            currMana = 0;
-        }
-
-        GetComponent<Mana>().RpcPlayManaEffect();
-    }
-
-    private void HandleManaValueUpdated(int oldMana, int newMana)
-    {
-        ClientOnManaUpdate?.Invoke(newMana, maxMana);
-    }
+    #endregion
 
     public void StopAnimation()
     { 

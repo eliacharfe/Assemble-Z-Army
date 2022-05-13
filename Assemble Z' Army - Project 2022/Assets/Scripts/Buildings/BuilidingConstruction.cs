@@ -6,14 +6,13 @@ using Utilities;
 public class BuilidingConstruction : NetworkBehaviour
 {
     [SerializeField] private CostumeSlider buldingConstructionSlider = null;
-    public float constructionTime = 5f;
     [SerializeField] [SyncVar(hook =nameof(HandleConstructionUpdated))] float timePassed = 0;
 
-    public event Action<float, float> ClientOnConstructionUpdated;
+    [SerializeField] private float constructionTime = 5f;
 
-    public GameObject hammerCursor;
+    [SerializeField] private GameObject hammerSprite;
 
-    GameObject mouseImage = null;
+    private GameObject mouseTopIcon = null;
 
     private void Start()
     {
@@ -31,22 +30,21 @@ public class BuilidingConstruction : NetworkBehaviour
     private void OnMouseEnter()
     {
         if(FindObjectOfType<RTSController>().HasWorkers())
-        mouseImage = Instantiate(hammerCursor, Utilities.Utils.GetMouseIconPos(), Quaternion.identity);
+        mouseTopIcon = Instantiate(hammerSprite, Utilities.Utils.GetMouseIconPos(), Quaternion.identity);
     }
     private void OnMouseOver()
     {
 
-        if (mouseImage)
-            mouseImage.transform.position = Utilities.Utils.GetMouseIconPos();
+        if (mouseTopIcon)
+            mouseTopIcon.transform.position = Utilities.Utils.GetMouseIconPos();
     }
 
     private void OnMouseExit()
     {
-        if (mouseImage)
+        if (mouseTopIcon)
         {
-            Destroy(mouseImage);
+            Destroy(mouseTopIcon);
         }
-        //Cursor.SetCursor(regularCursor, Vector2.zero, CursorMode.Auto);
     }
 
     #region Server
@@ -70,15 +68,11 @@ public class BuilidingConstruction : NetworkBehaviour
         this.enabled = false;
     }
 
-
-
-
     // Get building time passed.
     private float GetBuildingConstructionTime()
     {
         return buldingConstructionSlider.FillAmount();
     }
-
 
     private void HandleConstructionUpdated(float oldTime,float newTime)
     {

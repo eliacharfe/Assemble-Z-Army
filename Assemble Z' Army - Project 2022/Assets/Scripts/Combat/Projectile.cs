@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using UnityEngine.AI;
 
 public class Projectile : NetworkBehaviour
 {
@@ -58,8 +55,7 @@ public class Projectile : NetworkBehaviour
         AngularSpeed = 0.3f;
     }
 
-
-    //--------------------------------
+    #region server
     [ServerCallback]
     private void Update()
     {
@@ -87,9 +83,8 @@ public class Projectile : NetworkBehaviour
 
         }
     }
+    #endregion
 
-
-    //----------------------------------------
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<NetworkIdentity>(out NetworkIdentity networkIdentity))
@@ -105,10 +100,6 @@ public class Projectile : NetworkBehaviour
                 target.DealDamage(damage);
                 Destroy(gameObject);
             }
-
-
-            //if (Vector3.Distance(arrowPos, targetPosition) < 7f)
-              //  Destroy(gameObject);
         }
     }
 }

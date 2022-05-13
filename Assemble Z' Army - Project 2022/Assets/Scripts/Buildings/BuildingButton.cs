@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using UnityEngine.AI;
 using Mirror;
 
 public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,IPointerExitHandler
 {
     [SerializeField]private Building building = null;
 
-    public GameObject buildingPreview;
+    [SerializeField]private GameObject buildingPreview;
 
     private GameObject spritePreview;
 
@@ -19,22 +15,20 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     private float navMeshZAxis;
 
+    private string popupCostBuilding;
+
     ResourcesPlayer resourcesPlayer = null;
 
-    string popupCostBuilding;
 
     private void Start()
     {
         Sprite buildingSprite = building.GetComponentInChildren<SpriteRenderer>().sprite;
         gameObject.GetComponent<Image>().sprite = buildingSprite;
         buildingPreview.GetComponent<SpriteRenderer>().sprite = buildingSprite;
-
         navMeshZAxis = FindObjectOfType<NavMeshScript>().transform.position.z;
-
         resourcesPlayer = FindObjectOfType<ResourcesPlayer>();
 
         building.InitiateCosts();
-
         popupCostBuilding = "Wood: " + building.getCostBuilding()[0].ToString() + '\n' +
                             "Metal: " + building.getCostBuilding()[1].ToString() + '\n' +
                             "Gold: " + building.getCostBuilding()[2].ToString() + '\n' +
@@ -44,12 +38,13 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     private void Update()
     {
-        if (spritePreview == null) { return; }
+        if (!spritePreview) { return; }
 
         if (!player) {
             player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
         }
 
+        // Cancel building button selection.
         if (Input.GetMouseButtonDown(1))
         {
             Destroy(spritePreview);
@@ -58,11 +53,8 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
         }
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         mousePos.z = navMeshZAxis;
-
         spritePreview.transform.position = mousePos;
-
         spritePreview.GetComponent<SpriteRenderer>().color = Color.green;
 
         if(!CanPlaceBuilding(spritePreview.GetComponent<BoxCollider2D>()))
@@ -110,14 +102,12 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
 
     }
 
-
+    // Is allowed putting building in the current area.
     private bool CanPlaceBuilding(BoxCollider2D buildingCollider)
     {
-
         var buildings = FindObjectsOfType<Building>();
         
         foreach (var building in buildings){
-
             if (buildingCollider.bounds.Intersects(building.GetComponent<BoxCollider2D>().bounds)){
                 return false;
             }

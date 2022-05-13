@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager:MonoBehaviour
 {
-    const int
+/*    const int
         MENU_SCENE = 0,
         NETWORK_SCENE_PLAYGROUND = 1,
         OFFLINE_SCENE_PLAYGROUND =2;
@@ -27,11 +27,8 @@ public class GameSceneManager:MonoBehaviour
         SceneManager.LoadScene(MENU_SCENE);
     }
     
-
     public void ExitGame()
     {
         Application.Quit();
-    }
-
-
+    }*/
 }

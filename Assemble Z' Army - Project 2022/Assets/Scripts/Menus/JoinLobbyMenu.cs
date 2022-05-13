@@ -22,11 +22,9 @@ public class JoinLobbyMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        //audioPlayer.PlayBtnClickClip();
         RtsNetworkManager.ClientOnConnected -= HandleClientConnected;
         RtsNetworkManager.ClientOnDisConnected -= HandleClientDisconnected;
     }
-
 
     public void Join()
     {
@@ -39,7 +37,6 @@ public class JoinLobbyMenu : MonoBehaviour
 
         joinButton.interactable = false;
     }
-
 
     private void HandleClientConnected()
     {

@@ -52,7 +52,6 @@ public class MainMenu : MonoBehaviour
 
     }
 
-
     // When lobby is created , start hosting the game.
     private void OnLobbyCreated(LobbyCreated_t callback)
     {
@@ -66,7 +65,6 @@ public class MainMenu : MonoBehaviour
         SteamMatchmaking.SetLobbyData(new CSteamID(callback.m_ulSteamIDLobby), "HostAddress", SteamUser.GetSteamID().ToString());
 
     }
-
 
     // When player join the game.
     private void OnGameLobbyJoinRequasted(GameLobbyJoinRequested_t callback)
@@ -86,7 +84,4 @@ public class MainMenu : MonoBehaviour
 
         landingPagePanel.SetActive(false);
     }
-
-
-
 }

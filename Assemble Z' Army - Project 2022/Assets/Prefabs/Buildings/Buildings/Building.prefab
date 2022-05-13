@@ -57,9 +57,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   buldingConstructionSlider: {fileID: 465014552052168490}
-  constructionTime: 10
   timePassed: 0
-  hammerCursor: {fileID: 8405438503750832661, guid: 87a5160df6e0d6d48b9dc8485c675550, type: 3}
+  constructionTime: 10
+  hammerSprite: {fileID: 8405438503750832661, guid: 87a5160df6e0d6d48b9dc8485c675550, type: 3}
 --- !u!114 &1801245389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +87,6 @@ MonoBehaviour:
   token: {fileID: 3824360112819498004}
   recruitCursor: {fileID: 8405438503750832661, guid: 5d7a80c056c03094f931656adc6011d4, type: 3}
   timeSlider: {fileID: 3050743307702186120}
-  waitingUnit: []
 --- !u!208 &7784999203533053926
 NavMeshObstacle:
   m_ObjectHideFlags: 0

@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
-using System;
 
 // Abstract class for multiple attacks types.
 public abstract class Attacker : NetworkBehaviour
 {
+    public Targetable target = null;
     protected bool reachedTarget = false;
     protected bool isInAttackMode = false;
-    private bool isInModeAttackAutomated = false;
-
-    public Targetable target = null;
-
     protected UnitMovement movement = null;
+    private bool isInModeAttackAutomated = false;
 
     [Header("Attack Settings")]
     [SerializeField] private float attackTime = 1f;
@@ -32,25 +27,24 @@ public abstract class Attacker : NetworkBehaviour
         defense = GetComponent<Unit>().Defense.BaseValue;
     }
 
+    #region server
     [ServerCallback]
     private void Update()
     {
-        if (GetComponent<Unit>().isDead)
-        {
-            return;
-        }
+        if (GetComponent<Unit>().isDead) { return; }
 
-        if (!target || target.IsDead() || GetComponent<Unit>().moveToDir) {
+        if (!target || target.IsDead() || GetComponent<Unit>().moveToDir)
+        {
             isInModeAttackAutomated = false;
-            
+
             StopAttackAnime();
             target = null;
             reachedTarget = false;
             isInAttackMode = false;
-            return; 
+            return;
         }
 
-        if (Vector2.Distance(gameObject.transform.position,this.target.transform.position) < range)
+        if (Vector2.Distance(gameObject.transform.position, this.target.transform.position) < range)
         {
             GetComponent<Unit>().moveToDir = false;
             GetComponent<Unit>().StopMove();
@@ -77,6 +71,15 @@ public abstract class Attacker : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdSetTargetable(Targetable target)
+    {
+        GetComponent<Unit>().moveToDir = false;
+        this.target = target;
+    }
+    #endregion
+
+
     public void SetAutomateAttack()
     {
         isInModeAttackAutomated = true;
@@ -87,18 +90,10 @@ public abstract class Attacker : NetworkBehaviour
         return isInModeAttackAutomated;
     }
 
-    [Command]
-    public void CmdSetTargetable(Targetable target)
-    {
-        GetComponent<Unit>().moveToDir = false;
-        this.target = target;
-    }
-
     public void SetTargetable(Targetable target)
     {
         this.target = target;
     }
-
 
     public abstract void StopAttackAnime();
 

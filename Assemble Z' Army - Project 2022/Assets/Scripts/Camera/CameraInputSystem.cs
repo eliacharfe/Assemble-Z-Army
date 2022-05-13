@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
-using UnityEngine.Experimental.Rendering.LWRP;
-using UnityEngine.Experimental.Rendering.Universal;
 using Cinemachine;
 
 public class CameraInputSystem : NetworkBehaviour
@@ -19,37 +14,17 @@ public class CameraInputSystem : NetworkBehaviour
     [SerializeField] private float confinerBoundX = 60;
     [SerializeField] private float MAX_ZOOM_IN = 25f;
     [SerializeField] private float MAX_ZOOM_OUT = 35;
+    [SerializeField] private float zoomSize = 100f;
     CinemachineVirtualCamera virtualCamera = null;
 
     private Controls controls;
     private Vector2 prevInput;
+    private Vector3 startCameraPos;
 
-    [SerializeField] private GameObject gameObj;
-    [SerializeField] public new UnityEngine.Experimental.Rendering.Universal.Light2D light;
-
-    //[SerializeField] private Light2D light;
-    // UnityEngine.Experimental.Rendering.LWRP.Light2D m_Light2D = null;
-    //private float scrollSpeed = 40f;
-
-    private Vector3 startCameraPos, minCam, maxCam;
-    float leftLimit, rightLimit, topLimit, buttomLimit;
-
-    public override void OnStartAuthority()
+    private void Start()
     {
-        startCameraPos = playerCameraTransform.position;
-        screenXLimits = new Vector3(startCameraPos.x - confinerBoundX, startCameraPos.x + confinerBoundX, transform.position.z);
-        screenZLimits = new Vector3(startCameraPos.y - confinerBoundY, startCameraPos.y + confinerBoundY, transform.position.z);
-
-        playerCameraTransform.gameObject.SetActive(true);
-
-        controls = new Controls();
-
-        controls.Player.MoveCamera.performed += SetPrevInput;
-        controls.Player.MoveCamera.canceled += SetPrevInput;
-
-        controls.Enable();
+        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
     }
-
 
     public void OnStartingGame()
     {
@@ -68,15 +43,11 @@ public class CameraInputSystem : NetworkBehaviour
         screenZLimits = new Vector3(0 - confinerBoundY, 0 + confinerBoundY, transform.position.z);
     }
 
-    public override void OnStopAuthority()
-    {
-        Camera.main.transform.position = new Vector3(0, 0, 0);
-    }
+    #region server
 
-    private void Start()
-    {
-        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-    }
+    #endregion
+
+    #region client
 
     [ClientCallback]
     void Update()
@@ -85,9 +56,34 @@ public class CameraInputSystem : NetworkBehaviour
 
         MoveCamera();
 
-        if(virtualCamera)
+        if (virtualCamera)
             ZoomInOutCamera();
     }
+
+    public override void OnStartAuthority()
+    {
+        startCameraPos = playerCameraTransform.position;
+
+        // Set boundries
+        screenXLimits = new Vector3(startCameraPos.x - confinerBoundX, startCameraPos.x + confinerBoundX, transform.position.z);
+        screenZLimits = new Vector3(startCameraPos.y - confinerBoundY, startCameraPos.y + confinerBoundY, transform.position.z);
+
+        playerCameraTransform.gameObject.SetActive(true);
+
+        controls = new Controls();
+
+        controls.Player.MoveCamera.performed += SetPrevInput;
+        controls.Player.MoveCamera.canceled += SetPrevInput;
+
+        controls.Enable();
+    }
+
+    public override void OnStopAuthority()
+    {
+        Camera.main.transform.position = new Vector3(0, 0, 0);
+    }
+    #endregion
+
 
     private void SetPrevInput(InputAction.CallbackContext ctx)
     {
@@ -126,11 +122,6 @@ public class CameraInputSystem : NetworkBehaviour
         pos.y = Mathf.Clamp(pos.y, screenZLimits.x, screenZLimits.y);
 
         playerCameraTransform.position = pos;
-        /*
-        playerCameraTransform.position = new Vector3(
-
-        Mathf.Clamp(playerCameraTransform.position.z, minCam.z, maxCam.z)); // boundies to camera
-        */
     }
 
     public void setPlayerCameraTransform(Transform cameraTransform)
@@ -138,12 +129,6 @@ public class CameraInputSystem : NetworkBehaviour
         print(playerCameraTransform.position);
         playerCameraTransform.position = cameraTransform.position;
     }
-
-        [SerializeField] private float zoomSize = 100f;
-
-
-
-
 
     void ZoomInOutCamera()
     {
@@ -174,15 +159,5 @@ public class CameraInputSystem : NetworkBehaviour
         }
 
         virtualCamera.m_Lens.OrthographicSize = zoomSize;
-
     }
 }
-
-
-
-
-// pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
-// pos.z = Mathf.Clamp(pos.z, screenXLimits.x, screenXLimits.y);
-
-// float scroll = Input.GetAxis("Mouse ScrollWheel");
-// pos.y += scroll * scrollSpeed * 200f * Time.deltaTime;

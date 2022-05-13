@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
@@ -30,7 +27,7 @@ public class BowAttack : Attacker
 
     }
 
-
+    // Called from animation player
     public void realeseArrow()
     {
         if (!target)
@@ -74,12 +71,13 @@ public class BowAttack : Attacker
 
     }
 
-
+    #region client
     [ClientRpc]
     void RpcPlayBowSound()
     {
         audioPlayer.PlayShootingClip();
     }
+    #endregion
 
     private void FlipSideSprite(Vector3 target)
     {

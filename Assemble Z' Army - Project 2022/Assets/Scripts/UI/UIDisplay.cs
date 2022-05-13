@@ -68,14 +68,3 @@ public class UIDisplay : MonoBehaviour
         slider.transform.Find("Background").GetComponent<Image>().color = Color.red;
     }
 }
-
-
-// woodSlider.value = resourcesPlayer.GetWood();
-// woodText.text = resourcesPlayer.GetWood().ToString();
-
-// metalSlider.value = resourcesPlayer.GetMetal();
-// metalText.text = resourcesPlayer.GetMetal().ToString();
-// goldSlider.value = resourcesPlayer.GetGold();
-// goldText.text = resourcesPlayer.GetGold().ToString();
-// diamondsSlider.value = resourcesPlayer.GetDiamonds();
-// diamondsText.text = resourcesPlayer.GetDiamonds().ToString();

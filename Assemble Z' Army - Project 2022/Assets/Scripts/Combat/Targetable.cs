@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Mirror;
-
 
 public class Targetable : NetworkBehaviour
 {
@@ -10,7 +6,6 @@ public class Targetable : NetworkBehaviour
     {
         GetComponent<Health>().currHealth = 100;
     }
-
 
     public bool IsDead()
     {

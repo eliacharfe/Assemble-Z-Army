@@ -2,6 +2,14 @@ using UnityEngine;
 
 namespace Macros
 {
+
+    class Scenes
+    {
+        public const string PREPERATION_SCENE = "Playground";
+        public const string BATTLEFIELD_SCENE = "Battlefield";
+
+    }
+
     class Constents
     {
         // Phases

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
@@ -6,12 +5,11 @@ using UnityEngine.InputSystem;
 
 public class RTSController : MonoBehaviour
 {
+    [SerializeField] private Transform selectionAreaTransform;
     private Camera mainCamera;
     private List < Unit > selectedUnits;
     private Vector3 startPos;
     private Vector2 startPosition;
-
-    [SerializeField] private Transform selectionAreaTransform;
     private int LayerMaskDetectionArea;
     private List<Macros.Units> idsUnits;
 
@@ -24,9 +22,6 @@ public class RTSController : MonoBehaviour
         LayerMaskDetectionArea = LayerMask.GetMask("DetectionAttackArea");
     }
 
-    
-
-    //------------------------
     private void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -46,14 +41,9 @@ public class RTSController : MonoBehaviour
         {
             GiveMovmentCommand();
         }
-
-        /*foreach (Unit unit in selectedUnits)
-        {
-            if (unit.ReachedDestination()) { }
-        }*/
     }
 
-    //--------------------------------- 
+    // Give a command accordingly the unit type and location clicked
     private void GiveMovmentCommand()
     {
         BuilidingConstruction buildingToConstruct = null;
@@ -84,11 +74,9 @@ public class RTSController : MonoBehaviour
             MoveUnits();
     }
 
-    //--------------------------------------
-    //Todo - Seperate to different function.
+    // Attack the relevent unit
     private void AttackUnit(Targetable targetable, RaycastHit2D hit)
     {
-
         foreach (Unit unit in selectedUnits)
         {
             if(!unit || !unit.GetComponent<Attacker>())
@@ -118,7 +106,7 @@ public class RTSController : MonoBehaviour
         }
     }
 
-    // Send unit to building for recruitment.
+    // Send for recruitment.
     private void SendToRecruit(Building building, RaycastHit2D hit)
     {
         foreach (Unit unit in selectedUnits)
@@ -138,8 +126,7 @@ public class RTSController : MonoBehaviour
         }
     }
 
-
-    // Send workers to construct the building.
+    // Send workers only to construct the building.
     private void SendToBuild(BuilidingConstruction building, RaycastHit2D hit)
     {
         foreach (Unit unit in selectedUnits)
@@ -152,7 +139,6 @@ public class RTSController : MonoBehaviour
         }
         
     }
-
 
     // Move units to position clicked on.
     private void MoveUnits()
@@ -187,17 +173,16 @@ public class RTSController : MonoBehaviour
         }
     }
 
-
-    // Clear previous commands such as attack target or recruit.
     private void ClearPreviousCommands(Unit unit)
     {
-        unit?.RemoveBuildingRecruiting();
+        if(!unit) { return; }
 
-        if (unit && unit.GetComponent<Attacker>())
+        unit.RemoveBuildingRecruiting();
+
+        if (unit.GetComponent<Attacker>())
             unit.GetComponent<Attacker>().CmdSetTargetable(null);
     }
 
-    //-------------------------------------
     private void StartSelectionArea()
     {
         startPosition = Utils.GetMouseWorldPosition();
@@ -217,7 +202,7 @@ public class RTSController : MonoBehaviour
 
         UpdateSelectionArea();
     }
-    //--------------------------------
+
     private void ClearSelectionArea()
     {
         selectionAreaTransform.gameObject.SetActive(false);
@@ -237,7 +222,6 @@ public class RTSController : MonoBehaviour
         }
     }
 
-    //--------------------------------
     private void UpdateSelectionArea()
     {
         Vector3 currMousePos = Utils.GetMouseWorldPosition();
