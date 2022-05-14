@@ -259,6 +259,11 @@ public class RTSController : MonoBehaviour
         return selectedUnits.Find(unit => unit.id == Macros.Units.WORKER);
     }
 
+    public bool HasUnits()
+    {
+        return selectedUnits.Count > 0;
+    }
+
 }
 
 

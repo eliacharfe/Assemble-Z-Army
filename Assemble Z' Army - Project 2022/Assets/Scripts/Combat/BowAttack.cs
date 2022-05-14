@@ -54,7 +54,7 @@ public class BowAttack : Attacker
         Physics2D.IgnoreCollision(arrow.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-        //audioPlayer.PlayShootingClip();
+        audioPlayer.PlayShootingClip();
 
         FlipSideSprite(targPos);
 

@@ -18,6 +18,7 @@ public class Unit : NetworkBehaviour
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
     [SerializeField] private SpriteRenderer selectionCircle = null;
+    [SerializeField] private GameObject attackCursor = null;
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDeSpawned;
@@ -28,6 +29,7 @@ public class Unit : NetworkBehaviour
     UnitMovement move;
 
     private CapsuleCollider2D myBoxCollider = null;
+    private GameObject attackImageIcon = null;
 
     [SyncVar]public bool isDead;
     [SyncVar]public bool moveToDir;
@@ -82,6 +84,32 @@ public class Unit : NetworkBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         agent.speed = Speed.BaseValue; // exit from trigger
+    }
+
+    private void OnMouseEnter()
+    {
+       ;
+        if (this.hasAuthority) {
+            return;
+        }
+
+        var rtsController = FindObjectOfType<RTSController>();
+
+        if(rtsController && rtsController.HasUnits())
+            attackImageIcon = Instantiate(attackCursor, Utilities.Utils.GetMouseIconPos(), Quaternion.identity);
+    }
+
+    private void OnMouseOver()
+    {
+        if (attackImageIcon)
+            attackImageIcon.transform.position = Utilities.Utils.GetMouseIconPos();
+    }
+
+    private void OnMouseExit()
+    {
+        if (attackImageIcon)
+            Destroy(attackImageIcon);
+        
     }
 
     #region server
