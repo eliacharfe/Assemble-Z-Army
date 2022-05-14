@@ -109,17 +109,36 @@ public class RtsNetworkManager : NetworkManager
             List<Vector3> posList = Utilities.Utils.GetCircleForamtionPosList(startinPoint, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
             int posIndex = 0;
 
-            for (int i = 0; i < amountOfRecruits; i++)
+            /*for (int i = 0; i < amountOfRecruits; i++)
             {
                 GameObject RecruitsInstance = Instantiate(factory.GetUnitPrefab(Macros.Units.RECRUIT).gameObject, posList[posIndex], Quaternion.identity);
                 NetworkServer.Spawn(RecruitsInstance, player.connectionToClient);
                 posIndex = (posIndex + 1) % posList.Count;
-            }
+            }*/
+
+            spawnTemp(Units.ARCHER, factory, player, startinPoint);
+            spawnTemp(Units.ARCHER_HORSE, factory, player, startinPoint);
+            spawnTemp(Units.CROSSBOW, factory, player, startinPoint);
+            spawnTemp(Units.HEALER, factory, player, startinPoint);
+            spawnTemp(Units.RECRUIT, factory, player, startinPoint);
+            spawnTemp(Units.SIMPLE_HORSE, factory, player, startinPoint);
+            spawnTemp(Units.SPEAR_HORSE_KNIGHT, factory, player, startinPoint);
+            spawnTemp(Units.SPEAR_KNIGHT, factory, player, startinPoint);
+            spawnTemp(Units.SWORDMAN, factory, player, startinPoint);
+            spawnTemp(Units.SWORD_KNIGHT, factory, player, startinPoint);
 
             GameObject Healer = Instantiate(factory.GetUnitPrefab(Macros.Units.HEALER).gameObject, startinPoint, Quaternion.identity);
             NetworkServer.Spawn(Healer, player.connectionToClient);
         }
 
+    }
+
+    void spawnTemp(Macros.Units name, UnitsFactory factory, RTSPlayer player, Vector3 pos)
+    {
+        GameObject workerInstance = Instantiate(factory.GetUnitPrefab(name).gameObject, pos, Quaternion.identity);
+
+        // Spawn the player on server.
+        NetworkServer.Spawn(workerInstance, player.connectionToClient);
     }
 
     // Spawn gathered units in battlefield.
