@@ -87,6 +87,7 @@ public class RTSController : MonoBehaviour
 
             if (unit.id != Macros.Units.WORKER && !targetable.hasAuthority)
             {
+                print("Attack unit");
                 unit.GetComponent<Attacker>().CmdSetTargetable(targetable);
             }
 
