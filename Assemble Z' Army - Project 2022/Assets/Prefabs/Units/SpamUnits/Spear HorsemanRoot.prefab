@@ -5380,6 +5380,8 @@ GameObject:
   - component: {fileID: 7675357207386853791}
   - component: {fileID: 7675357207386853770}
   - component: {fileID: 7675357207386853780}
+  - component: {fileID: 5046415759682550528}
+  - component: {fileID: -65619710586445807}
   - component: {fileID: 7675357207386853783}
   - component: {fileID: 7675357207386853782}
   - component: {fileID: 7675357207386853777}
@@ -5515,6 +5517,31 @@ MonoBehaviour:
   health: {fileID: 7675357207386853783}
   healthBar: {fileID: 8882934259837889355}
   healthBarImage: {fileID: 8882934259569867908}
+--- !u!114 &5046415759682550528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675357207386853784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af66a1098e66934d874f63aebd4523f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-65619710586445807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675357207386853784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25381ff889a18694a84a2a95626980be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonuseAttack: 15
 --- !u!114 &7675357207386853783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6409,11 +6436,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2198042492332908200, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
   m_PrefabInstance: {fileID: 7333973063941191139}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &8882934259837889352 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2198042492332908203, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
-  m_PrefabInstance: {fileID: 7333973063941191139}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8882934259569867911 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2198042492063992164, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
@@ -6430,6 +6452,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &8882934259837889352 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2198042492332908203, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
+  m_PrefabInstance: {fileID: 7333973063941191139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8314928311992022406
 PrefabInstance:
   m_ObjectHideFlags: 0
