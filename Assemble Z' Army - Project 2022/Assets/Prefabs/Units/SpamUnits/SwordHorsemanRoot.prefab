@@ -5499,7 +5499,7 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  target: {fileID: 4953132780388519301}
+  target: {fileID: 4953132779582872138}
 --- !u!1 &1080620239725710659
 GameObject:
   m_ObjectHideFlags: 0
@@ -6429,11 +6429,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
---- !u!1 &4953132779582872137 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2198042492332908200, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
-  m_PrefabInstance: {fileID: 6502093975482451169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4953132779582872138 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2198042492332908203, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
@@ -6450,8 +6445,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &4953132780388519301 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2198042492063992164, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
+--- !u!1 &4953132779582872137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2198042492332908200, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
   m_PrefabInstance: {fileID: 6502093975482451169}
   m_PrefabAsset: {fileID: 0}

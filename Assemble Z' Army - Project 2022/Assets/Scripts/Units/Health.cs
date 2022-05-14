@@ -50,6 +50,7 @@ public class Health : NetworkBehaviour
 
         var effectPos = Utilities.Utils.ChangeYAxis(transform.position, transform.position.y + 2);
         Instantiate(hitEffect, effectPos, Quaternion.identity);
+        Destroy(hitEffect, 1.5f);
     }
     #endregion
 

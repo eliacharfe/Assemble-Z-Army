@@ -1365,7 +1365,7 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  target: {fileID: 6877927939079904719}
+  target: {fileID: 6877927940958472704}
 --- !u!1 &3712606424313511482
 GameObject:
   m_ObjectHideFlags: 0
@@ -6299,11 +6299,6 @@ GameObject:
 --- !u!224 &6877927940958472704 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2198042492332908203, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
-  m_PrefabInstance: {fileID: 4751943042668680363}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &6877927939079904719 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2198042492063992164, guid: 71dc06b2a7bcb424c950555b208b7136, type: 3}
   m_PrefabInstance: {fileID: 4751943042668680363}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &6877927939079904716 stripped
