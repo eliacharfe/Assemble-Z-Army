@@ -4,7 +4,7 @@ public class SwordAttack : Attacker
 {
     float bonusDamage = 0;
 
-    private void Start()
+    private void Awake()
     {
         var spear = GetComponent<Spear>();
         if (spear)

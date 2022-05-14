@@ -74,7 +74,6 @@ public abstract class Attacker : NetworkBehaviour
     [Command]
     public void CmdSetTargetable(Targetable target)
     {
-        print("Have targer");
         GetComponent<Unit>().moveToDir = false;
         this.target = target;
     }

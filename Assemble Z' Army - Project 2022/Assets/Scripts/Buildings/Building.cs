@@ -116,7 +116,6 @@ public class Building : NetworkBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             token.SetActive(false);
-
             ShowBuildingPanel(false);
         }
 
@@ -126,7 +125,6 @@ public class Building : NetworkBehaviour
     private void OnMouseUp()
     {
         token.SetActive(true);
-
         ShowBuildingPanel(true);
     }
 
@@ -138,7 +136,6 @@ public class Building : NetworkBehaviour
         }
 
         List<Macros.Units> units = rtsController.GetIdsUnits();
-
         foreach(Macros.Units id in units)
         {
             if (unitsFactory && unitsFactory.GetBuildingOutputUnit(this.id, id)){
@@ -161,9 +158,7 @@ public class Building : NetworkBehaviour
     private void OnMouseExit()
     {
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
-
         TooltipInfoUnitBuildingCost.HideTooltip_Static();
-
         if (recruitImageIcon)
             Destroy(recruitImageIcon);
     }
@@ -186,9 +181,7 @@ public class Building : NetworkBehaviour
             > spawnDistancePoint){ return; }
 
         spawnUnitPrefab = unitsFactory.GetBuildingOutputUnit(this.id, unit.id);
-
         RemoveUnitFromWaitingList(unit);
-
         var prices = resourcesPlayer.GetCostsTrainingUnitInBuildingByIds(unit.id, this.id);
 
         if (spawnUnitPrefab && resourcesPlayer.isHaveEnoughResources(prices))

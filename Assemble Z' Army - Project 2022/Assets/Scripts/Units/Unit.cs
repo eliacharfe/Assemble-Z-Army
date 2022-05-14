@@ -100,7 +100,6 @@ public class Unit : NetworkBehaviour
     [Command]
     public void CmdBuildAnimation()
     {
-        print("Start Build animation in command");
         GetComponent<Animator>().SetBool("isAttacking", true);
     }
 
@@ -332,7 +331,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 12f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 10f; 
+                    ReachDistance.BaseValue = 15f; 
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
@@ -404,7 +403,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 10f;
                     Attack.BaseValue = 10f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 7f;
+                    ReachDistance.BaseValue = 5f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 }
@@ -413,7 +412,7 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 7f;
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 7f;
-                    ReachDistance.BaseValue = 12f;
+                    ReachDistance.BaseValue = 6f;
                     SpeedAttack.BaseValue = 1.5f;
                     break;
                 }
@@ -422,16 +421,16 @@ public class Unit : NetworkBehaviour
                     Speed.BaseValue = agent.speed = 15f;
                     Attack.BaseValue = 15f;
                     Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 12f;
+                    ReachDistance.BaseValue = 6f;
                     SpeedAttack.BaseValue = 1.8f;
                     break;
                 };
             case Units.SPEAR_HORSE_KNIGHT:
                 {
                     Speed.BaseValue = agent.speed = 10f;
-                    Attack.BaseValue = 25f;
+                    Attack.BaseValue = 15f;
                     Defense.BaseValue = 7f;
-                    ReachDistance.BaseValue = 12f;
+                    ReachDistance.BaseValue = 6f;
                     SpeedAttack.BaseValue = 2f;
                     break;
                 };
