@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Script for worker allowing to build required building.
-public class ConstructBuilding : MonoBehaviour
+public class Worker : MonoBehaviour
 {
     public BuilidingConstruction buildingTarget;
     public float time = 0;
 
     private Unit unit = null;
-
     bool isBuilding = false;
 
     private void Start()
     {
         unit = gameObject.GetComponent<Unit>() as Unit;
     }
-
 
     // Update is called once per frame
     void Update()
@@ -37,16 +35,11 @@ public class ConstructBuilding : MonoBehaviour
     {
 
         BuilidingConstruction tempBuild = collision.GetComponent<BuilidingConstruction>();
-        print("Collided whith building" + tempBuild  +" building target " + buildingTarget);
         if (tempBuild && this.buildingTarget == tempBuild)
         {
-
             isBuilding = true;
-
             unit.CmdStopMove();
-
             unit.CmdBuildAnimation();
-
             GetComponent<Animator>().SetBool("isAttacking", true);
         }
 

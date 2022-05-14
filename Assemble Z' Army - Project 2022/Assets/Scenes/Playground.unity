@@ -61252,6 +61252,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 14005226}
     - target: {fileID: 8543692483657339222, guid: 7fcecf008f8d3d144b97565eb1baa158, type: 3}
+      propertyPath: BuildingPanelCanvas
+      value: 
+      objectReference: {fileID: 14005226}
+    - target: {fileID: 8543692483657339222, guid: 7fcecf008f8d3d144b97565eb1baa158, type: 3}
       propertyPath: currentPhaseDisplay
       value: 
       objectReference: {fileID: 2129725755}

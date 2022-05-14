@@ -11,14 +11,4 @@ public class StatSwordman : MonoBehaviour
     public CharacterStat Defense;
     public CharacterStat ReachDistance;
     public CharacterStat SpeedAttack;
-
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

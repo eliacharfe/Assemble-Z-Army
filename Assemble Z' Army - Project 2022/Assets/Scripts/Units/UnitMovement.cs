@@ -1,20 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
-using Utilities;
-
-using Cinemachine;
 using Mirror;
 
-public class UnitMovement:NetworkBehaviour
+public class UnitMovement : NetworkBehaviour
 {
     private NavMeshAgent agent = null;
-    public bool isMoving = false;
-
     private Unit unit = null;
+    public bool isMoving = false;
 
     private void Start()
     {
@@ -23,40 +15,31 @@ public class UnitMovement:NetworkBehaviour
         unit = GetComponent<Unit>();
     }
 
+    #region server
     [Command]
     public void CmdMove(Vector3 dest)
     {
         dest.z = 0;
-
         if (!unit || unit.isDead || Vector3.Distance(unit.transform.position, dest) <= 4f)
         {
             return;
         }
-
         GetComponent<Animator>().SetBool("isRunning", true);
-
         agent.SetDestination(dest);
-
         FlipSideSprite(dest);
-
         isMoving = true;
     }
-
+    #endregion
 
     public void Move(Vector3 dest)
     {
         dest.z = 0;
-
         GetComponent<Animator>().SetBool("isRunning", true);
-
-        //RpcMoveAnime();
-
         agent.SetDestination(dest);
-
         FlipSideSprite(dest);
     }
 
-
+    // Flip the sprite render to the relevent direction
     private void FlipSideSprite(Vector3 dest)
     {
         Transform tr = gameObject.transform;
@@ -65,9 +48,7 @@ public class UnitMovement:NetworkBehaviour
 
         if (dest.x < tr.position.x && tr.localScale.x < Mathf.Epsilon)
         {
-            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
-                                        tr.localScale.z);
-
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,                             tr.localScale.z);
             healthBar.localScale = new Vector3(-healthBar.localScale.x, healthBar.localScale.y, healthBar.localScale.z);
             if (manaBar)
             {
@@ -76,29 +57,23 @@ public class UnitMovement:NetworkBehaviour
         }
         else if (dest.x > tr.position.x && tr.localScale.x > Mathf.Epsilon)
         {
-            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,
-                                         tr.localScale.z);
-
+            tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y,                            tr.localScale.z);
             healthBar.localScale = new Vector3(-healthBar.localScale.x, healthBar.localScale.y, healthBar.localScale.z);
             if (manaBar)
             {
                 manaBar.localScale = new Vector3(-manaBar.localScale.x, manaBar.localScale.y, manaBar.localScale.z);
             }
         }
-
     }
-
     public bool IsMoving()
     {
         return agent.hasPath || isMoving;
     }
 
-
     public void PlayFootStepsSound()
     {
         FindObjectOfType<AudioPlayer>().PlayStepClip();
     }
-
 
     public void PlayHorseStepsSound()
     {

@@ -80,7 +80,7 @@ public class RtsNetworkManager : NetworkManager
         foreach (RTSPlayer player in players)
         {
             var startPos = GetStartPosition().position;
-            List<Vector3> posList = Utilities.Utils.GetPosListAround(startPos, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
+            List<Vector3> posList = Utilities.Utils.GetCircleForamtionPosList(startPos, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
             int posIndex = 0;
             var pos = Utilities.Utils.ChangeZAxis(startPos, -5);
 
@@ -106,7 +106,7 @@ public class RtsNetworkManager : NetworkManager
         {
             Vector3 startinPoint = player.transform.position;
             player.removeWorkers();
-            List<Vector3> posList = Utilities.Utils.GetPosListAround(startinPoint, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
+            List<Vector3> posList = Utilities.Utils.GetCircleForamtionPosList(startinPoint, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
             int posIndex = 0;
 
             for (int i = 0; i < amountOfRecruits; i++)

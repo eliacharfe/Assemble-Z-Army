@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 using Macros;
 
 // The class return units according the building and unit given.
-// The comprantion between units is mad according the given tags.
-// TODO compare types by scripts object.
+// The comprantion between units is made according the given id.
 public class UnitsFactory : MonoBehaviour
 {
     public Unit
@@ -28,48 +24,34 @@ public class UnitsFactory : MonoBehaviour
         worker,
         recruit;
 
-
-
-
     public Unit GetBuildingOutputUnit(Buildings buildingId, Units unitId)
     {
         switch(buildingId)
         {
             case Buildings.SWORD_SMITH:
                 return GetSwordmanUnit(unitId);
-
             case Buildings.SPEAR_SMITH:
                 return GetSpearUnit(unitId);
-
             case Buildings.ARCHERY_FIELD:
                 return GetArcherUnit(unitId);
-
             case Buildings.ARMORY:
                 return GetArmoredUnit(unitId);
-
             case Buildings.STABLE:
                 return GetStableUnit(unitId);
-
             case Buildings.CROSSBOW_FIELD:
                 return GetCrossbowUnit(unitId);
-
             case Buildings.WORKSHOP:
                 return GetCatapultUnit(unitId);
-
             case Buildings.TEMPLE:
                 return GetHealerUnit(unitId);
-
             case Buildings.CAMP:
                 return GetScoutUnit(unitId);
         }
         return null;
     }
 
-
     public Unit GetUnitPrefab(Units unitId)
     {
-
-        print("Unit id recived "+unitId);
         switch (unitId)
         {
             case Units.WORKER:
@@ -111,10 +93,8 @@ public class UnitsFactory : MonoBehaviour
             case Units.HEALER:
                 return healer;
         }
-
         return null;
     }
-
 
     private bool IsRecruit(Units unitId){
         return unitId == Units.RECRUIT;
@@ -127,16 +107,13 @@ public class UnitsFactory : MonoBehaviour
         return IsRecruit(unitId) ? crossbow : null;
     }
 
-
     private Unit GetCatapultUnit(Units unitId){
         return IsRecruit(unitId) ? catapult : null;
     }
 
-
     private Unit GetScoutUnit(Units unitId){
         return IsRecruit(unitId) ? scout : null;
     }
-
 
     private Unit GetSwordmanUnit(Units unitId){
         switch (unitId)
@@ -146,7 +123,6 @@ public class UnitsFactory : MonoBehaviour
             case Units.RECRUIT:
                 return swordman;
         }
-
         return null;
     }
 
@@ -158,7 +134,6 @@ public class UnitsFactory : MonoBehaviour
             case Units.RECRUIT:
                 return spearman;
         }
-
         return null;
     }
 
@@ -191,7 +166,6 @@ public class UnitsFactory : MonoBehaviour
         return null;
     }
 
-
     private Unit GetStableUnit(Units unitId){
         switch (unitId)
         {
@@ -208,7 +182,6 @@ public class UnitsFactory : MonoBehaviour
             case Units.SPEAR_KNIGHT:
                 return spearHorseKnight;
         }
-
         return null;
     }
 

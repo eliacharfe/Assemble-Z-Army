@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
@@ -60,9 +58,6 @@ public class FieldOfView : MonoBehaviour
             vertexIndex++;
             angle -= angleInc;
         }
-
-        // vertices[1] = new Vector3(50, 0);
-        // vertices[2] = new Vector3(0, -50);
 
         triangles[0] = 0;
         triangles[1] = 1;

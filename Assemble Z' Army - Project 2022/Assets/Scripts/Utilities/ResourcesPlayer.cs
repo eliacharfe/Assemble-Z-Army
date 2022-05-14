@@ -20,7 +20,6 @@ public class ResourcesPlayer : MonoBehaviour
         InitCostsTrainingUnitInBuilding();
     }
 
-    //--------------------
     public bool isHaveEnoughResources(List<int> costBuilding)
     {
         int i = 0;
@@ -35,7 +34,6 @@ public class ResourcesPlayer : MonoBehaviour
         return true;
     }
 
-    //--------------------------
     public void DecreaseResource(List<int> costBuilding)
     {
         for (int i = 0; i < resources.Count; i++)
@@ -43,7 +41,7 @@ public class ResourcesPlayer : MonoBehaviour
             resources[getResource(i)] -= costBuilding[i];
         }
     }
-    //-----------------------------------
+
     private Macros.Resources getResource(int i)
     {
         switch (i)
@@ -59,7 +57,7 @@ public class ResourcesPlayer : MonoBehaviour
         }
         return Macros.Resources.NONE;
     }
-    //------------------------------
+
     public int getResource(Macros.Resources resourse)
     {
         switch (resourse)

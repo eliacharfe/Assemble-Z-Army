@@ -133,7 +133,7 @@ public class RTSController : MonoBehaviour
         {
             if (unit && unit.id == Macros.Units.WORKER)
             {
-                (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).SetBuildingTarget(building);
+                (unit.GetComponent<Worker>() as Worker).SetBuildingTarget(building);
                 unit.MoveTo(hit.point);
             }
         }
@@ -144,7 +144,7 @@ public class RTSController : MonoBehaviour
     private void MoveUnits()
       {
         Vector3 moveToPos = Utils.GetMouseWorldPosition();
-        List<Vector3> targetPosList = Utils.GetPosListAround(moveToPos, new float[] {5, 10, 15}, new int[] {5, 10, 15});
+        List<Vector3> targetPosList = Utils.GetCircleForamtionPosList(moveToPos, new float[] {5, 10, 15}, new int[] {5, 10, 15});
 
         int targetPosIndex = 0;
 
@@ -168,7 +168,7 @@ public class RTSController : MonoBehaviour
 
             if (unit.id == Macros.Units.WORKER)
             {
-                (unit.GetComponent<ConstructBuilding>() as ConstructBuilding).ResetBuildingTarget();
+                (unit.GetComponent<Worker>() as Worker).ResetBuildingTarget();
             }
         }
     }

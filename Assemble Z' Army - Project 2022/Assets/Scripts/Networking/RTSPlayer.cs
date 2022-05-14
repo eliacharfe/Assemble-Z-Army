@@ -162,7 +162,7 @@ public class RTSPlayer : NetworkBehaviour
     {
         var factory = FindObjectOfType<UnitsFactory>();
         List<int> copy = new List<int>(m_unitsId);
-        List<Vector3> posList = Utilities.Utils.GetPosListAround(phaseThreePos, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
+        List<Vector3> posList = Utilities.Utils.GetCircleForamtionPosList(phaseThreePos, new float[] { 5, 10, 15 }, new int[] { 5, 10, 15 });
         int posIndex = 0;
 
         foreach (int id in copy)

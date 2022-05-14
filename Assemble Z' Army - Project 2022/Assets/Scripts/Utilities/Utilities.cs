@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Utilities{
     public static class Utils
     {
-
         public static Vector3 GetMouseIconPos()
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -23,6 +21,7 @@ namespace Utilities{
             return Camera.main.ScreenToWorldPoint(v);
         }
 
+        // Allowing to change one axis for relevent vector
         public static Vector3 ChangeXAxis(Vector3 pos, float x)
         {
             return new Vector3(x, pos.y, pos.z);
@@ -40,7 +39,7 @@ namespace Utilities{
 
 
         // Get positions around the point given.
-        public static List<Vector3> GetPosListAround(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
+        public static List<Vector3> GetCircleForamtionPosList(Vector3 startPos, float[] ringDistanceArr, int[] ringPosCountArr)
         {
             List<Vector3> posList = new List<Vector3>();
             posList.Add(startPos);
@@ -50,8 +49,7 @@ namespace Utilities{
             }
             return posList;
         }
-
-        //---------------------------------------------
+ 
         private static List<Vector3> GetPosListAround(Vector3 startPostion, float distance, int posCount)
         {
             List<Vector3> posList = new List<Vector3>();
@@ -65,7 +63,6 @@ namespace Utilities{
             return posList;
         }
 
-        //-------------------------------------------
         private static Vector3 ApplyRotationToVec(Vector3 vec, float angle)
         {
             return Quaternion.Euler(0, 0, angle) * vec;

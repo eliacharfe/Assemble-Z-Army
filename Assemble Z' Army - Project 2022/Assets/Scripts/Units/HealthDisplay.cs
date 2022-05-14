@@ -9,7 +9,6 @@ public class HealthDisplay : MonoBehaviour
     [SerializeField] private GameObject healthBar = null;
     [SerializeField] private Image healthBarImage = null;
 
-
     private void Awake()
     {
         healthBar.SetActive(true);
@@ -19,16 +18,6 @@ public class HealthDisplay : MonoBehaviour
     private void OnDestroy()
     {
         health.ClientOnHealthUpdate -= HandleHealthUpdated;
-    }
-
-    private void OnMouseEnter()
-    {
-        //healthBar.SetActive(true);
-    }
-
-     private void OnMouseExit()
-    {
-        //healthBar.SetActive(false);
     }
 
     private void HandleHealthUpdated(int currHealth, int maxHealth)

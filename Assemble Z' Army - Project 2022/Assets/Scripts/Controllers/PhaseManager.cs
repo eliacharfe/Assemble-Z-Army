@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using Macros;
 using UnityEngine;
 using TMPro;
 using Mirror;
 using System;
 
+// 
 public class PhaseManager : NetworkBehaviour
 {
     [SyncVar] public float currentTime = 0f;
@@ -15,34 +14,14 @@ public class PhaseManager : NetworkBehaviour
     [SerializeField] private float phaseOneTime = 5f;
     [SerializeField] private float phaseTwoTime = 5f;
 
-    //Canvas
+    // Canvas
     [SerializeField] GameObject phaseOneStartingCanvas = null;
-    [SerializeField] GameObject BuildingCanvasPanel = null;
+    [SerializeField] GameObject BuildingPanelCanvas = null;
     [SerializeField] GameObject phaseOneEndedCanvas = null;
     [SerializeField] GameObject phaseTwoEndedCanvas = null;
 
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI currentPhaseDisplay;
-
-
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
-        timer = phaseOneTime;
-        currentTime = phaseOneTime;
-    }
-
-    public override void OnStopServer()
-    {
-        base.OnStopServer();
-        Destroy(this);
-    }
-
-
-    public void SetTimer(bool value)
-    {
-        startTimer = value;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -84,19 +63,77 @@ public class PhaseManager : NetworkBehaviour
             }
             else 
             {
-                print("Time is up, show battlefield");
                 startTimer = false;
                 ChangePhase();
             }
-
         }
 
         if (timerText)
         {
+            // Show time in format of 00:00
             TimeSpan timeSpan = TimeSpan.FromSeconds(Mathf.Floor(Mathf.Max(timer - 5, 0)));
             timerText.text = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         }
 
+    }
+
+    #region server
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        timer = phaseOneTime;
+        currentTime = phaseOneTime;
+    }
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        Destroy(this);
+    }
+    #endregion
+
+    #region client
+    [ClientRpc]
+    public void RpcRemovePhaseOneStartCanvas()
+    {
+        phaseOneStartingCanvas.SetActive(false);
+    }
+
+    [ClientRpc]
+    public void RpcShowPhaseOneEndCanvas()
+    {
+        phaseOneEndedCanvas.SetActive(true);
+    }
+
+    [ClientRpc]
+    public void RpcRemovePhaseOneEndCanvas()
+    {
+        phaseOneEndedCanvas.SetActive(false);
+        currentPhaseDisplay.SetText("Preperation Phase");
+    }
+
+    [ClientRpc]
+    public void RpcRemoveBuildinPanel()
+    {
+        BuildingPanelCanvas.SetActive(false);
+    }
+
+    [ClientRpc]
+    private void RpcShowPhaseTwoEndCanvas()
+    {
+        phaseTwoEndedCanvas.SetActive(true);
+    }
+
+    [ClientRpc]
+    public void RpcRemovePhaseTwoEndCanvas()
+    {
+        phaseTwoEndedCanvas.SetActive(false);
+    }
+    #endregion
+
+    public void SetTimer(bool value)
+    {
+        startTimer = value;
     }
 
     private void ShowStartPhaseCanvas()
@@ -132,11 +169,8 @@ public class PhaseManager : NetworkBehaviour
         }
     }
 
-
-
     public void ChangePhase()
     {
-
         switch (currentPhase)
         {
             case Constents.PHASE_ONE:
@@ -151,13 +185,10 @@ public class PhaseManager : NetworkBehaviour
                 currentPhase = Constents.PHASE_FOUR;
                 SetPhaseFour();
                 break;
-
-
             default:
                 break;
         }
     }
-
 
     public void SetPhaseTwo()
     {
@@ -167,7 +198,6 @@ public class PhaseManager : NetworkBehaviour
         startTimer = true;
         RpcRemovePhaseOneEndCanvas();
         RpcRemoveBuildinPanel();
-
     }
 
     public void SetPhaseThree()
@@ -182,42 +212,5 @@ public class PhaseManager : NetworkBehaviour
     public void SetPhaseFour()
     {
 
-    }
-
-    [ClientRpc]
-    public void RpcRemovePhaseOneStartCanvas()
-    {
-        phaseOneStartingCanvas.SetActive(false);
-    }
-
-    [ClientRpc]
-    public void RpcShowPhaseOneEndCanvas()
-    {
-        phaseOneEndedCanvas.SetActive(true);
-    }
-
-    [ClientRpc]
-    public void RpcRemovePhaseOneEndCanvas()
-    {
-        phaseOneEndedCanvas.SetActive(false);
-        currentPhaseDisplay.SetText("Preperation Phase");
-    }
-
-    [ClientRpc]
-    public void RpcRemoveBuildinPanel()
-    {
-        BuildingCanvasPanel.SetActive(false);
-    }
-
-    [ClientRpc]
-    private void RpcShowPhaseTwoEndCanvas()
-    {
-        phaseTwoEndedCanvas.SetActive(true);
-    }
-
-    [ClientRpc]
-    public void RpcRemovePhaseTwoEndCanvas()
-    {
-        phaseTwoEndedCanvas.SetActive(false);
     }
 }

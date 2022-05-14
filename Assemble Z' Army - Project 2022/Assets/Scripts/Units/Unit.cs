@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using Mirror;
-using Utilities;
 
 using Char.CharacterStat;
 using Macros;
@@ -14,29 +11,20 @@ public class Unit : NetworkBehaviour
 {
     private bool selectable;
     private Building recrutingBuilding = null;
-
     private NavMeshAgent agent;
     private Animator myAnimator;
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-
     [SerializeField] private SpriteRenderer selectionCircle = null;
 
-
-    // Server Unit spawned event.
     public static event Action<Unit> ServerOnUnitSpawned;
-    // Server Unit despawned event.
     public static event Action<Unit> ServerOnUnitDeSpawned;
-
-    // Authorty Unit spawned event. 
     public static event Action<Unit> AuthortyOnUnitSpawned;
-    // Authorty Unit despawned event. 
     public static event Action<Unit> AuthortyOnUnitDeSpawned;
 
-    public Macros.Units id;
-    private Vector3 destination;
+    public Units id;
     UnitMovement move;
 
     private CapsuleCollider2D myBoxCollider = null;
@@ -49,8 +37,6 @@ public class Unit : NetworkBehaviour
     public CharacterStat Defense;
     public CharacterStat ReachDistance;
     public CharacterStat SpeedAttack;
-
-    // StatModifier mod1, mod2;
 
     private void Awake()
     {
@@ -74,16 +60,28 @@ public class Unit : NetworkBehaviour
 
         InitStats(id);
 
-        if (selectionCircle)
-        {
-            selectionCircle.color = getTeamColor();
-        }
-
         if (gameObject.GetComponent<Targetable>())
         {
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y,
             transform.localScale.z);
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+            agent.speed = Speed.BaseValue / 3; // when collide with water
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
+            agent.speed = Speed.BaseValue / 3; // inside water
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        agent.speed = Speed.BaseValue; // exit from trigger
     }
 
     #region server
@@ -105,6 +103,48 @@ public class Unit : NetworkBehaviour
         print("Start Build animation in command");
         GetComponent<Animator>().SetBool("isAttacking", true);
     }
+
+    [ServerCallback]
+    private void Update()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+
+        if (!agent.hasPath)
+            return;
+
+        if (agent.remainingDistance > agent.stoppingDistance)
+            return;
+
+        agent.ResetPath();
+        StopAnimation();
+        moveToDir = false;
+    }
+
+    [Command]
+    public void CmdStopMove()
+    {
+        agent.velocity = Vector3.zero;
+
+        StopAnimation();
+
+        agent.ResetPath();
+
+        GetComponent<UnitMovement>().isMoving = false;
+
+        moveToDir = false;
+    }
+
+    [Command]
+    public void CmdSetDead()
+    {
+        isDead = true;
+    }
+
+    [Command]
+    void CmdOrderToMove()
+    {
+        moveToDir = true;
+    }
     #endregion
 
 
@@ -125,9 +165,6 @@ public class Unit : NetworkBehaviour
     #endregion
 
     #region client
-    public override void OnStartClient()
-    {
-    }
 
     public override void OnStopClient()
     {
@@ -135,65 +172,22 @@ public class Unit : NetworkBehaviour
     }
     #endregion
 
-    //--------------------------------------
-    [ServerCallback]
-    private void Update()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-
-        if (!agent.hasPath)
-            return;
-
-        if (agent.remainingDistance > agent.stoppingDistance)
-            return;
-
-        agent.ResetPath();
-        StopAnimation();
-        moveToDir = false;
-    }
-    //-------------------------------------
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
-            agent.speed = Speed.BaseValue / 3; // when collide with water
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (myBoxCollider.IsTouchingLayers(LayerMask.GetMask("Water")))
-            agent.speed = Speed.BaseValue / 3; // inside water
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        agent.speed = Speed.BaseValue; // exit from trigger
-    }
-    //----------------------------
     public void SetPostion(Vector3 pos)
     {
         gameObject.transform.position = pos;
     }
 
-    //----------------------------
     public void ReintilizeNavMesh()
     {
         agent.enabled = false;
     }
 
-    //----------------------------
     public void MoveTo(Vector3 dest)
     {
         CmdOrderToMove();
         move.CmdMove(dest);
     }
 
-    [Command]
-    void CmdOrderToMove()
-    {
-        moveToDir = true;
-    }
-
-    //------------------------------
     public bool ReachedDestination()
     {
         if (isDead)
@@ -222,42 +216,36 @@ public class Unit : NetworkBehaviour
         return false;
     }
 
-    //----------------------------
     public void StopAnimation()
     {
         myAnimator.SetBool("isRunning", false);
     }
 
-    //----------------------------
     public void SetColorSelcted()
     {
         spriteRenderer.color = new Color(1f, 0f, 0f, 1f);
     }
 
-    //----------------------------
     public void ResetColor()
     {
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
     }
 
-    //----------------------------
     public bool isSelectable()
     {
         return selectable;
     }
 
-    //----------------------------
     public void Select()
     {
         onSelected?.Invoke();
     }
 
-    //----------------------------
     public void Deselect()
     {
         onDeselected?.Invoke();
     }
-    //----------------------------
+
     public void StopMove()
     {
         agent.velocity = Vector3.zero;
@@ -269,43 +257,20 @@ public class Unit : NetworkBehaviour
         GetComponent<UnitMovement>().isMoving = false;
     }
 
-
-    [Command]
-    public void CmdStopMove()
-    {
-        agent.velocity = Vector3.zero;
-
-        StopAnimation();
-
-        agent.ResetPath();
-
-        GetComponent<UnitMovement>().isMoving = false;
-
-        moveToDir = false;
-    }
-
-    //---------------------------
-    [Command]
-    public void CmdSetDead()
-    {
-        isDead = true;
-    }
-
     public void SetDead()
     {
         isDead = true;
     }
-    //----------------------------
+
     public void ContinutMove()
     {
         agent.isStopped = false;
     }
-    //----------------------------
+
     public bool isMoving()
     {
         return !agent.isStopped;
     }
-    //----------------------------
 
     public Building GetBuildingRecruiting()
     {
@@ -316,7 +281,6 @@ public class Unit : NetworkBehaviour
         recrutingBuilding = building;
     }
 
-    //----------------------------
     public void RemoveBuildingRecruiting()
     {
         if (recrutingBuilding)
@@ -325,7 +289,7 @@ public class Unit : NetworkBehaviour
             recrutingBuilding = null;
         }
     }
-    //----------------------------
+
     public void Equip(Stat stat)
     {
         // We need to store our modifiers in variables before adding them to the stat.
@@ -340,17 +304,6 @@ public class Unit : NetworkBehaviour
         stat.Attack.RemoveAllModifiersFromSource(this);
     }
 
-    // Todo- delete later.
-    private Color getTeamColor()
-    {
-        if (gameObject.GetComponent<Targetable>())
-        {
-            //return gameObject.GetComponent<Targetable>().teamNumber == 0 ? Color.red : Color.green;
-        }
-        return Color.green;
-    }
-
-    //-------------------
     private void InitStats(Units id)
     {
         switch (id)
@@ -505,95 +458,3 @@ public class Unit : NetworkBehaviour
 
 
 }
-
-
-
-
-    // private float GetSpeed(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 30f;
-    //         case Units.ARCHER: return 30f;
-    //         case Units.SWORD_KNIGHT: return 20f;
-    //         case Units.SIMPLE_HORSE: return 65f;
-    //         case Units.SWORD_HORSE: return 60f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 50f;
-    //         case Units.WORKER: return 25f;
-    //         case Units.SPEARMAN: return 20f;
-    //             // ...
-    //     }
-    //     return 30f;
-    // }
-
-    // private float GetAttack(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 15f;
-    //         case Units.ARCHER: return 10f;
-    //         case Units.SWORD_KNIGHT: return 20f;
-    //         case Units.SIMPLE_HORSE: return 10f;
-    //         case Units.SWORD_HORSE: return 25f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 30f;
-    //         case Units.WORKER: return 5f;
-    //         case Units.SPEARMAN:
-    //             {
-    //                 // add power 25 against horses
-    //                 return 10f;
-    //             }
-    //             // ...
-    //     }
-    //     return 10f;
-    // }
-
-    // private float GetDefense(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 5f;
-    //         case Units.ARCHER: return 5f;
-    //         case Units.SWORD_KNIGHT: return 15f;
-    //         case Units.SIMPLE_HORSE: return 5f;
-    //         case Units.SWORD_HORSE: return 10f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 20f;
-    //         case Units.WORKER: return 0f;
-    //         case Units.SPEARMAN: return 5f;
-    //             // ...
-    //     }
-    //     return 5f;
-    // }
-
-    // private float GetReachedDistance(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 10f;
-    //         case Units.ARCHER: return 50f;
-    //         case Units.SWORD_KNIGHT: return 15f;
-    //         case Units.SIMPLE_HORSE: return 10f;
-    //         case Units.SWORD_HORSE: return 15f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 20f;
-    //         case Units.WORKER: return 5f;
-    //         case Units.SPEARMAN: return 20f;
-    //             // ...
-    //     }
-    //     return 10f;
-    // }
-
-    // private float GetSpeedAttack(Units id)
-    // {
-    //     switch (id)
-    //     {
-    //         case Units.SWORDMAN: return 1f;
-    //         case Units.ARCHER: return 1f;
-    //         case Units.SWORD_KNIGHT: return 1f;
-    //         case Units.SIMPLE_HORSE: return 2f;
-    //         case Units.SWORD_HORSE: return 1.5f;
-    //         case Units.SWORD_HORSE_KNIGHT: return 1.5f;
-    //         case Units.WORKER: return 1.5f;
-    //         case Units.SPEARMAN: return 1.5f;
-    //             // ...
-    //     }
-    //     return 1f;
-    // }

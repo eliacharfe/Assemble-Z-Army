@@ -9,18 +9,15 @@ public class GameOverDisplay : MonoBehaviour
     [SerializeField] private GameObject gameOverDisplayParent = null;
     [SerializeField] private TMP_Text winnerNameText = null;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
     }
 
-
     private void OnDestroy()
     {
         GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
     }
-
 
     public void LeaveGame()
     {
@@ -36,8 +33,6 @@ public class GameOverDisplay : MonoBehaviour
 
     private void ClientHandleGameOver(string WinnerStr)
     {
-        Debug.Log("Game Over Command");
-
         winnerNameText.text = $"{WinnerStr}";
 
         gameOverDisplayParent.SetActive(true);

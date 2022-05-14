@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BuildingsFactory : MonoBehaviour
 {
+    // Avaible buildings.
     [SerializeField]GameObject[] buildings;
 
     public GameObject GetBuildingById(int id)
