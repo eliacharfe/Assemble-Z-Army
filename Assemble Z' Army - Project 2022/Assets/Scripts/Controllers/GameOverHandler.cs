@@ -46,6 +46,13 @@ public class GameOverHandler : NetworkBehaviour
     private void RpcGameOver(string winner)
     {
         ClientOnGameOver?.Invoke(winner);
+        var audioPlayer = FindObjectOfType<AudioPlayer>();
+
+        if (audioPlayer)
+        {
+            audioPlayer.StopMusic();
+            audioPlayer.PlayEndGameSound();
+        }
     }
 
     #endregion

@@ -44,6 +44,9 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] AudioClip constructionCompletedClip;
     [SerializeField] [Range(0f, 1f)] float constructionCompletedVolume = 1f;
 
+    [Header("Game ended")]
+    [SerializeField] AudioClip gameEndedClip;
+    [SerializeField] [Range(0f, 1f)] float gameEndedVolume = 1f;
 
     public void PlayShootingClip()
     {
@@ -93,6 +96,11 @@ public class AudioPlayer : MonoBehaviour
     public void StopHorseGallopClip()
     {
       //GetComponent<AudioSource>().Stop();
+    }
+
+    public void PlayEndGameSound()
+    {
+        PlayClip(gameEndedClip, gameEndedVolume);
     }
 
     public void PlayStepClip()
