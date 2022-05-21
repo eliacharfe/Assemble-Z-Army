@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class RTSController : MonoBehaviour
 {
     [SerializeField] private Transform selectionAreaTransform;
+    [SerializeField] private GameObject pointerDown = null;
     private Camera mainCamera;
     private List < Unit > selectedUnits;
     private Vector3 startPos;
@@ -161,16 +163,17 @@ public class RTSController : MonoBehaviour
 
         foreach (Unit unit in selectedUnits)
         {
-            if (!unit)
-            {
-                continue;
-            }
+            if (!unit) { continue; }
 
             ClearPreviousCommands(unit);
 
-            unit.MoveTo(targetPosList[targetPosIndex]);
-
+            Vector3 wantedPosition = targetPosList[targetPosIndex];
+            unit.MoveTo(wantedPosition);
             targetPosIndex = (targetPosIndex + 1) % targetPosList.Count;
+
+            // Position effect
+            GameObject newObj = Instantiate(pointerDown, wantedPosition,pointerDown.transform.rotation) as GameObject;
+            StartCoroutine(FadeOut(newObj));
 
             if (unit.id == Macros.Units.WORKER)
             {
@@ -241,7 +244,6 @@ public class RTSController : MonoBehaviour
         selectionAreaTransform.position = buttomLeft;
         selectionAreaTransform.localScale = topRight - buttomLeft;
     }
-    //-----------------------------------
 
     private void HandleDeSpawnUnit(Unit unit)
     {
@@ -269,50 +271,16 @@ public class RTSController : MonoBehaviour
         return selectedUnits.Count > 0;
     }
 
+    private IEnumerator FadeOut(GameObject gameObj)
+    {
+        SpriteRenderer spRenderer = gameObj.GetComponent<SpriteRenderer>();
+        for (float f = 1f; f >= -0.01; f -= 0.01f)
+        {
+            Color color = spRenderer.material.color;
+            color.a = f;
+            spRenderer.material.color = color;
+            yield return new WaitForSeconds(0.01f);
+        }
+        Destroy(gameObj.gameObject);
+    }
 }
-
-
-
-
-
-
-
-// public List<Unit> GetMyUnits()
-// {
-//     return selectedUnits;
-// }
-
-
-
-
-
-// unitSelectionArea.gameObject.SetActive(false);
-// if (unitSelectionArea.sizeDelta.magnitude == 0)
-// {
-//     Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-//     if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask)) { return; }
-//     if (!hit.collider.TryGetComponent<Unit>(out Unit unit)) { return; }
-//      selectedUnits.Add(unit);
-
-//     foreach (Unit selectedUnit in selectedUnits)
-//     {
-//         selectedUnit.Select();
-//     }
-
-//     return;
-// }
-
-// Vector2 min = unitSelectionArea.anchoredPosition - (unitSelectionArea.sizeDelta / 2);
-// Vector2 max = unitSelectionArea.anchoredPosition + (unitSelectionArea.sizeDelta / 2);
-
-// foreach (Unit unit in player.GetMyUnits())
-// {
-//     Vector3 screenPosition = mainCamera.WorldToScreenPoint(unit.transform.position);
-
-//     if (screenPosition.x > min.x && screenPosition.x < max.x &&
-//         screenPosition.y > min.y && screenPosition.y < max.y)
-//     {
-//         selectedUnits.Add(unit);
-//         unit.Select();
-//     }
-// }

@@ -67,8 +67,10 @@ public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandl
     {
         if (eventData.button != PointerEventData.InputButton.Left) { return; }
 
-        if(!resourcesPlayer.isHaveEnoughResources(building.getCostBuilding())) { 
+        if(!resourcesPlayer.isHaveEnoughResources(building.getCostBuilding())) {
             // Show message if doesnt have enough resources
+                TooltipNotEnoughResources.ShowTooltip_Static("Not enough resources to build: ",
+                                                             building.GetBuildingText());
             return;
         }
 

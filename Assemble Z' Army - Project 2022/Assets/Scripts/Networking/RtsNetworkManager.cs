@@ -66,12 +66,9 @@ public class RtsNetworkManager : NetworkManager
         {
             SetPhaseThree();
         }
-
-
-
     }
 
-    // Set wokers units.
+    // Set workers units.
     public void SetPhaseOne()
     {
         UnitsFactory factory = FindObjectOfType<UnitsFactory>();

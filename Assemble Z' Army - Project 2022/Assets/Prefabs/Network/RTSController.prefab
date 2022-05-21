@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d5b3c251b6df144b170b320a05bbfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectionAreaTransform: {fileID: 0}
+  pointerDown: {fileID: 302693555867477230, guid: d4f2cdf7d9dcd1d499bf69a95aafeec5, type: 3}

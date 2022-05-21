@@ -194,6 +194,11 @@ public class Building : NetworkBehaviour
 
             Destroy(unit.gameObject);
         }
+        else
+        {
+            TooltipNotEnoughResources.ShowTooltip_Static("Not enough resources to recruit: ",
+                                                            unit.id.ToString());
+        }
 
     }
 
