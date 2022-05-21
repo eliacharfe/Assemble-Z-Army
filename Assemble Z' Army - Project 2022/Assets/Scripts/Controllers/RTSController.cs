@@ -132,10 +132,15 @@ public class RTSController : MonoBehaviour
     {
         foreach (Unit unit in selectedUnits)
         {
+            var worker = (unit.GetComponent<Worker>() as Worker);
             if (unit && unit.id == Macros.Units.WORKER)
             {
-                (unit.GetComponent<Worker>() as Worker).SetBuildingTarget(building);
-                unit.MoveTo(hit.point);
+                // Building is certain not null
+                if (building != worker.GetBuildingTarget())
+                {
+                    worker.SetBuildingTarget(building);
+                    unit.MoveTo(hit.point);
+                }
             }
         }
         

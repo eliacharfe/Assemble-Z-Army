@@ -95,7 +95,7 @@ public class Projectile : NetworkBehaviour
             }
 
             Health target = networkIdentity.GetComponent<Health>();
-            if (target)
+            if (target && !target.isDead())
             {
                 target.DealDamage(damage);
                 Destroy(gameObject);

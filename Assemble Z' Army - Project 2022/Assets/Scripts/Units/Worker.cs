@@ -5,7 +5,7 @@ using UnityEngine;
 // Script for worker allowing to build required building.
 public class Worker : MonoBehaviour
 {
-    public BuilidingConstruction buildingTarget;
+    private BuilidingConstruction buildingTarget;
     public float time = 0;
 
     private Unit unit = null;
@@ -33,7 +33,6 @@ public class Worker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         BuilidingConstruction tempBuild = collision.GetComponent<BuilidingConstruction>();
         if (tempBuild && this.buildingTarget == tempBuild)
         {
@@ -42,9 +41,7 @@ public class Worker : MonoBehaviour
             unit.CmdBuildAnimation();
             GetComponent<Animator>().SetBool("isAttacking", true);
         }
-
     }
-
 
     // Increase the building time left.
     private void IncreaseTimeBuilding()
@@ -87,10 +84,20 @@ public class Worker : MonoBehaviour
     }
 
 
+    public BuilidingConstruction GetBuildingTarget()
+    {
+        return buildingTarget;
+    }
+
     // Set building needed to be constructed.
     public void SetBuildingTarget(BuilidingConstruction building)
     {
-        this.buildingTarget = building;
+        if (this.buildingTarget != building)
+        {
+            GetComponent<Animator>().SetBool("isAttacking", false);
+
+            this.buildingTarget = building;
+        }
     }
 
     public void BuildingClip()

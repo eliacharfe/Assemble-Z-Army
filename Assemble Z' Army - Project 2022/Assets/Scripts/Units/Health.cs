@@ -107,6 +107,12 @@ public class Health : NetworkBehaviour
     {
         GetComponent<Animator>().SetBool("gotHit", false);
     }
+
+
+    public bool isDead()
+    {
+        return currHealth <= 0;
+    }
 }
 
 
