@@ -10,11 +10,8 @@ public class DamagePopup : NetworkBehaviour
                                      int damageAmount, float localScale, bool isCriticalHit)
     {
         GameObject damagePopupTransform = Instantiate(damagePopup.gameObject, position, Quaternion.identity) ;
-
         DamagePopup myDamagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-
         myDamagePopup.Setup(damageAmount,  localScale, isCriticalHit);
-
         return myDamagePopup;
     }
 

@@ -29,12 +29,12 @@ public class GameOverHandler : NetworkBehaviour
 
     private void ServerHandlePlayerLost(int playerId)
     {
-        var players = ((RtsNetworkManager)NetworkManager.singleton).players;
+        // Check if one player left in the game with units,if does Rpc winner player name.
+        List<RTSPlayer> players = ((RtsNetworkManager)NetworkManager.singleton).players;
         if (players.FindAll(player => player.isPlayerLost).Count == players.Count-1)
         {
-            var winnerId = players.Find(player => !player.isPlayerLost).GetDisplayName();
-
-            RpcGameOver("The Winner is:" + winnerId);
+            string winnerId = players.Find(player => !player.isPlayerLost).GetDisplayName();
+            RpcGameOver("The Winner is: " + winnerId);
         }
 
     }
@@ -46,7 +46,7 @@ public class GameOverHandler : NetworkBehaviour
     private void RpcGameOver(string winner)
     {
         ClientOnGameOver?.Invoke(winner);
-        var audioPlayer = FindObjectOfType<AudioPlayer>();
+        AudioPlayer audioPlayer = FindObjectOfType<AudioPlayer>();
 
         if (audioPlayer)
         {

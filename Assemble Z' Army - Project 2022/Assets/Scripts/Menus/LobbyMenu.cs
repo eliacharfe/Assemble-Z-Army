@@ -14,7 +14,6 @@ public class LobbyMenu : MonoBehaviour
 
     AudioPlayer audioPlayer;
 
-
     private void Start()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>();

@@ -11,7 +11,6 @@ public class UnitMovement : NetworkBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-
         unit = GetComponent<Unit>();
     }
 
@@ -40,7 +39,7 @@ public class UnitMovement : NetworkBehaviour
     }
 
     // Flip the sprite render to the relevent direction
-    private void FlipSideSprite(Vector3 dest)
+    public void FlipSideSprite(Vector3 dest)
     {
         Transform tr = gameObject.transform;
         Transform healthBar = transform.Find("Health Bar Canvas");

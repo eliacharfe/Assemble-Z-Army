@@ -4,17 +4,21 @@ using Mirror;
 // Abstract class for multiple attacks types.
 public abstract class Attacker : NetworkBehaviour
 {
-    public Targetable target = null;
-    protected bool reachedTarget = false;
-    protected bool isInAttackMode = false;
-    protected UnitMovement movement = null;
-    private bool isInModeAttackAutomated = false;
-
     [Header("Attack Settings")]
     [SerializeField] private float attackTime = 1f;
     [SerializeField] private float range = 1f;
     [SerializeField] protected float damage = 5;
     [SerializeField] protected float defense = 5;
+
+    public Targetable target = null;
+    protected UnitMovement movement = null;
+    protected bool reachedTarget = false;
+ 
+    // Is currently attacking target
+    protected bool isInAttackMode = false;
+ 
+    // Has already detected target with circle detection
+    private bool isInModeAttackAutomated = false;
 
     private float time = 0;
 
@@ -28,6 +32,7 @@ public abstract class Attacker : NetworkBehaviour
     }
 
     #region server
+
     [ServerCallback]
     private void Update()
     {
@@ -66,7 +71,6 @@ public abstract class Attacker : NetworkBehaviour
             if (target && movement)
             {
                 movement.Move(this.target.transform.position);
-
             }
         }
     }
@@ -78,16 +82,24 @@ public abstract class Attacker : NetworkBehaviour
         this.target = target;
     }
     #endregion
+ 
+    public abstract void StopAttackAnime();
 
-
-    public void SetAutomateAttack()
-    {
-        isInModeAttackAutomated = true;
-    }
+    public abstract void Attack();
 
     public bool isInModeAttackAutomate()
     {
         return isInModeAttackAutomated;
+    }
+
+    public bool IsAttacking()
+    {
+        return isInAttackMode;
+    }
+
+    public void SetAutomateAttack()
+    {
+        isInModeAttackAutomated = true;
     }
 
     public void SetTargetable(Targetable target)
@@ -95,16 +107,7 @@ public abstract class Attacker : NetworkBehaviour
         this.target = target;
     }
 
-    public abstract void StopAttackAnime();
-
-    public abstract void Attack();
-
-    public bool IsAttacking()
-    {
-        return isInAttackMode;
-    }
-
-    public void setAttackMode()
+    public void SetAttackMode()
     {
         isInAttackMode = true;
     }

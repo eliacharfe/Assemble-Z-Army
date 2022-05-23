@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class SwordAttack : Attacker
+public class NormalAttack : Attacker
 {
-    float bonusDamage = 0;
+    private float bonusDamage = 0;
 
     private void Awake()
     {
-        var spear = GetComponent<Spear>();
+        // Is spear type
+        Spear spear = GetComponent<Spear>();
         if (spear)
             bonusDamage = spear.bonuseAttack;
     }
@@ -21,7 +22,7 @@ public class SwordAttack : Attacker
         GetComponent<Animator>().SetBool("isRunning", false);
         GetComponent<Animator>().SetBool("isAttacking", true);
 
-        var preciseDamage = damage;
+        float preciseDamage = damage;
         if (target.GetComponent<Horse>())
             preciseDamage += bonusDamage;
 

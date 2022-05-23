@@ -94,29 +94,28 @@ public class CameraInputSystem : NetworkBehaviour
     {
         Vector3 pos = playerCameraTransform.position;
 
-        // if (prevInput == Vector2.zero) // if mouse dragged
-        // {
-        //     Vector3 cursorMovement = Vector3.zero;
-        //     Vector2 cursorPosition = Mouse.current.position.ReadValue();
+        if (prevInput == Vector2.zero) // if mouse dragged
+        {
+            Vector3 cursormovement = Vector3.zero;
+            Vector2 cursorposition = Mouse.current.position.ReadValue();
 
-        //     if (cursorPosition.y >= Screen.height - screenBorderThikeness)
-        //         cursorMovement.y += 1;
-        //     else if (cursorPosition.y <= screenBorderThikeness)
-        //         cursorMovement.y -= 1;
+            if (cursorposition.y >= Screen.height - screenBorderThikeness)
+                cursormovement.y += 1;
+            else if (cursorposition.y <= screenBorderThikeness)
+                cursormovement.y -= 1;
 
-        //     if (cursorPosition.x >= Screen.width - screenBorderThikeness)
-        //         cursorMovement.x += 1;
-        //     else if (cursorPosition.x <= screenBorderThikeness)
-        //         cursorMovement.x -= 1;
+            if (cursorposition.x >= Screen.width - screenBorderThikeness)
+                cursormovement.x += 1;
+            else if (cursorposition.x <= screenBorderThikeness)
+                cursormovement.x -= 1;
 
-        //     pos += cursorMovement.normalized * speed * Time.deltaTime;
-        // }
-        // else
-        {  // if keyboard
-           
+            pos += cursormovement.normalized * speed * Time.deltaTime;
         }
-
-        pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
+        // if keyboard
+        else
+        {
+            pos += new Vector3(prevInput.x, prevInput.y, 0f) * speed * Time.deltaTime;
+        }
 
         pos.x = Mathf.Clamp(pos.x, screenXLimits.x, screenXLimits.y);
         pos.y = Mathf.Clamp(pos.y, screenZLimits.x, screenZLimits.y);
@@ -126,10 +125,10 @@ public class CameraInputSystem : NetworkBehaviour
 
     public void setPlayerCameraTransform(Transform cameraTransform)
     {
-        print(playerCameraTransform.position);
         playerCameraTransform.position = cameraTransform.position;
     }
 
+    // With mouse wheel
     void ZoomInOutCamera()
     {
         if (Mouse.current.scroll.ReadValue().y > 0)

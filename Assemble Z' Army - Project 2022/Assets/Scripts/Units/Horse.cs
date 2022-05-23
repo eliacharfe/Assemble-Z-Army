@@ -1,5 +1,4 @@
 using UnityEngine;
 
-public class Horse : MonoBehaviour
-{
-}
+// Type only class
+public class Horse : MonoBehaviour{}

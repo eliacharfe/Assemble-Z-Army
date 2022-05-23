@@ -34,9 +34,7 @@ public class GameOverDisplay : MonoBehaviour
     private void ClientHandleGameOver(string WinnerStr)
     {
         winnerNameText.text = $"{WinnerStr}";
-
         gameOverDisplayParent.SetActive(true);
-
     }
 
 }

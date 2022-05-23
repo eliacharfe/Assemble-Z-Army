@@ -8,35 +8,24 @@ public class RTSPlayer : NetworkBehaviour
 {
     // Following camera of the player.
     [SerializeField] private Transform cameraTransform = null;
-
-    // TODO - set access modifier
     // The phase three pos update the camera position for the player.
     [SyncVar(hook = nameof(HandleCameraChange))] public Vector3 phaseThreePos = new Vector3(0,0,0);
-
     [SyncVar]public bool isPlayerLost = false;
-
-    public GameObject unitSpawner = null;
-
-    public List<GameObject> m_workers = new List<GameObject>();
-
-    public List<int> m_unitsId = new List<int>();
-
-    private BuildingsFactory buildingsFactory = null;
-
-    private UnitsFactory unitsFactory = null;
-
-    private bool isPartyOwner = false;
-
-    private Color teamColor = new Color();
-
     [SyncVar(hook = nameof(ClientHandleDisplayNameUpdated))]
     private string displayName;
 
     // Server Unit despawned event.
     public static event Action<int> PlayerLostAllUnits;
-
     public static event Action ClientOnInfoUpdated;
     public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
+
+    public GameObject unitSpawner = null;
+    public List<GameObject> m_workers = new List<GameObject>();
+    public List<int> m_unitsId = new List<int>();
+    private BuildingsFactory buildingsFactory = null;
+    private UnitsFactory unitsFactory = null;
+    private bool isPartyOwner = false;
+    private Color teamColor = new Color();
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +44,6 @@ public class RTSPlayer : NetworkBehaviour
     public void SetCameraPosition(Vector3 pos)
     {
         cameraTransform.position = pos;
-
         GetComponent<CameraInputSystem>().OnStartingGame();
     }
 
@@ -72,9 +60,6 @@ public class RTSPlayer : NetworkBehaviour
         {
             GetComponent<CameraInputSystem>().OnChangePhaseThreeMap();
         }
-
-
-        //
     }
     #endregion
 
@@ -138,7 +123,6 @@ public class RTSPlayer : NetworkBehaviour
         if(m_unitsId.Count <= 0)
         {
             isPlayerLost = true;
-
             PlayerLostAllUnits?.Invoke(connectionToClient.connectionId);
         }
     }
@@ -154,7 +138,6 @@ public class RTSPlayer : NetworkBehaviour
     public void CmdStartGame()
     {
         if (!isPartyOwner) { return; }
-
         ((RtsNetworkManager)NetworkManager.singleton).ShowPreparationPhase();
     }
 
@@ -203,9 +186,7 @@ public class RTSPlayer : NetworkBehaviour
     public override void OnStartClient()
     {
         if (NetworkServer.active) return;
-
         DontDestroyOnLoad(gameObject);
-
         ((RtsNetworkManager)NetworkManager.singleton).players.Add(this);
     }
 
@@ -214,11 +195,9 @@ public class RTSPlayer : NetworkBehaviour
         base.OnStopClient();
 
         if (!isClientOnly) return;
-
         ((RtsNetworkManager)NetworkManager.singleton).players.Remove(this);
 
         if (!hasAuthority) return;
-
         Unit.AuthortyOnUnitSpawned -= AuthortyHandleUnitSpawned;
         Unit.AuthortyOnUnitDeSpawned -= AuthortyHandleUnitDeSpawned;
     }
@@ -233,12 +212,6 @@ public class RTSPlayer : NetworkBehaviour
     {
         Unit.AuthortyOnUnitSpawned -= AuthortyHandleUnitSpawned;
         Unit.AuthortyOnUnitDeSpawned -= AuthortyHandleUnitDeSpawned;
-    }
-
-    [ClientRpc]
-    public void RpcPlayerHasLost(string playerLost)
-    {
-        print("Client player with number" + playerLost +" has lost");
     }
 
     // Add unit to authorty 'list'.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+// Set teams colors for all players units
 public class TeamColorSetter : NetworkBehaviour
 {
     // Store the renderes which need to be colored.

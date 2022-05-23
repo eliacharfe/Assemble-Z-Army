@@ -5,9 +5,7 @@ public class BowAttack : Attacker
 {
     [Header("Projectile Settings")]
     [SerializeField] private GameObject arrowPrefab = null;
-    [SerializeField] private float arrowSpeed = 10f;
-
-    [SerializeField] GameObject shootStartPoint;
+    [SerializeField] private GameObject shootStartPoint;
 
     AudioPlayer audioPlayer;
 
@@ -56,24 +54,22 @@ public class BowAttack : Attacker
 
         audioPlayer.PlayShootingClip();
 
-        FlipSideSprite(targPos);
+        //FlipSideSprite(targPos);
+        GetComponent<UnitMovement>().FlipSideSprite(targetPos);
 
         Vector3 middle = new Vector3((shootStartPoint.transform.position.x + targPos.x) / 2,
                                      (shootStartPoint.transform.position.y + targPos.y) / 2, 0f);
 
         arrow.GetComponent<Projectile>().rotationCenter = middle;
         arrow.GetComponent<Projectile>().radius = Vector3.Distance(shootStartPoint.transform.position, targPos) / 2f; ;
-        //arrow.GetComponent<Projectile>().teamNumber = gameObject.GetComponent<Targetable>().teamNumber;
         arrow.GetComponent<Projectile>().targetPosition = targPos;
         arrow.GetComponent<Projectile>().archerPosition = archerPos;
-
         arrow.GetComponent<Projectile>().damage = (int)GetComponent<Unit>().Attack.BaseValue;
-
     }
 
     #region client
     [ClientRpc]
-    void RpcPlayBowSound()
+    private void RpcPlayBowSound()
     {
         audioPlayer.PlayShootingClip();
     }

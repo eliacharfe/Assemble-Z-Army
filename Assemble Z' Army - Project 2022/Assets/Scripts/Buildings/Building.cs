@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
 using System;
-
 public class Building : NetworkBehaviour
 {
     // Type of solider building recived and create.

@@ -8,13 +8,9 @@ public class Projectile : NetworkBehaviour
     public float radius;
     private float posX, posY, angle, angleEnd;
     public int damage;
-
-    Transform targetTransform;
-    Quaternion archerRotation = Quaternion.Euler(0, 0, 0);
-
     [SerializeField] private float AngularSpeed;
 
-    private Vector3 arrowPos;
+    Quaternion archerRotation = Quaternion.Euler(0, 0, 0);
 
     private void Start()
     {
@@ -59,7 +55,6 @@ public class Projectile : NetworkBehaviour
     [ServerCallback]
     private void Update()
     {
-
         posX = rotationCenter.x + Mathf.Cos(angle) * radius;
         posY = rotationCenter.y + Mathf.Sin(angle) * radius;
 
@@ -80,7 +75,6 @@ public class Projectile : NetworkBehaviour
                 Destroy(gameObject);
 
             angle += 0.05f + Time.deltaTime * AngularSpeed;
-
         }
     }
     #endregion

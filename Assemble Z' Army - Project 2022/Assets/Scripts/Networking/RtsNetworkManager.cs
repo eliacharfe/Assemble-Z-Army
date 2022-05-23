@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Macros;
-using UnityEngine.SceneManagement;
-using Utilities;
 using System;
 
 public class RtsNetworkManager : NetworkManager
@@ -32,13 +30,9 @@ public class RtsNetworkManager : NetworkManager
         base.OnServerAddPlayer(conn);
 
         RTSPlayer player = conn.identity.GetComponent<RTSPlayer>();
-
         players.Add(player);
-
         player.SetDisplayName($"Player {players.Count}");
-
         player.SetTeamColor(Constents.teamColors[players.Count-1]);
-
         player.SetPartyOwner(players.Count == 1);
     }
 
@@ -114,14 +108,6 @@ public class RtsNetworkManager : NetworkManager
             }
         }
 
-    }
-
-    void spawnTemp(Macros.Units name, UnitsFactory factory, RTSPlayer player, Vector3 pos)
-    {
-        GameObject workerInstance = Instantiate(factory.GetUnitPrefab(name).gameObject, pos, Quaternion.identity);
-
-        // Spawn the player on server.
-        NetworkServer.Spawn(workerInstance, player.connectionToClient);
     }
 
     // Spawn gathered units in battlefield.

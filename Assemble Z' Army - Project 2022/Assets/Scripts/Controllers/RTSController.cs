@@ -61,12 +61,15 @@ public class RTSController : MonoBehaviour
             hit.collider.gameObject.TryGetComponent<Targetable>(out targetable);
         }
 
+        // Clicked on building in construction
         if (buildingToConstruct && buildingToConstruct.enabled && buildingToConstruct.hasAuthority)
             SendToBuild(buildingToConstruct, hit);
 
+        // Clicked on building
         else if (building && building.enabled && building.hasAuthority)
             SendToRecruit(building, hit);
 
+        // Clicked on targetable unit
         else if (targetable)
         {
             AttackUnit(targetable, hit);
@@ -85,11 +88,10 @@ public class RTSController : MonoBehaviour
             {
                 continue;
             }
-            unit.GetComponent<Attacker>().setAttackMode();
+            unit.GetComponent<Attacker>().SetAttackMode();
 
             if (unit.id != Macros.Units.WORKER && !targetable.hasAuthority)
             {
-                print("Attack unit");
                 unit.GetComponent<Attacker>().CmdSetTargetable(targetable);
             }
 
@@ -116,14 +118,13 @@ public class RTSController : MonoBehaviour
         {
             if (unit && unit.id != Macros.Units.WORKER && building.isMatchedUnit(unit))
             {
-                var tempBuilding = unit.GetBuildingRecruiting();
+                Building tempBuilding = unit.GetBuildingRecruiting();
                 if(tempBuilding)
                 {
                     tempBuilding.RemoveUnitFromWaitingList(unit);
                 }
 
                 unit.SetBuildingRecruiting(building);
-
                 unit.MoveTo(building.EnterWaitingRecruitment(unit));
             }
         }
@@ -164,7 +165,6 @@ public class RTSController : MonoBehaviour
         foreach (Unit unit in selectedUnits)
         {
             if (!unit) { continue; }
-
             ClearPreviousCommands(unit);
 
             Vector3 wantedPosition = targetPosList[targetPosIndex];
@@ -187,7 +187,6 @@ public class RTSController : MonoBehaviour
         if(!unit) { return; }
 
         unit.RemoveBuildingRecruiting();
-
         if (unit.GetComponent<Attacker>())
             unit.GetComponent<Attacker>().CmdSetTargetable(null);
     }
@@ -249,6 +248,7 @@ public class RTSController : MonoBehaviour
     {
         selectedUnits.Remove(unit);
     }
+
     public List<Macros.Units> GetIdsUnits()
     {
         idsUnits = new List<Macros.Units>();

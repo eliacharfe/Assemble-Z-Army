@@ -5,9 +5,8 @@ using UnityEngine;
 // Script for worker allowing to build required building.
 public class Worker : MonoBehaviour
 {
-    private BuilidingConstruction buildingTarget;
     public float time = 0;
-
+    private BuilidingConstruction buildingTarget;
     private Unit unit = null;
     bool isBuilding = false;
 
@@ -64,7 +63,6 @@ public class Worker : MonoBehaviour
         }
     }
 
-    // Todo - set distance according the building boundry.
     // Check worker and building at minimum distance.
     private bool TryToBuild()
     {

@@ -8,10 +8,8 @@ using UnityEngine.InputSystem;
 public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
     [SerializeField] private Transform cameraTransform = null;
-
     [SerializeField] private RectTransform minimapRect = null;
     [SerializeField] private float mapScale = 150;
-    [SerializeField] private float offset = -6f;
 
     private Transform playerCameraTransform;
 
@@ -21,13 +19,6 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
         {
             return;
         }
-
-        // if (NetworkClient.connection.identity == null)
-        // {
-        //     return;
-        // }
-
-        // playerCameraTransform = NetworkClient.connection.identity.GetComponent<RTSPlayer>().GetCameraTransform();
 
         playerCameraTransform = cameraTransform;
     }

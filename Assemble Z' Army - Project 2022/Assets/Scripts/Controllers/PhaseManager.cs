@@ -4,7 +4,8 @@ using TMPro;
 using Mirror;
 using System;
 
-// 
+
+// Handle phases timers and UI canvases 
 public class PhaseManager : NetworkBehaviour
 {
     [SyncVar] public float currentTime = 0f;
@@ -15,13 +16,12 @@ public class PhaseManager : NetworkBehaviour
     [SerializeField] private float phaseTwoTime = 5f;
 
     // Canvas
-    [SerializeField] GameObject phaseOneStartingCanvas = null;
-    [SerializeField] GameObject BuildingPanelCanvas = null;
-    [SerializeField] GameObject phaseOneEndedCanvas = null;
-    [SerializeField] GameObject phaseTwoEndedCanvas = null;
-
-    public TextMeshProUGUI timerText;
-    public TextMeshProUGUI currentPhaseDisplay;
+    [SerializeField] private GameObject phaseOneStartingCanvas = null;
+    [SerializeField] private GameObject BuildingPanelCanvas = null;
+    [SerializeField] private GameObject phaseOneEndedCanvas = null;
+    [SerializeField] private GameObject phaseTwoEndedCanvas = null;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI currentPhaseDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +37,7 @@ public class PhaseManager : NetworkBehaviour
 
         if(currentPhase == Constents.PHASE_THREE)
         {
-            currentPhaseDisplay.SetText("Battle Phase");
+            currentPhaseDisplay.SetText(Phases.BATTLEFIELD_PHASE_NAME);
             startTimer = false;
         }
     }
@@ -109,7 +109,7 @@ public class PhaseManager : NetworkBehaviour
     public void RpcRemovePhaseOneEndCanvas()
     {
         phaseOneEndedCanvas.SetActive(false);
-        currentPhaseDisplay.SetText("Preperation Phase");
+        currentPhaseDisplay.SetText(Phases.PREPERATION_PHASE_NAME);
     }
 
     [ClientRpc]

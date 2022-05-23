@@ -7,19 +7,17 @@ public class Mana : NetworkBehaviour
 {
     [SerializeField] ParticleSystem manaEffect;
     [SerializeField] GameObject healingPointStart;
-
-    private int maxMana = 100;
     [SyncVar(hook = nameof(HandleManaValueUpdated))] public int currMana;
 
+    private int maxMana = 100;
     private float time;
     private float regenerateTime;
+    private bool isRegenerating;
+    private Image manaBarImage;
+
+    private Color BaseColor;
 
     public bool canHeal;
-    private bool isRegenerating;
-
-    private Image manaBarImage;
-    Color BaseColor;
-
     public event Action<int, int> ClientOnManaUpdate;
 
     private void Start()
@@ -56,7 +54,6 @@ public class Mana : NetworkBehaviour
     #endregion
 
     #region client
-    // To Do: mana timer regeration
     [ClientCallback]
     private void Update()
     {
@@ -72,7 +69,6 @@ public class Mana : NetworkBehaviour
                 canHeal = false;
                 time += Time.deltaTime;
                 currMana = (int)(time * 20f);
-                //GetComponent<ManaDisplay>().HandleManaUpdated((int)currMana, 100);
                 manaBarImage.color = Color.yellow;
                 ClientOnManaUpdate?.Invoke((int)currMana, 100);
             }
@@ -82,7 +78,6 @@ public class Mana : NetworkBehaviour
                 canHeal = true;
                 isRegenerating = false;
                 currMana = 100;
-                // GetComponent<ManaDisplay>().HandleManaUpdated((int)currMana, 100);
                 manaBarImage.color = BaseColor;
                 ClientOnManaUpdate?.Invoke((int)currMana, 100);
             }
@@ -95,9 +90,6 @@ public class Mana : NetworkBehaviour
         if (manaEffect != null)
         {
             ParticleSystem instance = Instantiate(manaEffect, healingPointStart.transform.position, Quaternion.identity);
-
-            //NetworkServer.Spawn(instance.gameObject);
-
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
     }

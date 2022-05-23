@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Controllers">
+    <Position X="2.296" Y="1.611" Height="0.396" Width="0.862" />
+  </Comment>
+  <Comment CommentText="  Units Handlers">
+    <Position X="3.867" Y="1.595" Height="0.396" Width="1.123" />
+  </Comment>
+  <Comment CommentText="      Combat">
+    <Position X="6.941" Y="1.595" Height="0.396" Width="1.123" />
+  </Comment>
+  <Comment CommentText="  Building Handlers">
+    <Position X="9.568" Y="1.557" Height="0.396" Width="1.316" />
+  </Comment>
+  <Comment CommentText="   Menu Handlers">
+    <Position X="11.333" Y="1.541" Height="0.396" Width="1.254" />
+  </Comment>
+  <Comment CommentText="    UI handlers">
+    <Position X="13.104" Y="1.534" Height="0.396" Width="1.123" />
+  </Comment>
+  <Comment CommentText="  Audio handlers">
+    <Position X="14.828" Y="1.541" Height="0.396" Width="1.123" />
+  </Comment>
+  <Comment CommentText="          Stats">
+    <Position X="16.585" Y="1.545" Height="0.396" Width="1.123" />
+  </Comment>
+  <Comment CommentText="                                                  Macros">
+    <Position X="19.467" Y="1.53" Height="0.396" Width="4.068" />
+  </Comment>
+  <Class Name="Building" Collapsed="true">
+    <Position X="9.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYVAABBQhmQApAQAANDAAAEQVBANgAEAgAQAgAAeAkA=</HashCode>
+      <FileName>Assets\Scripts\Buildings\Building.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildingButton" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GASAAAAAAiAIAAEAAAABEAAAAAAkAAABAAQAAQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Buildings\BuildingButton.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="BuildingsFactory" Collapsed="true">
+    <Position X="9.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Buildings\BuildingsFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraInputSystem" Collapsed="true">
+    <Position X="13" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQIAGAQAOAEAAAAAAAQAgAAKAAAASFEoAhAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Camera\CameraInputSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Minimap" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAKAAAAAIBgAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Camera\Minimap.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Attacker" Collapsed="true">
+    <Position X="6.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQBCAAIACoEhAEAIAAAAAAAALgAAACAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\Combat\Attacker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BowAttack" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAhAAAAAAAAAAAAABAAAAIAAAACAAAAACAEAAEA=</HashCode>
+      <FileName>Assets\Scripts\Combat\BowAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mana" Collapsed="true">
+    <Position X="3.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAgAAQCAAAABAAAgAQAABAASCAACAAKAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Combat\Healer\Mana.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManaDisplay" Collapsed="true">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAIAAAGA=</HashCode>
+      <FileName>Assets\Scripts\Combat\Healer\ManaDisplay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NormalAttack" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAIAAAACAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Combat\NormalAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projectile" Collapsed="true">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAEQAICCAAgAAAAAAAAAAAAEAAAAAAAAAAwABACCA=</HashCode>
+      <FileName>Assets\Scripts\Combat\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Targetable" Collapsed="true">
+    <Position X="6.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Combat\Targetable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Targeter" Collapsed="true">
+    <Position X="6.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAwAAI=</HashCode>
+      <FileName>Assets\Scripts\Combat\Targeter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RTSController" Collapsed="true">
+    <Position X="2" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BASDAKAACAEAABAAgAGAAAAAIACAEAEAEAAACAAgAE4=</HashCode>
+      <FileName>Assets\Scripts\Controllers\RTSController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="@Controls" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="7.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="@Controls.PlayerActions" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Inputs\Controls.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Interface Name="@Controls.IPlayerActions" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Inputs\Controls.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Interface>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAABAAAAAECBAAAAACAGAEAEAgCEgQAAA=</HashCode>
+      <FileName>Assets\Scripts\Inputs\Controls.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="JoinLobbyMenu" Collapsed="true">
+    <Position X="11.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAIAgAAAAAAAAAAgAAAQQIAAAAAAEACAI=</HashCode>
+      <FileName>Assets\Scripts\Menus\JoinLobbyMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LobbyMenu" Collapsed="true">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAJAAAAACAAAAAAAAAAAAAgAgAAEAAAAAAQAAEAAJE=</HashCode>
+      <FileName>Assets\Scripts\Menus\LobbyMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenu" Collapsed="true">
+    <Position X="11.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAiAAAAAAAAAAgAAAAAAAaBQAAAAAAIEAgAA=</HashCode>
+      <FileName>Assets\Scripts\Menus\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicHandle" Collapsed="true">
+    <Position X="14.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAgABAAAAAAAAAACCAAAEAAAIAEAAMAAAAAAAAQAA=</HashCode>
+      <FileName>Assets\Scripts\Menus\MusicHandle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RtsNetworkManager" Collapsed="true">
+    <Position X="1.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAIAgQAACIQAAQAAgABAgAAIBgAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Networking\RtsNetworkManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RTSPlayer" Collapsed="true">
+    <Position X="2" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQABCAAHALARhhABAICAFBKASAABAIE0gAABAgAIAQA=</HashCode>
+      <FileName>Assets\Scripts\Networking\RTSPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AudioPlayer" Collapsed="true">
+    <Position X="14.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAiEAIYIAAIEEBAAAQCQYEAQAAGABhhAWCQACAAE=</HashCode>
+      <FileName>Assets\Scripts\Sound\AudioPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIDisplay" Collapsed="true">
+    <Position X="13" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAyAAKAAAAAAAAAAAAAAAAABAAEAAAAAAAEE=</HashCode>
+      <FileName>Assets\Scripts\UI\UIDisplay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DetectionAttack" Collapsed="true">
+    <Position X="6.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\DetectionAttack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Health" Collapsed="true">
+    <Position X="3.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAYIACAAgABAAEAAAAAAABAAAAAAAECIBAEAAGA=</HashCode>
+      <FileName>Assets\Scripts\Units\Health.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealthDisplay" Collapsed="true">
+    <Position X="13" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAQAAAAAAAAAAEAAAAAQAEg=</HashCode>
+      <FileName>Assets\Scripts\Units\HealthDisplay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Horse" Collapsed="true">
+    <Position X="3.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Horse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spear" Collapsed="true">
+    <Position X="3.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Spear.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Stat">
+    <Position X="16.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAABQIAAAAAAAAAAAgAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Units\Stat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unit" Collapsed="true">
+    <Position X="3.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQABACCooRIpSC0AIBAAICBOdCIgAUAgAgBQgA4DuI=</HashCode>
+      <FileName>Assets\Scripts\Units\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnitMovement" Collapsed="true">
+    <Position X="3.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAKAhAQAAAAAAAAAAAAAAAAEAAABBCAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\UnitMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Worker" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAEgCAgAAAAAAAAAQQAIEAAAAAAABAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Units\Worker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResourcesPlayer" Collapsed="true">
+    <Position X="2" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAACAAQQIAAAAAAAAAAAAAAAAAAAAAQAg=</HashCode>
+      <FileName>Assets\Scripts\Utilities\ResourcesPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnitsFactory" Collapsed="true">
+    <Position X="3.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYAABABIACCYAAAAAIAABAEAKABIAABQAAEAAqQACSQ=</HashCode>
+      <FileName>Assets\Scripts\Utilities\UnitsFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Macros.Buildings">
+    <Position X="21.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABAIAgAAAAEAAAAAQAAAAAAAAAwAAAEAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Macros.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Macros.Units">
+    <Position X="20" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUAAAEAAAAUAAAAgAQgAIAACDAIAAAAQAAgAAAAIAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Macros.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Macros.Resources">
+    <Position X="23.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAACAAAAEAAAABAAEAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Macros.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Macros.TrainingUnitsInBuildings">
+    <Position X="18.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwCAAABAAAAgBBBJQBAAAACAAAAQAAAQEBABAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Macros.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

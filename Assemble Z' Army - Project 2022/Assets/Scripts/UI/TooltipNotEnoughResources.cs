@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class TooltipNotEnoughResources : MonoBehaviour
 {
-    private static TooltipNotEnoughResources instance;
-
     [SerializeField] private Camera uiCamera;
 
+    private static TooltipNotEnoughResources instance;
     private Text tooltipText;
     private RectTransform backgroundRectTransform;
-
     private Vector3 startPos;
 
     private void Awake()
@@ -63,19 +61,5 @@ public class TooltipNotEnoughResources : MonoBehaviour
     {
         instance.HideTooltip();
     }
-
-
-    //     private IEnumerator FadeIn(RectTransform gameObj)
-    //     {
-    //        Image spRenderer = gameObj.GetComponent<Image>();
-    //         for (float f = 0f; f <= 1f; f += 0.05f)
-    //         {
-    //             Color color = spRenderer.material.color;
-    //             color.a = f;
-    //             spRenderer.material.color = color;
-    //             yield return new WaitForSeconds(0.05f);
-    //         }
-    //         HideTooltip();
-    //     }
 
 }

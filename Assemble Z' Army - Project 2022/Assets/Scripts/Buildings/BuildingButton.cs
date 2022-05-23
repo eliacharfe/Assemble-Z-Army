@@ -6,18 +6,13 @@ using Mirror;
 public class BuildingButton : MonoBehaviour,IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,IPointerExitHandler
 {
     [SerializeField]private Building building = null;
-
     [SerializeField]private GameObject buildingPreview;
 
     private GameObject spritePreview;
-
     private RTSPlayer player;
-
     private float navMeshZAxis;
-
     private string popupCostBuilding;
-
-    ResourcesPlayer resourcesPlayer = null;
+    private ResourcesPlayer resourcesPlayer = null;
 
 
     private void Start()

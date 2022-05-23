@@ -3,14 +3,22 @@ using UnityEngine;
 // Namespace which organize most of the consts used
 namespace Macros
 {
-    class Scenes
+    struct Scenes
     {
         public const string PREPERATION_SCENE = "Playground";
         public const string BATTLEFIELD_SCENE = "Battlefield";
         public const string MENU_SCENE = "Menu";
     }
 
-    class Constents
+
+    struct Phases
+    {
+        public const string PREPERATION_PHASE_NAME = "Preperation Phase";
+        public const string BUILDING_PHASE_NAME = "";
+        public const string BATTLEFIELD_PHASE_NAME = "Battle Phase";
+    }
+
+    struct Constents
     {
         // Phases
         public const int PHASE_ONE = 1;

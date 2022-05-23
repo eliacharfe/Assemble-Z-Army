@@ -17,7 +17,6 @@ public class Unit : NetworkBehaviour
 
     [SerializeField] private UnityEvent onSelected = null;
     [SerializeField] private UnityEvent onDeselected = null;
-    [SerializeField] private SpriteRenderer selectionCircle = null;
     [SerializeField] private GameObject attackCursor = null;
 
     public static event Action<Unit> ServerOnUnitSpawned;
@@ -317,20 +316,6 @@ public class Unit : NetworkBehaviour
         }
     }
 
-    public void Equip(Stat stat)
-    {
-        // We need to store our modifiers in variables before adding them to the stat.
-        stat.Attack.AddModifier(new StatModifier(10, StatModType.Flat, this));
-        stat.Attack.AddModifier(new StatModifier(0.1f, StatModType.PercentMult, this));
-    }
-
-    public void Unequip(Stat stat)
-    {
-        // Here we need to use the stored modifiers in order to remove them.
-        // Otherwise they would be "lost" in the stat forever.
-        stat.Attack.RemoveAllModifiersFromSource(this);
-    }
-
     private void InitStats(Units id)
     {
         switch (id)
@@ -393,9 +378,9 @@ public class Unit : NetworkBehaviour
             case Units.CROSSBOW:
                 {
                     Speed.BaseValue = agent.speed = 10f;
-                    Attack.BaseValue = 12f;
-                    Defense.BaseValue = 5f;
-                    ReachDistance.BaseValue = 15f; 
+                    Attack.BaseValue = 15f;
+                    Defense.BaseValue = 0f;
+                    ReachDistance.BaseValue = 18f; 
                     SpeedAttack.BaseValue = 1f;
                     break;
                 };
