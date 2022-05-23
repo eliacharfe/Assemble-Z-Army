@@ -717,9 +717,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 402557976, guid: c17412157774d2b4c926247ae2134809, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1025441911, guid: c17412157774d2b4c926247ae2134809, type: 3}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096152479, guid: c17412157774d2b4c926247ae2134809, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 64987100124660040, guid: c17412157774d2b4c926247ae2134809, type: 3}
       propertyPath: m_AnchorMax.x
@@ -908,6 +916,10 @@ PrefabInstance:
     - target: {fileID: 3357052579806096606, guid: c17412157774d2b4c926247ae2134809, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeStateMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796612744174745850, guid: c17412157774d2b4c926247ae2134809, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5088155772926614621, guid: c17412157774d2b4c926247ae2134809, type: 3}
       propertyPath: m_AnchoredPosition.x
