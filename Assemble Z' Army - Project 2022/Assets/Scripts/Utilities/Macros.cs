@@ -74,10 +74,10 @@ namespace Macros
     public enum Resources
     {
         NONE,
-        WOOD = 1400,
-        METAL = 1100,
-        GOLD = 200,
-        DIAMONDS = 50
+        WOOD = 1650,
+        METAL = 1300,
+        GOLD = 500,
+        DIAMONDS = 120
     }
 
     public enum TrainingUnitsInBuildings

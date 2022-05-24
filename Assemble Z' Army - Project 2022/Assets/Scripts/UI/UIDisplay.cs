@@ -59,7 +59,7 @@ public class UIDisplay : MonoBehaviour
         }
         if (diamondsSlider.value <= 0)
         {
-            setSliderColorEmpty(woodSlider);
+            setSliderColorEmpty(diamondsSlider);
         }
     }
 
