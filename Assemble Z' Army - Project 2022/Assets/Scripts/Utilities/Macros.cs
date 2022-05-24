@@ -159,20 +159,20 @@ namespace Macros
             "________________________________________" +
             "Units’ stats: " +"\n"+
             "Level1: " +"\n"+
-            "SwordMan: a-15 d-5 s-10 sa-1 rd-5 " +"\n"+
-            "SpearMan: a-10 d-5 s-10 sa-1.5 rd-5 " +"\n"+
+            "Sword Man: a-15 d-5 s-10 sa-1 rd-5 " +"\n"+
+            "Spear Man: a-10 d-5 s-10 sa-1.5 rd-5 " +"\n"+
             "Archer:   a-10 d-0 s-10 sa-1 rd-30 " +"\n"+
             "Healer:   a-5 d-0 s-10 sa-1 rd-5 " +"\n"+
             "Crossbow: a-15 d-0 s-10 sa-1 rd-18 " +"\n"+
             "SimpleHorse: a-10 d-5 s-15 sa-2 rd-5 " +"\n"+
             "Level2: " +"\n"+
-            "SwordHorse: a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
-            "SpearHorse: a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
-            "ArcherHorse:a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
-            "SpearKnight:a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
-            "SwordKnight:a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
+            "Sword Horse: a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
+            "Spear Horse: a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
+            "Archer Horse:a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
+            "Spear Knight:a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
+            "Sword Knight:a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
             "Level3: " +"\n"+
-            "SwordHorseKnight: a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
-            "SpearHorseKnight: a-10 d-0 s-10 sa-1 rd-10"+"\n";
+            "Sword Horse Knight: a-10 d-0 s-10 sa-1 rd-10 " +"\n"+
+            "Spear Horse Knight: a-10 d-0 s-10 sa-1 rd-10"+"\n";
     }
 }
