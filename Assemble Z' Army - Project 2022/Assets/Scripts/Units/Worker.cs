@@ -95,6 +95,8 @@ public class Worker : MonoBehaviour
             GetComponent<Animator>().SetBool("isAttacking", false);
 
             this.buildingTarget = building;
+
+            isBuilding = false;
         }
     }
 
