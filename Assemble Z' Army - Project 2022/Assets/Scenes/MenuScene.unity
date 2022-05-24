@@ -4578,18 +4578,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1008225898}
     m_Modifications:
-    - target: {fileID: 1352540280355062109, guid: 49d3f5d04535ab448975059ee20fa9b3, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352540280355062109, guid: 49d3f5d04535ab448975059ee20fa9b3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.55521
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352540280355062109, guid: 49d3f5d04535ab448975059ee20fa9b3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.4154887
-      objectReference: {fileID: 0}
     - target: {fileID: 1352540280498718436, guid: 49d3f5d04535ab448975059ee20fa9b3, type: 3}
       propertyPath: landingPagePanel
       value: 
@@ -4597,10 +4585,6 @@ PrefabInstance:
     - target: {fileID: 1352540280498718490, guid: 49d3f5d04535ab448975059ee20fa9b3, type: 3}
       propertyPath: m_Name
       value: PanelHelp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1352540280498718490, guid: 49d3f5d04535ab448975059ee20fa9b3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1352540280498718491, guid: 49d3f5d04535ab448975059ee20fa9b3, type: 3}
       propertyPath: m_Pivot.x
