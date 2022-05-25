@@ -75,8 +75,8 @@ namespace Macros
         NONE,
         WOOD = 1650,
         METAL = 1300,
-        GOLD = 500,
-        DIAMONDS = 120
+        GOLD = 600,
+        DIAMONDS = 180
     }
 
     public enum TrainingUnitsInBuildings
@@ -112,20 +112,20 @@ namespace Macros
     struct GameText
     {
         public const string instructions = "Intro: " + "\n"+
-            "Welcome to Assemble Z’ Army real-time strategy multiplayer game." +"\n"+
-            "The main goal is to gather your army and defeat all your rival’s units. " +"\n"+
+            "Welcome to Assemble Zï¿½ Army real-time strategy multiplayer game." +"\n"+
+            "The main goal is to gather your army and defeat all your rivalï¿½s units. " +"\n"+
             "To do so, you must build training buildings, which qualify your units for the war to come.  " +"\n"+
             "But beware, you have limited time and resources, so plan carefully." +"\n"+
             "" +"\n"+
             "_________________________________________"+
             "Controllers: " + "\n"+ 
             "Basics controls: " + "\n" + 
-            "Mouse Left-click – Selecting units/buildings" + "\n"+
-            "Mouse Right-click – Command selected unit build/move/attack" +"\n"+
-            "Mouse wheel – Zoom in/out" +"\n"
+            "Mouse Left-click ï¿½ Selecting units/buildings" + "\n"+
+            "Mouse Right-click ï¿½ Command selected unit build/move/attack" +"\n"+
+            "Mouse wheel ï¿½ Zoom in/out" +"\n"
             + "\n" +
             "Map controls:" +"\n"+
-            "WASD-keys/Arrow-keys/Mouse direction – Move the world camera in a specific direction" +"\n"
+            "WASD-keys/Arrow-keys/Mouse direction ï¿½ Move the world camera in a specific direction" +"\n"
             + "\n" +
             "_________________________________________" +
             "Instructions:" + "\n" + 
@@ -137,18 +137,18 @@ namespace Macros
             + "\n" +
             "Building phase:" + "\n" + " Five workers will come to build the wanted building according to your choice and resources." + "\n"+
             "In this phase, you will have 1 minute to build all the planned buildings." +"\n"+
-            "Pay Attention: Buildings that won’t be fully constructed will be unusable and won’t allow you to recruit in the next phase." +"\n"
+            "Pay Attention: Buildings that wonï¿½t be fully constructed will be unusable and wonï¿½t allow you to recruit in the next phase." +"\n"
             + "\n" +
             "Preparation phase:" + "\n" + "After a hard-worked period, the workers will go home to their families, and the fresh recruits will arrive. " + "\n"+
             "You will receive about 15 recruits which each can be sent to the relevant building you had built, and after an amount of time, the unit will be qualified as a certain type of unit." +"\n"
              +"\n"+
             "There are 5 main types of units in the game: " +"\n"+
-            "Sword – Medium attack some defense skill " +"\n"+
-            "Spear – Has bonus attack against horses " +"\n"+
-            "Archer – Can attack from a far distance " +"\n"+
-            "Sorcerer – Can use mana for special spells " +"\n"+
-            "Horse – Have speed advantage " +"\n"+
-            "Full units’ details will be shown at the end of the instructions. " +"\n"+
+            "Sword ï¿½ Medium attack some defense skill " +"\n"+
+            "Spear ï¿½ Has bonus attack against horses " +"\n"+
+            "Archer ï¿½ Can attack from a far distance " +"\n"+
+            "Sorcerer ï¿½ Can use mana for special spells " +"\n"+
+            "Horse ï¿½ Have speed advantage " +"\n"+
+            "Full unitsï¿½ details will be shown at the end of the instructions. " +"\n"+
             "Pay Attention: Units that are middle of recruitment will be unqualified for war and be left behind." +"\n"+
             "" +"\n"+
             "Battlefield phase: " +"\n"+
@@ -157,7 +157,7 @@ namespace Macros
             "The winner will be the player who has the last units standing. " +"\n"+
             "" +"\n"+
             "________________________________________" +
-            "Units’ stats: " +"\n"+
+            "Unitsï¿½ stats: " +"\n"+
             "Level1: " +"\n"+
             "Sword Man: a-15 d-5 s-10 sa-1 rd-5 " +"\n"+
             "Spear Man: a-10 d-5 s-10 sa-1.5 rd-5 " +"\n"+
