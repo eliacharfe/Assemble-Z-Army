@@ -1,0 +1,23 @@
+Instruction for running Assamble Z' Army:
+
+Demonstration Video: https://drive.google.com/drive/folders/1GKltVwL-66EYPxr6lQj3PdUYG_DqSh9u
+Build game link:https://drive.google.com/drive/folders/1etVvP7VVK-LMU2NVyYSCzhKcvphFF1N1
+Github code link(accessible only for the mentor Assaf): https://github.com/Shimshon21/Project-2022
+
+1.Create Steam account
+2.Login to your steam account via desktop
+3.On the top of the bar press on Games-> 'Add a none steam game to my library'-> Browse
+4.Find the Assemble Z' Army - Project 2022.exe file and then press Open
+5.Press on Add Selected Programs
+6.Press on LIBRARY on the top
+7.Find the game added on left side of the screen and press on it
+8.Press the play button
+(Note: There might be installation required on the first time so press next on the 
+following requests if another application open, quit it and press play again)
+9.When the game is starting to run, you can host or join a game
+10.To host a game press on Host Game
+11.To join a game press shift+Tab on keyboard, than find the friend account whom hosting,
+and press right click on the mouse and press on the 'join game' button 
+
+
+
