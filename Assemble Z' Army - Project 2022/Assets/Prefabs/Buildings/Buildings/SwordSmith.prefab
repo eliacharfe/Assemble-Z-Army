@@ -51,6 +51,22 @@ PrefabInstance:
       propertyPath: costResourcesBuilding.Array.data[3]
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 110443865458432048, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 51.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 110443865458432048, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -48.399994
+      objectReference: {fileID: 0}
+    - target: {fileID: 575453738983616003, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 51.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 575453738983616003, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 32.2
+      objectReference: {fileID: 0}
     - target: {fileID: 594850713533669745, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: m_Name
       value: SwordSmith
@@ -83,6 +99,18 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2394261865931869565, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -50.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394261865931869565, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2525159990678312730, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -50.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2869317554764529570, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: m_Size.x
       value: 86
@@ -106,6 +134,18 @@ PrefabInstance:
     - target: {fileID: 5005265896654497167, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 53.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945267479919824170, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -50.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945267479919824170, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -51.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136733505208747475, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 51.4
       objectReference: {fileID: 0}
     - target: {fileID: 6729645794111851200, guid: bea6643a0969b2847be222a0c0a69752, type: 3}
       propertyPath: m_Pivot.x

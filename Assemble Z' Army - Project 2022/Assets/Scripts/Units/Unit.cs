@@ -23,6 +23,7 @@ public class Unit : NetworkBehaviour
     public static event Action<Unit> ServerOnUnitDeSpawned;
     public static event Action<Unit> AuthortyOnUnitSpawned;
     public static event Action<Unit> AuthortyOnUnitDeSpawned;
+    public event Action ReachedDestinationEvent;
 
     public Units id;
     UnitMovement move;
@@ -138,12 +139,14 @@ public class Unit : NetworkBehaviour
         if (!agent.hasPath)
             return;
 
-        if (agent.remainingDistance > agent.stoppingDistance)
+        if (agent.remainingDistance > agent.stoppingDistance || !moveToDir)
             return;
 
         agent.ResetPath();
         StopAnimation();
         moveToDir = false;
+        ReachedDestinationEvent.Invoke();
+        print("Reached destination");
     }
 
     [Command]

@@ -10,6 +10,9 @@ public class BuilidingConstruction : NetworkBehaviour
 
     [SerializeField] private GameObject hammerSprite;
 
+    [SerializeField] private Transform[] buildingPositions = null;
+    public int buildingPoistionIndex = 0;
+
     private GameObject mouseTopIcon = null;
 
     private void Start()
@@ -77,4 +80,27 @@ public class BuilidingConstruction : NetworkBehaviour
         buldingConstructionSlider.setValue(newTime);
     }
 
+    public Vector3 GetBuildingPoint()
+    {
+        if(buildingPoistionIndex < buildingPositions.Length)
+        {
+            return buildingPositions[buildingPoistionIndex].position;
+        }
+        return Vector3.negativeInfinity;
+    }
+
+
+    public void IncreaseIndex()
+    {
+        buildingPoistionIndex++;
+    }
+
+    public void DecreaseIndex()
+    {
+        if (buildingPoistionIndex <= 0)
+        {
+            return;
+        }
+        buildingPoistionIndex--;
+    }
 }

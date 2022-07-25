@@ -106,8 +106,6 @@ public class RTSController : MonoBehaviour
                 }
             
             }
-
-
         }
     }
 
@@ -141,8 +139,14 @@ public class RTSController : MonoBehaviour
                 // Building is certain not null
                 if (building != worker.GetBuildingTarget())
                 {
-                    worker.SetBuildingTarget(building);
-                    unit.MoveTo(hit.point);
+                    var position = building.GetBuildingPoint();
+
+                    print(position);
+
+                    if (position != Vector3.negativeInfinity)
+                    {
+                        worker.SetBuildingTarget(building);
+                    }
                 }
             }
         }
@@ -177,7 +181,11 @@ public class RTSController : MonoBehaviour
 
             if (unit.id == Macros.Units.WORKER)
             {
-                (unit.GetComponent<Worker>() as Worker).ResetBuildingTarget();
+                var worker = (unit.GetComponent<Worker>() as Worker);
+                if (worker.GetBuildingTarget() == null)
+                {
+                    worker.ResetBuildingTarget();
+                }
             }
         }
     }

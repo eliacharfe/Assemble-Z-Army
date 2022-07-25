@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Tooltip : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private float posY;
 
 
-    private Text tooltipText;
+    private TextMeshProUGUI tooltipText;
     private RectTransform backgroundRectTransform;
 
     private Text tooltipTextName;
@@ -23,7 +24,7 @@ public class Tooltip : MonoBehaviour
         instance = this;
 
         backgroundRectTransform = transform.Find("background").GetComponent<RectTransform>();
-        tooltipText = transform.Find("text").GetComponent<Text>();
+        tooltipText = transform.Find("resourceText").GetComponent<TextMeshProUGUI>();
 
         backgroundNameRectTransform = transform.Find("backgroundNameBuilding").GetComponent<RectTransform>();
         tooltipTextName = backgroundNameRectTransform.transform.Find("textNameBuilding").GetComponent<Text>();

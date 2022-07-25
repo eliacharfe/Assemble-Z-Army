@@ -1,6 +1,6 @@
 trackSelection = true
 fetchPreview = true
-wantsMore = false
+defaultFlags = 0
 keepOpen = false
 queryFolder = "Assets"
 onBoardingDoNotAskAgain = true
@@ -10,6 +10,9 @@ scopes = {
 	"last_search.785D90A9" = "prefab bru"
 	"InspectorPreview.785D90A9" = "0"
 	"currentGroup.785D90A9" = "all"
+	"last_search.DA949528" = ""
+	"OpenInspectorPreview.DA949528" = "0"
+	"currentGroup.DA949528" = "all"
 }
 providers = {
 	asset = {
@@ -47,6 +50,18 @@ providers = {
 		priority = 100
 		defaultAction = null
 	}
+	performance = {
+		active = false
+		priority = 100
+		defaultAction = null
+	}
+	adb = {
+		active = false
+		priority = 2500
+		defaultAction = null
+	}
+}
+objectSelectors = {
 }
 recentSearches = [
 	"PlayM"
@@ -55,3 +70,9 @@ searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
 showSavedSearchPanel = false
+expandedQueries = [
+]
+queryBuilder = false
+ignoredProperties = "id;name;classname;imagecontentshash"
+helperWidgetCurrentArea = "all"
+disabledIndexers = ""
