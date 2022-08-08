@@ -8,6 +8,7 @@ public class Worker : MonoBehaviour
     public float time = 0;
     private BuilidingConstruction buildingTarget;
     private Vector3 buildingPosition;
+    private int buildingIndex;
     private Unit unit = null;
     bool isBuilding = false;
 
@@ -24,33 +25,12 @@ public class Worker : MonoBehaviour
             return; 
         }
 
-        if (!isBuilding)
-        {
+        if (!isBuilding) {
             GetComponent<Animator>().SetBool("isAttacking", false);
             return;
         }
 
-        //if (GetComponent<Animator>().GetBool("isAttacking"))
-        //{
-        //    isBuilding = true;
-        //    unit.CmdStopMove();
-        //    unit.CmdBuildAnimation();
-        //    GetComponent<Animator>().SetBool("isAttacking", true);
-        //}
-
         IncreaseTimeBuilding();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //BuilidingConstruction tempBuild = collision.GetComponent<BuilidingConstruction>();
-        //if (tempBuild && this.buildingTarget == tempBuild)
-        //{
-        //    isBuilding = true;
-        //    unit.CmdStopMove();
-        //    unit.CmdBuildAnimation();
-        //    GetComponent<Animator>().SetBool("isAttacking", true);
-        //}
     }
 
     // Increase the building time left.
@@ -66,10 +46,7 @@ public class Worker : MonoBehaviour
         if (time <= 0.1f)
         {
             time += Time.deltaTime;
-        }
-
-        else
-        {
+        } else {
             buildingTarget.CmdIncreasingBuildingTime(0.1f);
             time = 0;
         }
@@ -81,13 +58,14 @@ public class Worker : MonoBehaviour
         return Vector2.Distance(buildingTarget.transform.position, transform.position) < 50f;
     }
 
-
     // Intlize target building and allowing worker to move.
     public void ResetBuildingTarget()
     {
-        if(buildingTarget != null)
+        if (buildingTarget != null)
+        {
             buildingTarget.DecreaseIndex();
-
+            buildingTarget.FreeBuildingPoint(buildingIndex);
+        }
         buildingTarget = null;
         isBuilding = false;
         time = 0;
@@ -96,29 +74,21 @@ public class Worker : MonoBehaviour
         GetComponent<Animator>().SetBool("isAttacking", false);
     }
 
-
     public BuilidingConstruction GetBuildingTarget()
     {
         return buildingTarget;
     }
 
     // Set building needed to be constructed.
-    public void SetBuildingTarget(BuilidingConstruction building)
-    { 
-        if (this.buildingTarget != building)
+    public void SetBuildingTargetPosition(BuilidingConstruction building)
+    {
+        if (building && this.buildingTarget != building)
         {
-            buildingPosition = building.GetBuildingPoint();
-
-            building.IncreaseIndex();
-
+            var buildingPosIndex = building.GetNearestBuildingPoint(transform.position);
+            buildingIndex = buildingPosIndex.Item2;
             GetComponent<Animator>().SetBool("isAttacking", false);
-
-            GetComponent<Unit>().MoveTo(buildingPosition);
-
-            print("Building index given:" + building.buildingPoistionIndex);
-
+            GetComponent<Unit>().MoveTo(buildingPosIndex.Item1);
             this.buildingTarget = building;
-
             isBuilding = false;
         }
     }
@@ -130,10 +100,18 @@ public class Worker : MonoBehaviour
 
     public void StartBuilding()
     {
-        isBuilding = true;
-        unit.CmdStopMove();
-        unit.CmdBuildAnimation();
-        GetComponent<Animator>().SetBool("isAttacking", true);
+        if (buildingTarget)
+        {
+            print("Starting to build");
+            isBuilding = true;
+            unit.CmdStopMove();
+            unit.CmdBuildAnimation();
+            GetComponent<Animator>().SetBool("isAttacking", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("isAttacking", false);
+        }
     }
 
 }

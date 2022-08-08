@@ -11,6 +11,8 @@ public class BuilidingConstruction : NetworkBehaviour
     [SerializeField] private GameObject hammerSprite;
 
     [SerializeField] private Transform[] buildingPositions = null;
+    public bool[] buildingPostionsPicked;
+
     public int buildingPoistionIndex = 0;
 
     private GameObject mouseTopIcon = null;
@@ -18,6 +20,7 @@ public class BuilidingConstruction : NetworkBehaviour
     private void Start()
     {
         buldingConstructionSlider.resetSlider();
+        buildingPostionsPicked = new bool[6] { false, false, false, false, false, false };
     }
 
     // Todo - increase time by worker.
@@ -33,6 +36,7 @@ public class BuilidingConstruction : NetworkBehaviour
         if(FindObjectOfType<RTSController>().HasWorkers())
         mouseTopIcon = Instantiate(hammerSprite, Utilities.Utils.GetMouseIconPos(), Quaternion.identity);
     }
+
     private void OnMouseOver()
     {
 
@@ -80,15 +84,38 @@ public class BuilidingConstruction : NetworkBehaviour
         buldingConstructionSlider.setValue(newTime);
     }
 
-    public Vector3 GetBuildingPoint()
+    public (Vector3,int) GetNearestBuildingPoint(Vector2 workerPosition)
     {
-        if(buildingPoistionIndex < buildingPositions.Length)
+        double minDistancePos = double.MaxValue;
+        int loopIndex = 0;
+        bool foundIndex = false;
+        print(buildingPositions.Length);
+        print(buildingPostionsPicked.Length);
+        foreach (var pos in buildingPositions)
         {
-            return buildingPositions[buildingPoistionIndex].position;
+            var distnace = Vector2.Distance(workerPosition, pos.position);
+            if (distnace < minDistancePos && !buildingPostionsPicked[loopIndex])
+            {
+
+                minDistancePos = distnace;
+                buildingPoistionIndex = loopIndex;
+                foundIndex = true;
+            }
+            loopIndex++;
         }
-        return Vector3.negativeInfinity;
+        if( foundIndex) {
+            buildingPostionsPicked[buildingPoistionIndex] = true;
+            return (buildingPositions[buildingPoistionIndex].position,buildingPoistionIndex);
+        }
+        return (Vector3.negativeInfinity,-1);
     }
 
+    public void FreeBuildingPoint(int index)
+    {
+        if (index < buildingPostionsPicked.Length) {
+            buildingPostionsPicked[index] = false;
+        }
+    }
 
     public void IncreaseIndex()
     {
@@ -103,4 +130,23 @@ public class BuilidingConstruction : NetworkBehaviour
         }
         buildingPoistionIndex--;
     }
+
+
+    public bool HasFreeSpace()
+    {
+        foreach (var avaiblePosition in buildingPostionsPicked)
+            if (!avaiblePosition)
+                return true;
+        return false;
+    }
+}
+
+public static class ForEachExtensions
+{
+    //public static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
+    //{
+    //    int idx = 0;
+    //    foreach (T item in enumerable)
+    //        handler(item, idx++);
+    //}
 }
