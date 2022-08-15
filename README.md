@@ -1,4 +1,4 @@
-# Assemble Z' Army
+## Assemble Z' Army
 
 Real-Time Strategy multiplayer game online made in Unity engine. Coding with C#, using
 Mirror library.
