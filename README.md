@@ -3,13 +3,13 @@
 Real-Time Strategy multiplayer game online made in Unity engine. Coding with C#, using
 Mirror library.
 
-#Intro:
+# Intro:
 Welcome to Assemble Z’ Army real-time strategy multiplayer game.
 The main goal is to gather your army and defeat all your rival’s units.
 To do so, you must build training buildings, which qualify your units for the war to come. 
 But beware, you have limited time and resources, so plan carefully.
 
-#Controllers:
+# Controllers:
 Basics controls:
 Mouse Left-click – Selecting units/buildings
 Mouse Right-click – Command selected unit build/move/attack
@@ -18,7 +18,7 @@ Map controls:
 WASD-keys/Arrow-keys/Mouse direction – Move the world camera in a specific direction
 
 
-#Instructions:
+# Instructions:
 The game is divided into three main phases:
 1.	Building phase 
 2.	Preparation phase
@@ -40,11 +40,11 @@ Horse – Have speed advantage
 Full units’ details will be shown at the end of the instructions.
 Pay Attention: Units that are middle of recruitment will be unqualified for war and be left behind.
 
-#Battlefield phase:
+# Battlefield phase:
 After all, preparations made the time for war has come. Be ready to send your units to attack the enemy.
 The winner will be the player who has the last units standing.
 
-#Buildings and Units:
+# Buildings and Units:
 
 Units’ stats:
 
